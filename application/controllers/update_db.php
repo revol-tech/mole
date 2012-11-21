@@ -4,7 +4,7 @@ class Update_db extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		
+
 		$this->load->library('migration');
 	}
 
@@ -13,16 +13,18 @@ class Update_db extends CI_Controller {
 		if($version){
 			/**
 			 * updates db to the spcified version line 23.
-			 */ 
+			 */
 			$this->migration->version($version);
 		}else{
 			/**
-			 * updates db to be version mentioned in 
-			 * 	$config['migration_version'] 
-			 * 
+			 * updates db to be version mentioned in
+			 * 	$config['migration_version']
+			 *
 			 * in line 23 of ./application/config/migration/
-			 */ 
-			$this->migration->current();
+			 * ????????
+			 * unsure.
+			 */
+			$this->migration->latest();
 		}
 	}
 }
