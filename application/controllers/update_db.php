@@ -4,7 +4,6 @@ class Update_db extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-
 		$this->load->library('migration');
 	}
 
@@ -25,9 +24,10 @@ class Update_db extends CI_Controller {
 			 * unsure.
 			 */
 			$this->migration->latest();
+			//$this->migration->version($version);
 		}
 	}
 }
 
 /* End of file update_db.php */
-/* Location: ./application/controller/update_db.php */
+/* Location: ./application/controller/update_db.php *
