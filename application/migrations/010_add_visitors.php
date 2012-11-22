@@ -10,38 +10,16 @@ class Migration_Add_visitors extends CI_Migration {
 
 	public function up()
 	{
-		$this->dbforge->add_field(array(
-				'id' => array(
-					'type' 			=> 'INT',
-					'unsigned' 		=> TRUE,
-					'auto_increment'=> TRUE
-				),
-				'name' => array(
-					'type' 		 => 'VARCHAR',
-					'constraint' => '127'
-				),
-				'email' => array(
-					'type' 		 => 'VARCHAR',
-					'constraint' => '127'
-				),
-				'address' => array(
-					'type' => 'varchar',
-					'constraint'=> '255'
-				),
-				'ip_address' => array(
-					'type' 		 => 'VARCHAR',
-					'constraint' => '11'
-				),
-				'date_created'=>array(
-					'type'		=> 'timestamp',
-					'null'		=> true
-				),
-				'date_published'=>array(
-					'type'		=> 'timestamp',
-					'null'		=> true
-				),
-			)
-		);
+		$fields = array(
+						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
+						'`name` varchar(127) NOT NULL',
+						'`email` varchar(127) NOT NULL',
+						'`address` varchar(255) NOT NULL',
+						'`ip_address` varchar(11) NOT NULL',
+						'`date_created` timestamp NULL DEFAULT NULL',
+						'`date_published` timestamp NULL DEFAULT NULL',
+					);
+		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('visitors');

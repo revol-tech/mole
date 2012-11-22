@@ -10,18 +10,16 @@ class Migration_Add_visited_count extends CI_Migration {
 
 	public function up()
 	{
-		$this->dbforge->add_field(array(
-				'id' => array(
-					'type' 			=> 'INT',
-					'unsigned' 		=> TRUE,
-					'auto_increment'=> TRUE
-				),
-				'timestamp'=>array(
-					'type'		=> 'timestamp',
-					'null'		=> true
-				),
-			)
-		);
+		$fields = array(
+						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
+						'`name` varchar(127) NOT NULL',
+						'`email` varchar(127) NOT NULL',
+						'`address` varchar(255) NOT NULL',
+						'`ip_address` varchar(11) NOT NULL',
+						'`date_created` timestamp NULL DEFAULT NULL',
+						'`date_published` timestamp NULL DEFAULT NULL',
+					);
+		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('visited_count');

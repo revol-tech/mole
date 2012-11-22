@@ -30,4 +30,4 @@ class Update_db extends CI_Controller {
 }
 
 /* End of file update_db.php */
-/* Location: ./application/controller/update_db.php *
+/* Location: ./application/controller/update_db.php */

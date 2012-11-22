@@ -10,23 +10,13 @@ class Migration_Add_poll_history extends CI_Migration {
 
 	public function up()
 	{
-		$this->dbforge->add_field(array(
-				'id' => array(
-					'type' 			=> 'INT',
-					'unsigned' 		=> TRUE,
-					'auto_increment'=> TRUE
-				),
-				'question_id' => array(
-					'type' 		 => 'int',
-				),
-				'user_id' => array(
-					'type' 		 => 'int',
-				),
-				'date_submitted' => array(
-					'type' 		 => 'timestamp',
-				)
-			)
-		);
+		$fields = array(
+						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
+						'`question_id` int(11) NOT NULL',
+						'`user_id` int(11) NOT NULL',
+						'`date_submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+					);
+		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('poll_history');

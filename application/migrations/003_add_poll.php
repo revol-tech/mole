@@ -10,7 +10,26 @@ class Migration_Add_poll extends CI_Migration {
 
 	public function up()
 	{
-		$this->dbforge->add_field(array(
+/**
+CREATE TABLE IF NOT EXISTS `poll` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `question` text NOT NULL,
+  `opinion1` text NOT NULL,
+  `opinion2` text NOT NULL,
+  `opinion3` text NOT NULL,
+  `opinion4` text NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `date_created` timestamp NULL DEFAULT NULL,
+  `date_published` timestamp NULL DEFAULT NULL,
+  `date_removed` timestamp NULL DEFAULT NULL,
+  `count_opinion1` int(127) NOT NULL,
+  `count_opinion2` int(127) NOT NULL,
+  `count_opinion3` int(127) NOT NULL,
+  `count_opinion4` int(127) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+ */
+/*		$this->dbforge->add_field(array(
 				'id' => array(
 					'type' 			=> 'INT',
 					'unsigned' 		=> TRUE,
@@ -65,6 +84,25 @@ class Migration_Add_poll extends CI_Migration {
 				)
 			)
 		);
+*/
+
+		$fields = array(
+						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
+						'`question` text NOT NULL',
+						'`opinion1` text NOT NULL',
+						'`opinion2` text NOT NULL',
+						'`opinion3` text NOT NULL',
+						'`opinion4` text NOT NULL',
+						'`created_by` int(11) NOT NULL',
+						'`date_created` timestamp NULL DEFAULT NULL',
+						'`date_published` timestamp NULL DEFAULT NULL',
+						'`date_removed` timestamp NULL DEFAULT NULL',
+						'`count_opinion1` int(127) NOT NULL',
+						'`count_opinion2` int(127) NOT NULL',
+						'`count_opinion3` int(127) NOT NULL',
+						'`count_opinion4` int(127) NOT NULL',
+					);
+		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('poll');
