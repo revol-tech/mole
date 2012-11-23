@@ -1,28 +1,32 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Main extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('ion_auth');
 
-		if($this->nativesession->get('user_id')!=1)
-			show_error('Access Denied');
+		chk_admin();
+
+		/**
+		 * set headers to prevent back after logout
+		 */
+		$this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
+		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
+		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
+		$this->output->set_header('Pragma: no-cache');
 	}
 
 
-
 	/**
-	 * show admin main screen
+	 * admin's main fn's
 	 */
-    public function index(){
-		//logout admim
-		if($this->input->post('logout'))
-			$this->_logout();
+    public function index()
+    {
+		if($this->input->post('logout')){
+			$this->logout();
+		}
 
-
-		//the admin's main screen here
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
 		$this->load->view('templates/footer');
@@ -30,14 +34,14 @@ class Main extends CI_Controller {
 
 
 	/**
-	 * logout admin
+	 * admin logout
 	 */
-	private function _logout(){
-		if($this->input->post('logout')){
-			$this->ion_auth->logout();
-			$this->nativesession->delete('user_id');
+    private function logout(){
+		$this->ion_auth->logout();
 
-			redirect(base_url());
-		}
+		$this->load->view('admin/logout.php');
+
+		redirect(base_url());
 	}
+
 }

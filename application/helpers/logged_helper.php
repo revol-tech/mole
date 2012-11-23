@@ -1,22 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * chk if a admin is logged in
- * if not, redirect to ......
+ * chk if admin is already logged in
+ * redirects to homepage if not
  **/
 
-if ( ! function_exists('chk_admin_logged')) {
-    function chk_admin_logged(){
-print_r($this->session->userdata());
+if ( ! function_exists('logged')) {
+    function chk_admin(){
+
 		$CI =& get_instance();
-		$CI->load->library('nativesession');
 
-		if(! isset( $CI->nativesession->get('user_id')) ||
-				( $CI->nativesession->get('user_id')!=1) ){
-
-			//admin is NOT logged in.
-			//redirect to somewhere else -- err page, login page, ....
-			redirect('....');
+		if(!$CI->ion_auth->is_admin()){
+			redirect(base_url(),'location');
 		}
 	}
 }

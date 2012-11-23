@@ -603,8 +603,7 @@ class Ion_auth_model extends CI_Model
 		    $this->update_last_login($result->id);
 
 		    $group_row = $this->db->select('name')->where('id', $result->group_id)->get($this->tables['groups'])->row();
-//echo $this->db->last_query();
-//print_r($group_row);
+
 		    $session_data = array(
 					$this->identity_column => $result->{$this->identity_column},
 					'id'                   => $result->id, //kept for backwards compatibility

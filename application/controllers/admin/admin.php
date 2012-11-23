@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
@@ -6,92 +6,58 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 
-		$this->load->library('ion_auth');
-		$this->load->helper('captcha');
-		$this->load->model('captcha_model');
+//echo 'asdf';
+		if(!$CI->ion_auth->is_admin()){
+
+			$this->login();
+		}
 	}
 
     public function login()
     {
+		$this->load->model('captcha_model');
 		$data = array();
 
-		if($this->nativesession->get('user_id')==1)
-			//redirect to admin's homepage.
-			redirect('admin/main');
+		//----------------------------
+		//if admin is trying to login ...
+		if($this->input->post('submit'))
+			//check & login
+			//redirect to admin/main if succces
+			//else return err msg array
+			$data['errors'] = $this->_chk_login();
+		//----------------------------
 
-		// admin login form submitted
-		if($this->input->post('login')){
-			$data = $this->_chk_login();
-		}
+		// create nu captcha
+		$cap = $this->captcha_model->create_nu_captcha();
 
-		//generate nu captcha for admin login form
-		$img = $this->generate_captcha();
+		$data['img'] = $cap['image'];
 
-		//set captcha data
-		$this->captcha_model->set_data(	array(	$img['time'],
-												$this->input->ip_address,
-												$img['word']
-											));
-		$data['image'] = $img['image'];
-
-
-		//load admin login view
-        $this->load->view('templates/header');
-        $this->load->view('admin/login.php',$data);
-        $this->load->view('templates/footer');
+		$this->load->view('templates/header');
+		$this->load->view('admin/login.php',$data);
+		$this->load->view('templates/footer');
+//print_r($data);
+//print_r($cap);
     }
 
-	//generate nu captcha for admin login form
-	public function generate_captcha(){
-
-		$captcha = array(
-						'font_path'	 => './'.FONTPATH.'/Times_New_Roman.ttf',
-						'img_path'	 => './'.CAPTCHAPATH,
-						'img_url'	 => base_url().CAPTCHAPATH,
-						'img_width'  => 125,
-						'img_height' => 50,
-						'expiration' => 20,
-					);
-		$img = create_captcha($captcha);
-		$this->captcha_model->set_data(	array(	$img['time'],
-												$this->input->ip_address,
-												$img['word']
-											));
-		return $img;
-	}
-
 	/**
-	 * validate admin login username, password, captcha
-	 * returns array of errors
+	 * validate username,password,captcha
+	 * redirect to admin if successful
 	 */
-    private function _chk_login(){
-		$this->load->model('users_model');
-		$data = array();
+	private function _chk_login(){
+		$err = array();
 
-		$cap = $this->captcha_model->chk_captcha();
-
-		if($this->users_model->login() && $cap ){
-			//set session
-			$this->nativesession->set('user_id',1);
-
-			//redirect to admin's homepage.
-			redirect('admin/main');
-
-		//invalid login information
-		}else{
-
-			//get entered username
-			$data['username'] = $this->input->post('username');
-			$data['errors'] = array();
-
-			//err msg for invalid captcha
-			array_push($data['errors'],($cap==null)?'<p>Invalid Captcha</p>' : '');
-
-			//err msg for invalid login
-			if($err = $this->ion_auth->errors()){
-				array_push($data['errors'],$err);
-			}
+		if(!$this->captcha_model->check_captcha()){
+			$err['captcha_err'] = 'Invalid Captcha';
 		}
-		return $data;
+
+		$this->load->model('users_model');
+
+//print_r($this->users_model->check_login());
+		if($this->users_model->check_login()){
+			redirect('/admin/main');
+		}
+		$err['login_err'] = 'Invalid Login';
+
+		return $err;
 	}
 }

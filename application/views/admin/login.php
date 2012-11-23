@@ -1,3 +1,13 @@
+<?php
+	if(isset($errors)){
+		echo '<div>';
+		foreach($errors as $error){
+			echo '<p>'.$error.'</p>';
+		}
+		echo '</div>';
+	}
+?>
+
 <section class="login_box">
 
 	<?php

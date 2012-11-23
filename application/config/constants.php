@@ -38,12 +38,22 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /*
 |--------------------------------------------------------------------------
-| CSS, Documents, Javascript and Images Folder
+| CSS, Documents, Javascript, Images, ... Folders
 |--------------------------------------------------------------------------
 */
-//define('IMGPATH',	'public/imgs/');
-define('CAPTCHAPATH',	'public/imgs/captcha');
-define('FONTPATH',		'public/font');
+//define('JSPATH',	'public/js/');
+//define('CSSPATH',	'public/css/');
+define('IMGPATH',	'public/imgs/');
+define('CAPTCHAPATH','public/imgs/captcha');
+define('FONTPATH',	'public/font');
+//define('TMPPATH',	'public/tmp');
+
+/*
+|--------------------------------------------------------------------------
+| Captcha limit
+|--------------------------------------------------------------------------
+*/
+define('CAPTCHATIME', 60);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
