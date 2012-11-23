@@ -15,20 +15,18 @@ class Captcha_model extends CI_Model{
 		$this->_del_captcha();
 
 		$vals = array(
-			'img_path' => './public/imgs/captcha/',
-			'img_url' => base_url().'public/imgs/captcha/',
+			'img_path' 	=> './public/imgs/captcha/',
+			'img_url' 	=> base_url().'public/imgs/captcha/',
 			'font_path' => './public/fonts/texb.ttf',
 			'img_width' => 120,
-			'img_height' => 40,
-			'expiration' => CAPTCHATIME,
+			'img_height'=> 40,
+			'expiration'=> CAPTCHATIME,
 			//'word'		=> 'hello'
 			);
 
 		$cap = create_captcha($vals);
 
-
-		$tmp_store_data = array(
-									$cap['time'],
+		$tmp_store_data = array(	$cap['time'],
 									$this->input->ip_address(),
 									$cap['word']
 								);
@@ -43,7 +41,6 @@ class Captcha_model extends CI_Model{
 
 	//store created captcha into db
 	public function _update_db($data){
-
 		$sql = 'insert into captcha (captcha_time, ip_address, word ) '.
 				'values (?, ?, ?);';
 		$query = $this->db->query($sql, $data);
@@ -71,5 +68,6 @@ class Captcha_model extends CI_Model{
 		return ($row->count==1);
 	}
 }
+
 /* End of file captcha_model.php */
 /* Location: ./application/models/captcha_model.php */

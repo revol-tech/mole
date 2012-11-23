@@ -15,7 +15,7 @@ class Migration_Add_chat extends CI_Migration {
 						'`timestamp` timestamp NULL DEFAULT NULL',
 						'`message` text NOT NULL',
 						'`user_id` int(11) NOT NULL',
-						'`acl_group_id` int(11) NOT NULL',
+						'`group_id` int(11) NOT NULL',
 					);
 		$this->dbforge->add_field($fields);
 

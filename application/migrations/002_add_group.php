@@ -29,7 +29,6 @@ INSERT INTO `group` (`id`, `name`, `description`) VALUES
 		$fields = array(
 						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
 						'`name` varchar(127) NOT NULL',
-						'`lname` varchar(127) NOT NULL',
 						'`description` varchar(127) NOT NULL',
 					);
 		$this->dbforge->add_field($fields);
