@@ -11,6 +11,7 @@ class News extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
+		$this->load->model('news_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -31,9 +32,26 @@ class News extends CI_Controller {
 
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 
-//print_r($this->data);
-
+		$this->load->view('templates/header');
+		$this->load->view('admin/index.php');
 		$this->load->view('admin/create_news.php', $this->data);
+		$this->load->view('templates/footer');
+	}
+
+	/**
+	 * save/update news form
+	 */
+    public function save(){
+
+		$data['res'] = $this->news_model->save();
+//print_r($data);
+		$this->create();
+//		$this->load->view('admin/news_saved',$data);
+	}
+
+
+	public function get(){
+		$this->news_model->get();
 	}
 
 
@@ -46,34 +64,6 @@ class News extends CI_Controller {
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"550px",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
-			),
-			//Replacing styles from the "Styles tool"
-			'styles' => array(
-				//Creating a new style named "style 1"
-				'style 1' => array (
-					'name' 		=> 	'Blue Title',
-					'element' 	=> 	'h2',
-					'styles' => array(
-						'color' 	=> 	'Blue',
-						'font-weight' 	=> 	'bold'
-					)
-				),
-				//Creating a new style named "style 2"
-				'style 2' => array (
-					'name' 	=> 	'Red Title',
-					'element' 	=> 	'h2',
-					'styles' => array(
-						'color' 		=> 	'Red',
-						'font-weight' 		=> 	'bold',
-						'text-decoration'	=> 	'underline'
-					)
-				)
-			)
 		);
 	}
 }
