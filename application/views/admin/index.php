@@ -1,4 +1,4 @@
-<form id="logout_form" method="post">
+<form id="logout_form" method="post" action='<?php echo site_url('admin/main')?>'>
 	<input type="submit" name='logout' value="Logout">
 </form>
 

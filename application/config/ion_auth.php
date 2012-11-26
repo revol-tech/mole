@@ -48,13 +48,13 @@
 	 * Meta table column you want to join WITH.
 	 * Joins from users.id
 	 **/
-	$config['join']                = 'user_id';
+	$config['join']                = 'id';
 
 	/**
 	 * Columns in your meta table,
 	 * id not required.
 	 **/
-	$config['columns']             = array('first_name', 'last_name', 'company', 'phone');
+	$config['columns']             = array('fname','lname','email','cv','image','phone','mobile');
 
 	/**
 	 * A database column which is used to

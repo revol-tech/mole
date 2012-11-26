@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS `users_meta` (
 						'`email` varchar(127) NOT NULL',
 						'`cv` varchar(127) DEFAULT NULL',
 						'`image` varchar(127) DEFAULT NULL',
+						'`phone` bigint(20) DEFAULT NULL',
+						'`mobile` bigint(20) DEFAULT NULL',
 					);
 		$this->dbforge->add_field($fields);
 

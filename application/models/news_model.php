@@ -7,50 +7,82 @@ class News_model extends CI_Model{
 	}
 
 
-	//store nu news
+	/**
+	 * update existing news
+	 */
+	private function update($data){
+//		$sql = 'UPDATE `news` SET'.
+//					'`title`="'.$data[0].'",		`content`="'.$data[1].'",'.
+//					'`date_published`='.$data[3].',	`date_removed`='.$data[4].''.
+//				'WHERE `id`='.$data['id'].';';
+
+
+		$update = array(
+					   'title' 		=> $data[0],
+					   'content' 	=> $data[1],
+					   'date_published' => $data[3],
+					   'date_removed' => $data[4]
+					);
+
+		$this->db->where('id', $data['id']);
+		$this->db->update('news', $update);
+
+		return $data['id'];
+	}
+
+	/**
+	 * store nu news
+	 * returns the id
+	 */
 	public function save(){
 		$data = array(
 					$this->input->post('title'),
 					htmlentities($this->input->post('content')),
 					$this->session->userdata('user_id'),
+					$this->session->userdata('date_created'),
 					$this->input->post('date_published'),
 					$this->input->post('date_removed')
 				);
 
-		$sql =	'insert into news ('.
-					'title,			content,		news_type,'.
-					'created_by,	date_created,	date_published,'.
-					'date_removed'.
-				')values ( ?, ?, 1,?,NOW(),?,?);';
+		//update existing news
+		if(($this->input->post('id'))){
+			$data['id'] = $this->input->post('id');
 
-		if(! $this->db->query($sql,$data)){
-			return $this->db->_error_message();
-		}
+			return $this->update($data);
+
+
+		//insert new news
+		}else{
+			$sql =	'insert into news ('.
+						'title,			content,		news_type,'.
+						'created_by,	date_created,	date_published,'.
+						'date_removed'.
+					')values ( ?, ?, 1,?,?,?,?);';
+
+			if(! $this->db->query($sql,$data)){
+				return $this->db->_error_message();
+			}
 
 //echo $this->db->last_query();
-		return 'true';
+			return $this->db->insert_id();
+		}
 	}
 
 
 
-	//get news
-	public function get(){
-/*
-		->where('title',$this->data['title'])
-		->where('content',$this->data['content'])
-		->where('news_type',$this->data['news_type'])
-		->where('created_by',$this->data['created_by'])
-		->where('date_created',$this->data['date_created'])
-		->where('date_published',$this->data['date_published'])
-		->where('date_removed', $this->data['date_removed'])
-
-		$res = $this->db->get('news')
-
+	/**
+	 * get news [of selected parameter]
+	 */
+	public function get($news){
+		foreach($news as $key=>$value){
+			$this->db->where($key,$value);
+		}
+		$res = $this->db->get('news');
 //echo $this->db->last_query();
+//print_r($res->result());
 		return $res->result();
-*/
 	}
 }
 
 /* End of file news_model.php */
-/* Location: ./application/models/n_model.php */
+/* Location: ./application/models/news_model.php */
