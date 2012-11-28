@@ -14,18 +14,18 @@ class Migration_Add_poll extends CI_Migration {
 CREATE TABLE IF NOT EXISTS `poll` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
-  `opinion1` text NOT NULL,
-  `opinion2` text NOT NULL,
-  `opinion3` text NOT NULL,
-  `opinion4` text NOT NULL,
+  `option1` text NOT NULL,
+  `option2` text NOT NULL,
+  `option3` text NOT NULL,
+  `option4` text NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
   `date_removed` timestamp NULL DEFAULT NULL,
-  `count_opinion1` int(127) NOT NULL,
-  `count_opinion2` int(127) NOT NULL,
-  `count_opinion3` int(127) NOT NULL,
-  `count_opinion4` int(127) NOT NULL,
+  `count_option1` int(127) NOT NULL,
+  `count_option2` int(127) NOT NULL,
+  `count_option3` int(127) NOT NULL,
+  `count_option4` int(127) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
  */
@@ -38,16 +38,16 @@ CREATE TABLE IF NOT EXISTS `poll` (
 				'question' => array(
 					'type' 		 => 'text',
 				),
-				'opinion1' => array(
+				'option1' => array(
 					'type' 		 => 'text',
 				),
-				'opinion2' => array(
+				'option2' => array(
 					'type' 		 => 'text',
 				),
-				'opinion3' => array(
+				'option3' => array(
 					'type' 		 => 'text',
 				),
-				'opinion4' => array(
+				'option4' => array(
 					'type' 		 => 'text',
 				),
 				'created_by'=>array(
@@ -66,19 +66,19 @@ CREATE TABLE IF NOT EXISTS `poll` (
 					'type'		=> 'timestamp',
 					'null'		=> true
 				),
-				'count_opinion1' => array(
+				'count_option1' => array(
 					'type' 		 => 'int',
 					'constraint'=>'127'
 				),
-				'count_opinion2' => array(
+				'count_option2' => array(
 					'type' 		 => 'int',
 					'constraint'=>'127'
 				),
-				'count_opinion3' => array(
+				'count_option3' => array(
 					'type' 		 => 'int',
 					'constraint'=>'127'
 				),
-				'count_opinion4' => array(
+				'count_option4' => array(
 					'type' 		 => 'int',
 					'constraint'=>'127'
 				)
@@ -89,18 +89,19 @@ CREATE TABLE IF NOT EXISTS `poll` (
 		$fields = array(
 						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
 						'`question` text NOT NULL',
-						'`opinion1` text NOT NULL',
-						'`opinion2` text NOT NULL',
-						'`opinion3` text NOT NULL',
-						'`opinion4` text NOT NULL',
+						'`option1` text NOT NULL',
+						'`option2` text NOT NULL',
+						'`option3` text NOT NULL',
+						'`option4` text NOT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',
 						'`date_removed` timestamp NULL DEFAULT NULL',
-						'`count_opinion1` int(127) NOT NULL',
-						'`count_opinion2` int(127) NOT NULL',
-						'`count_opinion3` int(127) NOT NULL',
-						'`count_opinion4` int(127) NOT NULL',
+						'`count_option1` int(127) NOT NULL',
+						'`count_option2` int(127) NOT NULL',
+						'`count_option3` int(127) NOT NULL',
+						'`count_option4` int(127) NOT NULL',
+						'`active` tinyint(4) NOT NULL DEFAULT "1"',
 					);
 		$this->dbforge->add_field($fields);
 

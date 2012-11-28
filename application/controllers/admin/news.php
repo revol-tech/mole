@@ -48,14 +48,14 @@ class News extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
-echo '--------------';
-echo 'created by '.$this->data['created_by'];
-echo  '<br/>username '.$this->ion_auth->get_user()->username;
-echo '--------------';
+//echo '--------------';
+//echo 'created by '.$this->data['created_by'];
+//echo  '<br/>username '.$this->ion_auth->get_user()->username;
+//echo '--------------';
 
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
+//echo '<pre>';
+//print_r($this->data);
+//echo '</pre>';
 
 
 		//display
