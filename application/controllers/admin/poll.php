@@ -35,14 +35,21 @@ class Poll extends CI_Controller {
 
 
 	/**
-	 * disp form to create a new poll
+	 * disp form for new/edit poll
 	 */
-	public function create(){
+	public function create($data=false){
 
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_poll.php');
+
+		if($data){
+			$this->load->view('admin/create_poll.php',$data);
+//print_r($data);
+		}else{
+			$this->load->view('admin/create_poll.php');
+		}
+
 		$this->load->view('templates/footer');
 	}
 
@@ -58,12 +65,24 @@ class Poll extends CI_Controller {
 						'option2'		=> $this->input->post('option2'),
 						'option3'		=> $this->input->post('option3'),
 						'option4'		=> $this->input->post('option4'),
-						'created_by'	=> $this->ion_auth->get_user()->id,
-						'date_created'	=> get_timestamp(),
 						'active'		=> $this->input->post('publish')
 					);
 
-		$this->poll_library->new_poll($data);
+
+		//store new poll
+		if($this->input->post('id')==null){
+			$data['created_by']	= $this->ion_auth->get_user()->id;
+			$data['date_created']= get_timestamp();
+
+			$this->poll_library->new_poll($data);
+
+
+		//update existing poll
+		}else{
+			$data['id']= $this->input->post('id');
+			$this->poll_library->update_poll($data);
+		}
+
 
 		redirect('admin/poll');
 	}
@@ -117,6 +136,51 @@ class Poll extends CI_Controller {
 		}
 
 		return $data;
+	}
+
+
+
+	/**
+	 * get 1 poll for editing
+	 */
+	public function edit(){
+
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='edit'){
+				$id = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->poll_library->list_poll($id);
+
+		$this->create($data[0]);
+
+	}
+
+
+	/**
+	 * view a poll for viewing
+	 */
+	public function view(){
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='view'){
+				$id = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->poll_library->list_poll($id);
+
+
+//print_r($data[0]);
+		//display
+		$this->load->view('templates/header');
+		$this->load->view('admin/index.php');
+		$this->load->view('admin/view_poll.php',$data[0]);
+		$this->load->view('templates/footer');
 	}
 
 

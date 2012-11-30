@@ -6,7 +6,7 @@ estimated fns. --
 	setup system
 	 - create db tables
 
-	create nu poll
+	create & update a poll
 	 - question
 	 - answer
 
@@ -85,6 +85,21 @@ class Poll_library
 
 
 	/**
+	 * update existing poll
+	 *
+	 * @param array -- udpated questionare
+	 * @return boolean
+	 */
+	public function update_poll($data){
+//print_r($data);
+		$this->ci->db->where('id',$data['id'])
+					->update($this->table,$data);
+
+		return true;
+	}
+
+
+	/**
 	 * change the active poll
 	 *
 	 * @param id int
@@ -124,7 +139,7 @@ class Poll_library
 	 */
 	public function list_poll($ids=false){
 
-		$ids ? $this->ci->db->where('id',$id) : '';
+		$ids ? $this->ci->db->where('id',$ids) : '';
 
 		$res = $this->ci->db->get($this->table);
 
@@ -167,33 +182,6 @@ class Poll_library
 /**
  * fns below are not tested yet.
  */
-
-	/**
-	 * view results
-	 *
-	 * @param int poll id
-	 * @return polls
-	 */
-	public function results($poll_id = false){
-		$poll_id ? $this->ci->db->where('id',$poll_id) : '';
-		$res = $this->ci->get($this->table);
-echo '9876';
-		if($poll_id){
-			$res = $this->ci->db->where('id',$poll_id);
-			$result = $res->result() ? $res->result() : false;
-			return $this->result_in_bargraph($result);
-			//$res->result() =  $res->result() ? $res->result() : false;
-			//$this->ci->ion->get_user();
-			//return $res;
-		}
-
-		foreach($res->results() as $key=>$val){
-			array_push($data,$val);
-		}
-
-		return $data;
-	}
-
 	/**
 	 * store vote count
 	 *
@@ -231,8 +219,7 @@ echo '9876';
 		if($data==null){
 			return $this->results();
 		}
-//=======================
-//========================
+
 		$res = $this->get_where($this->table,$data);
 
 		return $res->result() ? $res->result() : false ;
