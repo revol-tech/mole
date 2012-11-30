@@ -1,14 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<?php
-/*
-if($_REQUEST){
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
-}
-*/
-?>
 
 
 <!--

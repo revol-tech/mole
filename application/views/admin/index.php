@@ -8,8 +8,11 @@
 <a href='<?php echo site_url('admin/main')?>'>Admin homepage</a>
 <br/>
 
-<a href='<?php echo site_url('admin/news/create')?>'>Add new News</a>
+<a href='<?php echo site_url('admin/news')?>'>News</a>
 <br/>
 
 <a href='<?php echo site_url('admin/poll')?>'>Polls</a>
+<br/>
+
+<a href='<?php echo site_url('admin/notices')?>'>Notices</a>
 <br/>

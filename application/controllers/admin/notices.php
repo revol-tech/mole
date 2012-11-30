@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class News extends CI_Controller {
+class Notices extends CI_Controller {
 
 	public $data = array();
 
@@ -11,7 +11,7 @@ class News extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('news_model');
+		$this->load->model('news_model','notices_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -25,8 +25,7 @@ class News extends CI_Controller {
 
 	public function index(){
 
-
-		$data['items'] = $this->list_news();
+		$data['items'] = $this->list_notices();
 //echo '<pre>';
 //print_r($data);
 //echo '</pre>';
@@ -34,23 +33,24 @@ class News extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_news.php',$data);
+		$this->load->view('admin/list_notices.php',$data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * list all news
+	 * list all notices
 	 */
-	public function list_news(){
+	public function list_notices(){
 
-		$data = $this->news_model->get(array('news_type'=>1));
-
+		$data = $this->notices_model->get(array('news_type'=>2));
+//print_r($data);
 		//if there are no polls at present ...
 		if(!count($data)){
 			$item->id			='--';
 			$item->title		='--';
-			$item->news_type	='--';
+			$item->date_created	='--';
+			$item->notices_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
 
@@ -66,8 +66,8 @@ class News extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/news/active').'>'.
-						'<input type="hidden" name="news_id" value="'.$data[$key]->id.'"/>';
+			$str = '<form method="post" action='.site_url('admin/notices/active').'>'.
+						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
 				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
@@ -85,19 +85,19 @@ class News extends CI_Controller {
 
 
 	/**
-	 * activate/deactivate news
+	 * activate/deactivate notices
 	 */
 	public function active(){
-		$id = $this->input->post('news_id');
+		$id = $this->input->post('notice_id');
 		$active = $this->input->post('activate');
-		$this->news_model->change_active($id,$active);
+		$this->notices_model->change_active($id,$active);
 
-		redirect('admin/news');
+		redirect('admin/notices');
 	}
 
 
 	/**
-	 * news form
+	 * notices form
 	 */
     public function create(){
 		//generate WYSIWYG editor
@@ -106,7 +106,7 @@ class News extends CI_Controller {
 
 		$this->load->helper('utilites_helper');
 
-		//generate username, current date if creating nu news [not editing]
+		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
 			$this->session->set_userdata('date_created',$this->data['date_created']);
@@ -115,7 +115,7 @@ class News extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}else{
 
-			//get the username of the person who created the news
+			//get the username of the person who created the notices
 			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -129,44 +129,44 @@ class News extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_news.php', $this->data);
+		$this->load->view('admin/create_notices.php', $this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 
 	/**
-	 * save/update news form
+	 * save/update notices form
 	 */
     public function save(){
-		//save the news & return the id of that news
+		//save the notices & return the id of that notices
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->news_model->save();
+		$this->data['id'] = $this->notices_model->save(2);
 
-		//retrive that news
+		//retrive that notices
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that news
+		//display that notices
 		$this->create();
 	}
 
 
 
 	/**
-	 * view selected news
+	 * view selected notices
 	 */
 	public function view(){
 		$id=false;
-		$get_news = array('news_type'=>1);
+		$get_notices = array('news_type'=>2);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
-				$get_news['id'] = $this->uri->segment($key+1);
+				$get_notices['id'] = $this->uri->segment($key+1);
 				break;
 			}
 		}
 
-		$data = $this->news_model->get($get_news);
+		$data = $this->notices_model->get($get_notices);
 
 
 //print_r($data[0]);
@@ -174,13 +174,13 @@ class News extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_news.php',$data[0]);
+		$this->load->view('admin/view_notices.php',$data[0]);
 		$this->load->view('templates/footer');
 }
 
 
 	/**
-	 * edit selected news
+	 * edit selected notices
 	 */
 	public function edit(){
 		$id=false;
@@ -191,18 +191,18 @@ class News extends CI_Controller {
 			}
 		}
 
-		$data = $this->news_model->get(array('id'=>$id));
+		$data = $this->notices_model->get(array('id'=>$id));
 		$this->data = (array)$data[0];
 		$this->create();
 	}
 
 
 	/**
-	 * get the [seleccted] news
+	 * get the [seleccted] notices
 	 */
-	public function get($news_array=null){
+	public function get($notices_array=null){
 
-		$data = $this->news_model->get($news_array);
+		$data = $this->notices_model->get($notices_array);
 //print_r(($data[0]));
 
 		foreach($data[0] as $key=>$value){
@@ -212,13 +212,13 @@ class News extends CI_Controller {
 
 
 	/**
-	 * del selected news
+	 * del selected notices
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->news_model->del_poll($this->input->post('news_id'));
+		$this->notices_model->del_poll($this->input->post('notices_id'));
 
-		redirect('admin/news');
+		redirect('admin/notices');
 	}
 
 
