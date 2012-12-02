@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Notices extends CI_Controller {
+class Events extends CI_Controller {
 
 	public $data = array();
 
@@ -11,7 +11,7 @@ class Notices extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('news_model','notices_model');
+		$this->load->model('news_model','events_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -25,7 +25,7 @@ class Notices extends CI_Controller {
 
 	public function index(){
 
-		$data['items'] = $this->list_notices();
+		$data['items'] = $this->list_events();
 //echo '<pre>';
 //print_r($data);
 //echo '</pre>';
@@ -33,24 +33,24 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_notices.php',$data);
+		$this->load->view('admin/list_events.php',$data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * list all notices
+	 * list all events
 	 */
-	public function list_notices(){
+	public function list_events(){
 
-		$data = $this->notices_model->get(array('news_type'=>2));
+		$data = $this->events_model->get(array('news_type'=>3));
 //print_r($data);
 		//if there are no polls at present ...
 		if(!count($data)){
 			$item->id			='--';
 			$item->title		='--';
 			$item->date_created	='--';
-			$item->notices_type	='--';
+			$item->events_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
 
@@ -66,8 +66,8 @@ class Notices extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/notices/active').'>'.
-						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
+			$str = '<form method="post" action='.site_url('admin/events/active').'>'.
+						'<input type="hidden" name="events_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
 				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
@@ -85,19 +85,19 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * activate/deactivate notices
+	 * activate/deactivate events
 	 */
 	public function active(){
 		$id = $this->input->post('notice_id');
 		$active = $this->input->post('activate');
-		$this->notices_model->change_active($id,$active);
+		$this->events_model->change_active($id,$active);
 
-		redirect('admin/notices');
+		redirect('admin/events');
 	}
 
 
 	/**
-	 * notices form
+	 * events form
 	 */
     public function create(){
 		//generate WYSIWYG editor
@@ -106,7 +106,7 @@ class Notices extends CI_Controller {
 
 		$this->load->helper('utilites_helper');
 
-		//generate username, current date if creating nu notices [not editing]
+		//generate username, current date if creating nu events [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
 			$this->session->set_userdata('date_created',$this->data['date_created']);
@@ -115,7 +115,13 @@ class Notices extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}else{
 
-			//get the username of the person who created the notices
+			//get the username of the person who created the events
+//echo '<pre>';
+//print_r($this->data['created_by']);
+//print_r($this->ion_auth->get_user($this->data['created_by']));
+//print_r($this->ion_auth->get_user($this->data['created_by'])->username);
+//echo'</pre>';
+
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -129,44 +135,44 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_notices.php', $this->data);
+		$this->load->view('admin/create_events.php', $this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 
 	/**
-	 * save/update notices form
+	 * save/update events form
 	 */
     public function save(){
-		//save the notices & return the id of that notices
+		//save the events & return the id of that events
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->notices_model->save(2);
+		$this->data['id'] = $this->events_model->save(3);
 
-		//retrive that notices
+		//retrive that events
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that notices
+		//display that events
 		$this->create();
 	}
 
 
 
 	/**
-	 * view selected notices
+	 * view selected events
 	 */
 	public function view(){
 		$id=false;
-		$get_notices = array('news_type'=>2);
+		$get_events = array('news_type'=>3);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
-				$get_notices['id'] = $this->uri->segment($key+1);
+				$get_events['id'] = $this->uri->segment($key+1);
 				break;
 			}
 		}
 
-		$data = $this->notices_model->get($get_notices);
+		$data = $this->events_model->get($get_events);
 
 
 //print_r($data[0]);
@@ -174,13 +180,13 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_notices.php',$data[0]);
+		$this->load->view('admin/view_events.php',$data[0]);
 		$this->load->view('templates/footer');
 }
 
 
 	/**
-	 * edit selected notices
+	 * edit selected events
 	 */
 	public function edit(){
 		$id=false;
@@ -191,18 +197,18 @@ class Notices extends CI_Controller {
 			}
 		}
 
-		$data = $this->notices_model->get(array('id'=>$id));
+		$data = $this->events_model->get(array('id'=>$id));
 		$this->data = (array)$data[0];
 		$this->create();
 	}
 
 
 	/**
-	 * get the [seleccted] notices
+	 * get the [seleccted] events
 	 */
-	public function get($notices_array=null){
+	public function get($events_array=null){
 
-		$data = $this->notices_model->get($notices_array);
+		$data = $this->events_model->get($events_array);
 //print_r(($data[0]));
 
 		foreach($data[0] as $key=>$value){
@@ -212,13 +218,13 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * del selected notices
+	 * del selected events
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->notices_model->del_poll($this->input->post('notices_id'));
+		$this->events_model->del_poll($this->input->post('events_id'));
 
-		redirect('admin/notices');
+		redirect('admin/events');
 	}
 
 

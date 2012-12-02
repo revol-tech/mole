@@ -1,22 +1,11 @@
-<?php
-	if(isset($errors)){
-		echo '<div>';
-		foreach($errors as $error){
-			echo '<p>'.$error.'</p>';
-		}
-		echo '</div>';
-	}
-?>
 
 <section class="login_box">
 
 	<?php
 		if(isset($errors)){
-			echo '<div id="err">The following error occured : ';
 			foreach($errors as $error){
-				echo $error;
+				echo '<div class="err">'.$error.'</div>';
 			}
-			echo '</div>';
 		}
 	?>
 
@@ -24,7 +13,7 @@
 		<article>
 			<label>
 				Username:
-				<input type="text" name="username" value='<?php echo isset($username)?$username:''?>'>
+				<input type="text" name="username" value='<?php echo @$username?>'>
 			</label>
 			<br/>
 

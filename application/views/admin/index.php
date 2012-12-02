@@ -16,3 +16,12 @@
 
 <a href='<?php echo site_url('admin/notices')?>'>Notices</a>
 <br/>
+
+<a href='<?php echo site_url('admin/events')?>'>Events</a>
+<br/>
+
+<a href='<?php echo site_url('admin/press')?>'>Press</a>
+<br/>
+
+<a href='<?php echo site_url('admin/health')?>'>Health</a>
+<br/>

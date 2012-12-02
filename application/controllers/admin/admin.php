@@ -24,6 +24,8 @@ class Admin extends CI_Controller {
 			//redirect to admin/main if succces
 			//else return err msg array
 			$data['errors'] = $this->_chk_login();
+			$data['username']=$this->input->post('username');
+			$data['password']=$this->input->post('password');
 		}
 		//----------------------------
 

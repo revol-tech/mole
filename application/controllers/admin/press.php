@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Notices extends CI_Controller {
+class press extends CI_Controller {
 
 	public $data = array();
 
@@ -11,7 +11,7 @@ class Notices extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('news_model','notices_model');
+		$this->load->model('news_model','press_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -25,7 +25,7 @@ class Notices extends CI_Controller {
 
 	public function index(){
 
-		$data['items'] = $this->list_notices();
+		$data['items'] = $this->list_press();
 //echo '<pre>';
 //print_r($data);
 //echo '</pre>';
@@ -33,24 +33,24 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_notices.php',$data);
+		$this->load->view('admin/list_press.php',$data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * list all notices
+	 * list all press
 	 */
-	public function list_notices(){
+	public function list_press(){
 
-		$data = $this->notices_model->get(array('news_type'=>2));
+		$data = $this->press_model->get(array('news_type'=>4));
 //print_r($data);
 		//if there are no polls at present ...
 		if(!count($data)){
 			$item->id			='--';
 			$item->title		='--';
 			$item->date_created	='--';
-			$item->notices_type	='--';
+			$item->press_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
 
@@ -66,8 +66,8 @@ class Notices extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/notices/active').'>'.
-						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
+			$str = '<form method="post" action='.site_url('admin/press/active').'>'.
+						'<input type="hidden" name="press_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
 				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
@@ -85,19 +85,19 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * activate/deactivate notices
+	 * activate/deactivate press
 	 */
 	public function active(){
 		$id = $this->input->post('notice_id');
 		$active = $this->input->post('activate');
-		$this->notices_model->change_active($id,$active);
+		$this->press_model->change_active($id,$active);
 
-		redirect('admin/notices');
+		redirect('admin/press');
 	}
 
 
 	/**
-	 * notices form
+	 * press form
 	 */
     public function create(){
 		//generate WYSIWYG editor
@@ -106,7 +106,7 @@ class Notices extends CI_Controller {
 
 		$this->load->helper('utilites_helper');
 
-		//generate username, current date if creating nu notices [not editing]
+		//generate username, current date if creating nu press [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
 			$this->session->set_userdata('date_created',$this->data['date_created']);
@@ -115,7 +115,7 @@ class Notices extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}else{
 
-			//get the username of the person who created the notices
+			//get the username of the person who created the press
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -129,44 +129,44 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_notices.php', $this->data);
+		$this->load->view('admin/create_press.php', $this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 
 	/**
-	 * save/update notices form
+	 * save/update press form
 	 */
     public function save(){
-		//save the notices & return the id of that notices
+		//save the press & return the id of that press
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->notices_model->save(2);
+		$this->data['id'] = $this->press_model->save(4);
 
-		//retrive that notices
+		//retrive that press
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that notices
+		//display that press
 		$this->create();
 	}
 
 
 
 	/**
-	 * view selected notices
+	 * view selected press
 	 */
 	public function view(){
 		$id=false;
-		$get_notices = array('news_type'=>2);
+		$get_press = array('news_type'=>4);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
-				$get_notices['id'] = $this->uri->segment($key+1);
+				$get_press['id'] = $this->uri->segment($key+1);
 				break;
 			}
 		}
 
-		$data = $this->notices_model->get($get_notices);
+		$data = $this->press_model->get($get_press);
 
 
 //print_r($data[0]);
@@ -174,13 +174,13 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_notices.php',$data[0]);
+		$this->load->view('admin/view_press.php',$data[0]);
 		$this->load->view('templates/footer');
 }
 
 
 	/**
-	 * edit selected notices
+	 * edit selected press
 	 */
 	public function edit(){
 		$id=false;
@@ -191,18 +191,18 @@ class Notices extends CI_Controller {
 			}
 		}
 
-		$data = $this->notices_model->get(array('id'=>$id));
+		$data = $this->press_model->get(array('id'=>$id));
 		$this->data = (array)$data[0];
 		$this->create();
 	}
 
 
 	/**
-	 * get the [seleccted] notices
+	 * get the [seleccted] press
 	 */
-	public function get($notices_array=null){
+	public function get($press_array=null){
 
-		$data = $this->notices_model->get($notices_array);
+		$data = $this->press_model->get($press_array);
 //print_r(($data[0]));
 
 		foreach($data[0] as $key=>$value){
@@ -212,13 +212,13 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * del selected notices
+	 * del selected press
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->notices_model->del_poll($this->input->post('notices_id'));
+		$this->press_model->del_poll($this->input->post('press_id'));
 
-		redirect('admin/notices');
+		redirect('admin/press');
 	}
 
 
