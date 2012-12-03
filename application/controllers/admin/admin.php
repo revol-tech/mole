@@ -6,10 +6,22 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 
+		/**
+		 * set headers to prevent back after login
+		 */
+		$this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
+		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
+		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
+		$this->output->set_header('Pragma: no-cache');
+
 		//admin is already logged in.
 		if($this->ion_auth->is_admin()){
 			redirect('admin/main');
 		}
+	}
+
+	public function index(){
+		$this->login();
 	}
 
     public function login()
@@ -45,19 +57,21 @@ class Admin extends CI_Controller {
 	 */
 	private function _chk_login(){
 		$err = array();
+		$this->load->model('users_model');
 
 		if(!$this->captcha_model->check_captcha()){
 			$err['captcha_err'] = 'Invalid Captcha';
-		}
 
-		$this->load->model('users_model');
+		}else{
+			//if admin's login is invalid ...
+			if(! $this->users_model->check_login()){
+				$err['login_err'] = 'Invalid Login';
 
-		//if admin's login is valid ...
-		if($this->users_model->check_login()){
-			//redirect to admin's main page
-			redirect('/admin/main');
+			}else{
+				//redirect to admin's main page
+				redirect('/admin/main');
+			}
 		}
-		$err['login_err'] = 'Invalid Login';
 
 		return $err;
 	}
