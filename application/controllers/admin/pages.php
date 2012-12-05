@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Notices extends CI_Controller {
+class Pages extends CI_Controller {
 
 	public $data = array();
 
@@ -11,7 +11,7 @@ class Notices extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('news_model','notices_model');
+		$this->load->model('news_model','pages_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -25,7 +25,7 @@ class Notices extends CI_Controller {
 
 	public function index(){
 
-		$data['items'] = $this->list_notices();
+		$data['items'] = $this->list_pages();
 //echo '<pre>';
 //print_r($data);
 //echo '</pre>';
@@ -33,29 +33,29 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_notices.php',$data);
+		$this->load->view('admin/list_pages.php',$data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * list all notices
+	 * list all pages
 	 */
-	public function list_notices(){
+	public function list_pages(){
 
-		$data = $this->notices_model->get(array('news_type'=>2));
+		$data = $this->pages_model->get(array('news_type'=>6));
 //print_r($data);
-		//if there are no polls at present ...
+		//if there are no pages at present ...
 		if(!count($data)){
 			$item->id			='--';
 			$item->title		='--';
-			$item->title_link	= '--';
+			$item->title_link	='--';
 			$item->date_created	='--';
-			$item->notices_type	='--';
+			//$item->pages_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->edit			= '--';
-			$item->del			= '--';
+			$item->edit			='--';
+			$item->del			='--';
 
 			$data['items'] = $item;
 			return $data;
@@ -63,18 +63,19 @@ class Notices extends CI_Controller {
 //print_r($data);
 
 		foreach($data as $key=>$val){
-			$str =	'<a href="'.site_url('admin/notices/view/'.$val->id).'">'.
+
+			$str =	'<a href="'.site_url('admin/pages/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
 			$data[$key]->title_link = $str;
 
 
-			$str =	'<a href="'.site_url('admin/notices/edit/'.$val->id).'">edit</a>';
+			$str =	'<a href="'.site_url('admin/pages/edit/'.$val->id).'">edit</a>';
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/notices/del/').'">'.
-						'<input type="hidden" name="notices_id" value="'.$val->id.'"/>'.
+			$str = 	'<form method="post" action="'.site_url('admin/pages/del/').'">'.
+						'<input type="hidden" name="pages_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
@@ -86,8 +87,8 @@ class Notices extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/notices/active').'>'.
-						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
+			$str = '<form method="post" action='.site_url('admin/pages/active').'>'.
+						'<input type="hidden" name="pages_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
 				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
@@ -105,19 +106,19 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * activate/deactivate notices
+	 * activate/deactivate pages
 	 */
 	public function active(){
 		$id = $this->input->post('notice_id');
 		$active = $this->input->post('activate');
-		$this->notices_model->change_active($id,$active);
+		$this->pages_model->change_active($id,$active);
 
-		redirect('admin/notices');
+		redirect('admin/pages');
 	}
 
 
 	/**
-	 * notices form
+	 * pages form
 	 */
     public function create(){
 		//generate WYSIWYG editor
@@ -126,7 +127,7 @@ class Notices extends CI_Controller {
 
 		$this->load->helper('utilites_helper');
 
-		//generate username, current date if creating nu notices [not editing]
+		//generate username, current date if creating nu pages [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
 			$this->session->set_userdata('date_created',$this->data['date_created']);
@@ -135,7 +136,7 @@ class Notices extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}else{
 
-			//get the username of the person who created the notices
+			//get the username of the person who created the pages
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -149,44 +150,44 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_notices.php', $this->data);
+		$this->load->view('admin/create_pages.php', $this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 
 	/**
-	 * save/update notices form
+	 * save/update pages form
 	 */
     public function save(){
-		//save the notices & return the id of that notices
+		//save the pages & return the id of that pages
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->notices_model->save(2);
+		$this->data['id'] = $this->pages_model->save(6);
 
-		//retrive that notices
+		//retrive that pages
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that notices
+		//display that pages
 		$this->create();
 	}
 
 
 
 	/**
-	 * view selected notices
+	 * view selected pages
 	 */
 	public function view(){
 		$id=false;
-		$get_notices = array('news_type'=>2);
+		$get_pages = array('news_type'=>6);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
-				$get_notices['id'] = $this->uri->segment($key+1);
+				$get_pages['id'] = $this->uri->segment($key+1);
 				break;
 			}
 		}
 
-		$data = $this->notices_model->get($get_notices);
+		$data = $this->pages_model->get($get_pages);
 
 
 //print_r($data[0]);
@@ -194,13 +195,13 @@ class Notices extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_notices.php',$data[0]);
+		$this->load->view('admin/view_pages.php',$data[0]);
 		$this->load->view('templates/footer');
 }
 
 
 	/**
-	 * edit selected notices
+	 * edit selected pages
 	 */
 	public function edit(){
 		$id=false;
@@ -211,18 +212,18 @@ class Notices extends CI_Controller {
 			}
 		}
 
-		$data = $this->notices_model->get(array('id'=>$id));
+		$data = $this->pages_model->get(array('id'=>$id));
 		$this->data = (array)$data[0];
 		$this->create();
 	}
 
 
 	/**
-	 * get the [seleccted] notices
+	 * get the [seleccted] pages
 	 */
-	public function get($notices_array=null){
+	public function get($pages_array=null){
 
-		$data = $this->notices_model->get($notices_array);
+		$data = $this->pages_model->get($pages_array);
 //print_r(($data[0]));
 
 		foreach($data[0] as $key=>$value){
@@ -232,13 +233,13 @@ class Notices extends CI_Controller {
 
 
 	/**
-	 * del selected notices
+	 * del selected pages
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->notices_model->del_poll($this->input->post('notices_id'));
+		$this->pages_model->del_poll($this->input->post('pages_id'));
 
-		redirect('admin/notices');
+		redirect('admin/pages');
 	}
 
 

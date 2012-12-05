@@ -4,8 +4,7 @@ class News extends CI_Controller {
 
 	public $data = array();
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		chk_admin();
@@ -24,7 +23,6 @@ class News extends CI_Controller {
 
 
 	public function index(){
-
 
 		$data['items'] = $this->list_news();
 //echo '<pre>';
@@ -46,13 +44,18 @@ class News extends CI_Controller {
 
 		$data = $this->news_model->get(array('news_type'=>1));
 
-		//if there are no polls at present ...
+		//if there are no news at present ...
 		if(!count($data)){
-			$item->id			='--';
-			$item->title		='--';
-			$item->news_type	='--';
+			$item->id			= '--';
+			$item->title		= '--';
+			$item->title_link	= '--';
+			$item->news_type	= '--';
 			$item->created_by	= '--';
+			$item->date_created	= '--';
 			$item->date_published='--';
+			$item->active		= '--';
+			$item->edit			= '--';
+			$item->del			= '--';
 
 			$data['items'] = $item;
 			return $data;
@@ -60,6 +63,24 @@ class News extends CI_Controller {
 //print_r($data);
 
 		foreach($data as $key=>$val){
+
+			$str =	'<a href="'.site_url('admin/news/view/'.$val->id).'">'.
+						$val->title.
+					'</a>';
+			$data[$key]->title_link = $str;
+
+
+			$str =	'<a href="'.site_url('admin/news/edit/'.$val->id).'">edit</a>';
+			$data[$key]->edit = $str;
+
+
+			$str = 	'<form method="post" action="'.site_url('admin/news/del/').'">'.
+						'<input type="hidden" name="news_id" value="'.$val->id.'"/>'.
+						'<input type="submit" name="del" value="Delete"/>'.
+					'</form>';
+			$data[$key]->del = $str;
+
+
 			//to convert the userid into username
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
@@ -84,6 +105,8 @@ class News extends CI_Controller {
 	}
 
 
+
+
 	/**
 	 * activate/deactivate news
 	 */
@@ -103,7 +126,7 @@ class News extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
-
+//print_r($this->data);
 		$this->load->helper('utilites_helper');
 
 		//generate username, current date if creating nu news [not editing]
@@ -113,10 +136,10 @@ class News extends CI_Controller {
 		}
 		if(!isset($this->data['created_by'])){
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
-		}else{
-
-			//get the username of the person who created the news
-			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
+//		}else{
+//
+//			//get the username of the person who created the news
+//			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
 //print_r($this->data[0]);
@@ -176,7 +199,7 @@ class News extends CI_Controller {
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_news.php',$data[0]);
 		$this->load->view('templates/footer');
-}
+	}
 
 
 	/**

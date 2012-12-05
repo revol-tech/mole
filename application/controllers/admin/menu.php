@@ -111,10 +111,13 @@ class Menu extends CI_Controller {
 		if(!count($data)){
 			$item->id		='--';
 			$item->title	='--';
+			$item->title_link='--';
 			$item->link		='--';
 			$item->parent_id='--';
 			$item->active	='--';
 			$item->comments	='--';
+			$item->edit		='--';
+			$item->del		='--';
 
 			$data['items'] = $item;
 			return $data;
@@ -122,6 +125,22 @@ class Menu extends CI_Controller {
 //print_r($data);
 
 		foreach($data as $key=>$val){
+			$str =	'<a href="'.site_url('admin/menu/view/'.$val->id).'">'.
+						$val->title.
+					'</a>';
+			$data[$key]->title_link = $str;
+
+
+			$str =	'<a href="'.site_url('admin/menu/edit/'.$val->id).'">edit</a>';
+			$data[$key]->edit = $str;
+
+
+			$str = 	'<form method="post" action="'.site_url('admin/menu/del/').'">'.
+						'<input type="hidden" name="menu_id" value="'.$val->id.'"/>'.
+						'<input type="submit" name="del" value="Delete"/>'.
+					'</form>';
+			$data[$key]->del = $str;
+
 
 			//add activate/deactivate button
 			$str = '<form method="post" action='.site_url('admin/menu/active').'>'.

@@ -28,3 +28,6 @@
 
 <a href='<?php echo site_url('admin/menu')?>'>Menu</a>
 <br/>
+
+<a href='<?php echo site_url('admin/pages')?>'>Pages</a>
+<br/>

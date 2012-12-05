@@ -23,9 +23,7 @@
 	<?php foreach($items as $item): ?>
 		<tr>
 			<td><?php echo $item->id?></td>
-			<td><a href='<?php echo site_url('admin/poll/view/'.$item->id)?>'>
-					<?php echo $item->question?>
-				</a></td>
+			<td><?php echo $item->question_link?></td>
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
 			<td><?php echo $item->option1?></td>
@@ -34,15 +32,8 @@
 			<td><?php echo $item->option4?></td>
 			<td><?php echo $item->graph?></td>
 			<td><?php echo $item->active?></td>
-			<td><a href='<?php echo site_url('admin/poll/edit/'.$item->id)?>'>
-					edit
-				</a></td>
-			<td>
-				<form method='post' action='<?php echo site_url('admin/poll/del/')?>'>
-					<input type='hidden' name='poll_id' value='<?php echo $item->id?>'/>
-					<input type='submit' name='del' value='Delete'/>
-				</form>
-			</td>
+			<td><?php echo $item->edit?></td>
+			<td><?php echo $item->del?></td>
 		</tr>
 	<?php endforeach;?>
 </tbody>

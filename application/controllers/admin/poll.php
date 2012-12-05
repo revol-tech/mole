@@ -99,15 +99,18 @@ class Poll extends CI_Controller {
 		if(!count($data)){
 			$item->id		='--';
 			$item->question	='--';
+			$item->question_link='--';
 			$item->date_created='--';
 			$item->created_by='--';
 			$item->option1	='--';
 			$item->option2	='--';
 			$item->option3	='--';
 			$item->option4	='--';
-			$item->results	='--';
+			$item->graph	='--';
 			$item->active	='--';
 			$item->result	='--';
+			$item->edit		= '--';
+			$item->del		= '--';
 
 			$data['items'] = $item;
 			return $data;
@@ -115,6 +118,23 @@ class Poll extends CI_Controller {
 //print_r($data);
 
 		foreach($data as $key=>$val){
+			$str =	'<a href="'.site_url('admin/poll/view/'.$val->id).'">'.
+						$val->question.
+					'</a>';
+			$data[$key]->question_link = $str;
+
+
+			$str =	'<a href="'.site_url('admin/poll/edit/'.$val->id).'">edit</a>';
+			$data[$key]->edit = $str;
+
+			$str = 	'<form method="post" action="'.site_url('admin/poll/del/').'">'.
+						'<input type="hidden" name="poll_id" value="'.$val->id.'"/>'.
+						'<input type="submit" name="del" value="Delete"/>'.
+					'</form>';
+			$data[$key]->del = $str;
+
+
+
 			//to convert the userid into username
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;

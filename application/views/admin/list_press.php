@@ -18,21 +18,12 @@
 	<?php foreach($items as $item): ?>
 		<tr>
 			<td><?php echo $item->id?></td>
-			<td><a href='<?php echo site_url('admin/press/view/'.$item->id)?>'>
-					<?php echo $item->title?>
-				</a></td>
+			<td><?php echo $item->title_link?></td>
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
 			<td><?php echo $item->date_published?></td>
-			<td><a href='<?php echo site_url('admin/press/edit/'.$item->id)?>'>
-					edit
-				</a></td>
-			<td>
-				<form method='post' action='<?php echo site_url('admin/press/del/')?>'>
-					<input type='hidden' name='press_id' value='<?php echo $item->id?>'/>
-					<input type='submit' name='del' value='Delete'/>
-				</form>
-			</td>
+			<td><?php echo $item->edit?></td>
+			<td><?php echo $item->del?></td>
 		</tr>
 	<?php endforeach;?>
 </tbody>
