@@ -31,5 +31,5 @@ class Migration_Add_captcha extends CI_Migration {
 	}
 }
 
-/* End of file 011_add_captcha.php */
-/* Location: ./application/migrations/011_add_captcha.php */
+/* End of file 012_add_captcha.php */
+/* Location: ./application/migrations/012_add_captcha.php */

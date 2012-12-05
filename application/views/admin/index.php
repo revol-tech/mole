@@ -25,3 +25,6 @@
 
 <a href='<?php echo site_url('admin/health')?>'>Health</a>
 <br/>
+
+<a href='<?php echo site_url('admin/menu')?>'>Menu</a>
+<br/>

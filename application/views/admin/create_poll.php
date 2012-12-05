@@ -24,7 +24,7 @@
 
 	<label>
 		Publish
-		<input type='checkbox' name='publish' value='1'/>
+		<input type='checkbox' name='publish' value='1' <?php echo @$active==1?'checked=checkedd':''?>/>
 	</label>
 	<br/>
 

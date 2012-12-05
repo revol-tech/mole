@@ -26,6 +26,9 @@ class Update_db extends CI_Controller {
 			$this->migration->latest();
 			//$this->migration->version($version);
 		}
+
+		echo 'ur db tables should have been automatically updated by now.';
+		echo '<br/>u might wanna have a look at ur db';
 	}
 }
 
