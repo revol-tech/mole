@@ -188,6 +188,9 @@ class Notices extends CI_Controller {
 
 		$data = $this->notices_model->get($get_notices);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 
@@ -212,6 +215,11 @@ class Notices extends CI_Controller {
 		}
 
 		$data = $this->notices_model->get(array('id'=>$id));
+
+		if(count((array)$data)!=1){
+			show_404();
+		}
+
 		$this->data = (array)$data[0];
 		$this->create();
 	}

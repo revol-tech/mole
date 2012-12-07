@@ -189,6 +189,9 @@ class Pages extends CI_Controller {
 
 		$data = $this->pages_model->get($get_pages);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 
@@ -213,6 +216,10 @@ class Pages extends CI_Controller {
 		}
 
 		$data = $this->pages_model->get(array('id'=>$id));
+		if(count((array)$data)!=1){
+			show_404();
+		}
+
 		$this->data = (array)$data[0];
 		$this->create();
 	}

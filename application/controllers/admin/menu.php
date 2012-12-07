@@ -176,6 +176,10 @@ class Menu extends CI_Controller {
 		}
 
 		$data = $this->menu_model->get(array('id'=>$id));
+
+		if(count($data)!=1){
+			show_404();
+		}
 //print_r($data);
 		$this->create($data[0]);
 
@@ -196,6 +200,9 @@ class Menu extends CI_Controller {
 
 		$data = $this->menu_model->get(array('id'=>$id));
 
+		if(count($data)!=1){
+			show_404();
+		}
 //echo $id;
 //print_r($data[0]);
 		//display

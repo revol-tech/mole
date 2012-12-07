@@ -49,7 +49,7 @@ class Press extends CI_Controller {
 		if(!count($data)){
 			$item->id			='--';
 			$item->title		='--';
-			$item->title_link		='--';
+			$item->title_link	='--';
 			$item->date_created	='--';
 			$item->press_type	='--';
 			$item->created_by	= '--';
@@ -188,6 +188,9 @@ class Press extends CI_Controller {
 
 		$data = $this->press_model->get($get_press);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 
@@ -196,7 +199,7 @@ class Press extends CI_Controller {
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_press.php',$data[0]);
 		$this->load->view('templates/footer');
-}
+	}
 
 
 	/**
@@ -212,6 +215,10 @@ class Press extends CI_Controller {
 		}
 
 		$data = $this->press_model->get(array('id'=>$id));
+		if(count((array)$data)!=1){
+			show_404();
+		}
+
 		$this->data = (array)$data[0];
 		$this->create();
 	}

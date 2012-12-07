@@ -31,3 +31,6 @@
 
 <a href='<?php echo site_url('admin/pages')?>'>Pages</a>
 <br/>
+
+<a href='<?php echo site_url('admin/files')?>'>Files</a>
+<br/>

@@ -48,6 +48,8 @@ define('CAPTCHAPATH','public/imgs/captcha');
 define('FONTPATH',	'public/font');
 //define('TMPPATH',	'public/tmp');
 define('CKEDITOR',	'public/ckeditor');
+define('DOCUMENTS',	'public/documents');
+
 
 /*
 |--------------------------------------------------------------------------

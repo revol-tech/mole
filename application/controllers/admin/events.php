@@ -195,6 +195,9 @@ class Events extends CI_Controller {
 
 		$data = $this->events_model->get($get_events);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 
@@ -219,6 +222,10 @@ class Events extends CI_Controller {
 		}
 
 		$data = $this->events_model->get(array('id'=>$id));
+		if(count((array)$data)!=1){
+			show_404();
+		}
+
 		$this->data = (array)$data[0];
 		$this->create();
 	}

@@ -175,6 +175,9 @@ class Poll extends CI_Controller {
 
 		$data = $this->poll_library->list_poll($id);
 
+		if(count($data) != 1){
+			show_404();
+		}
 		$this->create($data[0]);
 
 	}
@@ -194,6 +197,9 @@ class Poll extends CI_Controller {
 
 		$data = $this->poll_library->list_poll($id);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 		//display

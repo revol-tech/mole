@@ -191,6 +191,9 @@ class News extends CI_Controller {
 
 		$data = $this->news_model->get($get_news);
 
+		if(count($data)!=1){
+			show_404();
+		}
 
 //print_r($data[0]);
 
@@ -215,6 +218,10 @@ class News extends CI_Controller {
 		}
 
 		$data = $this->news_model->get(array('id'=>$id));
+
+		if(count($data)!=1){
+			show_404();
+		}
 		$this->data = (array)$data[0];
 		$this->create();
 	}
