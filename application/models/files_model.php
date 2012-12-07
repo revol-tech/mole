@@ -8,32 +8,32 @@ class Files_model extends CI_Model{
 		$this->load->library('upload');
 	}
 
+
 	/**
 	 * get files [of selected parameter]
 	 */
-	public function get($files=null){
-//print_r($files);
+	public function get($files=null,$limit=null,$start=null){
+
+		if($limit){
+			$this->db->limit($limit,$start);
+		}
 		if(count($files)>0){
 			foreach($files as $key=>$value){
 				$this->db->where($key,$value);
 			}
 		}
 		$res = $this->db->get($this->table);
-/*
-//echo $this->db->last_query();
-echo '<pre>';
-print_r($res->result());
-echo '</pre>';
-		foreach($res->result() as $value){
-print_r($value->created_by);
-			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
-			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
-		}
-//print_r($res->result());
-*/
+
 		return $res->result();
 	}
 
+
+	/**
+	 * count records
+	 */
+	public function record_count(){
+		return $this->db->count_all($this->table);
+	}
 
 
 	/**

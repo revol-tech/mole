@@ -26,6 +26,7 @@ class Files extends CI_Controller {
 
 		$data['items'] = $this->list_files();
 
+
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
@@ -38,29 +39,43 @@ class Files extends CI_Controller {
 	/**
 	 * list all files
 	 */
-	public function list_files(){
+	private function list_files(){
 
-		$data = $this->files_model->get();
-		if(count($data)==0){
-			$item->id			='--';
-			$item->filename	='--';
-			$item->title		='--';
-			$item->title_link	='--';
-			$item->description	='--';
-			$item->timestamp	='--';
-			$item->date_created	='--';
-			$item->press_type	='--';
-			$item->created_by	= '--';
-			$item->date_published='--';
-			$item->download			='--';
-			$item->del			='--';
 
-			return array($item);
-		}
-//echo '<pre>';
-//print_r($data);
-//echo '</pre>';
+$config['base_url'] = site_url('admin/files/index');
+$config['total_rows'] = $this->files_model->record_count();
+$config['per_page'] = 3;
 
+
+if($config['total_rows']==0){
+	$item->id			='--';
+	$item->filename	='--';
+	$item->title		='--';
+	$item->title_link	='--';
+	$item->description	='--';
+	$item->timestamp	='--';
+	$item->date_created	='--';
+	$item->press_type	='--';
+	$item->created_by	= '--';
+	$item->date_published='--';
+	$item->download			='--';
+	$item->del			='--';
+
+	return array('data'=>array($item));
+}
+
+
+foreach($this->uri->segment_array() as $key=>$val){
+	if($val=='index'){
+		$config['uri_segment'] = $key+1;
+		break;
+	}
+}
+$this->pagination->initialize($config);
+isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
+$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+//echo $page;
+		$data = $this->files_model->get(null,$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 
@@ -87,8 +102,9 @@ class Files extends CI_Controller {
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 		}
+		//$data['links'] = $this->pagination->create_links();
 
-		return $data;
+		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 
