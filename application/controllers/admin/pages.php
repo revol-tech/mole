@@ -2,10 +2,11 @@
 
 class Pages extends CI_Controller {
 
-	public $data = array();
+	protected $data = array();
+	protected $type = 6;
 
-	public function __construct()
-	{
+	public function __construct(){
+
 		parent::__construct();
 
 		chk_admin();
@@ -20,6 +21,9 @@ class Pages extends CI_Controller {
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
+
+		//flashdata to redirect to the same page
+		$this->session->set_flashdata('redirectToCurrent', current_url());
 	}
 
 
@@ -43,10 +47,14 @@ class Pages extends CI_Controller {
 	 */
 	public function list_pages(){
 
-		$data = $this->pages_model->get(array('news_type'=>6));
+		//initial configurations for pagination
+		$config['base_url'] = site_url('admin/pages/index');
+		$config['total_rows'] = $this->pages_model->record_count($this->type);
+		$config['per_page'] = PAGEITEMS;
+
 //print_r($data);
 		//if there are no pages at present ...
-		if(!count($data)){
+		if($config['total_rows']==0){
 			$item->id			='--';
 			$item->title		='--';
 			$item->title_link	='--';
@@ -58,9 +66,24 @@ class Pages extends CI_Controller {
 			$item->del			='--';
 
 			$data['items'] = $item;
-			return $data;
+			return array('data'=>array($item));
 		}
 //print_r($data);
+
+		//get reqd page number
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='index'){
+				$config['uri_segment'] = $key+1;
+				break;
+			}
+		}
+		$this->pagination->initialize($config);
+		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
+		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		//echo $page;
+
+		//get reqd. page's data
+		$data = $this->pages_model->get(array('news_type'=>$this->type),$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 
@@ -101,7 +124,7 @@ class Pages extends CI_Controller {
 			$data[$key]->active = $str;
 		}
 
-		return $data;
+		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 
@@ -162,7 +185,7 @@ class Pages extends CI_Controller {
     public function save(){
 		//save the pages & return the id of that pages
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->pages_model->save(6);
+		$this->data['id'] = $this->pages_model->save($this->type);
 
 		//retrive that pages
 		$this->get(array('id'=> $this->data['id']));

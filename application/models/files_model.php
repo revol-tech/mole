@@ -119,8 +119,6 @@ class Files_model extends CI_Model{
 	}
 
 
-
-
 	/**
 	 * change the active poll
 	 *

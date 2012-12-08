@@ -16,23 +16,6 @@ class Menu_model extends CI_Model{
 
 
 	/**
-	 * change the active | inactive menu
-	 *
-	 */
-/**	public function active(){
-
-		$ids=$this->input->post('menu_id');
-		$active=$this->input->post('active');
-
-
-		$this->db->set(	'active',$active=='true'?1:0 )
-				->where('id',$ids)
-				->update($this->table);
-	}
-*/
-
-
-	/**
 	 * update existing link
 	 *
 	 * @param array updated item
@@ -107,10 +90,11 @@ class Menu_model extends CI_Model{
 	/**
 	 * get link [of selected parameter]
 	 */
-	public function get($data=null){
-//print_r($data);
-		$res = $this->db->get($this->table,$data);
-//echo $this->db->last_query();
+	public function get($data=null,$limit=null,$start=null){
+
+		if($limit){
+			$this->db->limit($limit,$start);
+		}
 		if(count($data)){
 			foreach($data as $key=>$value){
 				$this->db->where($key,$value);
@@ -122,6 +106,13 @@ class Menu_model extends CI_Model{
 		return $res->result();
 	}
 
+
+	/**
+	 * count records
+	 */
+	public function record_count(){
+		return $this->db->count_all($this->table);
+	}
 
 
 	/**
@@ -139,6 +130,23 @@ class Menu_model extends CI_Model{
 //echo $this->db->last_query();
 		return true;
 	}
+
+
+	/**
+	 * change the active | inactive menu
+	 *
+	 */
+/**	public function active(){
+
+		$ids=$this->input->post('menu_id');
+		$active=$this->input->post('active');
+
+
+		$this->db->set(	'active',$active=='true'?1:0 )
+				->where('id',$ids)
+				->update($this->table);
+	}
+*/
 }
 
 /* End of file menu_model.php */

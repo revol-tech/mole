@@ -4,8 +4,7 @@ class Files extends CI_Controller {
 
 	public $data = array();
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		chk_admin();
@@ -26,7 +25,6 @@ class Files extends CI_Controller {
 
 		$data['items'] = $this->list_files();
 
-
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
@@ -35,74 +33,77 @@ class Files extends CI_Controller {
 	}
 
 
-
 	/**
 	 * list all files
 	 */
 	private function list_files(){
 
-
-$config['base_url'] = site_url('admin/files/index');
-$config['total_rows'] = $this->files_model->record_count();
-$config['per_page'] = 3;
-
-
-if($config['total_rows']==0){
-	$item->id			='--';
-	$item->filename	='--';
-	$item->title		='--';
-	$item->title_link	='--';
-	$item->description	='--';
-	$item->timestamp	='--';
-	$item->date_created	='--';
-	$item->press_type	='--';
-	$item->created_by	= '--';
-	$item->date_published='--';
-	$item->download			='--';
-	$item->del			='--';
-
-	return array('data'=>array($item));
-}
+		//initial configurations for pagination
+		$config['base_url'] = site_url('admin/files/index');
+		$config['total_rows'] = $this->files_model->record_count();
+		$config['per_page'] = PAGEITEMS;
 
 
-foreach($this->uri->segment_array() as $key=>$val){
-	if($val=='index'){
-		$config['uri_segment'] = $key+1;
-		break;
-	}
-}
-$this->pagination->initialize($config);
-isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
-$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
-//echo $page;
+		//if no data, set then to display null
+		if($config['total_rows']==0){
+			$item->id			='--';
+			$item->filename		='--';
+			$item->title		='--';
+			$item->title_link	='--';
+			$item->description	='--';
+			$item->timestamp	='--';
+			$item->date_created	='--';
+			$item->press_type	='--';
+			$item->created_by	= '--';
+			$item->date_published='--';
+			$item->download		='--';
+			$item->del			='--';
+
+			return array('data'=>array($item));
+		}
+
+		//get reqd page number
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='index'){
+				$config['uri_segment'] = $key+1;
+				break;
+			}
+		}
+		$this->pagination->initialize($config);
+		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
+		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		//echo $page;
+
+		//get reqd. page's data
 		$data = $this->files_model->get(null,$config['per_page'],$page);
 
+		//enhance data as reqd.
 		foreach($data as $key=>$val){
 
+			//href for the page
 			$str =	'<a href="'.site_url('admin/files/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
 			$data[$key]->title_link = $str;
 
-
+			//del for the data
 			$str = 	'<form method="post" action="'.site_url('admin/files/del/').'">'.
 						'<input type="hidden" name="files_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
 
-
+			//download the file
 			$str =	'<a href="'.site_url('admin/files/download/'.$val->id).'">
 						download
 					</a>';
 			$data[$key]->download = $str;
 
 
-			//to convert the userid into username
+			//convert the userid into username
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 		}
-		//$data['links'] = $this->pagination->create_links();
 
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
@@ -116,6 +117,7 @@ $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($con
 		$this->load->helper('utilites_helper');
 
 		if($this->input->post('upload')){
+			//upload the file
 			$result = $this->files_model->upload();
 			$result['status'] = 'file uploaded';
 
@@ -143,7 +145,6 @@ $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($con
 	 * del selected files
 	 */
 	public function del(){
-//echo 'in delete polll';
 		$this->files_model->del(array('id'=>$this->input->post('files_id')));
 
 		redirect('admin/files');
@@ -203,5 +204,4 @@ $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($con
 
 		force_download($file_name, $file_data);
 	}
-
 }

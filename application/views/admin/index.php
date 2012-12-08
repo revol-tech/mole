@@ -8,19 +8,11 @@
 <a href='<?php echo site_url('admin/main')?>'>Admin homepage</a>
 <br/>
 
-<a href='<?php echo site_url('admin/news')?>'>News</a>
-<br/>
-
-<a href='<?php echo site_url('admin/poll')?>'>Polls</a>
-<br/>
-
-<a href='<?php echo site_url('admin/notices')?>'>Notices</a>
-<br/>
 
 <a href='<?php echo site_url('admin/events')?>'>Events</a>
 <br/>
 
-<a href='<?php echo site_url('admin/press')?>'>Press</a>
+<a href='<?php echo site_url('admin/files')?>'>Files</a>
 <br/>
 
 <a href='<?php echo site_url('admin/health')?>'>Health</a>
@@ -29,8 +21,17 @@
 <a href='<?php echo site_url('admin/menu')?>'>Menu</a>
 <br/>
 
+<a href='<?php echo site_url('admin/news')?>'>News</a>
+<br/>
+
+<a href='<?php echo site_url('admin/notices')?>'>Notices</a>
+<br/>
+
 <a href='<?php echo site_url('admin/pages')?>'>Pages</a>
 <br/>
 
-<a href='<?php echo site_url('admin/files')?>'>Files</a>
+<a href='<?php echo site_url('admin/poll')?>'>Polls</a>
+<br/>
+
+<a href='<?php echo site_url('admin/press')?>'>Press</a>
 <br/>

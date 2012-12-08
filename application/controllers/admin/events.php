@@ -3,9 +3,10 @@
 class Events extends CI_Controller {
 
 	public $data = array();
+	public $type = 3;
 
-	public function __construct()
-	{
+
+	public function __construct(){
 		parent::__construct();
 
 		chk_admin();
@@ -20,7 +21,11 @@ class Events extends CI_Controller {
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
+
+		//flashdata to redirect to the same page
+		$this->session->set_flashdata('redirectToCurrent', current_url());
 	}
+
 
 
 	public function index(){
@@ -41,12 +46,16 @@ class Events extends CI_Controller {
 	/**
 	 * list all events
 	 */
-	public function list_events(){
+	private function list_events(){
 
-		$data = $this->events_model->get(array('news_type'=>3));
-//print_r($data);
+		//initial configurations for pagination
+		$config['base_url'] = site_url('admin/events/index');
+		$config['total_rows'] = $this->events_model->record_count($this->type);
+		$config['per_page'] = PAGEITEMS;
+
+
 		//if there are no polls at present ...
-		if(!count($data)){
+		if($config['total_rows']==0){
 			$item->id			='--';
 			$item->title		='--';
 			$item->title_link	='--';
@@ -58,9 +67,27 @@ class Events extends CI_Controller {
 			$item->del			='--';
 
 			$data['items'] = $item;
-			return $data;
+			return array('data'=>array($item));
 		}
-//print_r($data);
+
+		//get reqd page number
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='index'){
+				$config['uri_segment'] = $key+1;
+				break;
+			}
+		}
+		$this->pagination->initialize($config);
+		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
+		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		//echo $page;
+
+		//get reqd. page's data
+		$data = $this->events_model->get(array('news_type'=>$this->type),
+											$config['per_page'],
+											$page
+										);
+
 
 		foreach($data as $key=>$val){
 			$str =	'<a href="'.site_url('admin/events/view/'.$val->id).'">'.
@@ -101,7 +128,7 @@ class Events extends CI_Controller {
 			$data[$key]->active = $str;
 		}
 
-		return $data;
+		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 
@@ -113,7 +140,7 @@ class Events extends CI_Controller {
 		$active = $this->input->post('activate');
 		$this->events_model->change_active($id,$active);
 
-		redirect('admin/events');
+		redirect($this->session->flashdata('redirectToCurrent'));
 	}
 
 
@@ -168,7 +195,7 @@ class Events extends CI_Controller {
     public function save(){
 		//save the events & return the id of that events
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->events_model->save(3);
+		$this->data['id'] = $this->events_model->save($this->type);
 
 		//retrive that events
 		$this->get(array('id'=> $this->data['id']));
@@ -252,7 +279,7 @@ class Events extends CI_Controller {
 //echo 'in delete polll';
 		$this->events_model->del_poll($this->input->post('events_id'));
 
-		redirect('admin/events');
+		redirect($this->session->flashdata('redirectToCurrent'));
 	}
 
 

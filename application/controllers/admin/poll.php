@@ -20,6 +20,9 @@ class Poll extends CI_Controller {
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
+
+		//flashdata to redirect to the same page
+		$this->session->set_flashdata('redirectToCurrent', current_url());
 	}
 
 
@@ -93,10 +96,13 @@ class Poll extends CI_Controller {
 	 */
 	public function list_poll(){
 
-		$data = $this->poll_library->list_poll();
+		//initial configurations for pagination
+		$config['base_url'] = site_url('admin/events/index');
+		$config['total_rows'] = $this->poll_library->record_count();
+		$config['per_page'] = PAGEITEMS;
 
 		//if there are no polls at present ...
-		if(!count($data)){
+		if($config['total_rows']==0){
 			$item->id		='--';
 			$item->question	='--';
 			$item->question_link='--';
@@ -113,9 +119,24 @@ class Poll extends CI_Controller {
 			$item->del		= '--';
 
 			$data['items'] = $item;
-			return $data;
+			return array('data'=>array($item));
 		}
 //print_r($data);
+
+		//get reqd page number
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='index'){
+				$config['uri_segment'] = $key+1;
+				break;
+			}
+		}
+		$this->pagination->initialize($config);
+		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
+		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		//echo $page;
+
+		//get reqd. page's data
+		$data = $this->poll_library->list_poll(null,$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 			$str =	'<a href="'.site_url('admin/poll/view/'.$val->id).'">'.
@@ -155,7 +176,7 @@ class Poll extends CI_Controller {
 			$data[$key]->active = $str;
 		}
 
-		return $data;
+		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 

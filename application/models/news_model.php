@@ -1,8 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class News_model extends CI_Model{
-	public function __construct()
-	{
+
+	//the table to be used in the db
+	private $table = 'news';
+
+	public function __construct(){
 		parent::__construct();
 	}
 
@@ -16,7 +19,7 @@ class News_model extends CI_Model{
 
 		$this->db->set(	'active',$active=='true'?1:0 )
 				->where('id',$ids)
-				->update('news');
+				->update($this->table);
 	}
 
 
@@ -24,11 +27,6 @@ class News_model extends CI_Model{
 	 * update existing news
 	 */
 	private function update($data){
-//		$sql = 'UPDATE `news` SET'.
-//					'`title`="'.$data[0].'",		`content`="'.$data[1].'",'.
-//					'`date_published`='.$data[3].',	`date_removed`='.$data[4].''.
-//				'WHERE `id`='.$data['id'].';';
-
 
 		$update = array(
 					   'title' 		=> $data[0],
@@ -38,10 +36,11 @@ class News_model extends CI_Model{
 					);
 
 		$this->db->where('id', $data['id']);
-		$this->db->update('news', $update);
+		$this->db->update($this->table, $update);
 
 		return $data['id'];
 	}
+
 
 	/**
 	 * store nu news
@@ -66,7 +65,7 @@ class News_model extends CI_Model{
 
 		//insert new news
 		}else{
-			$sql =	'insert into news ('.
+			$sql =	'insert into '.$this->table.' ('.
 						'title,			content,		news_type,'.
 						'created_by,	date_created,	date_published,'.
 						'date_removed'.
@@ -76,34 +75,44 @@ class News_model extends CI_Model{
 				return $this->db->_error_message();
 			}
 
-//echo $this->db->last_query();
 			return $this->db->insert_id();
 		}
 	}
 
 
-
 	/**
 	 * get news [of selected parameter]
 	 */
-	public function get($news){
-//print_r($news);
-		foreach($news as $key=>$value){
-			$this->db->where($key,$value);
+	public function get($news,$limit=null,$start=null){
+
+		if($limit){
+			$this->db->limit($limit,$start);
 		}
-		$res = $this->db->get('news');
-//echo $this->db->last_query();
+		if($news){
+			foreach($news as $key=>$value){
+				$this->db->where($key,$value);
+			}
+		}
+		$res = $this->db->get($this->table);
 
 		foreach($res->result() as $value){
-//print_r($value->created_by);
-$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
-
-
+			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
-//print_r($res->result());
 		return $res->result();
 	}
+
+
+	/**
+	 * count records
+	 */
+	public function record_count($type){
+		$this->db->where('news_type',$type);
+		$x = $this->db->count_all_results($this->table);
+
+		return $x;
+	}
+
 
 
 	/**
@@ -115,7 +124,7 @@ $value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 	 */
 	public function del_poll($ids){
 		$this->db->where('id',$ids)
-				->delete('news');
+				->delete($this->table);
 
 		return true;
 

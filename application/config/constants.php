@@ -29,12 +29,13 @@ define('DIR_WRITE_MODE', 0777);
 
 define('FOPEN_READ',							'rb');
 define('FOPEN_READ_WRITE',						'r+b');
-define('FOPEN_WRITE_CREATE_DESTRUCTIVE',		'wb'); // truncates existing file data, use with care
+define('FOPEN_WRITE_CREATE_DESTRUCTIVE',		'wb');  // truncates existing file data, use with care
 define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE',	'w+b'); // truncates existing file data, use with care
 define('FOPEN_WRITE_CREATE',					'ab');
 define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +56,23 @@ define('DOCUMENTS',	'public/documents');
 |--------------------------------------------------------------------------
 | Captcha limit
 |--------------------------------------------------------------------------
+|
+| The time limit [in seconds] for validity of a captcha
+|
 */
 define('CAPTCHATIME', 60);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Captcha limit
+|--------------------------------------------------------------------------
+|
+| The number of items to be shown in a page -- for pagination
+|
+*/
+define('PAGEITEMS', 3);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

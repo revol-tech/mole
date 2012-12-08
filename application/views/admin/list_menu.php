@@ -2,6 +2,10 @@
 <?php //print_r($items);?>
 
 <a href='<?php echo site_url('admin/menu/create')?>'>Create nu menu</a>
+
+<br/>
+<?php echo @$items['links']?>
+
 <table border=1>
 <thead>
 	<tr>
@@ -16,7 +20,7 @@
 	</tr>
 </thead>
 <tbody>
-	<?php foreach($items as $item): ?>
+	<?php foreach($items['data'] as $item): ?>
 		<tr>
 			<td><?php echo $item->id?></td>
 			<td><?php echo $item->title_link?></td>

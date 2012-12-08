@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <a href='<?php echo site_url('admin/events/create')?>'>Create nu events</a>
+
+<br/>
+<?php echo @$items['links']?>
+
 <table border=1>
 <thead>
 	<tr>
@@ -14,7 +18,7 @@
 	</tr>
 </thead>
 <tbody>
-	<?php foreach($items as $item): ?>
+	<?php foreach($items['data'] as $item): ?>
 		<tr>
 			<td><?php echo $item->id?></td>
 			<td><?php echo $item->title_link?></td>

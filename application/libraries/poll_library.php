@@ -83,6 +83,14 @@ class Poll_library
 	}
 
 
+	/**
+	 * count records
+	 */
+	public function record_count(){
+		return $this->ci->db->count_all($this->table);
+	}
+
+
 
 	/**
 	 * update existing poll
@@ -137,8 +145,10 @@ class Poll_library
 	 * @param id
 	 * @return polls
 	 */
-	public function list_poll($ids=false){
-
+	public function list_poll($ids=false,$limit=null,$start=null){
+		if($limit){
+			$this->db->limit($limit,$start);
+		}
 		$ids ? $this->ci->db->where('id',$ids) : '';
 
 		$res = $this->ci->db->get($this->table);
