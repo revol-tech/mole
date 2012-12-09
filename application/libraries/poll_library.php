@@ -147,7 +147,7 @@ class Poll_library
 	 */
 	public function list_poll($ids=false,$limit=null,$start=null){
 		if($limit){
-			$this->db->limit($limit,$start);
+			$this->ci->db->limit($limit,$start);
 		}
 		$ids ? $this->ci->db->where('id',$ids) : '';
 

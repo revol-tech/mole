@@ -5,8 +5,8 @@ class Health extends CI_Controller {
 	protected $data = array();
 	protected $type = 5;
 
-	public function __construct()
-	{
+	public function __construct(){
+
 		parent::__construct();
 
 		chk_admin();
@@ -56,7 +56,7 @@ class Health extends CI_Controller {
 		if($config['total_rows']==0){
 			$item->id			='--';
 			$item->title		='--';
-			$item->title_link		='--';
+			$item->title_link	='--';
 			$item->date_created	='--';
 			$item->health_type	='--';
 			$item->created_by	= '--';
@@ -81,7 +81,7 @@ class Health extends CI_Controller {
 		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
 
 		//get reqd. page's data
-		$data = $this->health_model->get(null,$config['per_page'],$page);
+		$data = $this->health_model->get(array('news_type'=>$this->type),$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 			$str =	'<a href="'.site_url('admin/health/view/'.$val->id).'">'.

@@ -82,7 +82,7 @@ class Notices extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->notices_model->get(null,$config['per_page'],$page);
+		$data = $this->notices_model->get(array('news_type'=>$this->type),$config['per_page'],$page);
 
 
 		foreach($data as $key=>$val){

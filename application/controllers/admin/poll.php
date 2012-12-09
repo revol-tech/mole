@@ -4,8 +4,8 @@ class Poll extends CI_Controller {
 
 	public $data = array();
 
-	public function __construct()
-	{
+	public function __construct(){
+
 		parent::__construct();
 
 		chk_admin();
@@ -97,7 +97,7 @@ class Poll extends CI_Controller {
 	public function list_poll(){
 
 		//initial configurations for pagination
-		$config['base_url'] = site_url('admin/events/index');
+		$config['base_url'] = site_url('admin/poll/index');
 		$config['total_rows'] = $this->poll_library->record_count();
 		$config['per_page'] = PAGEITEMS;
 
