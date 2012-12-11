@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Files extends CI_Controller {
+class Slider extends CI_Controller {
 
 	public $data = array();
 
@@ -9,7 +9,7 @@ class Files extends CI_Controller {
 
 		chk_admin();
 
-		$this->load->model('files_model');
+		$this->load->model('files_model','slider_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -23,29 +23,26 @@ class Files extends CI_Controller {
 
 	public function index(){
 
-		$data['items'] = $this->list_files();
+		$data['items'] = $this->list_slider();
 
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_files.php',$data);
+		$this->load->view('admin/list_slider.php',$data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * list all files
+	 * list all images
 	 */
-	private function list_files(){
+	private function list_slider(){
 
 		//initial configurations for pagination
-		$config['base_url'] = site_url('admin/files/index');
-		$config['total_rows'] = $this->files_model->record_count();
-		$config['per_page'] = PAGEITEMS;
-
+		$data = $this->slider_model->get(array('file_type'=>'slider'));
 
 		//if no data, set then to display null
-		if($config['total_rows']==0){
+		if(count($data)==0){
 			$item->id			='--';
 			$item->filename		='--';
 			$item->title		='--';
@@ -62,39 +59,28 @@ class Files extends CI_Controller {
 			return array('data'=>array($item));
 		}
 
-		//get reqd page number
-		foreach($this->uri->segment_array() as $key=>$val){
-			if($val=='index'){
-				$config['uri_segment'] = $key+1;
-				break;
-			}
-		}
-		$this->pagination->initialize($config);
-		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
-		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
-		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->files_model->get(null,$config['per_page'],$page);
+		$data = $this->slider_model->get(array('file_type'=>'slider'));
 
 		//enhance data as reqd.
 		foreach($data as $key=>$val){
 
 			//href for the page
-			$str =	'<a href="'.site_url('admin/files/view/'.$val->id).'">'.
+			$str =	'<a href="'.site_url('admin/slider/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
 			$data[$key]->title_link = $str;
 
 			//del for the data
-			$str = 	'<form method="post" action="'.site_url('admin/files/del/').'">'.
-						'<input type="hidden" name="files_id" value="'.$val->id.'"/>'.
+			$str = 	'<form method="post" action="'.site_url('admin/slider/del/').'">'.
+						'<input type="hidden" name="slider_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
 
 			//download the file
-			$str =	'<a href="'.site_url('admin/files/download/'.$val->id).'">
+			$str =	'<a href="'.site_url('admin/slider/download/'.$val->id).'">
 						download
 					</a>';
 			$data[$key]->download = $str;
@@ -110,7 +96,7 @@ class Files extends CI_Controller {
 
 
 	/**
-	 * files form
+	 * slider form
 	 */
     public function upload(){
 
@@ -118,17 +104,17 @@ class Files extends CI_Controller {
 
 		if($this->input->post('upload')){
 			//upload the file
-			$result = $this->files_model->upload();
-			$result['status'] = 'file uploaded';
+			$result = $this->slider_model->upload('slider');
+			$result['status'] = 'image uploaded';
 
 			//get uploaded file's info.
 			$this->data = array_merge($this->data,array('result'=>$result));
 
-			redirect('admin/files');
+			redirect('admin/slider');
 		}
 
 
-		//generate username, current date if creating nu files [not editing]
+		//generate username, current date if creating nu slider [not editing]
 		$this->data['date_created'] = get_timestamp();
 		$this->session->set_userdata('date_created',$this->data['date_created']);
 		$this->data['created_by'] = $this->ion_auth->get_user()->username;
@@ -136,18 +122,18 @@ class Files extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/upload_files.php',$this->data);
+		$this->load->view('admin/upload_slider.php',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * del selected files
+	 * del selected slider
 	 */
 	public function del(){
-		$this->files_model->del(array('id'=>$this->input->post('files_id')));
+		$this->slider_model->del(array('id'=>$this->input->post('slider_id')));
 
-		redirect('admin/files');
+		redirect('admin/slider');
 	}
 
 
@@ -155,7 +141,7 @@ class Files extends CI_Controller {
 	 * view uploaded file
 	 */
 	public function view(){
-		$get_file = array();
+		$get_file = array('file_type'=>'slider');
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
@@ -164,24 +150,22 @@ class Files extends CI_Controller {
 			}
 		}
 
-		$data = $this->files_model->get($get_file);
+		$data = $this->slider_model->get($get_file);
 
-//print_r($this->input->post());
-//print_r($data);
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_files.php',$data[0]);
+		$this->load->view('admin/view_slider.php',$data[0]);
 		$this->load->view('templates/footer');
 	}
 
 
 	/**
-	 * download selected health
+	 * download selected file
 	 */
 	public function download(){
 		$id=false;
-		$get_file = array();
+		$get_file = array('file_type'=>'slider');
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='download'){
@@ -190,13 +174,12 @@ class Files extends CI_Controller {
 			}
 		}
 
-		$data = $this->files_model->get($get_file);
+		$data = $this->slider_model->get($get_file);
 
 		if(count($data)!=1){
 			show_404();
 		}
 
-		//print_r($data[0]);
 		$this->load->helper('download');
 
 		$file_data = file_get_contents(DOCUMENTS.$data[0]->timestamp); // Read the file's contents

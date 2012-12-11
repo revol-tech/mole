@@ -10,7 +10,7 @@
 
 	<!-- CSS Start //-->
 	<link rel="shortcut icon" href="<?php echo CSSPATH?>images/favicon.png"/>
-	<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>style.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>style.css"/>-->
 
 	<!-- Import CSS Reset File -->
 	<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>reset.css"/>
@@ -64,36 +64,48 @@
 <!-- Contain starts Here -->
 <div id="container">
   <div id="topheader">
-    <div class="grid_1 alpha fl"> <a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo">Government of Nepal Ministry of Labour and Employment</a> </div>
+    <div class="grid_1 alpha fl">
+		<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo">
+			Government of Nepal Ministry of Labour and Employment
+		</a>
+	</div>
     <div class="grid_2 omega fr">
       <div class="links fr">
         <ul>
-          <li><a href="#" class="download"><span>Downloads</span></a></li>
-          <li><a href="#" class="login"><span>Login</span></a></li>
+          <li>
+			  <a href="#" class="download">
+				  <span>Downloads</span>
+			  </a>
+		  </li>
+          <li>
+			  <a href="#" class="login">
+				  <span>Login</span>
+			  </a>
+		  </li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="slider-wrapper theme-default fl">
-    <div id="slider" class="nivoSlider">
-		<img src="images/sliders/slide1.jpg" data-thumb="images/sliders/slide1.jpg" alt="" title="#htmlcaption" />
-		<img src="images/sliders/slide2.jpg" data-thumb="images/sliders/slide2.jpg" alt="" title="#htmlcaption" />
-		<img src="images/sliders/slide3.jpg" data-thumb="images/sliders/slide2.jpg" alt="" title="#htmlcaption" />
-		<img src="images/sliders/slide4.jpg" data-thumb="images/sliders/slide2.jpg" alt="" title="#htmlcaption" />
+
+
+	<div class="slider-wrapper theme-default fl">
+		<?php echo $slider?>
 	</div>
-    <div id="htmlcaption1" class="nivo-html-caption"> <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. </div>
-    <div id="htmlcaption2" class="nivo-html-caption"> <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. </div>
-  </div>
-  <div class="container_1 fl">
-    <div class="newsticker">
-      <div class="ticker_title fl">
-        <h3>News</h3>
-      </div>
-      <div class="ticker_block fl">
-        <p>The Development of Labour Administration for the Strengthening of Trade Cooperation in ASEAN Community Program...</p>
-        <a href="#" class="readon">Read more</a></div>
-    </div>
-  </div>
+
+
+	<div class="container_1 fl">
+		<div class="newsticker">
+			<div class="ticker_title fl">
+				<h3>News</h3>
+			</div>
+			<div class="ticker_block fl">
+				<p>The Development of Labour Administration for the Strengthening
+					of Trade Cooperation in ASEAN Community Program...</p>
+				<a href="#" class="readon">Read more</a>
+			</div>
+		</div>
+	</div>
+
   <div class="container_2 fl">
     <div class="grid_3 alpha fl">
       <div class="about">
@@ -155,41 +167,16 @@
           <li><strong>The floods submits documents... <a href="#" class="title_date">Nov 12 2012</a></strong> <span>An employer or an establishment hit by the floods submits documents concerned to the Provincial Office of Labour...<a href="#" class="more">more</a></span> </li>
         </ul>
       </div>
-      <div class="item1 fl">
-        <h2><span>Public </span>Poll</h2>
-        <div class="poll_block">
-          <p class="poll_topic">How much should the minimum wage be increased by? </p>
-          <form>
-            <div class="form_holder fl">
-              <label for="radio-choice-1">Choice 1</label>
-              <input id="radio-choice-1" type="radio" value="choice-1" tabindex="2" name="radio-choice-1">
-            </div>
-            <div class="form_holder fl">
-              <label for="radio-choice-2">Choice 2</label>
-              <input id="radio-choice-2" type="radio" value="choice-2" tabindex="3" name="radio-choice-1">
-            </div>
-            <div class="form_holder fl">
-              <label for="radio-choice-3">Choice 3</label>
-              <input id="radio-choice-3" type="radio" value="choice-3" tabindex="3" name="radio-choice-1">
-            </div>
-            <div class="form_holder fl">
-              <label for="radio-choice-4">Choice 4</label>
-              <input id="radio-choice-4" type="radio" value="choice-4" tabindex="3" name="radio-choice-1">
-            </div>
-            <div class="form_holder fl mar_top">
-                <a href="#" class="btn_red fr">Result</a>
-               <input class="btn_red fr" type="submit" value="Vote"/>
-            </div>
-          </form>
-        </div>
-      </div>
+
+	<?php echo $poll?>
+
     </div>
   </div>
   <div class="clear"></div>
 
 </div>
-<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
+
+<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
 <script type="text/javascript">
     $(window).load(function() {
         $('#slider').nivoSlider();

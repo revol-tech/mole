@@ -9,6 +9,7 @@
 <br/>
 
 
+
 <a href='<?php echo site_url('admin/events')?>'>Events</a>
 <br/>
 
@@ -34,6 +35,9 @@
 <br/>
 
 <a href='<?php echo site_url('admin/press')?>'>Press</a>
+<br/>
+
+<a href='<?php echo site_url('admin/slider')?>'>Homepage Image Slider</a>
 <br/>
 
 <a href='<?php echo site_url('admin/gallery')?>'>Gallery</a>

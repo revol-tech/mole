@@ -68,9 +68,10 @@ $template['default']['regions'] = array(
 //	   'title'	=>'<h1>Ministry of Labour and Employment</h1>',
 	   'menu'	=>array('content'=>array(
 											'<div class="home fl"><a href="'.base_url().'"></a></div>',
-											//'<ul class="menu sf-menu"></ul>',
 										)
 						),
+		'slider'=>array(),
+		'poll'	=>array(),
 //	   'content'=>'',
 	);
 

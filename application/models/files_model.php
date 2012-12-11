@@ -29,6 +29,53 @@ class Files_model extends CI_Model{
 
 
 	/**
+	 * render the slider images
+	 *
+	 * @return
+	 */
+	public function render_slider(){
+		$data = $this->get(array('file_type'=>'slider'));
+
+		$str=$this->_render_recursive($data,0);
+
+		return $str;
+	}
+
+	/**
+	 * for recursive rendering
+	 */
+	private function _render_recursive($data,$parent_id){
+		$count = 1;
+
+		$str = '<div id="slider" class="nivoSlider">';
+
+		foreach($data as $k=>$v){
+
+			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
+			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
+			$str.=' alt="'.$v->title.'" title="#htmlcaption'.$count.'"';
+			$str.=' />';
+
+			$count++;
+		}
+
+		$str .= '</div>';
+
+		$count = 1;
+		foreach($data as $k=>$v){
+
+			$str.='<div id="htmlcaption'.$count.'" class="nivo-html-caption">';
+			$str.= $v->description;
+			$str.='</div>';
+
+			$count++;
+		}
+
+		return $str;
+	}
+
+
+	/**
 	 * count records
 	 */
 	public function record_count(){
@@ -40,7 +87,7 @@ class Files_model extends CI_Model{
 	 * store & upload nu file
 	 * returns the id
 	 */
-	public function upload($type=1){
+	public function upload($type=null){
 //echo '<pre>';
 //print_r($_FILES);
 //print_r($_POST);
@@ -82,7 +129,8 @@ class Files_model extends CI_Model{
 						'description'	=> $this->input->post('description'),
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
-						'date_created'	=> $this->session->userdata('date_created')
+						'date_created'	=> $this->session->userdata('date_created'),
+						'file_type'		=> $type
 					);
 
 //print_r($_POST);
@@ -108,7 +156,7 @@ class Files_model extends CI_Model{
 		$files = $this->get($ids);
 //print_r($files);
 		foreach($files as $file){
-			unlink(DOCUMENTS.'/'.$file->timestamp);
+			unlink(DOCUMENTS.$file->timestamp);
 		}
 
 
@@ -150,8 +198,6 @@ class Files_model extends CI_Model{
 
 		return $data['id'];
 	}
-
-
 }
 
 /* End of file news_model.php */

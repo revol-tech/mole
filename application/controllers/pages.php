@@ -6,11 +6,26 @@ class Pages extends CI_Controller {
 		parent::__construct();
 	}
 
-	public function view($page = 'home'){
-$this->load->model('menu_model');
-$xyz = $this->menu_model->render_menu(array('active'=>1));
+	public function view($params = array()){
+		$this->load->model('menu_model');
+		$menu = $this->menu_model->render_menu(array('active'=>1));
+		$this->template->write('menu',$menu);
 
-$this->template->write('menu',$xyz);
+
+		$this->load->model('files_model','slider_model');
+		$slider = $this->slider_model->render_slider(array('file_type'=>'slider'));
+		$this->template->write('slider',$slider);
+
+
+		$this->load->library('poll_library');
+		$poll = $this->poll_library->render_poll();
+		$this->template->write('poll',$poll);
+
 		$this->template->render();
+	}
+
+	public function vote(){
+echo 'u just voted';
+print_r($_POST);
 	}
 }

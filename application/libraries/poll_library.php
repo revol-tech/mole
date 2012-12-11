@@ -1,34 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
 
-estimated fns. --
+class Poll_library{
 
-	setup system
-	 - create db tables
-
-	create & update a poll
-	 - question
-	 - answer
-
-	delete poll
-	 - poll id
-
-	list polls
-
-	vote
-	 - userid, pollid, answerid
-
-	view result
-	 - questionid
-	 - answers count
-
-	search poll
-
-*/
-
-
-class Poll_library
-{
 	protected $ci;
 
 	/**
@@ -145,7 +118,10 @@ class Poll_library
 	 * @param id
 	 * @return polls
 	 */
-	public function list_poll($ids=false,$limit=null,$start=null){
+	public function list_poll($ids=false,$limit=null,$start=null,$active=false){
+		if($active){
+			$this->ci->db->where('active',1);
+		}
 		if($limit){
 			$this->ci->db->limit($limit,$start);
 		}
@@ -187,6 +163,47 @@ class Poll_library
 		return $items;
 	}
 
+	/**
+	 * render active poll
+	 *
+	 * @returns string html
+	 */
+	public function render_poll(){
+		$poll = $this->list_poll(false,null,null,true);
+//print_r($poll);
+
+		$html = '<div class="item1 fl">
+					<h2><span>Public </span>Poll</h2>
+					<div class="poll_block">
+						<p class="poll_topic">'.$poll[0]->question.'</p>
+						<form method="post" action="'.site_url('pages/vote').'">
+							<div class="form_holder fl">
+								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
+								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="radio-choice-1">
+							</div>
+							<div class="form_holder fl">
+								<label for="radio-choice-2">'.$poll[0]->option2.'</label>
+								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="radio-choice-1">
+							</div>
+							<div class="form_holder fl">
+								<label for="radio-choice-3">'.$poll[0]->option3.'</label>
+								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="radio-choice-1">
+							</div>
+							<div class="form_holder fl">
+								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
+								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="radio-choice-1">
+							</div>
+							<div class="form_holder fl mar_top">
+								<a href="#" class="btn_red fr">Result</a>
+								<input class="btn_red fr" type="submit" value="Vote"/>
+							</div>
+						</form>
+					</div>
+				</div>';
+
+
+		return $html;
+	}
 
 
 /**

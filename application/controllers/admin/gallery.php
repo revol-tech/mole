@@ -81,6 +81,7 @@ class Gallery extends CI_Controller {
 
 
 		foreach($data as $key=>$val){
+print_r($val);
 			$str =	'<a href="'.site_url('admin/gallery/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
