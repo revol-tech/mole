@@ -2,8 +2,8 @@
 
 class Admin extends CI_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
+
 		parent::__construct();
 
 		/**
@@ -24,8 +24,8 @@ class Admin extends CI_Controller {
 		$this->login();
 	}
 
-    public function login()
-    {
+    public function login(){
+
 		$this->load->model('captcha_model');
 		$data = array();
 

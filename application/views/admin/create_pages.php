@@ -5,8 +5,8 @@
 <!--
 	<!--for date picker
 
-	<script src='<?php echo base_url().JSPATH?>/jquery-ui.js'></script>
-	<link href='<?php echo base_url().JSPATH ?>/jquery-ui.css' rel='stylesheet'/>
+	<script src='<?php echo base_url().JSPATH?>jquery-ui.js'></script>
+	<link href='<?php echo base_url().JSPATH ?>jquery-ui.css' rel='stylesheet'/>
 	<script>
 	$(function() {
 		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd",defaultDate: 0 });

@@ -42,8 +42,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 | CSS, Documents, Javascript, Images, ... Folders
 |--------------------------------------------------------------------------
 */
-define('JSPATH',	'public/js');
-//define('CSSPATH',	'public/css/');
+define('JSPATH',	'public/js/');
+define('CSSPATH',	'public/css/');
 define('IMGPATH',	'public/imgs/');
 define('CAPTCHAPATH','public/imgs/captcha');
 define('FONTPATH',	'public/font');
@@ -66,13 +66,14 @@ define('CAPTCHATIME', 60);
 
 /*
 |--------------------------------------------------------------------------
-| Captcha limit
+| Pagination limit
 |--------------------------------------------------------------------------
 |
-| The number of items to be shown in a page -- for pagination
+| The number of items to be shown in a page
 |
 */
 define('PAGEITEMS', 3);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

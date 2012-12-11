@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','ion_auth','pagination');
+$autoload['libraries'] = array('database','ion_auth','pagination','template');
 
 
 /*
@@ -110,6 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array();
+
 
 
 /* End of file autoload.php */

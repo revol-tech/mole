@@ -108,6 +108,47 @@ class Menu_model extends CI_Model{
 
 
 	/**
+	 * render the links [droopdown menus]
+	 *
+	 * @return string <li><a href="...." title="...">....</a></li>
+	 */
+	public function render_menu(){
+		$data = $this->get(array('active'=>1));
+
+		$str = '<ul class="menu sf-menu">';
+		$str.=$this->_render_recursive($data,0);
+		$str.='</ul>';
+
+		return $str;
+	}
+
+	/**
+	 * for recursive rendering
+	 */
+	private function _render_recursive($data,$parent_id){
+		$str = $parent_id!=0?'<ul>':'';
+
+		foreach($data as $k=>$v){
+			if($v->parent_id==$parent_id){
+
+				$str.='<li>';
+				$str.='<a href="'.$v->link.'" title="'.$v->comments.'">';
+				$str.=$v->title;
+				$str.='</a>';
+
+				unset($data[$k]);
+
+				$str .= $this->_render_recursive($data,$v->id);
+				$str.='</li>';
+			}
+		}
+
+		$str .= $parent_id!=0?'</ul>':'';
+		return $str;
+	}
+
+
+	/**
 	 * count records
 	 */
 	public function record_count(){

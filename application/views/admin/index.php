@@ -35,3 +35,6 @@
 
 <a href='<?php echo site_url('admin/press')?>'>Press</a>
 <br/>
+
+<a href='<?php echo site_url('admin/gallery')?>'>Gallery</a>
+<br/>
