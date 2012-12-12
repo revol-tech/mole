@@ -20,6 +20,7 @@ class Migration_Add_news extends CI_Migration {
 						'`date_published` timestamp NULL DEFAULT NULL',
 						'`date_removed` timestamp NULL DEFAULT NULL',
 						'`active` tinyint(4) NOT NULL DEFAULT 1',
+						'`homepage` tinyint(4) NOT NULL DEFAULT 0',
 					);
 		$this->dbforge->add_field($fields);
 

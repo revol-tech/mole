@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-
-
 <!--
 	<!--for date picker
 
@@ -39,6 +37,13 @@
 		<input type='text' name='created_by' disabled='disabled' value='<?php echo $created_by?>' />
 	</label>
 	<br/>
+
+	<label>
+		Homepage :
+		<input type='checkbox' name='homepage' value='1' <?php echo @$active==1?'checked=checkedd':''?>/>
+	</label>
+	<br/>
+
 <!--	<label>
 		publish on
 		<input type='text' name='date_published' class='datepicker' />

@@ -72,6 +72,7 @@ $template['default']['regions'] = array(
 						),
 		'slider'=>array(),
 		'poll'	=>array(),
+		'page'	=>array(),
 //	   'content'=>'',
 	);
 

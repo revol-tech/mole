@@ -62,6 +62,7 @@ class Pages extends CI_Controller {
 			//$item->pages_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
+			$item->homepage		='--';
 			$item->edit			='--';
 			$item->del			='--';
 
@@ -121,10 +122,34 @@ class Pages extends CI_Controller {
 			}
 			$str .= '</form>';
 
-			$data[$key]->active = $str;
+			//display-hide page on homepage
+			$str = '<form method="post" action='.site_url('admin/pages/homepage').'>'.
+						'<input type="hidden" name="pages_id" value="'.$data[$key]->id.'"/>';
+			if($data[$key]->homepage == 1){
+				$str .=	'<input type="hidden" name="homepage" value="false"/>';
+				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
+			}else{
+				$str .=	'<input type="hidden" name="homepage" value="true"/>';
+				$str .=	'<input type="submit" name="active"   value="Activate"/>';
+			}
+			$str .= '</form>';
+
+			$data[$key]->homepage = $str;
 		}
 
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
+	}
+
+
+	/**
+	 * display-hide page on mainpage
+	 */
+	public function homepage(){
+		$id = $this->input->post('pages_id');
+		$active = $this->input->post('active');
+		$this->pages_model->change_homepage($id,$active,6);
+
+		redirect('admin/pages');
 	}
 
 

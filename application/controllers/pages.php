@@ -21,6 +21,12 @@ class Pages extends CI_Controller {
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
 
+
+		$this->load->model('news_model');
+		$params = array('news_type'=>6,'homepage'=>1);
+		$page = $this->news_model->render($params);
+		$this->template->write('page',$page);
+
 		$this->template->render();
 	}
 

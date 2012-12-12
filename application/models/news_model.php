@@ -10,6 +10,27 @@ class News_model extends CI_Model{
 	}
 
 	/**
+	 * dispay-hide the news on homepage
+	 *
+	 * @param id int
+	 * @param active boolean
+	 */
+	public function change_homepage($ids=false,$active=false,$type){
+
+		$this->db->set(	'homepage',$active=='Activate'?1:0 )
+				->where('id',$ids)
+				->where('news_type',$type)
+				->update($this->table);
+//echo $this->db->last_query();echo '<br/>';
+		$this->db->set(	'homepage',0 )
+				->where('id !=',$ids)
+				->where('news_type',$type)
+				->update($this->table);
+//echo $this->db->last_query();echo '<br/>';
+	}
+
+
+	/**
 	 * change the active poll
 	 *
 	 * @param id int
@@ -102,6 +123,21 @@ class News_model extends CI_Model{
 		return $res->result();
 	}
 
+	/**
+	 * render news for display
+	 */
+	public function render($params){
+		$this->load->helper('text');
+		$data = $this->get($params);
+
+		$str = '<div class="about">';
+		$str.= '<h1>'.$data[0]->title.'</h1>';
+		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
+		$str.= '<a href="#" class="btn_red fr">read more</a>'; // <--- link not set properly
+		$str.= '</div>';
+
+		return $str;
+	}
 
 	/**
 	 * count records

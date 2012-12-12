@@ -107,12 +107,12 @@
 	</div>
 
   <div class="container_2 fl">
-    <div class="grid_3 alpha fl">
-      <div class="about">
-        <h1>Ministry of Labour and Employment</h1>
-        <p>The Ministry of Labour and Employment is entrusted to promote economic development of the country by creating an investment-friendly environment by means of mobilizing and managing public-private partnership, cooperative and domestic and foreign private investments, and for making the process of industrialization orderly and rapid, and for the development of infrastructure and other sectors to create employment opportunities, and to offer meaningful contribution to poverty alleviation</p>
-        <a href="#" class="btn_red fr">read more</a> </div>
-    </div>
+
+	<div class="grid_3 alpha fl">
+		<?php echo $page?>
+		<!--readmore link not set properly-->
+	</div>
+
     <div class="grid_4 omega alpha fl">
       <div class="highlight fl">
         <div class="intro_block fl">
