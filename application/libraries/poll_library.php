@@ -170,7 +170,10 @@ class Poll_library{
 	 */
 	public function render_poll(){
 		$poll = $this->list_poll(false,null,null,true);
-//print_r($poll);
+
+		if(!$poll){
+			return null;
+		}
 
 		$html = '<div class="item1 fl">
 					<h2><span>Public </span>Poll</h2>
