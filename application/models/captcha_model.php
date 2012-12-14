@@ -25,7 +25,6 @@ class Captcha_model extends CI_Model{
 			);
 
 		$cap = create_captcha($vals);
-
 		$tmp_store_data = array(	$cap['time'],
 									$this->input->ip_address(),
 									$cap['word']
