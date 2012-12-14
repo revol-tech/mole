@@ -42,3 +42,18 @@
 
 <a href='<?php echo site_url('admin/gallery')?>'>Gallery</a>
 <br/>
+
+<a href='<?php echo site_url('admin/contacts')?>'>Contactus</a>
+<br/>
+
+<a href='<?php echo site_url('admin/usefullinks')?>'>Usefullinks</a>
+<br/>
+
+<a href='<?php echo site_url('admin/networks')?>'>Networks</a>
+<br/>
+
+<a href='<?php echo site_url('admin/employments')?>'>Employments</a>
+<br/>
+
+<a href='<?php echo site_url('admin/vip')?>'>VIP</a>
+<br/>
