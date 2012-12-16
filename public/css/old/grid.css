@@ -1,0 +1,119 @@
+/*
+  Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if your layout is wider.
+
+  Note: IE6 works fine without this fix.
+*/
+
+
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+
+.container_1 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	display: block;
+}
+.container_2 {
+	width: 960px;
+	float: left;
+	display: block;
+}
+ .container_3, {
+ width:960px;
+ display:block;
+ background-color:#fff;
+ margin:0 auto;
+}
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+
+
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7 {
+	display: block;
+	float: left;
+	position: relative;
+	margin: 0 10px;
+}
+.container_3 .grid_5 {
+	width: 549px;
+	padding: 20px 20px;
+	border-right: 1px solid #e0e0e0;
+}
+.container_3 .grid_6 {
+	width: 330px;
+	padding: 20px 20px;
+}
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-left: 0;
+}
+.omega {
+	margin-right: 0 !important;
+}
+.omega_bottom {
+	margin-bottom: 0 !important;
+}
+.pad_alpha {
+	padding-left: 0px !important;
+}
+.pad_omega {
+	padding-right: 0px
+}
+.mar_top {
+	margin-top: 20px !important;
+}
+/* Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container_1 .grid_1 {
+	width: 670px;
+	margin: 0 10px 0 0;
+}
+.container_1 .grid_2 {
+	width: 270px;
+	margin: 0px 0 0 10px;
+}
+.container_2 .grid_3 {
+	margin: 0 40px 0 0;
+}
+#container .container_2 {
+	width: 880px;
+	background: #f2f2f2;
+	padding: 40px 40px 0px 40px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #E0E0E0;
+}
+#container {
+	width: 960px;
+	min-height: 300px;
+	margin: 0 auto;
+}
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+.clearfix:before, .clearfix:after {
+	content: '\0020';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+.clearfix:after {
+	clear: both;
+}

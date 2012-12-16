@@ -104,8 +104,10 @@ print_r($val);
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
+print_r($data[$key]);
 
-			//add activate/deactivate button
+/** //activate-deactivate not currently set for gallery
+			//add activate/deactivate button			
 			$str = '<form method="post" action='.site_url('admin/gallery/active').'>'.
 						'<input type="hidden" name="gallery_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
@@ -118,6 +120,7 @@ print_r($val);
 			$str .= '</form>';
 
 			$data[$key]->active = $str;
+*/ 
 
 			//count no. of photos in the album
 			$data['no_photos'] = $this->gallery_model->count_photos(id);

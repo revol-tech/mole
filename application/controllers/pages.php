@@ -29,12 +29,31 @@ class Pages extends CI_Controller {
 		$page = $this->news_model->render($params);
 		$this->template->write('page',$page);
 
-
 		//vertical slider notices
 		$params = array('news_type'=>2,'active'=>1);
 		$notices = $this->news_model->render($params);
 		$this->template->write('notices',$notices);
 
+		//events
+		$params = array('news_type'=>3,'active'=>1);
+		$events = $this->news_model->render($params);
+		$this->template->write('events',$events);
+
+		//press
+		$params = array('news_type'=>4,'active'=>1);
+		$press = $this->news_model->render($params);
+		$this->template->write('press',$press);
+
+		//health
+		$params = array('news_type'=>5,'active'=>1);
+		$health = $this->news_model->render($params);
+		$this->template->write('health',$health);
+
+		//activities & photos -- gallery
+		$this->load->model('gallery_model');
+		$gallery = $this->gallery_model->render();
+		$this->template->write('gallery',$gallery);		
+		
 		//poll
 		$this->load->library('poll_library');
 		$poll = $this->poll_library->render_poll();

@@ -26,6 +26,25 @@ class Gallery_model extends CI_Model{
 		return $res->result();
 	}
 
+	/**
+	 * render acivities album for landing page
+	 */
+	public function render(){
+		$str = '<div class="gallery_thumnail fl">';
+		$data = $this->get();
+
+		if(count($data)>0){
+			foreach($data as $key=>$val){
+				$str.='<div class="block_img3 fl alpha">;';
+				$str.='	<a href="#">';
+				$str.='		<img src="'.IMGPATH.'gallery/gallery_1.png" alt="labour day" title="" width="140" height="100"/>';
+				//$str.='		<span>'.$key->title.'</span>';
+				$str.='	</a>';
+				$str.='</div>';
+			}
+		}
+		$str.= '</div><a href="#" class="view_all">View All Gallery +</a>';
+	}
 
 	/**
 	 * count records
@@ -34,6 +53,13 @@ class Gallery_model extends CI_Model{
 		return $this->db->count_all($this->table_album);
 	}
 
+	/**
+	 * count photos in the given album
+	 */
+	public function count_photos($id){
+		$this->db->where('album_id');
+		$this->db->get($this->table_imgs);
+	}
 
 	/**
 	 * save nu album
