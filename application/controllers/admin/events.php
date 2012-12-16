@@ -127,7 +127,9 @@ class Events extends CI_Controller {
 
 			$data[$key]->active = $str;
 		}
-
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 

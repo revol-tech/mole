@@ -72,7 +72,7 @@ define('CAPTCHATIME', 60);
 | The number of items to be shown in a page
 |
 */
-define('PAGEITEMS', 3);
+define('PAGEITEMS', 5);
 
 
 /* End of file constants.php */

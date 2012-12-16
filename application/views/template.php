@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>superfish.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>default.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo CSSPATH?>nivo-slider.css" media="screen" />
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+	<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
 
 	<script src="<?php echo JSPATH?>jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.easing.1.3.js"></script>
@@ -45,7 +45,10 @@
             <input class="btn-search fr" type="submit" value=""/>
           </form>
         </div>
-        <div class="language fr"> <a href="#" class="nepal fl color">Nepali</a> <a href="#" class="active fl">English</a> </div>
+        <div class="language fr">
+			<a href="#" class="nepal fl color">Nepali</a>
+			<a href="#" class="active fl">English</a>
+		</div>
       </div>
       <div class="clear"></div>
     </div>
@@ -98,11 +101,12 @@
 			<div class="ticker_title fl">
 				<h3>News</h3>
 			</div>
-			<div class="ticker_block fl">
+			<!--<div class="ticker_block fl">
 				<p>The Development of Labour Administration for the Strengthening
 					of Trade Cooperation in ASEAN Community Program...</p>
 				<a href="#" class="readon">Read more</a>
-			</div>
+			</div>-->
+			<?php echo $flash_news?>
 		</div>
 	</div>
 
@@ -160,13 +164,12 @@
 
     </div>
     <div class="grid_6 alpha omega fl">
-      <div class="item1 fl">
-        <h2><span>Latest</span> Notices</h2>
-        <ul>
-          <li><strong>The floods submits documents... <a href="#" class="title_date">Nov 12 2012</a></strong> <span>An employer or an establishment hit by the floods submits documents concerned to the Provincial Office of Labour...<a href="#" class="more">more</a></span> </li>
-          <li><strong>The floods submits documents... <a href="#" class="title_date">Nov 12 2012</a></strong> <span>An employer or an establishment hit by the floods submits documents concerned to the Provincial Office of Labour...<a href="#" class="more">more</a></span> </li>
-        </ul>
-      </div>
+
+	<div class="item1 fl">
+		<h2 id='carousel_header'><span>Latest</span> Notices</h2>
+
+		<?php echo $notices?>
+	</div>
 
 	<?php echo $poll?>
 
@@ -176,11 +179,5 @@
 
 </div>
 
-<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
-<script type="text/javascript">
-    $(window).load(function() {
-        $('#slider').nivoSlider();
-    });
-    </script>
 </body>
 </html>
