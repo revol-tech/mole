@@ -274,18 +274,4 @@ class Usefullinks extends CI_Controller {
 
 		redirect('admin/usefullinks');
 	}
-
-
-
-	/**
-	 * ckEditor's configurations.
-	 */
-	private function _ckeditor_conf(){
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content',
-			'path'	=>	CKEDITOR,
-		);
-	}
 }

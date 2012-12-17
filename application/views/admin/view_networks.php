@@ -7,11 +7,18 @@
 	</a>
 	<br/>
 
-
 	title :
 	<span class='title'><?php echo $title;?></span>
 	<br/>
-
+	
+	link :
+	<span class='link'><?php echo $link;?></span>
+	<br/>
+	
+	description :
+	<span class='description'><?php echo $description;?></span>
+	<br/>
+	
 	created by :
 	<span class='created_by'><?php echo $created_by;?></span>
 	<br/>
@@ -21,9 +28,9 @@
 	<?php echo $active?>
 	<br/>
 
-	content :<br/>
-	<hr/>
-	<?php echo $content?>
+	homepage :
+	<span class='homepage'><?php echo $homepage?></span>
 	<br/>
+
 	<hr/>
 </div>

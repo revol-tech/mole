@@ -10,7 +10,6 @@ class Networks extends CI_Controller {
 
 		chk_admin();
 
-		$this->load->helper('ckeditor');
 		$this->load->model('networks_model');
 
 		/**
@@ -53,16 +52,19 @@ class Networks extends CI_Controller {
 
 		//if there are no networks at present ...
 		if($config['total_rows']==0){
-			$item->id			= '--';
-			$item->title		= '--';
-			$item->title_link	= '--';
-			$item->networks_type	= '--';
-			$item->created_by	= '--';
-			$item->date_created	= '--';
-			$item->date_published='--';
-			$item->active		= '--';
-			$item->edit			= '--';
-			$item->del			= '--';
+			$item->id				= '--';
+			$item->title			= '--';
+			$item->title_link		= '--';
+			$item->link				= '--';
+			$item->description		= '--';
+			$item->created_by		= '--';
+			$item->date_created		= '--';
+			$item->date_published	= '--';
+			$item->date_removed		= '--';
+			$item->active			= '--';
+			$item->homepage			= '--';
+			$item->edit				= '--';
+			$item->del				= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -82,7 +84,7 @@ class Networks extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->networks_model->get(array('networks_type'=>$this->type),$config['per_page'],$page);
+		$data = $this->networks_model->get(array(),$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 
@@ -133,7 +135,7 @@ class Networks extends CI_Controller {
 	 * activate/deactivate networks
 	 */
 	public function active(){
-		$id = $this->input->post('networks_id');
+		$id = $this->input->post('networks');
 		$active = $this->input->post('activate');
 		$this->networks_model->change_active($id,$active);
 
@@ -145,9 +147,7 @@ class Networks extends CI_Controller {
 	 * networks form
 	 */
     public function create(){
-		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+
 //print_r($this->data);
 		$this->load->helper('utilites_helper');
 
@@ -184,16 +184,18 @@ class Networks extends CI_Controller {
 	 * save/update networks form
 	 */
     public function save(){
-		//save the networks & return the id of that networks
+		//save the neworks & return the id of that usefullinks
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->networks_model->save($this->type);
 
+		redirect('admin/networks');
+/*
 		//retrive that networks
 		$this->get(array('id'=> $this->data['id']));
 
 		//display that networks
 		$this->create();
-	}
+*/	}
 
 
 
@@ -202,7 +204,7 @@ class Networks extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_networks = array('networks_type'=>1);
+		$get_networks = array();
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
@@ -271,19 +273,5 @@ class Networks extends CI_Controller {
 		$this->networks_model->del_poll($this->input->post('networks_id'));
 
 		redirect('admin/networks');
-	}
-
-
-
-	/**
-	 * ckEditor's configurations.
-	 */
-	private function _ckeditor_conf(){
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content',
-			'path'	=>	CKEDITOR,
-		);
 	}
 }

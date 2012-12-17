@@ -48,6 +48,20 @@ class Networks_model extends CI_Model{
 	 * update existing networks
 	 */
 	private function update($data){
+/*
+Array
+(
+    [title] => adsfasdfasdfasdf
+    [link] => ikj;oij
+    [description] => ;ih;oiho
+    [created_by] => 
+    [date_created] => 
+    [date_published] => 
+    [date_removed] => 
+    [active] => 
+    [homepage] => 
+    [id] => 0
+)
 
 		$update = array(
 					   'title' 		=> $data[0],
@@ -55,11 +69,14 @@ class Networks_model extends CI_Model{
 					   'date_published' => $data[3],
 					   'date_removed' => $data[4]
 					);
+*/
+		$id = $data['id'];
+		unset($data['id']);
+		
+		$this->db->where('id', $id);
+		$this->db->update($this->table, $data);
 
-		$this->db->where('id', $data['id']);
-		$this->db->update($this->table, $update);
-
-		return $data['id'];
+		return $id;
 	}
 
 
@@ -69,30 +86,27 @@ class Networks_model extends CI_Model{
 	 */
 	public function save($type=1){
 		$data = array(
-					$this->input->post('title'),
-					htmlentities($this->input->post('content')),
-					$this->session->userdata('user_id'),
-					$this->session->userdata('date_created'),
-					$this->input->post('date_published'),
-					$this->input->post('date_removed')
+				'title'			=> $this->input->post('title'),
+				'link'			=> $this->input->post('link'),
+				'description'	=>$this->input->post('description'),
+				'created_by'	=> $this->input->post('created_by'),
+				'date_created'	=>$this->input->post('date_created'),
+				'date_published'=>$this->input->post('date_published'),
+				'date_removed'	=>$this->input->post('date_removed'),
+				'active'		=>$this->input->post('active'),
+				'homepage'		=> $this->input->post('homepage'),
 				);
 
 		//update existing networks
-		if(($this->input->post('id'))){
+		if(strlen($this->input->post('id'))>0){
 			$data['id'] = $this->input->post('id');
 
 			return $this->update($data);
 
-
 		//insert new networks
 		}else{
-			$sql =	'insert into '.$this->table.' ('.
-						'title,			content,		networks_type,'.
-						'created_by,	date_created,	date_published,'.
-						'date_removed'.
-					')values ( ?, ?, '.$type.',?,?,?,?);';
 
-			if(! $this->db->query($sql,$data)){
+			if(! $this->db->insert($this->table,$data)){
 				return $this->db->_error_message();
 			}
 
@@ -118,7 +132,7 @@ class Networks_model extends CI_Model{
 
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
-			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
+			//$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
 		return $res->result();
 	}
@@ -126,15 +140,19 @@ class Networks_model extends CI_Model{
 	/**
 	 * render networks for display
 	 */
-	public function render($params){
-		$this->load->helper('text');
+	public function render($params=null){
 		$data = $this->get($params);
 
-		$str = '<div class="about">';
-		$str.= '<h1>'.$data[0]->title.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
-		$str.= '<a href="#" class="btn_red fr">read more</a>'; // <--- link not set properly
-		$str.= '</div>';
+		$str =	'<div class="grid_7 social border_rt_gray border_lt_white">'.
+				'	<h3><span>Network</span> with us</h3>'.
+				'	<p>Connect with us via the social networks... </p><ul>';
+
+		foreach($data as $key=>$val){
+			$str .= '<li><a href="'.$val->link.'" title="'.$val->description.
+						'">'.$val->title.'</a></li>';
+		}
+
+		$str .= '</ul></div>';
 
 		return $str;
 	}
@@ -143,7 +161,7 @@ class Networks_model extends CI_Model{
 	 * count records
 	 */
 	public function record_count($type){
-		$this->db->where('networks_type',$type);
+
 		$x = $this->db->count_all_results($this->table);
 
 		return $x;

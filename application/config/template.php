@@ -81,6 +81,7 @@ $template['default']['regions'] = array(
 		'poll'	 =>array(),
 		'contacts'=>array(),
 		'usefullinks'=>array(),
+		'network'=>array(),
 		'counter'=>array(),
 //	   'content'=>'',
 	);

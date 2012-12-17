@@ -69,6 +69,11 @@ class Pages extends CI_Controller {
 		$usefullinks = $this->usefullinks_model->render();
 		$this->template->write('usefullinks',$usefullinks);		
 
+		//network
+		$this->load->model('networks_model');
+		$networks = $this->networks_model->render();
+		$this->template->write('network',$networks);
+
 		//counter
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);

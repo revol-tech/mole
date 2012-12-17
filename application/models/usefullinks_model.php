@@ -132,6 +132,7 @@ Array
 
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
+//echo $value->created_by;			
 			//$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
 		return $res->result();

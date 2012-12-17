@@ -119,7 +119,7 @@ class Contacts_model extends CI_Model{
 						</div>
 					</div>
 					<div class="contact_holder">
-						<div class="email"><a href="#">'.$data[0]->email.'</a></div>
+						<div class="email"><a href="mailto:'.$data[0]->email.'">'.$data[0]->email.'</a></div>
 					</div>
 				</div>';
 

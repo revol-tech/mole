@@ -320,6 +320,10 @@ class News_model extends CI_Model{
 				'});'.
 				'</script>';
 
+		$str .=	'<div class="item1 fl">'.
+				'<h2 id="carousel_header">'.
+				'	<span>Latest</span> Notices'.
+				'</h2>';
 
 		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
@@ -333,7 +337,7 @@ class News_model extends CI_Model{
 				$str .= '</li>';
 			}
 		}
-		$str.= '</ul>';
+		$str.= '</ul></div>';
 		return $str;
 	}
 
