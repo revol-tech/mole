@@ -64,6 +64,11 @@ class Pages extends CI_Controller {
 		$contacts = $this->contacts_model->render();
 		$this->template->write('contacts',$contacts);		
 
+		//userful links
+		$this->load->model('usefullinks_model');
+		$usefullinks = $this->usefullinks_model->render();
+		$this->template->write('usefullinks',$usefullinks);		
+
 		//counter
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);

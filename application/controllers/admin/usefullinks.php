@@ -10,7 +10,6 @@ class Usefullinks extends CI_Controller {
 
 		chk_admin();
 
-		$this->load->helper('ckeditor');
 		$this->load->model('usefullinks_model');
 
 		/**
@@ -53,16 +52,19 @@ class Usefullinks extends CI_Controller {
 
 		//if there are no usefullinks at present ...
 		if($config['total_rows']==0){
-			$item->id			= '--';
-			$item->title		= '--';
-			$item->title_link	= '--';
-			$item->usefullinks_type	= '--';
-			$item->created_by	= '--';
-			$item->date_created	= '--';
-			$item->date_published='--';
-			$item->active		= '--';
-			$item->edit			= '--';
-			$item->del			= '--';
+			$item->id				= '--';
+			$item->title			= '--';
+			$item->title_link		= '--';
+			$item->link				= '--';
+			$item->description		= '--';
+			$item->created_by		= '--';
+			$item->date_created		= '--';
+			$item->date_published	= '--';
+			$item->date_removed		= '--';
+			$item->active			= '--';
+			$item->homepage			= '--';
+			$item->edit				= '--';
+			$item->del				= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -82,7 +84,7 @@ class Usefullinks extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->usefullinks_model->get(array('usefullinks_type'=>$this->type),$config['per_page'],$page);
+		$data = $this->usefullinks_model->get(array(),$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
 
@@ -145,9 +147,7 @@ class Usefullinks extends CI_Controller {
 	 * usefullinks form
 	 */
     public function create(){
-		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+
 //print_r($this->data);
 		$this->load->helper('utilites_helper');
 
@@ -188,12 +188,14 @@ class Usefullinks extends CI_Controller {
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->usefullinks_model->save($this->type);
 
+		redirect('admin/usefullinks');
+/*
 		//retrive that usefullinks
 		$this->get(array('id'=> $this->data['id']));
 
 		//display that usefullinks
 		$this->create();
-	}
+*/	}
 
 
 
@@ -202,7 +204,7 @@ class Usefullinks extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_usefullinks = array('usefullinks_type'=>1);
+		$get_usefullinks = array();
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){

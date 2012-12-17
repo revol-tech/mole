@@ -209,15 +209,18 @@
 	<div id="bottom">
 		<div class="bottom_contain_1">
 			<?php echo $contacts?>
-			<div class="grid_7 useful_links border_rt_gray border_lt_white">
-				<h3><span>Useful</span> links</h3>
-				<ul>
-					<li><a href="#">Employment Agreement Builder</a></li>
-					<li><a href="#">Paid Parental Leave Calculator</a></li>
-					<li><a href="#">Employment Law Database</a></li>
-					<li><a href="#">Collective Bargaining resource</a></li>
-				</ul>
-			</div>
+			<?php echo $usefullinks?>
+<!--
+<div class="grid_7 useful_links border_rt_gray border_lt_white">
+	<h3><span>Useful</span> links</h3>
+	<ul>
+		<li><a href="#">Employment Agreement Builder</a></li>
+		<li><a href="#">Paid Parental Leave Calculator</a></li>
+		<li><a href="#">Employment Law Database</a></li>
+		<li><a href="#">Collective Bargaining resource</a></li>
+	</ul>
+</div>
+-->
 			<div class="grid_7 social border_rt_gray border_lt_white">
 				<h3><span>Network</span> with us</h3>
 				<p>Connect with us via FaceBook and Twitter. </p>

@@ -80,6 +80,7 @@ $template['default']['regions'] = array(
 		'gallery'=>array(),
 		'poll'	 =>array(),
 		'contacts'=>array(),
+		'usefullinks'=>array(),
 		'counter'=>array(),
 //	   'content'=>'',
 	);
