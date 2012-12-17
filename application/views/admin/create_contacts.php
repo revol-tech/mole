@@ -25,7 +25,7 @@
 		<?php echo @$content?>
 	</textarea>
 	<label>
-		title
+		Keywords
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>

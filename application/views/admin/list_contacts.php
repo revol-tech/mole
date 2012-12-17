@@ -8,6 +8,7 @@
 <table border=1>
 <thead>
 	<tr>
+		<th>id</th>
 		<th>title</th>
 		<th>date created</th>
 		<th>created by</th>
@@ -19,6 +20,7 @@
 <tbody>
 	<?php foreach($items['data'] as $item): ?>
 		<tr>
+			<td><?php echo $item->id?></td>
 			<td><?php echo $item->title_link?></td>
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
