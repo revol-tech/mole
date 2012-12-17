@@ -48,18 +48,8 @@ class Contacts_model extends CI_Model{
 	 * update existing contacts
 	 */
 	private function update($data){
-
-		$update = array(
-					   'title' 		=> $data[0],
-					   'content' 	=> $data[1],
-					   'date_published' => $data[3],
-					   'date_removed' => $data[4]
-					);
-
 		$this->db->where('id', $data['id']);
-		$this->db->update($this->table, $update);
-
-		return $data['id'];
+		$this->db->update($this->table, $data);
 	}
 
 
@@ -69,16 +59,20 @@ class Contacts_model extends CI_Model{
 	 */
 	public function save($type=1){
 		$data = array(
-					$this->input->post('title'),
-					htmlentities($this->input->post('content')),
-					$this->session->userdata('user_id'),
-					$this->session->userdata('date_created'),
-					$this->input->post('date_published'),
-					$this->input->post('date_removed')
+					'address'	=> htmlentities($this->input->post('address')),
+					'tel'		=> $this->input->post('tel'),
+					'fax'		=> $this->input->post('fax'),
+					'email'		=> $this->input->post('email'),
+					'created_by'=> $this->session->userdata('user_id'),
+					'date_created'=>$this->session->userdata('date_created'),
+					'date_published'=>$this->input->post('date_published'),
+					'date_removed'	=> $this->input->post('date_removed'),
+					'active'	=>$this->input->post('active'),
+					'homepage' => $this->input->post('homepage'),
 				);
 
 		//update existing contacts
-		if(($this->input->post('id'))){
+		if(strlen($this->input->post('id'))){
 			$data['id'] = $this->input->post('id');
 
 			return $this->update($data);
@@ -86,13 +80,8 @@ class Contacts_model extends CI_Model{
 
 		//insert new contacts
 		}else{
-			$sql =	'insert into '.$this->table.' ('.
-						'title,			content,		contacts_type,'.
-						'created_by,	date_created,	date_published,'.
-						'date_removed'.
-					')values ( ?, ?, '.$type.',?,?,?,?);';
 
-			if(! $this->db->query($sql,$data)){
+			if(! $this->db->insert($this->table,$data)){
 				return $this->db->_error_message();
 			}
 
@@ -104,231 +93,35 @@ class Contacts_model extends CI_Model{
 	/**
 	 * get contacts [of selected parameter]
 	 */
-	public function get($contacts,$limit=null,$start=null){
-
-		if($limit){
-			$this->db->limit($limit,$start);
-		}
-		if($contacts){
-			foreach($contacts as $key=>$value){
-				$this->db->where($key,$value);
-			}
-		}
+	public function get($contacts=null,$limit=null,$start=null){
 		$res = $this->db->get($this->table);
 
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
-			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
-//print_r($res->result());
 		return $res->result();
 	}
 
 	/**
 	 * render contacts for display
 	 */
-	public function render($params){
-//print_r( $params);
-		$this->load->helper('text');
-		$data = $this->get($params);
+	public function render(){
+		$data = $this->contacts_model->get();
+//print_r($data);		die;
 
-		switch($params['contacts_type']){
-
-			//render Flash contacts
-			case '1':
-				$str = $this->_render_flash_contacts($data);
-				break;
-
-			//render Notices
-			case '2':
-				$str = $this->_render_notices($data);
-				break;
-
-			//render Events
-			case '3':
-				$str = $this->_render_events($data);
-				break;
-
-			//render Press Release
-			case '4':
-				$str = $this->_render_press($data);
-				break;
-
-			//render Health
-			case '5':
-				$str = $this->_render_health($data);
-				break;
-
-			//render About
-			case '6':
-				$str = $this->_render_page($data);
-				break;
-		}
-		return $str;
-	}
-
-	private function _render_health($data){
-		$str = '<div class="tab_grid2"><ul>';
-		if(count($data)>0){
-			foreach($data as $key=>$val){
-				$str.='<li>';
-				$str.='<span class="list_style_red_dot fl"></span>';
-				$str.='<a href="#">'.word_limiter($val->title,4).'</a>';
-				$str.='</li>';
-			}
-		}
-		$str.= '</ul><a href="#" class="btn_red fr alpha">View more</a></div>';
-		return $str;
-	}
-/*	
-<div class="tab_grid2">
-	<ul>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">WSH Regulatory Framework </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Safety & Health Management System </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Monitoring and Surveillance </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Work Injury Compensation </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Certification & Registration </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Incident Reporting </a> 
-		</li>
-	</ul>
-	<a href="#" class="btn_red fr alpha">View more</a>
-</div>
-*/	
-	private function _render_press($data){
-
-		$str ='<div class="tab_grid1 fr">';
-		$str.='		<h5>'.$data[0]->title.'</h5>';
-		$str.='		<p>'.word_limiter(strip_tags($data[0]->content),25);
-		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
-		$str.='		</p>';
-		$str.='		<a href="#" class="btn_red fl alpha">Read more</a>';
-		$str.='</div>';
-
-		return $str;
-	}
-
-	private function _render_events($data){
-		$str = '<div class="item1_content fl">';
-		$str.= '	<p>'.word_limiter(strip_tags($data[0]->content),25);
-		$str.= '		<a href="#" class="more">read more</a></p>'; // <--- link not set properly
-		$str.= '<a href="#" class="view_all">View All Events +</a>';
-		$str.= '</div>';
-
-		return $str;
-	}
-
-	private function _render_flash_contacts($data){
-		$count = count($data);
-		$str ='';
-		$str.=	'<style>'.
-				'	.contacts_ticker_content{'.
-				'		background-color:#fff;'.
-				'		color			:#888;'.
-				'		font			:13px/20px "Open Sans",Arial,Helvetica,sans-serif;'.
-				'		height			:inherit;'.
-				'		overflow		:hidden;'.
-				'		padding			:10px 0 0 10px;'.
-				'		top				:0;'.
-				'	}'.
-				'</style>';
-		$str.='<div class="contacts_ticker_content" style="">';
-		$str .= //'<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
-				'<script>
-				jQuery(document).ready(function() {
-					jQuery("#flash-slider").jcarousel({
-						visible	: 1,
-						scroll 	: 1,
-						auto	: 5,
-						wrap	: "circular",
-				//		itemFallbackDimension: 800
-				//		buttonNextHTML:"null",
-				//		buttonPrevHTML:"null",
-					})
-				//	.jcarouselAutoscroll()
-				//	.hover(function() {
-				//		$(this).jcarouselAutoscroll("stop");
-				//	}, function() {
-				//		$(this).jcarouselAutoscroll("start");
-				//	});
-				});
-				</script>';
-
-		$str .= '<ul id="flash-slider">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
-		if(count($data)){
-			foreach($data as $key=>$val){
-				$str .= '<li>';
-				$str .= '	<span>';
-				$str .= 		word_limiter(strip_tags($val->content),15);
-				$str .= '		<a href="#" class="more">more</a>';
-				$str .= '	</span>';
-				$str .= '</li>';
-			}
-		}
-		$str.= '</ul></div>';
-		return $str;
-	}
-
-	private function _render_notices($data){
-		$count = count($data);
-
-		$str ='';
-		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
-				'<script>'.
-				'jQuery(document).ready(function() {'.
-				'	jQuery("#notice-slider").jcarousel({'.
-				'		vertical: true,'.
-				'		visible	: 2,'.
-				'		scroll 	: 1,'.
-				'		auto	: 10000,'.
-				'		wrap	: "circular",'.
-				'		buttonNextHTML:"null",'.
-				'		buttonPrevHTML:"null",'.
-				'	});'.
-				'});'.
-				'</script>';
-
-
-		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango">';
-		if(count($data)){
-			foreach($data as $key=>$val){
-				$str .= '<li>';
-				$str .= '	<h4>'.$val->title.'</h4><a href="#" class="title_date">'.$val->date_created.'</a>';
-				$str .= '	<span>';
-				$str .= 		word_limiter(strip_tags($val->content),25);
-				$str .= '		<a href="#" class="more">more</a>';
-				$str .= '	</span>';
-				$str .= '</li>';
-			}
-		}
-		$str.= '</ul>';
-		return $str;
-	}
-
-	private function _render_page($data){
-		$str = '<div class="about">';
-		$str.= '<h1>'.$data[0]->title.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
-		$str.= '<a href="#" class="btn_red fr">read more</a>'; // <--- link not set properly
-		$str.= '</div>';
+		$str = 	'<div class="grid_7 address pad_alpha border_rt_gray">
+					<h3><span>Contact</span> Details</h3>'.
+					$data[0]->address.
+					'<div class="contact_holder">
+						<div class="tel">
+							<p><strong>T</strong><span>'.$data[0]->tel.'</span></p>
+							<p><strong>F</strong><span>'.$data[0]->fax.'</span></p>
+						</div>
+					</div>
+					<div class="contact_holder">
+						<div class="email"><a href="#">'.$data[0]->email.'</a></div>
+					</div>
+				</div>';
 
 		return $str;
 	}
@@ -337,7 +130,7 @@ class Contacts_model extends CI_Model{
 	 * count records
 	 */
 	public function record_count($type){
-		$this->db->where('contacts_type',$type);
+		//$this->db->where('contacts_type',$type);	// <<---- invalid .......????!!!!!
 		$x = $this->db->count_all_results($this->table);
 
 		return $x;

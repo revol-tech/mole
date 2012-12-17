@@ -27,7 +27,8 @@ class Contacts extends CI_Controller {
 
 
 	public function index(){
-
+		$this->view();
+/*
 		$data['items'] = $this->list_contacts();
 //echo '<pre>';
 //print_r($data);
@@ -38,7 +39,7 @@ class Contacts extends CI_Controller {
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_contacts.php',$data);
 		$this->load->view('templates/footer');
-	}
+*/	}
 
 
 	/**
@@ -68,7 +69,8 @@ class Contacts extends CI_Controller {
 			return array('data'=>array($item));
 		}
 //print_r($data);
-
+		return $this->view();
+/*		
 		//get reqd page number
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='index'){
@@ -124,6 +126,7 @@ class Contacts extends CI_Controller {
 		}
 
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
+*/
 	}
 
 
@@ -158,19 +161,8 @@ class Contacts extends CI_Controller {
 		}
 		if(!isset($this->data['created_by'])){
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
-//		}else{
-//
-//			//get the username of the person who created the contacts
-//			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
-//print_r($this->data[0]);
-//array_push($this->data,$this->data[0]);
-//array_push($this->data,(array)$this->data[0]);
-//array_merge($this->data[0],$this->data);
-//echo '<pre>';
-//print_r($this->data);
-//echo '</pre>';
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
@@ -186,21 +178,18 @@ class Contacts extends CI_Controller {
     public function save(){
 		//save the contacts & return the id of that contacts
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->contacts_model->save($this->type);
-
-		//retrive that contacts
-		$this->get(array('id'=> $this->data['id']));
+		$this->contacts_model->save($this->type);
 
 		//display that contacts
-		$this->create();
+		redirect('admin/contacts');
 	}
-
 
 
 	/**
 	 * view selected contacts
 	 */
 	public function view(){
+
 		$id=false;
 		$get_contacts = array('contacts_type'=>1);
 
@@ -214,7 +203,7 @@ class Contacts extends CI_Controller {
 		$data = $this->contacts_model->get($get_contacts);
 
 		if(count($data)!=1){
-			show_404();
+			$data[0]=null;
 		}
 
 //print_r($data[0]);
@@ -231,18 +220,11 @@ class Contacts extends CI_Controller {
 	 * edit selected contacts
 	 */
 	public function edit(){
-		$id=false;
-		foreach($this->uri->segment_array() as $key=>$val){
-			if($val=='edit'){
-				$id = $this->uri->segment($key+1);
-				break;
-			}
-		}
 
-		$data = $this->contacts_model->get(array('id'=>$id));
+		$data = $this->contacts_model->get();
 
 		if(count($data)!=1){
-			show_404();
+			$data[0]=null;
 		}
 		$this->data = (array)$data[0];
 		$this->create();

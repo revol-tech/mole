@@ -59,6 +59,10 @@ class Pages extends CI_Controller {
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
 
+		//contact
+		$this->load->model('contacts_model');
+		$contacts = $this->contacts_model->render();
+		$this->template->write('contacts',$contacts);		
 
 		//counter
 		$counter = get_count_visitors();

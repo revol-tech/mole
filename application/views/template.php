@@ -208,21 +208,7 @@
 	</div>
 	<div id="bottom">
 		<div class="bottom_contain_1">
-			<div class="grid_7 address pad_alpha border_rt_gray">
-				<h3><span>Contact</span> Details</h3>
-				<p><strong>Government of Nepal</strong> Ministry of Labour and Employment
-				Minbhawan, Baneshwor,
-				Kathmandu, Nepal</p>
-				<div class="contact_holder">
-					<div class="tel">
-						<p><strong>T</strong><span>00977-1- 4413968, 4700934, 4700935,4700847, 4700849</span></p>
-						<p><strong>F</strong><span> 00977-1-4414510</span></p>
-					</div>
-				</div>
-				<div class="contact_holder">
-					<div class="email"><a href="#"> info@mole.gov.np</a></div>
-				</div>
-			</div>
+			<?php echo $contacts?>
 			<div class="grid_7 useful_links border_rt_gray border_lt_white">
 				<h3><span>Useful</span> links</h3>
 				<ul>
@@ -252,6 +238,8 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	
+	
 	<div id="footer">
 		<div class="footer_content">
 			<div class="grid_6">
@@ -263,6 +251,8 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	
+	
 	<a href="#" id="top-link">Scroll to top</a>
 	<span style='background-color:red;'>
 		unique visited upto now : <?php echo $counter?>

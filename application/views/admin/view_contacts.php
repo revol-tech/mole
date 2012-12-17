@@ -2,28 +2,31 @@
 
 <div>
 	<br/>
-	<a href='<?php echo site_url('admin/contacts/edit/'.$id)?>'>
-		edit
+	<a href='<?php echo site_url('admin/contacts/edit')?>'>
+		add/edit
 	</a>
 	<br/>
 
+	<hr/>
+	address :<br/>
+	<?php echo @$address?>
+	<br/>
 
-	title :
-	<span class='title'><?php echo $title;?></span>
+	tel :
+	<span class='title'><?php echo @$tel;?></span>
+	<br/>
+
+	fax :
+	<span class='title'><?php echo @$fax;?></span>
+	<br/>
+
+	email :
+	<span class='title'><?php echo @$email;?></span>
 	<br/>
 
 	created by :
-	<span class='created_by'><?php echo $created_by;?></span>
+	<span class='created_by'><?php echo @$created_by;?></span>
 	<br/>
 
-
-	Publish :
-	<?php echo $active?>
-	<br/>
-
-	content :<br/>
-	<hr/>
-	<?php echo $content?>
-	<br/>
 	<hr/>
 </div>
