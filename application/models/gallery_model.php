@@ -2,7 +2,7 @@
 
 class Gallery_model extends CI_Model{
 	protected $table_album= 'album';
-	protected $table_imgs = 'imgs';
+	protected $table_imgs = 'files';
 
 	public function __construct(){
 		parent::__construct();
@@ -156,7 +156,7 @@ echo 'c';
 
 			$data = array_merge($data,array('id'=>$this->db->insert_id()));
 
-			return $data;
+				return $data;
 		}
 	}
 

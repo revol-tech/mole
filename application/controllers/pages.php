@@ -60,6 +60,9 @@ class Pages extends CI_Controller {
 		$this->template->write('poll',$poll);
 
 
+		//counter
+		$counter = get_count_visitors();
+		$this->template->write('counter',$counter);
 		$this->template->render();
 	}
 

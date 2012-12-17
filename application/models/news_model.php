@@ -212,6 +212,9 @@ class News_model extends CI_Model{
 </div>
 */	
 	private function _render_press($data){
+		if(count($data)==0){
+			return '';
+		}
 
 		$str ='<div class="tab_grid1 fr">';
 		$str.='		<h5>'.$data[0]->title.'</h5>';
@@ -225,6 +228,10 @@ class News_model extends CI_Model{
 	}
 
 	private function _render_events($data){
+		if(count($data)==0){
+			return '';
+		}
+
 		$str = '<div class="item1_content fl">';
 		$str.= '	<p>'.word_limiter(strip_tags($data[0]->content),25);
 		$str.= '		<a href="#" class="more">read more</a></p>'; // <--- link not set properly
@@ -236,6 +243,10 @@ class News_model extends CI_Model{
 
 	private function _render_flash_news($data){
 		$count = count($data);
+		if($count==0){
+			return '';
+		}
+		
 		$str ='';
 		$str.=	'<style>'.
 				'	.news_ticker_content{'.
@@ -288,6 +299,9 @@ class News_model extends CI_Model{
 
 	private function _render_notices($data){
 		$count = count($data);
+		if($count==0){
+			return '';
+		}
 
 		$str ='';
 		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
@@ -324,6 +338,10 @@ class News_model extends CI_Model{
 	}
 
 	private function _render_page($data){
+		if(count($data)==0){
+			return '';
+		}
+
 		$str = '<div class="about">';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
 		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';

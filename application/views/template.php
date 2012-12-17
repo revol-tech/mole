@@ -264,5 +264,8 @@
 		</div>
 	</div>
 	<a href="#" id="top-link">Scroll to top</a>
+	<span style='background-color:red;'>
+		unique visited upto now : <?php echo $counter?>
+	</span>
 </body>
 </html>

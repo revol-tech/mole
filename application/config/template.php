@@ -79,6 +79,7 @@ $template['default']['regions'] = array(
 		'health' =>array(),
 		'gallery'=>array(),
 		'poll'	 =>array(),
+		'counter'=>array(),
 //	   'content'=>'',
 	);
 
