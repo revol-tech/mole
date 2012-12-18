@@ -75,6 +75,7 @@ $template['default']['regions'] = array(
 		'slider' 	=> array(),
 		'flash_news'=> array(),
 		'page'	 	=> array(),
+		'vip'		=> array(),
 		'events' 	=> array(),
 		'notices'	=> array(),
 		'press'	 	=> array(),

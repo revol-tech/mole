@@ -107,26 +107,29 @@
 			</div>
 
 			<div class="grid_4 omega alpha fl">
-				<div class="highlight fl">
-					<div class="intro_block fl">
-						<div class="block_img1 fl">
-							<img src="<?php echo IMGPATH?>Prime_minister_Baburam_Bhattarai.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
-						</div>
-						<div class="intro_box fr">
-							<div class="name fl">Dr. Baburam Bhattarai</div>
-							<div class="title fl">Prime Minister of Nepal</div>
-						</div>
-					</div>
-					<div class="intro_block omega_bottom fl">
-						<div class="block_img1 fl">
-							<img src="<?php echo IMGPATH?>/Minister.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
-						</div>
-						<div class="intro_box fr">
-							<div class="name fl">Mr. Purna Chandra Bhattrai</div>
-							<div class="title fl">Minister of Department</div>
-						</div>
-					</div>
-				</div>
+				<?php echo $vip?>
+<!--
+<div class="highlight fl">
+	<div class="intro_block fl">
+		<div class="block_img1 fl">
+			<img src="<?php echo IMGPATH?>Prime_minister_Baburam_Bhattarai.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
+		</div>
+		<div class="intro_box fr">
+			<div class="name fl">Dr. Baburam Bhattarai</div>
+			<div class="title fl">Prime Minister of Nepal</div>
+		</div>
+	</div>
+	<div class="intro_block omega_bottom fl">
+		<div class="block_img1 fl">
+			<img src="<?php echo IMGPATH?>/Minister.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
+		</div>
+		<div class="intro_box fr">
+			<div class="name fl">Mr. Purna Chandra Bhattrai</div>
+			<div class="title fl">Minister of Department</div>
+		</div>
+	</div>
+</div>
+-->
 			</div>
 		</div>
 		<div class="container_3 fl">

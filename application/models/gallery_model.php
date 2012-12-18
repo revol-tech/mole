@@ -7,6 +7,7 @@ class Gallery_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('upload');
+		$this->load->model('files_model','imgs_model');
 	}
 
 
@@ -57,7 +58,7 @@ class Gallery_model extends CI_Model{
 	 * count photos in the given album
 	 */
 	public function count_photos($id){
-		$this->db->where('album_id');
+		$this->db->where('album_id',$id);
 		$this->db->get($this->table_imgs);
 	}
 
@@ -67,13 +68,13 @@ class Gallery_model extends CI_Model{
 	public function save_album($album=null){
 		if((count($album))<1)
 			return false;
-echo 'a';
+//echo 'a';
 		if($this->db->insert($this->table_album,$album)){
-echo $this->db->last_query();
-echo 'b';
+//echo $this->db->last_query();
+//echo 'b';
 			return $this->db->insert_id();
 		}
-echo 'c';
+//echo 'c';
 
 		return false;
 	}
@@ -88,13 +89,38 @@ echo 'c';
 	public function del($id){
 
 		//del photos of that album
-		$this->del_imgs($id);
+		$this->del_imgs(array('album_id'=>$id));
 
 		$this->db->where('id',$id)
 				->delete($this->table_album);
 
 		return true;
 	}
+
+
+
+
+
+
+
+	/**
+	 * del imgs
+	 */
+	public function del_imgs($params){
+		$this->imgs_model->del_imgs($params);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

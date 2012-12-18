@@ -81,7 +81,10 @@ class Gallery extends CI_Controller {
 
 
 		foreach($data as $key=>$val){
-print_r($val);
+//echo '<pre>';
+//print_r($val);
+//echo '</pre>';
+
 			$str =	'<a href="'.site_url('admin/gallery/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
@@ -104,7 +107,7 @@ print_r($val);
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
-print_r($data[$key]);
+//print_r($data[$key]);
 
 /** //activate-deactivate not currently set for gallery
 			//add activate/deactivate button			
@@ -123,10 +126,12 @@ print_r($data[$key]);
 */ 
 
 			//count no. of photos in the album
-			$data['no_photos'] = $this->gallery_model->count_photos(id);
+			$data[$key]->no_photos = $this->gallery_model->count_photos($data[$key]->id);
 
 		}
-
+echo '<pre>';
+print_r($data);
+echo'</pre>';
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
@@ -162,7 +167,7 @@ print_r($data[$key]);
 	 */
 	public function del(){
 
-		$this->gallery_model->del($this->input->post('album_id'));
+		$this->gallery_model->del($this->input->post('gallery_id'));
 
 		redirect($this->session->flashdata('redirectToCurrent'));
 	}
@@ -176,6 +181,7 @@ print_r($data[$key]);
 		$this->data = $this->input->post();
 		unset($this->data['save']);
 		$this->data['date_created'] = $this->session->userdata('date_created');
+		$this->data['created_by'] = $this->ion_auth->get_user()->id;
 //print_r($this->data);die;
 		$this->data['id'] = $this->gallery_model->save_album($this->data);
 //echo $this->data['id'];die;
@@ -218,7 +224,7 @@ print_r($data[$key]);
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
-
+/*
 			//add activate/deactivate button
 			$str = '<form method="post" action='.site_url('admin/gallery/active').'>'.
 						'<input type="hidden" name="gallery_id" value="'.$data[$key]->id.'"/>';
@@ -230,7 +236,7 @@ print_r($data[$key]);
 				$str .=	'<input type="submit" name="active"   value="Activate"/>';
 			}
 			$str .= '</form>';
-
+*/
 			$data[$key]->active = $str;
 		}
 	}

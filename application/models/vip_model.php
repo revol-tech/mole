@@ -29,47 +29,33 @@ class Vip_model extends CI_Model{
 
 
 	/**
-	 * render the slider images
+	 * render the vip
 	 *
 	 * @return
 	 */
-	public function render_slider(){
-		$data = $this->get(array('file_type'=>'slider'));
+	public function render(){
+		$data = $this->get();
 
-		$str=$this->_render_recursive($data,0);
-
-		return $str;
-	}
-
-	/**
-	 * for recursive rendering
-	 */
-	private function _render_recursive($data,$parent_id){
 		$count = 1;
 
-		$str = '<div id="slider" class="nivoSlider">';
+		$str = '<div class="highlight fl">';
 
 		foreach($data as $k=>$v){
-
-			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
-			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
-			$str.=' alt="'.$v->title.'" title="#htmlcaption'.$count.'"';
-			$str.=' />';
-
+			$str .= '<div class="intro_block fl">';
+			$str .= 	'<div class="block_img1 fl">';
+			$str .=			'<img src="'.DOCUMENTS.'/'.$v->timestamp.'" ';
+			$str .=				'alt="'.$v->title.'" title="'.$v->description.'"/>';
+			$str .=		'</div>';
+			$str .=		'<div class="intro_box fr">';
+			$str .=			'<div class="name fl">'.$v->title.'</div>';
+			$str .=			'<div class="title fl">'.$v->description.'</div>';
+			$str .= 	'</div>';
+			$str .=	'</div>';
+			
 			$count++;
 		}
 
 		$str .= '</div>';
-
-		$count = 1;
-		foreach($data as $k=>$v){
-
-			$str.='<div id="htmlcaption'.$count.'" class="nivo-html-caption">';
-			$str.= $v->description;
-			$str.='</div>';
-
-			$count++;
-		}
 
 		return $str;
 	}
@@ -130,7 +116,7 @@ class Vip_model extends CI_Model{
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
 						'date_created'	=> $this->session->userdata('date_created'),
-						'file_type'		=> $type
+					//	'file_type'		=> $type
 					);
 
 //print_r($_POST);

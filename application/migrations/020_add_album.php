@@ -17,6 +17,7 @@ class Migration_Add_album extends CI_Migration {
 						  '`created_by` int(11) NOT NULL',
 						  '`date_created` timestamp NULL DEFAULT NULL',
 						  '`date_published` timestamp NULL DEFAULT NULL',
+						  '`active` tinyint default 1',
 					);
 		$this->dbforge->add_field($fields);
 

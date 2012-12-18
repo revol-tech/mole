@@ -11,7 +11,7 @@ class Migration_Add_vip extends CI_Migration {
 	public function up()
 	{
 		$fields = array(
-						  '`id` int(11) NOT NULL',
+						  '`id` int(11) NOT NULL auto_increment',
               '`filename` varchar(127) CHARACTER SET utf8 NOT NULL',
               '`title` varchar(127) CHARACTER SET utf8 NOT NULL',
               '`description` varchar(255) CHARACTER SET utf8 NOT NULL',

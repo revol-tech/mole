@@ -171,17 +171,7 @@ class News_model extends CI_Model{
 		}
 		return $str;
 	}
-/*
-<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">
-	<h3><span>Employment </span>relations</h3>
-	<ul>
-		<li><a href="#">Employment Agreement Builder</a></li>
-		<li><a href="#">Paid Parental Leave Calculator</a></li>
-		<li><a href="#">Employment Law Database</a></li>
-		<li><a href="#">Collective Bargaining resource</a></li>
-	</ul>
-</div>
-*/ 
+
 	private function _render_employments($data){
 		$str = '<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">'.
 					'<h3><span>Employment </span>relations</h3><ul>';
@@ -246,6 +236,12 @@ class News_model extends CI_Model{
 		}
 		
 		$str ='';
+
+		if(!($this->session->flashdata('jcarousel'))){
+			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
+			$this->session->set_flashdata('jcarousel',true);
+		}
+		
 		$str.=	'<style>'.
 				'	.news_ticker_content{'.
 				'		background-color:#fff;'.
@@ -259,7 +255,6 @@ class News_model extends CI_Model{
 				'</style>';
 		$str.='<div class="news_ticker_content" style="">';
 		$str .= //'<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
 				'<script>
 				function flash_initCallback(carousel){
 					
@@ -310,8 +305,13 @@ class News_model extends CI_Model{
 		}
 
 		$str ='';
+
+		if(!($this->session->flashdata('jcarousel'))){
+			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
+			$this->session->set_flashdata('jcarousel',true);
+		}
+
 		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
 				'<script>'.
 				'function notice_initCallback(carousel){'.
 				'	/* Disable autoscrolling if the user clicks the prev or next button.*/'.

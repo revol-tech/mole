@@ -19,7 +19,8 @@ class Migration_Add_files extends CI_Migration {
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',
-						'`file_type` varchar(11) null'
+						'`file_type` varchar(11) null',
+						'`album_id` int(11) default null',
 					);
 		$this->dbforge->add_field($fields);
 

@@ -29,6 +29,11 @@ class Pages extends CI_Controller {
 		$page = $this->news_model->render($params);
 		$this->template->write('page',$page);
 
+		//VIP
+		$this->load->model('vip_model');
+		$vip = $this->vip_model->render();
+		$this->template->write('vip',$vip);
+
 		//vertical slider notices
 		$params = array('news_type'=>2,'active'=>1);
 		$notices = $this->news_model->render($params);

@@ -175,6 +175,28 @@ class Files_model extends CI_Model{
 
 
 	/**
+	 * delete imgs 
+	 *
+	 * @param array of enws ids to be deleted
+	 * 		  OR int
+	 * @return boolean
+	 */
+	public function del_imgs($ids){
+		$files = $this->get($ids);
+//print_r($files);
+		foreach($files as $file){
+			unlink(DOCUMENTS.$file->timestamp);
+		}
+
+
+		$this->db->where('album_id',$ids['album_id'])
+				->delete($this->table);
+
+		return true;
+	}
+
+
+	/**
 	 * change the active poll
 	 *
 	 * @param id int

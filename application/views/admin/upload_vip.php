@@ -2,20 +2,20 @@
 
 <form method='post' action='<?php echo site_url('admin/vip/upload')?>'  enctype="multipart/form-data" style='width:700px;' >
 	<label>
-		file :
+		image :
 		<input type='file' name='file' />
 	</label>
 	<br/>
 
 
 	<label>
-		file title:
+		name:
 		<input type='text' name='title' />
 	</label>
 	<br/>
 
 	<label>
-		description :
+		position :
 		<input type='text' name='description' />
 	</label>
 	<br/>
