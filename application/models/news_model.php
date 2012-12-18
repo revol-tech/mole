@@ -163,7 +163,36 @@ class News_model extends CI_Model{
 			case '6':
 				$str = $this->_render_page($data);
 				break;
+
+			//render employments
+			case '7':
+				$str = $this->_render_employments($data);
+				break;
 		}
+		return $str;
+	}
+/*
+<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">
+	<h3><span>Employment </span>relations</h3>
+	<ul>
+		<li><a href="#">Employment Agreement Builder</a></li>
+		<li><a href="#">Paid Parental Leave Calculator</a></li>
+		<li><a href="#">Employment Law Database</a></li>
+		<li><a href="#">Collective Bargaining resource</a></li>
+	</ul>
+</div>
+*/ 
+	private function _render_employments($data){
+		$str = '<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">'.
+					'<h3><span>Employment </span>relations</h3><ul>';
+		if(count($data)>0){
+			foreach($data as $key=>$val){
+				$str.='<li>';
+				$str.='<a href="#" title='.$val->title.'>'.word_limiter($val->title,4).'</a>';
+				$str.='</li>';
+			}
+		}
+		$str.= '</ul></div>';
 		return $str;
 	}
 
@@ -180,37 +209,6 @@ class News_model extends CI_Model{
 		$str.= '</ul><a href="#" class="btn_red fr alpha">View more</a></div>';
 		return $str;
 	}
-/*	
-<div class="tab_grid2">
-	<ul>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">WSH Regulatory Framework </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Safety & Health Management System </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Monitoring and Surveillance </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Work Injury Compensation </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Certification & Registration </a> 
-		</li>
-		<li>
-			<span class="list_style_red_dot fl"></span>
-			<a href="#">Incident Reporting </a> 
-		</li>
-	</ul>
-	<a href="#" class="btn_red fr alpha">View more</a>
-</div>
-*/	
 	private function _render_press($data){
 		if(count($data)==0){
 			return '';

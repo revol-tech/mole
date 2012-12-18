@@ -74,6 +74,11 @@ class Pages extends CI_Controller {
 		$networks = $this->networks_model->render();
 		$this->template->write('network',$networks);
 
+		//employments
+		$params = array('news_type'=>7,'active'=>1);
+		$employments = $this->news_model->render($params);
+		$this->template->write('employments',$employments);
+
 		//counter
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);

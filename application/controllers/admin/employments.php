@@ -3,15 +3,16 @@
 class Employments extends CI_Controller {
 
 	protected $data = array();
-	protected $type = 1;
+	protected $type = 7;
 
 	public function __construct(){
+
 		parent::__construct();
 
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('employments_model');
+		$this->load->model('news_model','employments_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -51,18 +52,17 @@ class Employments extends CI_Controller {
 		$config['total_rows'] = $this->employments_model->record_count($this->type);
 		$config['per_page'] = PAGEITEMS;
 
-		//if there are no employments at present ...
+		//if there are no polls at present ...
 		if($config['total_rows']==0){
-			$item->id			= '--';
-			$item->title		= '--';
-			$item->title_link	= '--';
-			$item->employments_type	= '--';
+			$item->id			='--';
+			$item->title		='--';
+			$item->title_link	='--';
+			$item->date_created	='--';
+			$item->employments_type	='--';
 			$item->created_by	= '--';
-			$item->date_created	= '--';
 			$item->date_published='--';
-			$item->active		= '--';
-			$item->edit			= '--';
-			$item->del			= '--';
+			$item->edit			='--';
+			$item->del			='--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -79,13 +79,11 @@ class Employments extends CI_Controller {
 		$this->pagination->initialize($config);
 		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
 		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
-		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->employments_model->get(array('employments_type'=>$this->type),$config['per_page'],$page);
+		$data = $this->employments_model->get(array('news_type'=>$this->type),$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
-
 			$str =	'<a href="'.site_url('admin/employments/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
@@ -101,6 +99,7 @@ class Employments extends CI_Controller {
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
+
 
 
 			//to convert the userid into username
@@ -127,13 +126,11 @@ class Employments extends CI_Controller {
 	}
 
 
-
-
 	/**
 	 * activate/deactivate employments
 	 */
 	public function active(){
-		$id = $this->input->post('employments_id');
+		$id = $this->input->post('notice_id');
 		$active = $this->input->post('activate');
 		$this->employments_model->change_active($id,$active);
 
@@ -148,7 +145,7 @@ class Employments extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
-//print_r($this->data);
+
 		$this->load->helper('utilites_helper');
 
 		//generate username, current date if creating nu employments [not editing]
@@ -158,9 +155,9 @@ class Employments extends CI_Controller {
 		}
 		if(!isset($this->data['created_by'])){
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
-//		}else{
-//
-//			//get the username of the person who created the employments
+		}else{
+
+			//get the username of the person who created the employments
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -202,7 +199,7 @@ class Employments extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_employments = array('employments_type'=>1);
+		$get_employments = array('news_type'=>7);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
@@ -224,7 +221,7 @@ class Employments extends CI_Controller {
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_employments.php',$data[0]);
 		$this->load->view('templates/footer');
-	}
+}
 
 
 	/**
@@ -240,8 +237,7 @@ class Employments extends CI_Controller {
 		}
 
 		$data = $this->employments_model->get(array('id'=>$id));
-
-		if(count($data)!=1){
+		if(count((array)$data)!=1){
 			show_404();
 		}
 		$this->data = (array)$data[0];

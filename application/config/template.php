@@ -85,6 +85,7 @@ $template['default']['regions'] = array(
 		'usefullinks'=>array(),
 		'network'	=> array(),
 		'counter'	=> array(),
+		'employments'=>array(),
 //	   'content'=>'',
 	);
 

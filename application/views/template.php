@@ -204,16 +204,18 @@
 			<?php echo $contacts?>
 			<?php echo $usefullinks?>
 			<?php echo $network?>
-			<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">
-				<h3><span>Employment </span>relations</h3>
-				<ul>
-					<li><a href="#">Employment Agreement Builder</a></li>
-					<li><a href="#">Paid Parental Leave Calculator</a></li>
-					<li><a href="#">Employment Law Database</a></li>
-					<li><a href="#">Collective Bargaining resource</a></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
+			<?php echo $employments?>
+<!--
+<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">
+	<h3><span>Employment </span>relations</h3>
+	<ul>
+		<li><a href="#">Employment Agreement Builder</a></li>
+		<li><a href="#">Paid Parental Leave Calculator</a></li>
+		<li><a href="#">Employment Law Database</a></li>
+		<li><a href="#">Collective Bargaining resource</a></li>
+	</ul>
+</div>
+-->			<div class="clear"></div>
 		</div>
 	</div>
 	
