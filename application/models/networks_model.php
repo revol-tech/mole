@@ -88,12 +88,12 @@ Array
 		$data = array(
 				'title'			=> $this->input->post('title'),
 				'link'			=> $this->input->post('link'),
-				'description'	=>$this->input->post('description'),
-				'created_by'	=> $this->input->post('created_by'),
-				'date_created'	=>$this->input->post('date_created'),
-				'date_published'=>$this->input->post('date_published'),
-				'date_removed'	=>$this->input->post('date_removed'),
-				'active'		=>$this->input->post('active'),
+				'description'	=> $this->input->post('description'),
+				'created_by'	=> $this->ion_auth->get_user(),
+				'date_created'	=> get_timestamp(),
+				'date_published'=> $this->input->post('date_published'),
+				'date_removed'	=> $this->input->post('date_removed'),
+				'active'		=> $this->input->post('active'),
 				'homepage'		=> $this->input->post('homepage'),
 				);
 

@@ -65,24 +65,26 @@ $template['default']['regions'] = array(
 //				   'wrapper' 	=> '<div>',
 //				   'attributes' => array('id' => 'wrapper')
 //				),
-		'title'	 =>array('content'=>array('Ministry of Labour and Employment')),
-		'menu'	 =>array('content'=>array(
-											'<div class="home fl"><a href="'.base_url().'"></a></div>',
+		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
+		'menu'	 	=> array('content'=>array(
+											'<div class="home fl">
+												<a href="'.base_url().'"></a>
+											</div>',
 										)
 						),
-		'slider' =>array(),
-		'flash_news'=>array(),
-		'page'	 =>array(),
-		'events' =>array(),
-		'notices'=>array(),
-		'press'	 =>array(),
-		'health' =>array(),
-		'gallery'=>array(),
-		'poll'	 =>array(),
-		'contacts'=>array(),
+		'slider' 	=> array(),
+		'flash_news'=> array(),
+		'page'	 	=> array(),
+		'events' 	=> array(),
+		'notices'	=> array(),
+		'press'	 	=> array(),
+		'health' 	=> array(),
+		'gallery'	=> array(),
+		'poll'	 	=> array(),
+		'contacts'	=> array(),
 		'usefullinks'=>array(),
-		'network'=>array(),
-		'counter'=>array(),
+		'network'	=> array(),
+		'counter'	=> array(),
 //	   'content'=>'',
 	);
 

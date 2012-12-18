@@ -78,6 +78,11 @@ class Pages extends CI_Controller {
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);
 		$this->template->render();
+/*
+echo '<pre>';
+print_r($this->ion_auth->get_users());
+echo '</pre>';
+*/
 	}
 
 	public function vote(){

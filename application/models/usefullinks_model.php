@@ -88,15 +88,20 @@ Array
 		$data = array(
 				'title'			=> $this->input->post('title'),
 				'link'			=> $this->input->post('link'),
-				'description'	=>$this->input->post('description'),
-				'created_by'	=> $this->input->post('created_by'),
-				'date_created'	=>$this->input->post('date_created'),
-				'date_published'=>$this->input->post('date_published'),
-				'date_removed'	=>$this->input->post('date_removed'),
-				'active'		=>$this->input->post('active'),
+				'description'	=> $this->input->post('description'),
+				'created_by'	=> $this->ion_auth->get_user(),
+				'date_created'	=> get_timestamp(),
+				'date_published'=> $this->input->post('date_published'),
+				'date_removed'	=> $this->input->post('date_removed'),
+				'active'		=> $this->input->post('active'),
 				'homepage'		=> $this->input->post('homepage'),
 				);
-
+/*
+echo '<pre>';
+print_r($data);
+print_r($_POST);
+echo '</pre>';
+*/
 		//update existing usefullinks
 		if(strlen($this->input->post('id'))>0){
 			$data['id'] = $this->input->post('id');
@@ -131,8 +136,19 @@ Array
 		$res = $this->db->get($this->table);
 
 		foreach($res->result() as $value){
+/*			
+$x = $value->created_by;
+$y = $this->ion_auth->get_user($x);
+$y->username;
+echo '<pre>';
+print_r($value);
+print_r($x);
+print_r($y);
+print_r($y->username);
+echo '</pre>';
+*/
+//print_r($this->ion_auth->get_user($value->created_by)->username);
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
-//echo $value->created_by;			
 			//$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
 		return $res->result();
