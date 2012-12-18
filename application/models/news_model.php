@@ -261,24 +261,32 @@ class News_model extends CI_Model{
 		$str .= //'<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
 				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
 				'<script>
+				function flash_initCallback(carousel){
+					
+					/* Disable autoscrolling if the user clicks the prev or next button.*/
+					carousel.buttonNext.bind("click", function() {
+						carousel.startAuto(0);
+					});
+					carousel.buttonPrev.bind("click", function() {
+						carousel.startAuto(0);
+					});
+					/* Pause autoscrolling if the user moves with the cursor over the clip.*/
+					carousel.clip.hover(function() {
+						carousel.stopAuto();
+					}, function() {
+						carousel.startAuto();
+					});
+				}; 
+
 				jQuery(document).ready(function() {
 					jQuery("#flash-slider").jcarousel({
 						visible	: 1,
 						scroll 	: 1,
 						auto	: 5,
 						wrap	: "circular",
-				//		itemFallbackDimension: 800
-				//		buttonNextHTML:"null",
-				//		buttonPrevHTML:"null",
+						initCallback: flash_initCallback,
 					})
-				//	.jcarouselAutoscroll()
-				//	.hover(function() {
-				//		$(this).jcarouselAutoscroll("stop");
-				//	}, function() {
-				//		$(this).jcarouselAutoscroll("start");
-				//	});
-				});
-				</script>';
+				})</script>';
 
 		$str .= '<ul id="flash-slider">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
@@ -305,15 +313,31 @@ class News_model extends CI_Model{
 		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
 				'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>'.
 				'<script>'.
+				'function notice_initCallback(carousel){'.
+				'	/* Disable autoscrolling if the user clicks the prev or next button.*/'.
+				'	carousel.buttonNext.bind("click", function() {'.
+				'		carousel.startAuto(0);'.
+				'	});'.
+				'	carousel.buttonPrev.bind("click", function() {'.
+				'		carousel.startAuto(0);'.
+				'	});'.
+				'	/* Pause autoscrolling if the user moves with the cursor over the clip.*/'.
+				'	carousel.clip.hover(function() {'.
+				'		carousel.stopAuto();'.
+				'	}, function() {'.
+				'		carousel.startAuto();'.
+				'	});'.
+				'}; '.
 				'jQuery(document).ready(function() {'.
 				'	jQuery("#notice-slider").jcarousel({'.
 				'		vertical: true,'.
 				'		visible	: 2,'.
 				'		scroll 	: 1,'.
-				'		auto	: 10000,'.
+				'		auto	: 10,'.
 				'		wrap	: "circular",'.
 				'		buttonNextHTML:"null",'.
 				'		buttonPrevHTML:"null",'.
+				'		initCallback: notice_initCallback,'.
 				'	});'.
 				'});'.
 				'</script>';
