@@ -89,7 +89,7 @@ Array
 				'title'			=> $this->input->post('title'),
 				'link'			=> $this->input->post('link'),
 				'description'	=> $this->input->post('description'),
-				'created_by'	=> $this->ion_auth->get_user(),
+				'created_by'	=> $this->ion_auth->get_user()->id,
 				'date_created'	=> get_timestamp(),
 				'date_published'=> $this->input->post('date_published'),
 				'date_removed'	=> $this->input->post('date_removed'),
