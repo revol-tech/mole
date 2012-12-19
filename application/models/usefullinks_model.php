@@ -89,7 +89,7 @@ Array
 				'title'			=> $this->input->post('title'),
 				'link'			=> $this->input->post('link'),
 				'description'	=> $this->input->post('description'),
-				'created_by'	=> $this->ion_auth->get_user(),
+				'created_by'	=> $this->ion_auth->get_user()->id,
 				'date_created'	=> get_timestamp(),
 				'date_published'=> $this->input->post('date_published'),
 				'date_removed'	=> $this->input->post('date_removed'),
@@ -102,6 +102,7 @@ print_r($data);
 print_r($_POST);
 echo '</pre>';
 */
+//print_r( $this->ion_auth->get_user()->id);
 		//update existing usefullinks
 		if(strlen($this->input->post('id'))>0){
 			$data['id'] = $this->input->post('id');
@@ -110,7 +111,9 @@ echo '</pre>';
 
 		//insert new usefullinks
 		}else{
-
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
 			if(! $this->db->insert($this->table,$data)){
 				return $this->db->_error_message();
 			}

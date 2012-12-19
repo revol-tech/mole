@@ -4,6 +4,9 @@ class Pages extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+
+		//counter
+		set_count_visitors();
 	}
 
 	public function view($params = array()){

@@ -56,7 +56,7 @@ class Vip extends CI_Controller {
 			$item->press_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->download		='--';
+			$item->edit		='--';
 			$item->del			='--';
 
 			return array('data'=>array($item));
@@ -93,11 +93,11 @@ class Vip extends CI_Controller {
 					'</form>';
 			$data[$key]->del = $str;
 
-			//download the file
-			$str =	'<a href="'.site_url('admin/vip/download/'.$val->id).'">
-						download
+			//edit
+			$str =	'<a href="'.site_url('admin/vip/edit/'.$val->id).'">
+						edit
 					</a>';
-			$data[$key]->download = $str;
+			$data[$key]->edit = $str;
 
 
 			//convert the userid into username
@@ -140,6 +140,26 @@ class Vip extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	/**
+	 * edit selected vip
+	 */
+	public function edit(){
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='edit'){
+				$id = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->vip_model->get(array('id'=>$id));
+		if(count((array)$data)!=1){
+			show_404();
+		}
+		$this->data = (array)$data[0];
+		$this->upload();
+	}
+
 
 	/**
 	 * del selected vip
@@ -171,7 +191,7 @@ class Vip extends CI_Controller {
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_vip.php',$data[0]);
+		$this->load->view('admin/view_vip.php',@$data[0]);
 		$this->load->view('templates/footer');
 	}
 

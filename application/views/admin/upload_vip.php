@@ -10,13 +10,13 @@
 
 	<label>
 		name:
-		<input type='text' name='title' />
+		<input type='text' name='title' value="<?php echo @$title?>"/>
 	</label>
 	<br/>
 
 	<label>
 		position :
-		<input type='text' name='description' />
+		<input type='text' name='description' value='<?php echo @$description?>'/>
 	</label>
 	<br/>
 

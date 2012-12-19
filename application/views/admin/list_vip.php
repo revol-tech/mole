@@ -16,7 +16,7 @@
 		<th>date created</th>
 		<th>created by</th>
 		<!--<th>date published</th>-->
-		<th>download</th>
+		<!--<th>edit</th>-->
 		<th>delete</th>
 	</tr>
 </thead>
@@ -30,7 +30,7 @@
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
 			<!--<td><?php //echo $item->date_published?></td>-->
-			<td><?php echo $item->download?></td>
+			<!--<td><?php //echo $item->edit?></td>-->
 			<td><?php echo $item->del?></td>
 		</tr>
 	<?php endforeach;?>
