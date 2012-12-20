@@ -43,6 +43,11 @@ class Update_db extends CI_Controller {
 				(3, 'slide3.jpg', 'Labour''s Alternative', 'Employment Law Practice', '1355935328.0733.jpg', 0, '2012-12-19 16:41:18', NULL, 'slider', NULL),
 				(4, 'slide4.jpg', 'Children', 'Have rights too', '1355935352.8419.jpg', 0, '2012-12-19 16:42:11', NULL, 'slider', NULL);";
 		$this->db->query($sql);
+		copy('./'.IMGPATH.'sliders/slide1.jpg','./'.DOCUMENTS.'1355935239.1404.jpg');
+		copy('./'.IMGPATH.'sliders/slide2.jpg','./'.DOCUMENTS.'1355935275.3907.jpg');
+		copy('./'.IMGPATH.'sliders/slide3.jpg','./'.DOCUMENTS.'1355935328.0733.jpg');
+		copy('./'.IMGPATH.'sliders/slide4.jpg','./'.DOCUMENTS.'1355935352.8419.jpg');
+
 
 		$sql =	"INSERT INTO `menu` (`id`, `title`, `link`, `parent_id`, `active`, `comments`) VALUES
 				(1, 'about us', 'aboutus', 0, 1, ''),
@@ -88,6 +93,8 @@ class Update_db extends CI_Controller {
 				(1, 'Prime_minister_Baburam_Bhattarai.jpg', 'Dr. Babu Ram Bhattarai', 'Prime MInister', '1355936183.8766.jpg', 0, '2012-12-19 16:55:58', NULL, ''),
 				(2, 'Minister.jpg', 'Mr. Purna Chandra Bhattrai', 'Minister', '1355936206.9151.jpg', 0, '2012-12-19 16:56:28', NULL, '');";
 		$this->db->query($sql);
+		copy('./'.IMGPATH.'Prime_minister_Baburam_Bhattarai.jpg','./'.DOCUMENTS.'1355936183.8766.jpg');
+		copy('./'.IMGPATH.'Minister.jpg','./'.DOCUMENTS.'1355936206.9151.jpg');
 
 		$sql = 	"INSERT INTO `poll` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `created_by`, `date_created`, `date_published`, `date_removed`, `count_option1`, `count_option2`, `count_option3`, `count_option4`, `active`) VALUES
 				(1, 'How much should the minimum wage be increased by?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 1, '2012-12-20 06:25:51', NULL, NULL, 0, 0, 0, 0, 1);";
