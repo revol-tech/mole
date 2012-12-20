@@ -17,7 +17,8 @@ class Files_model extends CI_Model{
 		if($limit){
 			$this->db->limit($limit,$start);
 		}
-		if(count($files)>0){
+//var_dump($files);		
+		if(count($files)>0 && $files){
 			foreach($files as $key=>$value){
 				$this->db->where($key,$value);
 			}

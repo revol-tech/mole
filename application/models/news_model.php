@@ -173,28 +173,32 @@ class News_model extends CI_Model{
 	}
 
 	private function _render_employments($data){
+		if(!(count($data)>0)){
+			return '';
+		}
+		
 		$str = '<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">'.
 					'<h3><span>Employment </span>relations</h3><ul>';
-		if(count($data)>0){
 			foreach($data as $key=>$val){
 				$str.='<li>';
 				$str.='<a href="#" title='.$val->title.'>'.word_limiter($val->title,4).'</a>';
 				$str.='</li>';
 			}
-		}
 		$str.= '</ul></div>';
+		
 		return $str;
 	}
-
 	private function _render_health($data){
+		if(!(count($data)>0)){
+			return '';
+		}
+		
 		$str = '<div class="tab_grid2"><ul>';
-		if(count($data)>0){
-			foreach($data as $key=>$val){
-				$str.='<li>';
-				$str.='<span class="list_style_red_dot fl"></span>';
-				$str.='<a href="#">'.word_limiter($val->title,4).'</a>';
-				$str.='</li>';
-			}
+		foreach($data as $key=>$val){
+			$str.='<li>';
+			$str.='<span class="list_style_red_dot fl"></span>';
+			$str.='<a href="#">'.word_limiter($val->title,4).'</a>';
+			$str.='</li>';
 		}
 		$str.= '</ul><a href="#" class="btn_red fr alpha">View more</a></div>';
 		return $str;

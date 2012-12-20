@@ -142,29 +142,6 @@
 						</div>
 						<div id="tab3" class="tab_content">
 							<?php echo $gallery?>
-<!--							
-<div class="gallery_thumnail fl">
-	<div class="block_img3 fl alpha">
-		<a href="#">
-			<img src="<?php echo IMGPATH?>gallery/gallery_1.png" alt="labour day" title="" width="140" height="100"/>
-			<span>Album 1</span>
-		</a>
-	</div>
-	<div class="block_img3 fl">
-		<a href="#">
-			<img src="<?php echo IMGPATH?>gallery/gallery_2.png" alt="stop child labour" title="" width="140" height="100"/>
-			<span>Album 2 </span>
-		</a>
-	</div>
-	<div class="block_img3 fl omega">
-		<a href="#"> 
-			<img src="<?php echo IMGPATH?>gallery/gallery_4.png" alt="labour traning" title="" width="140" height="100"/>
-			<span>Album 3</span>
-		</a>
-	</div>
-</div>
-<a href="#" class="view_all">View All Gallery +</a>
--->							
 						</div>
 				</div>
 			</div>
@@ -194,7 +171,7 @@
 				<div class="copyright-text fl"> © 2012 Ministry of Labour and Employment. All Rights Reserved </div>
 			</div>
 			<div class="grid_7 fr">
-				<div class="dev-text fl"> Designed By <a href="http://www.revol-tech.com.np">Revol-tech</a> </div>
+				<div class="dev-text fl"> Designed By <a href="http://www.revol-tech.com.np" target="_blank">Revol-tech</a> </div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -203,7 +180,7 @@
 	
 	<a href="#" id="top-link">Scroll to top</a>
 
-	<span style='background-color:red;'>
+	<span style='border:1px solid black;'>
 		unique visited upto now : <?php echo $counter?>
 	</span>
 

@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/mole/';		//<<---- !!!!! put the server's adddress
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/mole/';		//<<---- !!!!! put the server's adddress
 													//		when uploading to production server !!!!!
 
 /*

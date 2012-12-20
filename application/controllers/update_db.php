@@ -90,7 +90,7 @@ class Update_db extends CI_Controller {
 		$this->db->query($sql);
 
 		$sql = 	"INSERT INTO `poll` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `created_by`, `date_created`, `date_published`, `date_removed`, `count_option1`, `count_option2`, `count_option3`, `count_option4`, `active`) VALUES
-				(1, 'How much should the minimum wage be increased by?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 1, '2012-12-20 06:25:51', NULL, NULL, 0, 0, 0, 0, 1);"
+				(1, 'How much should the minimum wage be increased by?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 1, '2012-12-20 06:25:51', NULL, NULL, 0, 0, 0, 0, 1);";
 		$this->db->query($sql);
 
 		echo 'sample data entered.';

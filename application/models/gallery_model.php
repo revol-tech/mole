@@ -42,7 +42,7 @@ class Gallery_model extends CI_Model{
 //echo '<pre>';
 //print_r($val);				
 //echo '</pre>';
-$imgs = $this->get_imgs(array('album_id'=>$val->id));
+				$imgs = $this->get_imgs(array('album_id'=>$val->id));
 //print_r($imgs[0]->timestamp);
 //echo $this->db->last_query();
 

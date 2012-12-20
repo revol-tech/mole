@@ -130,6 +130,9 @@ class Employments_model extends CI_Model{
 		$this->load->helper('text');
 		$data = $this->get($params);
 
+		if(!(count($data)>0))
+			return '';
+
 		$str = '<div class="about">';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
 		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';

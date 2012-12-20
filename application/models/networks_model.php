@@ -143,6 +143,9 @@ Array
 	public function render($params=null){
 		$data = $this->get($params);
 
+		if(!(count($data)>0))
+			return '';
+
 		$str =	'<div class="grid_7 social border_rt_gray border_lt_white">'.
 				'	<h3><span>Network</span> with us</h3>'.
 				'	<p>Connect with us via the social networks... </p><ul>';
