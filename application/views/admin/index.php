@@ -40,8 +40,12 @@
 <a href='<?php echo site_url('admin/slider')?>'>Homepage Image Slider</a>
 <br/>
 
-<a href='<?php echo site_url('admin/gallery')?>'>Gallery</a>
+<a href='<?php echo site_url('admin/gallery')?>'>Albums</a>
 <br/>
+
+<a href='<?php echo site_url('admin/gallery/list_imgs')?>'>images</a>
+<br/>
+
 
 <a href='<?php echo site_url('admin/contacts')?>'>Contactus</a>
 <br/>

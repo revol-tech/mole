@@ -108,7 +108,9 @@ class Contacts_model extends CI_Model{
 	public function render(){
 		$data = $this->contacts_model->get();
 //print_r($data);		die;
-
+		if(!(count($data)>0))
+			return '';
+		
 		$str = 	'<div class="grid_7 address pad_alpha border_rt_gray">
 					<h3><span>Contact</span> Details</h3>'.
 					$data[0]->address.

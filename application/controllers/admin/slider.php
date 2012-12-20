@@ -100,8 +100,6 @@ class Slider extends CI_Controller {
 	 */
     public function upload(){
 
-		$this->load->helper('utilites_helper');
-
 		if($this->input->post('upload')){
 			//upload the file
 			$result = $this->slider_model->upload('slider');

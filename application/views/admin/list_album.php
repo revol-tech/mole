@@ -2,6 +2,7 @@
 
 <a href='<?php echo site_url('admin/gallery/create')?>'>Create nu album</a>
 
+
 <br/>
 <?php echo @$items['links']?>
 
@@ -13,7 +14,7 @@
 		<th>date created</th>
 		<th>created by</th>
 		<th>date published</th>
-		<th>edit</th>
+		<!--<th>edit</th>-->
 		<th>delete</th>
 	</tr>
 </thead>
@@ -25,7 +26,7 @@
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
 			<td><?php echo $item->date_published?></td>
-			<td><?php echo $item->edit?></td>
+			<!--<td><?php //echo $item->edit?></td>-->
 			<td><?php echo $item->del?></td>
 		</tr>
 	<?php endforeach;?>

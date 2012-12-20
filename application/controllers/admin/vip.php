@@ -56,7 +56,7 @@ class Vip extends CI_Controller {
 			$item->press_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->edit		='--';
+			$item->edit			='--';
 			$item->del			='--';
 
 			return array('data'=>array($item));
@@ -114,8 +114,6 @@ class Vip extends CI_Controller {
 	 */
     public function upload(){
 
-		$this->load->helper('utilites_helper');
-
 		if($this->input->post('upload')){
 			//upload the file
 			$result = $this->vip_model->upload();
@@ -150,6 +148,7 @@ class Vip extends CI_Controller {
 				$id = $this->uri->segment($key+1);
 				break;
 			}
+			show_error('Invalid link');
 		}
 
 		$data = $this->vip_model->get(array('id'=>$id));

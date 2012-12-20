@@ -108,28 +108,6 @@
 
 			<div class="grid_4 omega alpha fl">
 				<?php echo $vip?>
-<!--
-<div class="highlight fl">
-	<div class="intro_block fl">
-		<div class="block_img1 fl">
-			<img src="<?php echo IMGPATH?>Prime_minister_Baburam_Bhattarai.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
-		</div>
-		<div class="intro_box fr">
-			<div class="name fl">Dr. Baburam Bhattarai</div>
-			<div class="title fl">Prime Minister of Nepal</div>
-		</div>
-	</div>
-	<div class="intro_block omega_bottom fl">
-		<div class="block_img1 fl">
-			<img src="<?php echo IMGPATH?>/Minister.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
-		</div>
-		<div class="intro_box fr">
-			<div class="name fl">Mr. Purna Chandra Bhattrai</div>
-			<div class="title fl">Minister of Department</div>
-		</div>
-	</div>
-</div>
--->
 			</div>
 		</div>
 		<div class="container_3 fl">
@@ -163,34 +141,30 @@
 							<?php echo $health?>
 						</div>
 						<div id="tab3" class="tab_content">
-							<?php //echo $gallery?>
-							
-							<div class="gallery_thumnail fl">
-								<div class="block_img3 fl alpha">
-									<a href="#">
-										<img src="<?php echo IMGPATH?>gallery/gallery_1.png" alt="labour day" title="" width="140" height="100"/>
-										<span>Album 1</span>
-									</a>
-								</div>
-								<div class="block_img3 fl">
-									<a href="#">
-										<img src="<?php echo IMGPATH?>gallery/gallery_2.png" alt="stop child labour" title="" width="140" height="100"/>
-										<span>Album 2 </span>
-									</a>
-								</div>
-							<!-- 
-								<div class="block_img3 fl"> 
-									<img src="images/gallery/gallery_3.png" alt="woman working in green field" title="" width="117" height="100"/> 
-								</div>
-							-->
-								<div class="block_img3 fl omega">
-									<a href="#"> <img src="<?php echo IMGPATH?>gallery/gallery_4.png" alt="labour traning" title="" width="140" height="100"/>
-										<span>Album 3</span>
-									</a>
-								</div>
-							</div>
-							<a href="#" class="view_all">View All Gallery +</a>
-							
+							<?php echo $gallery?>
+<!--							
+<div class="gallery_thumnail fl">
+	<div class="block_img3 fl alpha">
+		<a href="#">
+			<img src="<?php echo IMGPATH?>gallery/gallery_1.png" alt="labour day" title="" width="140" height="100"/>
+			<span>Album 1</span>
+		</a>
+	</div>
+	<div class="block_img3 fl">
+		<a href="#">
+			<img src="<?php echo IMGPATH?>gallery/gallery_2.png" alt="stop child labour" title="" width="140" height="100"/>
+			<span>Album 2 </span>
+		</a>
+	</div>
+	<div class="block_img3 fl omega">
+		<a href="#"> 
+			<img src="<?php echo IMGPATH?>gallery/gallery_4.png" alt="labour traning" title="" width="140" height="100"/>
+			<span>Album 3</span>
+		</a>
+	</div>
+</div>
+<a href="#" class="view_all">View All Gallery +</a>
+-->							
 						</div>
 				</div>
 			</div>
@@ -208,17 +182,8 @@
 			<?php echo $usefullinks?>
 			<?php echo $network?>
 			<?php echo $employments?>
-<!--
-<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">
-	<h3><span>Employment </span>relations</h3>
-	<ul>
-		<li><a href="#">Employment Agreement Builder</a></li>
-		<li><a href="#">Paid Parental Leave Calculator</a></li>
-		<li><a href="#">Employment Law Database</a></li>
-		<li><a href="#">Collective Bargaining resource</a></li>
-	</ul>
-</div>
--->			<div class="clear"></div>
+
+			<div class="clear"></div>
 		</div>
 	</div>
 	
@@ -237,8 +202,10 @@
 	
 	
 	<a href="#" id="top-link">Scroll to top</a>
+
 	<span style='background-color:red;'>
 		unique visited upto now : <?php echo $counter?>
 	</span>
+
 </body>
 </html>

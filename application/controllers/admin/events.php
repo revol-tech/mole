@@ -154,8 +154,6 @@ class Events extends CI_Controller {
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 
-		$this->load->helper('utilites_helper');
-
 		//generate username, current date if creating nu events [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
@@ -235,7 +233,7 @@ class Events extends CI_Controller {
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_events.php',$data[0]);
 		$this->load->view('templates/footer');
-}
+	}
 
 
 	/**

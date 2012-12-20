@@ -19,6 +19,8 @@ class Migration_Add_visited_count extends CI_Migration {
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('visited_count');
+		
+		$this->db->query('ALTER TABLE `mole`.`visited_count` ADD UNIQUE `ip_address` ( `ip_address` ) ;');
 		//--------------------------------------------
 
 	}

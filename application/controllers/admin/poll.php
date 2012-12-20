@@ -11,7 +11,6 @@ class Poll extends CI_Controller {
 		chk_admin();
 
 		$this->load->library('poll_library');
-		$this->load->helper('utilites_helper');
 
 		/**
 		 * set headers to prevent back after logout

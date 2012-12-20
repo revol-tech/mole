@@ -149,7 +149,6 @@ class News extends CI_Controller {
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 //print_r($this->data);
-		$this->load->helper('utilites_helper');
 
 		//generate username, current date if creating nu news [not editing]
 		if(!isset($this->data['date_created'])){

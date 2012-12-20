@@ -163,6 +163,10 @@ echo '</pre>';
 	public function render($params=null){
 		$data = $this->get($params);
 
+		if(count($data)==0){
+			return '';
+		}
+
 		$str =	'<div class="grid_7 useful_links border_rt_gray border_lt_white">'.
 				'	<h3><span>Useful</span> links</h3>'.
 				'	<ul>';

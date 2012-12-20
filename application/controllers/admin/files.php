@@ -114,8 +114,6 @@ class Files extends CI_Controller {
 	 */
     public function upload(){
 
-		$this->load->helper('utilites_helper');
-
 		if($this->input->post('upload')){
 			//upload the file
 			$result = $this->files_model->upload();

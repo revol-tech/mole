@@ -115,6 +115,9 @@ class Menu_model extends CI_Model{
 	public function render_menu(){
 		$data = $this->get(array('active'=>1));
 
+		if(count($data)==0){
+			return '';
+		}
 		$str = '<ul class="menu sf-menu">';
 		$str.=$this->_render_recursive($data,0);
 		$str.='</ul>';
@@ -126,6 +129,8 @@ class Menu_model extends CI_Model{
 	 * for recursive rendering
 	 */
 	private function _render_recursive($data,$parent_id){
+		if(!(count($data)>0))
+			return '';
 		$str = $parent_id!=0?'<ul>':'';
 
 		foreach($data as $k=>$v){

@@ -129,9 +129,9 @@ class Gallery extends CI_Controller {
 			$data[$key]->no_photos = $this->gallery_model->count_photos($data[$key]->id);
 
 		}
-echo '<pre>';
-print_r($data);
-echo'</pre>';
+//echo '<pre>';
+//print_r($data);
+//echo'</pre>';
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
@@ -140,7 +140,6 @@ echo'</pre>';
 	 * create nu album's form
 	 */
 	public function create(){
-		$this->load->helper('utilites_helper');
 
 		//generate username, current date if creating nu events [not editing]
 		if(!isset($this->data['date_created'])){
@@ -186,7 +185,7 @@ echo'</pre>';
 		$this->data['id'] = $this->gallery_model->save_album($this->data);
 //echo $this->data['id'];die;
 		//retrive that album
-		$this->get($this->data['id']);
+		$this->get($this->data);
 
 		//display that gallery
 		redirect('admin/gallery');
@@ -242,14 +241,35 @@ echo'</pre>';
 	}
 
 
+	/**
+	 * view selected album
+	 */
+	public function view(){
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='view'){
+				$get_gallery['id'] = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->gallery_model->get($get_gallery);
+//print_r($data[0]);
+		if(count($data)!=1){
+			show_404();
+		}
+
+		//display
+		$this->load->view('templates/header');
+		$this->load->view('admin/index.php');
+		$this->load->view('admin/view_gallery.php',$data[0]);
+		$this->load->view('templates/footer');
+	}
 
 
 	/**
 	 * images upload form + images upload & store
 	 */
     public function upload_imgs(){
-
-		$this->load->helper('utilites_helper');
 
 		if($this->input->post('upload')){
 			//upload the image
@@ -259,7 +279,7 @@ echo'</pre>';
 			//get uploaded image's info.
 			$this->data = array_merge($this->data,array('result'=>$result));
 
-			redirect('admin/gallery');
+			redirect('admin/gallery/list_imgs');
 		}
 
 
@@ -268,6 +288,24 @@ echo'</pre>';
 		$this->session->set_userdata('date_created',$this->data['date_created']);
 		$this->data['created_by'] = $this->ion_auth->get_user()->username;
 
+
+		//generate album's dropdown
+		$str = $this->list_gallery();
+//echo '<pre>';
+//print_r($str['data']);
+//echo '</pre>';	
+
+		$albums = '<select name="album_id">';
+		$albums .= '<option value="" selected="selected">Select one</option>';
+		foreach($str['data'] as $key=>$value){
+			$albums .= '<option value="'.$value->id.'">'.$value->title.'</option>';
+		}
+		$albums .='</select>';
+		$this->data['albums'] = $albums;
+//echo '<pre>';
+//echo $this->data['albums'];
+//echo '</pre>';	
+		
 		//display
 		$this->load->view('templates/header');
 		$this->load->view('admin/index.php');
@@ -294,7 +332,7 @@ echo'</pre>';
 
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/files/index');
-		$config['total_rows'] = $this->gallery_model->count_photos($imgs['album_id']);
+		$config['total_rows'] = $this->gallery_model->count_photos(@$imgs['album_id']);
 		$config['per_page'] = PAGEITEMS;
 
 
@@ -332,17 +370,18 @@ echo'</pre>';
 		$data = $this->gallery_model->get_imgs($imgs,$config['per_page'],$page);
 
 		foreach($data as $key=>$val){
-			$str =	'<a href="'.site_url('admin/gallery/view/'.$val->id).'">'.
-						$val->title.
-					'</a>';
-			$data[$key]->title_link = $str;
+			//$str =	'<a href="'.site_url('admin/gallery/view/'.$val->id).'">'.
+			//			$val->title.
+			//		'</a>';
+			//$data[$key]->title_link = $str;
+			$data[$key]->title_link = $val->title;
 
 
-			$str =	'<a href="'.site_url('admin/gallery/edit/'.$val->id).'">edit</a>';
-			$data[$key]->edit = $str;
+			//$str =	'<a href="'.site_url('admin/gallery/edit/'.$val->id).'">edit</a>';
+			//$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/gallery/del/').'">'.
+			$str = 	'<form method="post" action="'.site_url('admin/gallery/del_imgs/').'">'.
 						'<input type="hidden" name="gallery_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -354,7 +393,11 @@ echo'</pre>';
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
+			//get the abum info
+			$x = $this->gallery_model->get(array('id'=>$val->album_id));
+			$data[$key]->album = @$x[0]->title;
 
+/*
 			//add activate/deactivate button
 			$str = '<form method="post" action='.site_url('admin/gallery/active').'>'.
 						'<input type="hidden" name="gallery_id" value="'.$data[$key]->id.'"/>';
@@ -368,9 +411,25 @@ echo'</pre>';
 			$str .= '</form>';
 
 			$data[$key]->active = $str;
+*/ 
 		}
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
+
+	public function list_imgs(){
+		$data = $this->get_imgs();
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+
+		//display
+		$this->load->view('templates/header');
+		$this->load->view('admin/index.php');
+		$this->load->view('admin/list_images.php',$data);
+		$this->load->view('templates/footer');
+	}
+
+
 
 	public function update_imgs(){}
 }

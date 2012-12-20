@@ -149,7 +149,6 @@ class Networks extends CI_Controller {
     public function create(){
 
 //print_r($this->data);
-		$this->load->helper('utilites_helper');
 
 		//generate username, current date if creating nu networks [not editing]
 		if(!isset($this->data['date_created'])){

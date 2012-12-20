@@ -14,13 +14,16 @@ class Gallery_model extends CI_Model{
 	/**
 	 * get album(s) [of selected id]
 	 */
-	public function get($album_id=null,$limit=null,$start=null){
-
+	public function get($album_params=null,$limit=null,$start=null){
+//print_r($album_params);			
 		if($limit){
 			$this->db->limit($limit,$start);
 		}
-		if($album_id){
-			$this->db->where('id',$album_id);
+		if(count($album_params)>0){
+
+			foreach($album_params as $key=>$value){
+				$this->db->where($key,$value);
+			}
 		}
 		$res = $this->db->get($this->table_album);
 
@@ -36,15 +39,23 @@ class Gallery_model extends CI_Model{
 
 		if(count($data)>0){
 			foreach($data as $key=>$val){
-				$str.='<div class="block_img3 fl alpha">;';
+//echo '<pre>';
+//print_r($val);				
+//echo '</pre>';
+$imgs = $this->get_imgs(array('album_id'=>$val->id));
+//print_r($imgs[0]->timestamp);
+//echo $this->db->last_query();
+
+				$str.='<div class="block_img3 fl alpha">';
 				$str.='	<a href="#">';
-				$str.='		<img src="'.IMGPATH.'gallery/gallery_1.png" alt="labour day" title="" width="140" height="100"/>';
-				//$str.='		<span>'.$key->title.'</span>';
+				$str.='		<img src="'.DOCUMENTS.$imgs[0]->timestamp.'" alt="'.$val->title.'" title="'.$val->description.'" width="140" height="100"/>';
+				$str.='		<span>'.$val->title.'</span>';
 				$str.='	</a>';
 				$str.='</div>';
 			}
 		}
 		$str.= '</div><a href="#" class="view_all">View All Gallery +</a>';
+		return $str;
 	}
 
 	/**
@@ -57,9 +68,13 @@ class Gallery_model extends CI_Model{
 	/**
 	 * count photos in the given album
 	 */
-	public function count_photos($id){
-		$this->db->where('album_id',$id);
-		$this->db->get($this->table_imgs);
+	public function count_photos($id=null){
+		if($id){
+			$this->db->where('album_id',$id);
+		}
+		$data = $this->db->get($this->table_imgs);
+		
+		return count($data);
 	}
 
 	/**
@@ -111,22 +126,6 @@ class Gallery_model extends CI_Model{
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * store & upload nu imgs
 	 * returns the id
@@ -173,18 +172,53 @@ class Gallery_model extends CI_Model{
 						'description'	=> $this->input->post('description'),
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
-						'date_created'	=> $this->session->userdata('date_created')
+						'date_created'	=> $this->session->userdata('date_created'),
+						'album_id'		=> $this->input->post('album_id'),
 					);
 
 //print_r($_POST);
 //print_r($data);die;
-			$this->db->insert($this->table,$data);
+			$this->db->insert($this->table_imgs,$data);
 
 			$data = array_merge($data,array('id'=>$this->db->insert_id()));
 
 				return $data;
 		}
 	}
+
+	/**
+	 * get imgs(s) [of selected params]
+	 */
+	public function get_imgs($params=null,$limit=null,$start=null){
+//print_r($album_params);			
+		if($limit){
+			$this->db->limit($limit,$start);
+		}
+		if(count($params)>0){
+
+			foreach($params as $key=>$value){
+				$this->db->where($key,$value);
+			}
+		}
+		$res = $this->db->get($this->table_imgs);
+
+		return $res->result();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	/**
