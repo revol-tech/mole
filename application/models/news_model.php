@@ -257,6 +257,7 @@ class News_model extends CI_Model{
 				'		top				:0;'.
 				'	}'.
 				'</style>';
+		$str.='<div class="newsticker">';
 		$str.='<div class="news_ticker_content" style="">';
 		$str .= //'<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
 				'<script>
@@ -287,6 +288,11 @@ class News_model extends CI_Model{
 					})
 				})</script>';
 
+
+		$str .=	'<div class="ticker_title fl">'.
+				'	<h3>News</h3>'.
+				'</div>';
+
 		$str .= '<ul id="flash-slider">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
 			foreach($data as $key=>$val){
@@ -298,7 +304,7 @@ class News_model extends CI_Model{
 				$str .= '</li>';
 			}
 		}
-		$str.= '</ul></div>';
+		$str.= '</ul></div></div>';
 		return $str;
 	}
 

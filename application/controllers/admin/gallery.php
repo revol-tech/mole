@@ -296,7 +296,6 @@ class Gallery extends CI_Controller {
 //echo '</pre>';	
 
 		$albums = '<select name="album_id">';
-		$albums .= '<option value="" selected="selected">Select one</option>';
 		foreach($str['data'] as $key=>$value){
 			$albums .= '<option value="'.$value->id.'">'.$value->title.'</option>';
 		}
@@ -318,10 +317,11 @@ class Gallery extends CI_Controller {
 	 * delete image
 	 */
 	public function del_imgs(){
-
-		$this->gallery_model->del_imgs($this->input->post('album_id'));
-
-		redirect($this->session->flashdata('redirectToCurrent'));
+//echo 'aa';
+		$this->gallery_model->del_imgs(array('id'=>$this->input->post('id')));
+//echo $this->session->flashdata('redirectToCurrent');
+		//redirect($this->session->flashdata('redirectToCurrent'));
+		redirect(site_url('admin/gallery/list_imgs'));
 	}
 
 
@@ -343,6 +343,7 @@ class Gallery extends CI_Controller {
 			$item->title		='--';
 			$item->title_link	='--';
 			$item->description	='--';
+			$item->album		='--';
 			$item->timestamp	='--';
 			$item->date_created	='--';
 			$item->press_type	='--';
@@ -382,7 +383,7 @@ class Gallery extends CI_Controller {
 
 
 			$str = 	'<form method="post" action="'.site_url('admin/gallery/del_imgs/').'">'.
-						'<input type="hidden" name="gallery_id" value="'.$val->id.'"/>'.
+						'<input type="hidden" name="id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
@@ -418,9 +419,9 @@ class Gallery extends CI_Controller {
 
 	public function list_imgs(){
 		$data = $this->get_imgs();
-echo '<pre>';
-print_r($data);
-echo '</pre>';
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
 
 		//display
 		$this->load->view('templates/header');

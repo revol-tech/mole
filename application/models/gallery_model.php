@@ -43,7 +43,10 @@ class Gallery_model extends CI_Model{
 //print_r($val);				
 //echo '</pre>';
 				$imgs = $this->get_imgs(array('album_id'=>$val->id));
-//print_r($imgs[0]->timestamp);
+
+				//do not disp. empty albums...
+				if(!isset($imgs[0]->timestamp))
+					continue;
 //echo $this->db->last_query();
 
 				$str.='<div class="block_img3 fl alpha">';
@@ -71,10 +74,15 @@ class Gallery_model extends CI_Model{
 	public function count_photos($id=null){
 		if($id){
 			$this->db->where('album_id',$id);
+		}else{
+			$this->db->where('album_id is not null');
 		}
 		$data = $this->db->get($this->table_imgs);
-		
-		return count($data);
+//echo $this->db->last_query();
+//echo count($data);
+//print_r($data);
+//echo $this->db->last_query();		
+		return count($data->result());
 	}
 
 	/**
@@ -122,6 +130,7 @@ class Gallery_model extends CI_Model{
 	 * del imgs
 	 */
 	public function del_imgs($params){
+//echo 'bb';		
 		$this->imgs_model->del_imgs($params);
 	}
 
@@ -200,6 +209,8 @@ class Gallery_model extends CI_Model{
 				$this->db->where($key,$value);
 			}
 		}
+		$this->db->where('album_id is not null');
+		
 		$res = $this->db->get($this->table_imgs);
 
 		return $res->result();

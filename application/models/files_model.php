@@ -183,6 +183,9 @@ class Files_model extends CI_Model{
 	 * @return boolean
 	 */
 	public function del_imgs($ids){
+//echo 'cc';		
+//print_r($ids);
+//echo '<br/>';
 		$files = $this->get($ids);
 //print_r($files);
 		foreach($files as $file){
@@ -190,7 +193,7 @@ class Files_model extends CI_Model{
 		}
 
 
-		$this->db->where('album_id',$ids['album_id'])
+		$this->db->where('id',$ids['id'])
 				->delete($this->table);
 
 		return true;

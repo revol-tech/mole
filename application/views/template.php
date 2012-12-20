@@ -92,12 +92,7 @@
 		</div>
 
 		<div class="container_1 fl">
-			<div class="newsticker">
-				<div class="ticker_title fl">
-					<h3>News</h3>
-				</div>
-				<?php echo $flash_news?>
-			</div>
+			<?php echo $flash_news?>
 		</div>
 
 		<div class="container_2 fl">

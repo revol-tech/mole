@@ -41,12 +41,22 @@ class Update_db extends CI_Controller {
 				(1, 'slide1.jpg', 'Hon''ble Minister with Secretary', 'Innaguration DOL Program', '1355935239.1404.jpg', 0, '2012-12-19 16:39:31', NULL, 'slider', NULL),
 				(2, 'slide2.jpg', 'The Labour Relations', 'Employment Law Practice', '1355935275.3907.jpg', 0, '2012-12-19 16:40:50', NULL, 'slider', NULL),
 				(3, 'slide3.jpg', 'Labour''s Alternative', 'Employment Law Practice', '1355935328.0733.jpg', 0, '2012-12-19 16:41:18', NULL, 'slider', NULL),
-				(4, 'slide4.jpg', 'Children', 'Have rights too', '1355935352.8419.jpg', 0, '2012-12-19 16:42:11', NULL, 'slider', NULL);";
+				(4, 'slide4.jpg', 'Children', 'Have rights too', '1355935352.8419.jpg', 0, '2012-12-19 16:42:11', NULL, 'slider', NULL),
+				(5, 'gallery_1.png', 'Album 1', 'More about album 1', '1356033859.9995.png', 0, '2012-12-20 20:04:07', NULL, NULL, 1),
+				(6, 'gallery_2.png', 'Album 2', 'More about album 2', '1356033913.3109.png', 0, '2012-12-20 20:04:53', NULL, NULL, 2),
+				(7, 'gallery_3.png', 'Album 2', 'More about album 2', '1356033941.4707.png', 0, '2012-12-20 20:05:17', NULL, NULL, 2),
+				(8, 'gallery_4.png', 'Album 3', 'More about album 3', '1356033966.351.png', 0, '2012-12-20 20:05:46', NULL, NULL, 3);";
+				
 		$this->db->query($sql);
 		copy('./'.IMGPATH.'sliders/slide1.jpg','./'.DOCUMENTS.'1355935239.1404.jpg');
 		copy('./'.IMGPATH.'sliders/slide2.jpg','./'.DOCUMENTS.'1355935275.3907.jpg');
 		copy('./'.IMGPATH.'sliders/slide3.jpg','./'.DOCUMENTS.'1355935328.0733.jpg');
 		copy('./'.IMGPATH.'sliders/slide4.jpg','./'.DOCUMENTS.'1355935352.8419.jpg');
+
+		copy('./'.IMGPATH.'gallery/gallery_1.png','./'.DOCUMENTS.'1356033859.9995.png');
+		copy('./'.IMGPATH.'gallery/gallery_2.png','./'.DOCUMENTS.'1356033913.3109.png');
+		copy('./'.IMGPATH.'gallery/gallery_3.png','./'.DOCUMENTS.'1356033941.4707.png');
+		copy('./'.IMGPATH.'gallery/gallery_4.png','./'.DOCUMENTS.'1356033966.351.png');
 
 
 		$sql =	"INSERT INTO `menu` (`id`, `title`, `link`, `parent_id`, `active`, `comments`) VALUES
@@ -100,6 +110,12 @@ class Update_db extends CI_Controller {
 				(1, 'How much should the minimum wage be increased by?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 1, '2012-12-20 06:25:51', NULL, NULL, 0, 0, 0, 0, 1);";
 		$this->db->query($sql);
 
+		$sql = 	"INSERT INTO `album` (`id`, `title`, `description`, `created_by`, `date_created`, `date_published`, `active`) VALUES
+				(1, 'Album 1', 'More about album 1', 1, '2012-12-20 19:05:58', NULL, 1),
+				(2, 'Album 2', 'More about album 2', 1, '2012-12-20 19:06:16', NULL, 1),
+				(3, 'Album 3', 'More about album 3', 1, '2012-12-20 19:06:29', NULL, 1);";
+		$this->db->query($sql);
+
 		echo 'sample data entered.';
 		$this->_comments();
 	}
@@ -107,7 +123,8 @@ class Update_db extends CI_Controller {
 	private function _comments(){
 		echo '<br/>goto <a href="'.base_url().'">homepage</a>';
 		echo '<br/>or <a href="'.site_url('admin/login').'">admin page</a>';		
-		echo '<br/>you can safely delete <code>./applications/controllers/update_db.php</code> file.';
+		echo '<br/>you can safely delete <code>./applications/controllers/update_db.php</code>';
+		echo '<br/>if everything is fine.';
 	}
 }
 
