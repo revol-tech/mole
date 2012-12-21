@@ -241,9 +241,9 @@ class News_model extends CI_Model{
 		
 		$str ='';
 
-		if(!($this->session->flashdata('jcarousel'))){
+		if(!isset($config['jcarousel'])){
 			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
-			$this->session->set_flashdata('jcarousel',true);
+			$this->config->set_item('jcarousel',true);
 		}
 		
 		$str.=	'<style>'.
@@ -316,9 +316,9 @@ class News_model extends CI_Model{
 
 		$str ='';
 
-		if(!($this->session->flashdata('jcarousel'))){
+		if(!isset($config['jcarousel'])){
 			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
-			$this->session->set_flashdata('jcarousel',true);
+			$this->config->set_item('jcarousel',true);
 		}
 
 		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.

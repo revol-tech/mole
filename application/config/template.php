@@ -96,5 +96,50 @@ $template['default']['parser_method'] = 'parse';
 $template['default']['parse_template'] = FALSE;
 
 
+/*
+|--------------------------------------------------------------------------
+| Admin Template Configuration
+|--------------------------------------------------------------------------
+*/
+$template['admin']['template'] = 'admin.php';
+
+$template['admin']['regions'] = array(
+//		'header' => array(
+//				   'content' 	=> array('<div id="header"></div>','<div id="header_bottom"></div>'),
+//				   'name' 		=> 'Page Header',
+//				   'wrapper' 	=> '<div>',
+//				   'attributes' => array('id' => 'wrapper')
+//				),
+		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
+		'menu'	 	=> array('content'=>array(
+											'<div class="home fl">
+												<a href="'.base_url().'"></a>
+											</div>',
+										)
+						),
+		'slider' 	=> array(),
+		'flash_news'=> array(),
+		'page'	 	=> array(),
+		'vip'		=> array(),
+		'events' 	=> array(),
+		'notices'	=> array(),
+		'press'	 	=> array(),
+		'health' 	=> array(),
+		'gallery'	=> array(),
+		'poll'	 	=> array(),
+		'contacts'	=> array(),
+		'usefullinks'=>array(),
+		'network'	=> array(),
+		'counter'	=> array(),
+		'employments'=>array(),
+//	   'content'=>'',
+	);
+
+
+$template['admin']['parser'] = 'parser';
+$template['admin']['parser_method'] = 'parse';
+$template['admin']['parse_template'] = FALSE;
+
+
 /* End of file template.php */
 /* Location: ./application/config/template.php */
