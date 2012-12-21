@@ -94,7 +94,7 @@ class Employments extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/employments/del/').'">'.
+			$str = 	form_open(site_url('admin/employments/del/')).//'<form method="post" action="'.site_url('admin/employments/del/').'">'.
 						'<input type="hidden" name="employments_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -108,7 +108,7 @@ class Employments extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/employments/active').'>'.
+			$str = form_open(site_url('admin/employments/active/')).//'<form method="post" action='.site_url('admin/employments/active').'>'.
 						'<input type="hidden" name="employments_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

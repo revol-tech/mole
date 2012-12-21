@@ -100,7 +100,7 @@ class Events extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/events/del/').'">'.
+			$str = 	form_open(site_url('admin/events/del/')).//'<form method="post" action="'.site_url('admin/events/del/').'">'.
 						'<input type="hidden" name="events_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -114,7 +114,7 @@ class Events extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/events/active').'>'.
+			$str = form_open(site_url('admin/events/active')).//'<form method="post" action='.site_url('admin/events/active').'>'.
 						'<input type="hidden" name="events_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

@@ -40,7 +40,7 @@ class Files extends CI_Controller {
 
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/files/index');
-		$config['total_rows'] = $this->files_model->record_count();
+		$config['total_rows'] = $this->files_model->record_count(array('file_type is null'=>null));
 		$config['per_page'] = PAGEITEMS;
 
 
@@ -75,7 +75,7 @@ class Files extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->files_model->get(null,$config['per_page'],$page);
+		$data = $this->files_model->get(array('file_type is null'=>null),$config['per_page'],$page);
 
 		//enhance data as reqd.
 		foreach($data as $key=>$val){
@@ -87,7 +87,7 @@ class Files extends CI_Controller {
 			$data[$key]->title_link = $str;
 
 			//del for the data
-			$str = 	'<form method="post" action="'.site_url('admin/files/del/').'">'.
+			$str = 	form_open(site_url('admin/files/del/')).//'<form method="post" action="'.site_url('admin/files/del/').'">'.
 						'<input type="hidden" name="files_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';

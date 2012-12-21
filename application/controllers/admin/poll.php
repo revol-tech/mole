@@ -147,7 +147,7 @@ class Poll extends CI_Controller {
 			$str =	'<a href="'.site_url('admin/poll/edit/'.$val->id).'">edit</a>';
 			$data[$key]->edit = $str;
 
-			$str = 	'<form method="post" action="'.site_url('admin/poll/del/').'">'.
+			$str = 	form_open(site_url('admin/poll/del/')).//'<form method="post" action="'.site_url('admin/poll/del/').'">'.
 						'<input type="hidden" name="poll_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -161,7 +161,7 @@ class Poll extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/poll/active').'>'.
+			$str = form_open(site_url('admin/poll/active/')).//'<form method="post" action='.site_url('admin/poll/active').'>'.
 						'<input type="hidden" name="poll_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

@@ -25,7 +25,8 @@
 	<br/>
 
 
-	<form method='post' action='<?php echo site_url('admin/slider/del')?>'>
+	<!--<form method='post' action='<?php echo site_url('admin/slider/del')?>'>-->
+	<?php echo form_open(site_url('admin/slider/del'))?>
 		<input type='hidden' name='slider_id' value='<?php echo $id?>' />
 		<input type='submit' name='del' value='Delete'/>
 	</form>

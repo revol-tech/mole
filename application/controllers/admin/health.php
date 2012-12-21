@@ -94,7 +94,7 @@ class Health extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/health/del/').'">'.
+			$str = 	form_open(site_url('admin/health/del/')).//'<form method="post" action="'.site_url('admin/health/del/').'">'.
 						'<input type="hidden" name="health_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -108,7 +108,7 @@ class Health extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/health/active').'>'.
+			$str = form_open(site_url('admin/health/active/')).//'<form method="post" action='.site_url('admin/health/active').'>'.
 						'<input type="hidden" name="health_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

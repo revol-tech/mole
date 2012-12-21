@@ -3,7 +3,8 @@
 <div>
 	<br/>
 
-	<form method='post' action='<?php echo site_url('admin/contacts/del')?>'>
+	<!--<form method='post' action='<?php echo site_url('admin/contacts/del')?>'>-->
+	<?php echo form_open(site_url('admin/contacts/del'))?>
 		<input type='submit' name='delete' value='Delete' />
 		<input type='hidden' name='contacts_id' value='0' />
 	</form>

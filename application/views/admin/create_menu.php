@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<form method='post' action='<?php echo site_url('admin/menu/save')?>'>
+<!--<form method='post' action='<?php echo site_url('admin/menu/save')?>'>-->
+<?php echo form_open(site_url('admin/menu/save'))?>
 
 	title :
 	<input type='text' name='title' value='<?php echo @$title;?>'/>

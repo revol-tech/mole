@@ -18,7 +18,9 @@
 	body{height:1000px;} /*temporoary. be edited in better format*/
 	</style>
 -->
-<form method='post' action='<?php echo site_url('admin/pages/save')?>' style='width:700px;'>
+<!--<form method='post' action='<?php echo site_url('admin/pages/save')?>' style='width:700px;'>-->
+<?php echo form_open(site_url('admin/pages/save'),array('style'=>'width:700px;'))?>
+
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>

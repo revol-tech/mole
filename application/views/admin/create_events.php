@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 
-<form method='post' action='<?php echo site_url('admin/events/save')?>' style='width:700px;'>
+<!--<form method='post' action='<?php echo site_url('admin/events/save')?>' style='width:700px;'>-->
+<?php echo form_open(site_url('admin/events/save'),array('style'=>'width:700px;'))?>
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>

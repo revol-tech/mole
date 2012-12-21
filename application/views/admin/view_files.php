@@ -25,7 +25,8 @@
 	<br/>
 
 
-	<form method='post' action='<?php echo site_url('admin/files/del')?>'>
+	<!--<form method='post' action='<?php echo site_url('admin/files/del')?>'>-->
+	<?php echo form_open(site_url('admin/files/del'))?>
 		<input type='hidden' name='files_id' value='<?php echo $id?>' />
 		<input type='submit' name='del' value='Delete'/>
 	</form>

@@ -98,7 +98,7 @@ class Networks extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/networks/del/').'">'.
+			$str = 	form_open(site_url('admin/networks/del/')).//'<form method="post" action="'.site_url('admin/networks/del/').'">'.
 						'<input type="hidden" name="networks_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -111,7 +111,7 @@ class Networks extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/networks/active').'>'.
+			$str = form_open(site_url('admin/neworks/active/')).//'<form method="post" action='.site_url('admin/networks/active').'>'.
 						'<input type="hidden" name="networks_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

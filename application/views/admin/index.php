@@ -1,8 +1,8 @@
 <?php
-$this->template->set_template('admin');
-$this->template->render();
+//$this->template->set_template('admin');
+//$this->template->render();
 ?>
-<form id="logout_form" method="post" action='<?php echo site_url('admin/main')?>'>
+<?php echo form_open(site_url('admin/main'),array('id'=>'logout_form'))?>
 	<input type="submit" name='logout' value="Logout">
 </form>
 

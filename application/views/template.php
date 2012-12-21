@@ -41,7 +41,8 @@
 				</div>
 				<div class="grid_2 fr">
 					<div id="search-box">
-						<form>
+						<!--<form>-->
+						<?php echo form_open()?>
 							<input type="text" value="Search..." name="" class="search fl" onfocus="if(this.value=='Search...')this.value='';" onblur="if(this.value=='')this.value='Search...';"/>
 							<input class="btn-search fr" type="submit" value=""/>
 						</form>

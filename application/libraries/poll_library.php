@@ -179,7 +179,8 @@ class Poll_library{
 					<h2><span>Public </span>Poll</h2>
 					<div class="poll_block">
 						<p class="poll_topic">'.$poll[0]->question.'</p>
-						<form method="post" action="'.site_url('pages/vote').'">
+						<!--<form method="post" action="'.site_url('pages/vote').'">-->
+						'.form_open(site_url('pages/vote')).'
 							<div class="form_holder fl">
 								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
 								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="radio-choice-1">

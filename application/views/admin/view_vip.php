@@ -25,7 +25,8 @@
 	<br/>
 
 
-	<form method='post' action='<?php echo site_url('admin/vip/del')?>'>
+	<!--<form method='post' action='<?php echo site_url('admin/vip/del')?>'>-->
+	<?php echo form_open(site_url('admin/vip/del'))?>
 		<input type='hidden' name='vip_id' value='<?php echo $id?>' />
 		<input type='submit' name='del' value='Delete'/>
 	</form>

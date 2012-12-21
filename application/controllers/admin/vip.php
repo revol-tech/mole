@@ -87,7 +87,7 @@ class Vip extends CI_Controller {
 			$data[$key]->title_link = $str;
 
 			//del for the data
-			$str = 	'<form method="post" action="'.site_url('admin/vip/del/').'">'.
+			$str = 	form_open(site_url('admin/vip/del/')).//'<form method="post" action="'.site_url('admin/vip/del/').'">'.
 						'<input type="hidden" name="vip_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';

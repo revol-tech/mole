@@ -9,7 +9,8 @@
 		}
 	?>
 
-	<form id="login_form" method="post">
+	<!--<form id="login_form" method="post">-->
+	<?php echo form_open(null,array('id'=>'login_form'))?>
 		<article>
 			<label>
 				Username:

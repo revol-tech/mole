@@ -2,6 +2,7 @@
 
 class Files_model extends CI_Model{
 	protected $table = 'files';
+	protected $allowd_types = 'jpg|jpeg|gif|png|txt|pdf|doc|docx';
 
 	public function __construct(){
 		parent::__construct();
@@ -86,8 +87,9 @@ class Files_model extends CI_Model{
 	/**
 	 * count records
 	 */
-	public function record_count(){
-		return $this->db->count_all($this->table);
+	public function record_count($params){
+		return count($this->get($params));
+		//return $this->db->count_all($this->table);
 	}
 
 
@@ -106,7 +108,7 @@ class Files_model extends CI_Model{
 		$mtime = microtime(true).'.'.$ext;
 //echo $mtime.'<br/>';
 		$config = array(
-					  'allowed_types' => 'jpg|jpeg|gif|png|txt|pdf|doc|docx',
+					  'allowed_types' => $allowd_types,
 					  'upload_path' => DOCUMENTS,
 					  'maintain_ratio' => true,
 					  'max-size' => 20000,

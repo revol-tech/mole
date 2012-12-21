@@ -4,7 +4,8 @@
 </pre>
 
 
-<form method='post' action='<?php echo site_url('admin/gallery/save')?>' style='width:700px;'>
+<!--<form method='post' action='<?php echo site_url('admin/gallery/save')?>' style='width:700px;'>-->
+<?php echo form_open(site_url('admin/gallery/save'),array('style'=>'width:700px;'))?>
 	<label>
 		title
 		<input type='text' name='title' value='<?php echo @$title?>' />

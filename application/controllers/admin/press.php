@@ -97,7 +97,7 @@ class Press extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/press/del/').'">'.
+			$str = 	form_open(site_url('admin/press/del/')).//'<form method="post" action="'.site_url('admin/press/del/').'">'.
 						'<input type="hidden" name="press_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -110,7 +110,7 @@ class Press extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/press/active').'>'.
+			$str = form_open(site_url('admin/press/active/')).//'<form method="post" action='.site_url('admin/press/active').'>'.
 						'<input type="hidden" name="press_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

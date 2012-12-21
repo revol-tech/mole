@@ -45,8 +45,8 @@ class Menu_model extends CI_Model{
 //echo 'asdf';
 //print_r($this->get(array('link'=>$this->input->post('link',true))));
 
-			array_merge($arr, $this->get(array('link'=>$this->input->post('link',true))));
-			array_merge($arr, $this->get(array('title'=>$this->input->post('title',true))));
+			array_merge($arr, $this->get(array('link'=>$this->input->post('link'))));
+			array_merge($arr, $this->get(array('title'=>$this->input->post('title'))));
 //print_r(count($arr));
 			if(count($arr) > 0){
 				return false;
@@ -67,7 +67,7 @@ class Menu_model extends CI_Model{
 		if(($this->input->post('id'))){
 		//update existing link
 
-			$data['id'] = $this->input->post('id',true);
+			$data['id'] = $this->input->post('id');
 //print_r($data);
 //print_r('asdf');
 			return $this->update($data);

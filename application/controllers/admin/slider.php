@@ -73,7 +73,7 @@ class Slider extends CI_Controller {
 			$data[$key]->title_link = $str;
 
 			//del for the data
-			$str = 	'<form method="post" action="'.site_url('admin/slider/del/').'">'.
+			$str = 	form_open(site_url('admin/slider/del/')).//'<form method="post" action="'.site_url('admin/slider/del/').'">'.
 						'<input type="hidden" name="slider_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';

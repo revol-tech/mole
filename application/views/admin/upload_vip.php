@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<form method='post' action='<?php echo site_url('admin/vip/upload')?>'  enctype="multipart/form-data" style='width:700px;' >
+<!--<form method='post' action='<?php echo site_url('admin/vip/upload')?>'  enctype="multipart/form-data" style='width:700px;' >-->
+<?php echo form_open(site_url('admin/vip/upload'),array('style'=>'width:700px;'))?>
 	<label>
 		image :
 		<input type='file' name='file' />

@@ -98,7 +98,7 @@ class Pages extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/pages/del/').'">'.
+			$str = 	form_open(site_url('admin/pages/del/')).//'<form method="post" action="'.site_url('admin/pages/del/').'">'.
 						'<input type="hidden" name="pages_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -111,7 +111,7 @@ class Pages extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/pages/active').'>'.
+			$str = form_open(site_url('admin/pages/active/')).//'<form method="post" action='.site_url('admin/pages/active').'>'.
 						'<input type="hidden" name="pages_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
@@ -123,7 +123,7 @@ class Pages extends CI_Controller {
 			$str .= '</form>';
 
 			//display-hide page on homepage
-			$str = '<form method="post" action='.site_url('admin/pages/homepage').'>'.
+			$str = form_open(site_url('admin/pages/homepage/')).//'<form method="post" action='.site_url('admin/pages/homepage').'>'.
 						'<input type="hidden" name="pages_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->homepage == 1){
 				$str .=	'<input type="hidden" name="homepage" value="false"/>';

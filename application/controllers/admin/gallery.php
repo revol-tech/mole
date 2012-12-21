@@ -95,7 +95,7 @@ class Gallery extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/gallery/del/').'">'.
+			$str = 	form_open(site_url('admin/gallery/del/')).//'<form method="post" action="'.site_url('admin/gallery/del/').'">'.
 						'<input type="hidden" name="gallery_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -211,7 +211,7 @@ class Gallery extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/gallery/del/').'">'.
+			$str = 	form_open(site_url('admin/gallery/del/')).//'<form method="post" action="'.site_url('admin/gallery/del/').'">'.
 						'<input type="hidden" name="gallery_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -382,7 +382,7 @@ class Gallery extends CI_Controller {
 			//$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/gallery/del_imgs/').'">'.
+			$str = 	form_open(site_url('admin/gallery/del_imgs/')).//'<form method="post" action="'.site_url('admin/gallery/del_imgs/').'">'.
 						'<input type="hidden" name="id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';

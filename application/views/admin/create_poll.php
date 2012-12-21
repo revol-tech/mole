@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<form method='post' action='<?php echo site_url('admin/poll/save')?>'>
+<!--<form method='post' action='<?php echo site_url('admin/poll/save')?>'>-->
+<?php echo form_open(site_url('admin/poll/save'))?>
 
 	question :
 	<input type='text' name='question' value='<?php echo @$question;?>'/>

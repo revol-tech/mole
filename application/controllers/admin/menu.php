@@ -77,11 +77,11 @@ class Menu extends CI_Controller {
 	public function save(){
 
 		$data = array(
-						'title' 	=> $this->input->post('title',true),
-						'link'		=> $this->input->post('link',true),
-						'parent_id'	=> $this->input->post('parent_id',true),
-						'active'	=> $this->input->post('active',true),
-						'comments'	=> $this->input->post('comments',true)
+						'title' 	=> $this->input->post('title'),
+						'link'		=> $this->input->post('link'),
+						'parent_id'	=> $this->input->post('parent_id'),
+						'active'	=> $this->input->post('active'),
+						'comments'	=> $this->input->post('comments')
 					);
 
 
@@ -93,7 +93,7 @@ class Menu extends CI_Controller {
 
 		//update existing menu
 		}else{
-			$data['id']= $this->input->post('id',true);
+			$data['id']= $this->input->post('id');
 //print_r($data);
 			$this->menu_model->update($data);
 		}
@@ -158,7 +158,7 @@ class Menu extends CI_Controller {
 			$data[$key]->edit = $str;
 
 
-			$str = 	'<form method="post" action="'.site_url('admin/menu/del/').'">'.
+			$str = 	form_open(site_url('admin/menu/del/')).//'<form method="post" action="'.site_url('admin/menu/del/').'">'.
 						'<input type="hidden" name="menu_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
@@ -166,7 +166,7 @@ class Menu extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = '<form method="post" action='.site_url('admin/menu/active').'>'.
+			$str = form_open(site_url('admin/menu/active/')).//'<form method="post" action='.site_url('admin/menu/active').'>'.
 						'<input type="hidden" name="menu_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
@@ -242,8 +242,8 @@ class Menu extends CI_Controller {
 	 * only one menu can be active.
 	 */
 	public function active(){
-		$active = $this->input->post('active',true)=='Activate'?1:0;
-		$ids = $this->input->post('menu_id',true);
+		$active = $this->input->post('active')=='Activate'?1:0;
+		$ids = $this->input->post('menu_id');
 //echo $active;
 //echo $this->input->post('active');
 
@@ -263,7 +263,7 @@ class Menu extends CI_Controller {
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->menu_model->del($this->input->post('menu_id',true));
+		$this->menu_model->del($this->input->post('menu_id'));
 		redirect('admin/menu');
 	}
 
