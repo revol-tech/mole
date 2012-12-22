@@ -197,7 +197,7 @@ class Health extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_health = array('news_type'=>5);
+		$get_health = array('news_type'=>$this->type);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){

@@ -198,7 +198,7 @@ class Notices extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_notices = array('news_type'=>2);
+		$get_notices = array('news_type'=>$this->type);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){

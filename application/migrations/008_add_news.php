@@ -25,6 +25,7 @@ class Migration_Add_news extends CI_Migration {
 		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->add_key('news_type');
 		$this->dbforge->create_table('news');
 		//--------------------------------------------
 

@@ -224,7 +224,7 @@ class Pages extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_pages = array('news_type'=>6);
+		$get_pages = array('news_type'=>$this->type);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
