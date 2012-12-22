@@ -1,26 +1,25 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Pages extends CI_Controller {
+class Pages extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
 
-
-		//counter
-		set_count_visitors();
-
+		$this->_header_view();
+		$this->_footer_view();
+//$this->output->enable_profiler(true);
 	}
 
-	public function view($params = array()){
-		//menu
-		$this->load->model('menu_model');
-		$menu = $this->menu_model->render_menu(array('active'=>1));
-		$this->template->write('menu',$menu);
 
+	/**
+	 * default homepage
+	 */
+	public function index($params = array()){
 		//slider
 		$this->load->model('files_model','slider_model');
 		$slider = $this->slider_model->render_slider(array('file_type'=>'slider'));
 		$this->template->write('slider',$slider);
+
 
 		//flash news
 		$this->load->model('news_model');
@@ -40,21 +39,25 @@ class Pages extends CI_Controller {
 		$this->template->write('vip',$vip);
 
 		//vertical slider notices
+		$this->load->model('news_model');
 		$params = array('news_type'=>2,'active'=>1);
 		$notices = $this->news_model->render($params);
 		$this->template->write('notices',$notices);
 
 		//events
+		$this->load->model('news_model');
 		$params = array('news_type'=>3,'active'=>1);
 		$events = $this->news_model->render($params);
 		$this->template->write('events',$events);
 
 		//press
+		$this->load->model('news_model');
 		$params = array('news_type'=>4,'active'=>1);
 		$press = $this->news_model->render($params);
 		$this->template->write('press',$press);
 
 		//health
+		$this->load->model('news_model');
 		$params = array('news_type'=>5,'active'=>1);
 		$health = $this->news_model->render($params);
 		$this->template->write('health',$health);
@@ -69,6 +72,37 @@ class Pages extends CI_Controller {
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
 
+		$this->template->render();	
+
+	}
+
+
+	public function routes(){
+echo 'routed to : '	; 
+echo '<pre>';
+print_r($this->uri->segment_array());
+echo '</pre>';
+
+		$this->template->render();
+	}
+	
+	
+	/**
+	 * headers.
+	 * Contains the links & menus
+	 */
+	private function _header_view(){
+		//menu
+		$this->load->model('menu_model');
+		$menu = $this->menu_model->render_menu(array('active'=>1));
+		$this->template->write('menu',$menu);	
+	}
+
+	/**
+	 * footers
+	 * Contains the SiteMap & other similar links
+	 */
+	private function _footer_view(){
 		//contact
 		$this->load->model('contacts_model');
 		$contacts = $this->contacts_model->render();
@@ -85,6 +119,7 @@ class Pages extends CI_Controller {
 		$this->template->write('network',$networks);
 
 		//employments
+		$this->load->model('news_model');
 		$params = array('news_type'=>7,'active'=>1);
 		$employments = $this->news_model->render($params);
 		$this->template->write('employments',$employments);
@@ -92,13 +127,12 @@ class Pages extends CI_Controller {
 		//counter
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);
-		$this->template->render();
-/*
-echo '<pre>';
-print_r($this->ion_auth->get_users());
-echo '</pre>';
-*/
 	}
+
+
+
+
+
 
 	public function vote(){
 echo 'u just voted';

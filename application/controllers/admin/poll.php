@@ -29,10 +29,10 @@ class Poll extends CI_Controller {
 		$data['items'] = $this->list_poll();
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_poll.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -42,7 +42,7 @@ class Poll extends CI_Controller {
 	public function create($data=false){
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 
 		if($data){
@@ -52,7 +52,7 @@ class Poll extends CI_Controller {
 			$this->load->view('admin/create_poll.php');
 		}
 
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -223,10 +223,10 @@ class Poll extends CI_Controller {
 
 //print_r($data[0]);
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_poll.php',$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 

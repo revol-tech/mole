@@ -30,10 +30,10 @@ class Gallery extends CI_Controller {
 		$data['items'] = $this->list_gallery();
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_album.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -154,10 +154,10 @@ class Gallery extends CI_Controller {
 		}
 //print_r($this->data);
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/create_album.php', $this->data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -259,10 +259,10 @@ class Gallery extends CI_Controller {
 		}
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_gallery.php',$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -306,10 +306,10 @@ class Gallery extends CI_Controller {
 //echo '</pre>';	
 		
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/upload_images.php',$this->data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -424,10 +424,10 @@ class Gallery extends CI_Controller {
 //echo '</pre>';
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_images.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 

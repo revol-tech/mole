@@ -27,9 +27,9 @@ class Main extends CI_Controller {
 			$this->logout();
 		}
 
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
     }
 
 

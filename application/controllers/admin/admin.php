@@ -46,9 +46,9 @@ class Admin extends CI_Controller {
 
 		$data['image'] = $cap['image'];
 
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/login.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
     }
 
 	/**

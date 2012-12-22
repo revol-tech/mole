@@ -33,10 +33,10 @@ class Usefullinks extends CI_Controller {
 //echo '</pre>';
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_usefullinks.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -171,10 +171,10 @@ class Usefullinks extends CI_Controller {
 //print_r($this->data);
 //echo '</pre>';
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/create_usefullinks.php', $this->data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -221,10 +221,10 @@ class Usefullinks extends CI_Controller {
 //print_r($data[0]);
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_usefullinks.php',$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 

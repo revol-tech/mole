@@ -297,7 +297,7 @@ $config['global_xss_filtering'] = TRUE;
 $config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
-$config['csrf_expire'] = 720;
+$config['csrf_expire'] = 1800;
 
 /*
 |--------------------------------------------------------------------------

@@ -29,10 +29,10 @@ class Menu extends CI_Controller {
 		$data['items'] = $this->list_menu();
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_menu.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -57,7 +57,7 @@ class Menu extends CI_Controller {
 
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 
 		if($data){
@@ -67,7 +67,7 @@ class Menu extends CI_Controller {
 			$this->load->view('admin/create_menu.php');
 		}
 
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -229,10 +229,10 @@ class Menu extends CI_Controller {
 //echo $id;
 //print_r($data[0]);
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_menu.php',$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 

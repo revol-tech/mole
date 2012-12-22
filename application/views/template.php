@@ -149,6 +149,7 @@
 	</div>
 	<div class="clear"></div>
 	</div>
+
 	<div id="bottom">
 		<div class="bottom_contain_1">
 			<?php echo $contacts?>

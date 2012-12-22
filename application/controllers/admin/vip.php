@@ -26,10 +26,10 @@ class Vip extends CI_Controller {
 		$data['items'] = $this->list_vip();
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_vip.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -132,10 +132,10 @@ class Vip extends CI_Controller {
 		$this->data['created_by'] = $this->ion_auth->get_user()->username;
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/upload_vip.php',$this->data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 	/**
@@ -188,10 +188,10 @@ class Vip extends CI_Controller {
 //print_r($this->input->post());
 //print_r($data);
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_vip.php',@$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 

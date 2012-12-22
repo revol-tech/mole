@@ -26,10 +26,10 @@ class Slider extends CI_Controller {
 		$data['items'] = $this->list_slider();
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/list_slider.php',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -118,10 +118,10 @@ class Slider extends CI_Controller {
 		$this->data['created_by'] = $this->ion_auth->get_user()->username;
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/upload_slider.php',$this->data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
@@ -151,10 +151,10 @@ class Slider extends CI_Controller {
 		$data = $this->slider_model->get($get_file);
 
 		//display
-		$this->load->view('templates/header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_slider.php',$data[0]);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
 
