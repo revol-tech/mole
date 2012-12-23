@@ -1,6 +1,6 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Pages extends MY_MOLE_Controller {
+class Pages_loader extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -8,6 +8,7 @@ class Pages extends MY_MOLE_Controller {
 		$this->_header_view();
 		$this->_footer_view();
 //$this->output->enable_profiler(true);
+//$this->output->cache(5);
 	}
 
 
@@ -78,10 +79,10 @@ class Pages extends MY_MOLE_Controller {
 
 
 	public function routes(){
-echo 'routed to : '	; 
-echo '<pre>';
-print_r($this->uri->segment_array());
-echo '</pre>';
+//echo 'routed to : '	; 
+//echo '<pre>';
+//print_r($this->uri->segment_array());
+//echo '</pre>';
 
 		$this->template->render();
 	}

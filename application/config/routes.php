@@ -38,12 +38,12 @@
 |
 */
 
-$route['default_controller']= "welcome";
-$route['default_controller']= "pages";
-$route['admin/login'] 		= 'admin/admin/login';
-$route['(:any)'] 			= 'pages/routes/$1';		//<<---- incomplete yet
-$route['404_override'] 		= '';
 
+$route['default_controller']= 'pages_loader';
+$route['admin/login'] = 'admin/admin/login';
+$route['admin'] = 'admin/admin';
+$route['(?!admin).*'] = 'pages_loader/routes/$1';	//<<---- incomplete yet
+$route['404_override'] = '';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
