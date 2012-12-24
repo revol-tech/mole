@@ -18,7 +18,6 @@ class Admin extends CI_Controller {
 		if($this->ion_auth->is_admin()){
 			redirect('admin/main');
 		}
-		
 	}
 
 	public function index(){		

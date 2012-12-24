@@ -1,9 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Press extends CI_Controller {
+class Faqs extends CI_Controller {
 
 	protected $data = array();
-	protected $type = 4;
 
 	public function __construct(){
 
@@ -12,7 +11,7 @@ class Press extends CI_Controller {
 		chk_admin();
 
 		$this->load->helper('ckeditor');
-		$this->load->model('news_model','press_model');
+		$this->load->model('faqs_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -29,46 +28,44 @@ class Press extends CI_Controller {
 
 	public function index(){
 
-		$data['items'] = $this->list_press();
-//echo '<pre>';
-//print_r($data);
-//echo '</pre>';
+		$data['items'] = $this->list_faqs();
+echo '<pre>';
+print_r($data['items']);
+echo '</pre>';
 
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_press.php',$data);
+		$this->load->view('admin/list_faqs.php',$data);
 		$this->load->view('templates/admin_footer');
 	}
 
 
 	/**
-	 * list all press
+	 * list faqs
 	 */
-	public function list_press(){
+	public function list_faqs(){
 
 		//initial configurations for pagination
-		$config['base_url'] = site_url('admin/press/index');
-		$config['total_rows'] = $this->press_model->record_count($this->type);
+		$config['base_url'] = site_url('admin/faqs/index');
+		$config['total_rows'] = $this->faqs_model->record_count();
 		$config['per_page'] = PAGEITEMS;
 
-//print_r($data);
-		//if there are no polls at present ...
+		//if there are no faqs at present ...
 		if($config['total_rows']==0){
-			$item->id			='--';
-			$item->title		='--';
-			$item->title_link	='--';
-			$item->date_created	='--';
-			$item->press_type	='--';
-			$item->created_by	= '--';
-			$item->date_published='--';
-			$item->edit			='--';
-			$item->del			='--';
+			$item->id				= '--';
+			$item->question			= '--';
+			$item->question_link	= '--';
+			$item->date_created		= '--';
+			//$item->notices_type	= '--';
+			$item->created_by		= '--';
+			$item->date_published	= '--';
+			$item->edit				= '--';
+			$item->del				= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
 		}
-//print_r($data);
 
 		//get reqd page number
 		foreach($this->uri->segment_array() as $key=>$val){
@@ -83,22 +80,22 @@ class Press extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->press_model->get(array('news_type'=>$this->type),$config['per_page'],$page);
+		$data = $this->faqs_model->get(array(),$config['per_page'],$page);
 
 
 		foreach($data as $key=>$val){
-			$str =	'<a href="'.site_url('admin/press/view/'.$val->id).'">'.
-						$val->title.
+			$str =	'<a href="'.site_url('admin/faqs/view/'.$val->id).'">'.
+						$val->question.
 					'</a>';
-			$data[$key]->title_link = $str;
+			$data[$key]->question_link = $str;
 
 
-			$str =	'<a href="'.site_url('admin/press/edit/'.$val->id).'">edit</a>';
+			$str =	'<a href="'.site_url('admin/faqs/edit/'.$val->id).'">edit</a>';
 			$data[$key]->edit = $str;
 
 
-			$str = 	form_open(site_url('admin/press/del/')).//'<form method="post" action="'.site_url('admin/press/del/').'">'.
-						'<input type="hidden" name="press_id" value="'.$val->id.'"/>'.
+			$str = 	form_open(site_url('admin/faqs/del/')).
+						'<input type="hidden" name="faqs_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
@@ -109,46 +106,35 @@ class Press extends CI_Controller {
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
 
-			//add activate/deactivate button
-			$str = form_open(site_url('admin/press/active/')).
-						'<input type="hidden" name="press_id" value="'.$data[$key]->id.'"/>';
-			if($data[$key]->active == 1){
-				$str .=	'<input type="hidden" name="activate" value="false"/>';
-				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
-			}else{
-				$str .=	'<input type="hidden" name="activate" value="true"/>';
-				$str .=	'<input type="submit" name="active"   value="Activate"/>';
-			}
-			$str .= '</form>';
+//			//add activate/deactivate button
+//			$str = form_open(site_url('admin/faqs/active/')).
+//						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
+//			if($data[$key]->active == 1){
+//				$str .=	'<input type="hidden" name="activate" value="false"/>';
+//				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
+//			}else{
+//				$str .=	'<input type="hidden" name="activate" value="true"/>';
+//				$str .=	'<input type="submit" name="active"   value="Activate"/>';
+//			}
+//			$str .= '</form>';
 
 			$data[$key]->active = $str;
 		}
-
+print_r($data);
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 
-	/**
-	 * activate/deactivate press
-	 */
-	public function active(){
-		$id = $this->input->post('notice_id');
-		$active = $this->input->post('activate');
-		$this->press_model->change_active($id,$active);
-
-		redirect('admin/press');
-	}
-
 
 	/**
-	 * press form
+	 * faqs form
 	 */
     public function create(){
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 
-		//generate username, current date if creating nu press [not editing]
+		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
 			$this->data['date_created'] = get_timestamp();
 			$this->session->set_userdata('date_created',$this->data['date_created']);
@@ -157,7 +143,7 @@ class Press extends CI_Controller {
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}else{
 
-			//get the username of the person who created the press
+			//get the username of the person who created the notices
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
@@ -171,61 +157,43 @@ class Press extends CI_Controller {
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/create_press.php', $this->data);
+		$this->load->view('admin/create_faqs.php', $this->data);
 		$this->load->view('templates/admin_footer');
 	}
 
 
-
 	/**
-	 * save/update press form
+	 * save/update faqs form
 	 */
     public function save(){
-		//save the press & return the id of that press
+		//save the faqs & return the id of that faqs
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->press_model->save($this->type);
+		$this->data['id'] = $this->faqs_model->save();
 
-		//retrive that press
+		//retrive that faqs
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that press
+		//display that faqs
 		$this->create();
 	}
 
 
-
 	/**
-	 * view selected press
+	 * get the [seleccted] faqs
 	 */
-	public function view(){
-		$id=false;
-		$get_press = array('news_type'=>$this->type);
+	public function get($faqs_array=null){
 
-		foreach($this->uri->segment_array() as $key=>$val){
-			if($val=='view'){
-				$get_press['id'] = $this->uri->segment($key+1);
-				break;
-			}
+		$data = $this->faqs_model->get($faqs_array);
+//print_r(($data[0]));
+
+		foreach($data[0] as $key=>$value){
+			$this->data[$key] = $value;
 		}
-
-		$data = $this->press_model->get($get_press);
-
-		if(count($data)!=1){
-			show_404();
-		}
-
-//print_r($data[0]);
-
-		//display
-		$this->load->view('templates/admin_header');
-		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_press.php',$data[0]);
-		$this->load->view('templates/admin_footer');
 	}
 
 
 	/**
-	 * edit selected press
+	 * edit selected faqs
 	 */
 	public function edit(){
 		$id=false;
@@ -236,7 +204,8 @@ class Press extends CI_Controller {
 			}
 		}
 
-		$data = $this->press_model->get(array('id'=>$id));
+		$data = $this->faqs_model->get(array('id'=>$id));
+
 		if(count((array)$data)!=1){
 			show_404();
 		}
@@ -247,27 +216,56 @@ class Press extends CI_Controller {
 
 
 	/**
-	 * get the [seleccted] press
+	 * view selected faqs
 	 */
-	public function get($press_array=null){
+	public function view(){
+		$id=false;
+		//$get_notices = array('news_type'=>$this->type);
+		$get_faqs = array();
 
-		$data = $this->press_model->get($press_array);
-//print_r(($data[0]));
-
-		foreach($data[0] as $key=>$value){
-			$this->data[$key] = $value;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='view'){
+				$get_faqs['id'] = $this->uri->segment($key+1);
+				break;
+			}
 		}
+
+		$data = $this->faqs_model->get($get_faqs);
+
+		if(count($data)!=1){
+			show_404();
+		}
+
+//print_r($data[0]);
+
+		//display
+		$this->load->view('templates/admin_header');
+		$this->load->view('admin/index.php');
+		$this->load->view('admin/view_faqs.php',$data[0]);
+		$this->load->view('templates/admin_footer');
 	}
 
 
+	
+//	/**
+//	 * activate/deactivate faqs
+//	 */
+//	public function active(){
+//		$id = $this->input->post('faqs_id');
+//		$active = $this->input->post('activate');
+//		$this->notices_model->change_active($id,$active);
+//
+//		redirect('admin/faqs');
+//	}
+
+
 	/**
-	 * del selected press
+	 * del selected faqs
 	 */
 	public function del(){
-//echo 'in delete polll';
-		$this->press_model->del_poll($this->input->post('press_id'));
+		$this->faqs_model->del_faqs($this->input->post('faqs_id'));
 
-		redirect('admin/press');
+		redirect('admin/faqs');
 	}
 
 
@@ -279,7 +277,7 @@ class Press extends CI_Controller {
 		//Ckeditor's configuration
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
-			'id' 	=> 	'content',
+			'id' 	=> 	'answer',
 			'path'	=>	CKEDITOR,
 		);
 	}

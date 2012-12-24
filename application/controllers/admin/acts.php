@@ -110,7 +110,7 @@ class Acts extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/acts/active/')).//'<form method="post" action='.site_url('admin/acts/active').'>'.
+			$str = form_open(site_url('admin/acts/active/')).
 						'<input type="hidden" name="acts_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

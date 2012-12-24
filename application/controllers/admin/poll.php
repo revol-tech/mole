@@ -161,7 +161,7 @@ class Poll extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/poll/active/')).//'<form method="post" action='.site_url('admin/poll/active').'>'.
+			$str = form_open(site_url('admin/poll/active/')).
 						'<input type="hidden" name="poll_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

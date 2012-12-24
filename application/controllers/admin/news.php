@@ -109,7 +109,7 @@ class News extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/news/active/')).//'<form method="post" action='.site_url('admin/news/active').'>'.
+			$str = form_open(site_url('admin/news/active/')).
 						'<input type="hidden" name="news_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

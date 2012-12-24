@@ -111,7 +111,7 @@ class Usefullinks extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/usefullinks/active/')).//'<form method="post" action='.site_url('admin/usefullinks/active').'>'.
+			$str = form_open(site_url('admin/usefullinks/active/')).
 						'<input type="hidden" name="usefullinks_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';

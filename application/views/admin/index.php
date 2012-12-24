@@ -42,7 +42,7 @@
 	<tr>
 		<td><a href='<?php echo site_url('admin/vip')?>'>VIP</a></td>
 		<td><a href='<?php echo site_url('admin/acts')?>'>Acts and Laws</a></td>
-		<td>&nbsp;</td>
+		<td><a href='<?php echo site_url('admin/faqs')?>'>FAQs</a></td>
 		<td>&nbsp;</td>
 	</tr>
 </table>
