@@ -2,8 +2,8 @@
 
 class Main extends CI_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
+		
 		parent::__construct();
 
 		chk_admin();
@@ -21,8 +21,8 @@ class Main extends CI_Controller {
 	/**
 	 * admin's main fn's
 	 */
-    public function index()
-    {
+    public function index(){
+		
 		if($this->input->post('logout')){
 			$this->logout();
 		}

@@ -98,6 +98,58 @@ $template['default']['parse_template'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
+| Inner Page Template Configuration
+|--------------------------------------------------------------------------
+*/
+$template['template_inner']['template'] = 'template_inner.php';
+
+$template['template_inner']['regions'] = array(
+//		'header' => array(
+//				   'content' 	=> array('<div id="header"></div>','<div id="header_bottom"></div>'),
+//				   'name' 		=> 'Page Header',
+//				   'wrapper' 	=> '<div>',
+//				   'attributes' => array('id' => 'wrapper')
+//				),
+		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
+		'menu'	 	=> array('content'=>array(
+											'<div class="home fl">
+												<a href="'.base_url().'"></a>
+											</div>',
+										)
+						),
+		
+		//'slider' 	=> array(),
+		//'flash_news'=> array(),
+		
+		'page'	 	=> array(),
+		'news'		=> array(),
+		'acts'		=> array(),
+		'poll'	 	=> array(),
+		'notices'	=> array(),
+		
+		
+		'vip'		=> array(),
+		'events' 	=> array(),
+		'press'	 	=> array(),
+		'health' 	=> array(),
+		'gallery'	=> array(),
+		'contacts'	=> array(),
+		'usefullinks'=>array(),
+		'network'	=> array(),
+		'counter'	=> array(),
+		'employments'=>array(),
+//	   'content'=>'',
+	);
+
+
+$template['template_inner']['parser'] = 'parser';
+$template['template_inner']['parser_method'] = 'parse';
+$template['template_inner']['parse_template'] = FALSE;
+
+//=============================================================
+
+/*
+|--------------------------------------------------------------------------
 | Admin Template Configuration
 |--------------------------------------------------------------------------
 */

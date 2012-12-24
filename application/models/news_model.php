@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class News_model extends CI_Model{
 
 	//the table to be used in the db
@@ -128,20 +127,30 @@ class News_model extends CI_Model{
 	 * render news for display
 	 */
 	public function render($params){
-//print_r( $params);
+		$link_type=null;	// render for selected page. default = homepage
+		if(isset($params['link_type'])){
+			$link_type = $params['link_type'];
+			unset($params['link_type']);
+		}
+
 		$this->load->helper('text');
 		$data = $this->get($params);
-
+		
 		switch($params['news_type']){
 
-			//render Flash News
+			//render news/Flash News
 			case '1':
-				$str = $this->_render_flash_news($data);
+				if($link_type != null){
+					$str = $this->_render_news($data,$link_type);
+				}else{
+					$str = $this->_render_flash_news($data);
+				}
+				
 				break;
 
 			//render Notices
 			case '2':
-				$str = $this->_render_notices($data);
+				$str = $this->_render_notices($data,$link_type);
 				break;
 
 			//render Events
@@ -161,17 +170,49 @@ class News_model extends CI_Model{
 
 			//render About
 			case '6':
-				$str = $this->_render_page($data);
+				$str = $this->_render_page($data,$link_type);
 				break;
 
 			//render employments
 			case '7':
 				$str = $this->_render_employments($data);
 				break;
+
+			//render acts
+			case '8':
+				$str = $this->_render_acts($data,$link_type);
+				break;
 		}
 		return $str;
 	}
 
+	private function _render_acts($data,$link_type){
+		$str = '';
+
+		if(count($data)==0){
+			return $str;
+		}
+
+		if($link_type=='about'){
+			$str .= '<div class="item1 fl">';
+			for($i=0;$i<1;$i++){
+				$str .=	'<h3><span>'.$data[$i]->title.'</h3>'.
+						'<div class="articleinfo fl">'.
+						'	<span class="date-posted fl">'.$data[$i]->date_published.'</span>'.
+						//'	<span class="date-modified fl"> Last Updated on 31 July 2011 </span>'.
+						'	<span class="author fl">'.$data[$i]->created_by.'</span>'.
+						'	<a href="#" class="print fr"></a>'.
+						'</div>'.
+						'<div class="item1_content fl">'.
+							word_limiter($data[$i]->content,50) .
+							'<a class="more" href="#">more</a>'.
+						'</div>';
+			}
+			$str .= '</div>';
+			return $str;
+		}
+	}
+	
 	private function _render_employments($data){
 		if(!(count($data)>0)){
 			return '';
@@ -233,6 +274,33 @@ class News_model extends CI_Model{
 		return $str;
 	}
 
+	/**
+	 * render news links
+	 */
+	private function _render_news($data,$type=null){
+		$str = '';
+		$str .=	'<div class="highlight fl">'.
+				'	<div class="title1">'.
+				'		<h2><span>Latest</span> News </h2>'.
+				'		<div class="piece"></div>'.
+				'	</div>'.
+				'	<div class="highlight_content fl"><ul>';
+
+		if(count($data)==0){
+			$str .= '</ul></div></div>';
+			return $str;
+		}
+		if($type=='about'){
+			foreach($data as $key=>$val){
+				$str .= '<li><a href="#">'.$val->title.'</a></li>';
+			
+			}
+
+			$str .= '</ul></div></div>';
+			return $str;
+		}
+	}
+	
 	private function _render_flash_news($data){
 		$count = count($data);
 		if($count==0){
@@ -308,13 +376,34 @@ class News_model extends CI_Model{
 		return $str;
 	}
 
-	private function _render_notices($data){
+	private function _render_notices($data,$link_type){
 		$count = count($data);
 		if($count==0){
 			return '';
 		}
 
 		$str ='';
+
+		if($link_type=='about'){
+			$str .=	'<div class="item3 fl">'.
+						'<h2><span>Latest</span> Notices</h2>'.
+						'<div id="accordion">';
+					
+			foreach($data as $key=>$value){
+//echo '<pre>';print_r($value);echo '</pre>';				
+				$str .=	'<div class="acc-item last">'.
+						'	<a href="#" class="acc_trigger">'.
+						'		<span>'.$value->title.'</span>'.
+						'	</a>'.
+						'	<div class="acc_container">'.
+								word_limiter($value->content,20) .
+						'		<a href="#" class="btn_red">Read more</a>'.
+						'	</div>'.
+						'</div>';
+			}
+			$str .= '</div></div>';
+			return $str;
+		}
 
 		if(!isset($config['jcarousel'])){
 			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
@@ -373,15 +462,25 @@ class News_model extends CI_Model{
 		return $str;
 	}
 
-	private function _render_page($data){
+	private function _render_page($data,$type=null){
+		$str = '';
 		if(count($data)==0){
-			return '';
+			return $str;
+		}
+		if($type=='about'){
+			$str =	'<div class="about_us fl">
+						<h1>
+							<span>Welcome to</span> '.$data[0]->title.'
+						</h1>
+						<div class="text_box fr">'.$data[0]->content.'</div>
+					</div>';
+			return $str;
 		}
 
 		$str = '<div class="about">';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
 		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
-		$str.= '<a href="#" class="btn_red fr">read more</a>'; // <--- link not set properly
+		$str.= '<a href="aboutus" class="btn_red fr">read more</a>'; // <--- link not set properly
 		$str.= '</div>';
 
 		return $str;

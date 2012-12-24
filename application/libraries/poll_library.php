@@ -181,23 +181,23 @@ class Poll_library{
 						<p class="poll_topic">'.$poll[0]->question.'</p>
 						<!--<form method="post" action="'.site_url('pages/vote').'">-->
 						'.form_open(site_url('pages/vote')).'
-							<div class="form_holder fl">
-								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
+							<div class="form_holder1 fl">
 								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="radio-choice-1">
+								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
 							</div>
-							<div class="form_holder fl">
-								<label for="radio-choice-2">'.$poll[0]->option2.'</label>
+							<div class="form_holder1 fl">
 								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="radio-choice-1">
+								<label for="radio-choice-2">'.$poll[0]->option2.'</label>
 							</div>
-							<div class="form_holder fl">
-								<label for="radio-choice-3">'.$poll[0]->option3.'</label>
+							<div class="form_holder1 fl">
 								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="radio-choice-1">
+								<label for="radio-choice-3">'.$poll[0]->option3.'</label>
 							</div>
-							<div class="form_holder fl">
-								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
+							<div class="form_holder1 fl">
 								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="radio-choice-1">
+								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
 							</div>
-							<div class="form_holder fl mar_top">
+							<div class="form_holder1 fl mar_top">
 								<a href="#" class="btn_red fr">Result</a>
 								<input class="btn_red fr" type="submit" value="Vote"/>
 							</div>

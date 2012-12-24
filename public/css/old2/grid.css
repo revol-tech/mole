@@ -22,40 +22,12 @@
 	float: left;
 	display: block;
 }
- .container_3 {
+ .container_3, {
  width:960px;
  display:block;
+ background-color:#fff;
  margin:0 auto;
 }
-#inner_container  .container_3{
-	border-top:1px solid #e0e0e0;
-	padding:10px 10px 40px 10px;
-	width:940px;
-	}
-#container .container_2, #inner_container .container_1 {
-	width: 880px;
-	background: #f2f2f2;
-	padding: 40px 40px 0px 40px;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #E0E0E0;
-}
-#inner_container .container_1 {
-padding: 40px 0px 0px 0px;
-	background: #fff;
-	width:960px;
-	
-}
-#container, #inner_container{
-	width: 960px;
-	min-height: 300px;
-	margin: 0 auto;
-}
-#inner_container .container_2{
-	background-color:#f2f2f2;
-	border-top:1px solid #fff;
-	border-bottom:1px solid #fff;
-}
-
 /* Grid >> Global
 ----------------------------------------------------------------------------------------------------*/
 
@@ -73,30 +45,9 @@ padding: 40px 0px 0px 0px;
 	border-right: 1px solid #e0e0e0;
 }
 .container_3 .grid_6 {
-	width: 330px;
+	width: 329px;	/*  <<===== width changed from 330 .... */
 	padding: 0px 20px 20px 20px;
 }
-#inner_container .grid_6{
-
-
-
-    padding: 40px 20px 20px 0;
-    width: 292px; 	
-	}
-.lower_block{
-display:block;	
-	
-	}	
-	 .container_1 .grid_3, .container_2 .grid_5 {
-	width: 608px;
-	padding: 0px 0px 20px 20px;
-	
-}
-#inner_container .grid_7{
-	margin: 0 10px;
-    width: 293px;
-	}	
-	
 /* Grid >> Children (Alpha ~ First, Omega ~ Last)
 ----------------------------------------------------------------------------------------------------*/
 
@@ -131,7 +82,18 @@ display:block;
 .container_2 .grid_3 {
 	margin: 0 40px 0 0;
 }
-
+#container .container_2 {
+	width: 881px;			/* <<===== the witdh changed from 880..... */
+	background: #f2f2f2;
+	padding: 40px 40px 0px 40px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #E0E0E0;
+}
+#container {
+	width: 960px;
+	min-height: 300px;
+	margin: 0 auto;
+}
 /* `Clear Floated Elements
 ----------------------------------------------------------------------------------------------------*/
 

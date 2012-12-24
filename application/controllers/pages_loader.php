@@ -4,9 +4,6 @@ class Pages_loader extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
-
-		$this->_header_view();
-		$this->_footer_view();
 //$this->output->enable_profiler(true);
 //$this->output->cache(5);
 	}
@@ -73,17 +70,47 @@ class Pages_loader extends MY_MOLE_Controller {
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
 
+		$this->_header_view();
+		$this->_footer_view();
 		$this->template->render();	
-
 	}
 
 
 	public function routes(){
-//echo 'routed to : '	; 
-//echo '<pre>';
-//print_r($this->uri->segment_array());
-//echo '</pre>';
+		$this->template->set_template('template_inner');
 
+		//page -- about us -- full
+		$this->load->model('news_model');
+		$params = array('news_type'=>6,'active'=>1,'link_type'=>'about');
+		$page = $this->news_model->render($params);
+		$this->template->write('page',$page);
+
+		//news links
+		$this->load->model('news_model');
+		$params = array('news_type'=>1,'active'=>1,'link_type'=>'about');
+		$news = $this->news_model->render($params);
+		$this->template->write('news',$news);
+
+		//act
+		$this->load->model('news_model');
+		$params = array('news_type'=>8,'active'=>1,'link_type'=>'about');
+		$acts = $this->news_model->render($params);
+		$this->template->write('acts',$acts);
+
+		//poll
+		$this->load->library('poll_library');
+		$poll = $this->poll_library->render_poll();
+		$this->template->write('poll',$poll);
+
+		//notices
+		$this->load->model('news_model');
+		$params = array('news_type'=>2,'active'=>1,'link_type'=>'about');
+		$notices = $this->news_model->render($params);
+		$this->template->write('notices',$notices);
+
+
+		$this->_header_view();
+		$this->_footer_view();
 		$this->template->render();
 	}
 	
@@ -97,6 +124,7 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->load->model('menu_model');
 		$menu = $this->menu_model->render_menu(array('active'=>1));
 		$this->template->write('menu',$menu);	
+//echo($menu);die;
 	}
 
 	/**
