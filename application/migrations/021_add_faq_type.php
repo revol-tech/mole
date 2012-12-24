@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_Add_faqs extends CI_Migration {
+class Migration_Add_album extends CI_Migration {
 
 	public function __construct(){
 		parent::__construct();
@@ -11,29 +11,29 @@ class Migration_Add_faqs extends CI_Migration {
 	public function up()
 	{
 		$fields = array(
-						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
-						'`faqs_type_id` int(11) NOT NULL',
-						'`question` text NOT NULL',
-						'`answer` mediumtext NOT NULL',
+						'`id` int(11) NOT NULL AUTO_INCREMENT',
+						'`title` varchar(127) NOT NULL',
+						'`description` varchar(255) NOT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',
 						'`date_removed` timestamp NULL DEFAULT NULL',
+						'`active` tinyint default 1',
 					);
 		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->add_key('faqs_type_id');
-		$this->dbforge->create_table('faqs');
-		//--------------------------------------------
-	}
+		$this->dbforge->create_table('faq_type');
 
+	//--------------------------------------------
+
+	}
 
 	public function down()
 	{
-		$this->dbforge->drop_table('faqs');
+		$this->dbforge->drop_table('faq_type');
 	}
 }
 
-/* End of file 005_add_faq.php */
-/* Location: ./application/migrations/005_add_faq.php */
+/* End of file 021_add_faq_type.php */
+/* Location: ./application/migrations/021_add_faq_type.php */
