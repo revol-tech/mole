@@ -12,12 +12,14 @@ class Faqs_model extends CI_Model{
 	/**
 	 * get faqs [of selected parameter]
 	 */
-	public function get($faqs,$limit=null,$start=null){
+	public function get($faqs=null,$limit=null,$start=null){
 
 		if($limit){
 			$this->db->limit($limit,$start);
 		}
-		if($faqs){
+//print_r(count($faqs));
+//print_r($faqs);		
+		if(count($faqs)>0 && is_array($faqs)){
 			foreach($faqs as $key=>$value){
 				$this->db->where($key,$value);
 			}
@@ -41,6 +43,7 @@ class Faqs_model extends CI_Model{
 		$data = array(
 					'question'		=> $this->input->post('question'),
 					'answer'		=> htmlentities($this->input->post('answer')),
+					'faqs_type_id'	=> $this->input->post('faqs_type_id'),
 					'created_by'	=> $this->session->userdata('user_id'),
 					'date_created'	=> $this->session->userdata('date_created'),
 					'date_published'=> $this->input->post('date_published'),
@@ -73,6 +76,7 @@ class Faqs_model extends CI_Model{
 		$update = array(
 					   'question' 		=> $data['question'],
 					   'answer' 		=> $data['answer'],
+					   'faqs_type_id'	=> $data['faqs_type_id'],
 					   'date_published' => $data['date_published'],
 					   'date_removed' 	=> $data['date_removed']
 					);
@@ -82,6 +86,7 @@ class Faqs_model extends CI_Model{
 
 		return $data['id'];
 	}
+
 
 	/**
 	 * count records
@@ -147,7 +152,7 @@ class Faqs_model extends CI_Model{
 
 		return $x;
 	}
-	public function get_type($faqs_type,$limit=null,$start=null){
+	public function get_type($faqs_type=null,$limit=null,$start=null){
 
 		if($limit){
 			$this->db->limit($limit,$start);
@@ -180,7 +185,7 @@ class Faqs_model extends CI_Model{
 					'date_published'=> $this->input->post('date_published'),
 					'date_removed'	=> $this->input->post('date_removed')
 				);
-print_r($data);
+//print_r($data);
 		//update existing faqs type
 		if(($this->input->post('id'))){
 			$data['id'] = $this->input->post('id');
@@ -247,65 +252,53 @@ print_r($data);
 	/**
 	 * render faq for display
 	 */
-	public function render($params){
+	public function render($params=null){
+//print_r($params);
 		$link_type=null;	// render for selected page. default = homepage
+		$str = '';
+
 		if(isset($params['link_type'])){
 			$link_type = $params['link_type'];
 			unset($params['link_type']);
 		}
+		
+		$data = $this->get_type();
+//print_r($data);
+		if(count($data)==0){
+			return $str;
+		}
 
 		$this->load->helper('text');
-		$data = $this->get($params);
-		
-		switch($params['news_type']){
+		$data = $this->get_type($params);
+//echo '<pre>';
+//print_r($data);		
+//echo '</pre>';
+//echo 'odid';
+//echo $link_type;		
+		if($link_type=='about'){
+			$str .= '<div class="item1 fl">';
+			$str .= '<h2>FAQ\'s</h2>';
+			$str .= '<ul>';
+			for($i=0;$i<count($data);$i++){
+				$str .=	'<li>'.
+						'	<a href="#" class="title1"><h3>'.$data[$i]->title.'</h3></a> '.
+						'	<span class="total_questions">'.
+								'( Total '.count($this->get(array('faqs_type_id'=>$data[$i]->id))).' Questions )'.
+						'	</span>'.
+						'	<em class="abt_questions">'.$data[$i]->description.'</em>'.
+						'</li>';
+//echo '<pre>';
+//print_r($data[$i]);
+//print_r(($this->get(array('faqs_type_id'=>$data[$i]->id))));
+//echo '</pre>';						
 
-			//render news/Flash News
-			case '1':
-				if($link_type != null){
-					$str = $this->_render_news($data,$link_type);
-				}else{
-					$str = $this->_render_flash_news($data);
-				}
-				
-				break;
-
-			//render Notices
-			case '2':
-				$str = $this->_render_notices($data,$link_type);
-				break;
-
-			//render Events
-			case '3':
-				$str = $this->_render_events($data);
-				break;
-
-			//render Press Release
-			case '4':
-				$str = $this->_render_press($data);
-				break;
-
-			//render Health
-			case '5':
-				$str = $this->_render_health($data);
-				break;
-
-			//render About
-			case '6':
-				$str = $this->_render_page($data,$link_type);
-				break;
-
-			//render employments
-			case '7':
-				$str = $this->_render_employments($data);
-				break;
-
-			//render acts
-			case '8':
-				$str = $this->_render_acts($data,$link_type);
-				break;
+			}
+			$str .= '</ul></div>';
+//echo $str;			
+			return $str;
 		}
-		return $str;
 	}
+	
 }
 
 /* End of file faqs_model.php */

@@ -56,6 +56,7 @@ class Faqs extends CI_Controller {
 			$item->id				= '--';
 			$item->question			= '--';
 			$item->question_link	= '--';
+			$item->faqs_type			= '--';
 			$item->date_created		= '--';
 			//$item->notices_type	= '--';
 			$item->created_by		= '--';
@@ -100,11 +101,18 @@ class Faqs extends CI_Controller {
 					'</form>';
 			$data[$key]->del = $str;
 
+			
+			//show selected faq's type
+			$faqs_type = $this->faqs_model->get_type($val->faqs_type_id);
+			$data[$key]->faqs_type = $faqs_type[0]->title;
+
 
 			//to convert the userid into username
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
+
+			
 
 //			//add activate/deactivate button
 //			$str = form_open(site_url('admin/faqs/active/')).
@@ -154,6 +162,10 @@ class Faqs extends CI_Controller {
 //echo '<pre>';
 //print_r($this->data);
 //echo '</pre>';
+
+		//generate faqs type -- for dropdown
+		$this->data['faqs_type'] = $this->faqs_model->get_type(false);
+
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
@@ -232,11 +244,16 @@ class Faqs extends CI_Controller {
 
 		$data = $this->faqs_model->get($get_faqs);
 
+$xx = $this->faqs_model->get_type(array('id'=>$data[0]->faqs_type_id));
+print_r( $xx);
+echo '<br/>';
+ 		
+
 		if(count($data)!=1){
 			show_404();
 		}
 
-//print_r($data[0]);
+print_r($data[0]);
 
 		//display
 		$this->load->view('templates/admin_header');
@@ -410,7 +427,7 @@ class Faqs extends CI_Controller {
 		//save the faqs & return the id of that faqs
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->faqs_model->save_type();
-
+//print_r($this->data['id']);die;
 		//retrive that faqs
 		$this->get_type(array('id'=> $this->data['id']));
 
@@ -424,8 +441,8 @@ class Faqs extends CI_Controller {
 		$get_faqs_type = array();
 
 		foreach($this->uri->segment_array() as $key=>$val){
-			if($val=='view'){
-				$get_faqs['id'] = $this->uri->segment($key+1);
+			if($val=='view_type'){
+				$get_faqs_type['id'] = $this->uri->segment($key+1);
 				break;
 			}
 		}
@@ -435,8 +452,6 @@ class Faqs extends CI_Controller {
 		if(count($data)!=1){
 			show_404();
 		}
-
-//print_r($data[0]);
 
 		//display
 		$this->load->view('templates/admin_header');
@@ -451,8 +466,33 @@ class Faqs extends CI_Controller {
 		redirect('admin/faqs/faqs_type');	
 	}
 
-	public function edit_type(){}
-	public function get_type(){}
+	public function get_type($params){
+		$data = $this->faqs_model->get_type($params);
+//print_r(($data[0]));
+
+		foreach($data[0] as $key=>$value){
+			$this->data[$key] = $value;
+		}
+	}
+	
+	public function edit_type($params){
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='edit_type'){
+				$id = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->faqs_model->get_type(array('id'=>$id));
+
+		if(count((array)$data)!=1){
+			show_404();
+		}
+
+		$this->data = (array)$data[0];
+		$this->create_type();
+	}
 //=======================================================================
 
 

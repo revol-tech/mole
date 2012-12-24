@@ -4,7 +4,7 @@ class Pages_loader extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
-//$this->output->enable_profiler(true);
+$this->output->enable_profiler(true);
 //$this->output->cache(5);
 	}
 
@@ -80,10 +80,14 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->template->set_template('template_inner');
 
 		//page -- about us -- full
-		$this->load->model('news_model');
-		$params = array('news_type'=>6,'active'=>1,'link_type'=>'about');
-		$page = $this->news_model->render($params);
-		$this->template->write('page',$page);
+		if($this->uri->segment(1)=='aboutus'){
+			
+			$this->load->model('news_model');
+			$params = array('news_type'=>6,'active'=>1,'link_type'=>'about');
+			$page = $this->news_model->render($params);
+			$this->template->write('page',$page);
+		}
+
 
 		//news links
 		$this->load->model('news_model');
@@ -101,6 +105,13 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->load->library('poll_library');
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
+
+		//faqs
+		$this->load->model('faqs_model');
+		$faqs = $this->faqs_model->render(array('link_type'=>'about'));
+//$faqs = $this->faqs_model->render(array('link_type'=>'about'));
+//print_r($faqs);
+		$this->template->write('faqs',$faqs);
 
 		//notices
 		$this->load->model('news_model');

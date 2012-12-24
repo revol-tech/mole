@@ -109,7 +109,7 @@
 				<?php echo @$feedback?>
 			</div>
 			<div class="grid_7  fl">
-				<?php echo @$faq?>
+				<?php echo @$faqs?>
 			</div>
 			<div class="grid_7 fl">
 				<?php echo @$notices?>

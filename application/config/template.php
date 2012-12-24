@@ -118,13 +118,11 @@ $template['template_inner']['regions'] = array(
 										)
 						),
 		
-		//'slider' 	=> array(),
-		//'flash_news'=> array(),
-		
 		'page'	 	=> array(),
 		'news'		=> array(),
 		'acts'		=> array(),
 		'poll'	 	=> array(),
+		'faqs'		=> array(),
 		'notices'	=> array(),
 		
 		

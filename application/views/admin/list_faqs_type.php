@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<!--
 <pre>
-<?php print_r($data);?>
+<?php //print_r($data);?>
 </pre>
-
+-->
 <a href='<?php echo site_url('admin/faqs/create_type')?>'>Create nu faqs type</a>
 
 <br/>

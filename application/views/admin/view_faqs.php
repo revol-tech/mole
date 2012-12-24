@@ -21,6 +21,10 @@
 	<span class='question'><?php echo $question;?></span>
 	<br/>
 
+	faq type :
+	<span class='faqs_type'><?php echo $faqs_type;?></span>
+	<br/>	
+
 	answer :<br/>
 	<hr/>
 	<?php echo $answer?>
