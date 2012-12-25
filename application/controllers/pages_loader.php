@@ -4,8 +4,8 @@ class Pages_loader extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
-$this->output->enable_profiler(true);
-//$this->output->cache(5);
+//$this->output->enable_profiler(true);
+//$this->db->cache_on();
 	}
 
 
@@ -79,7 +79,14 @@ $this->output->enable_profiler(true);
 	public function routes(){
 		$this->template->set_template('template_inner');
 
-		//page -- about us -- full
+		//page -- submit feedback -- full ---tmp. need to use admin & db.......
+		if($this->uri->segment(1)=='submit_feedback'){
+			$this->load->library('feedback_library');
+			$this->feedback_library->send($this->input->post());
+		}
+			
+
+		//page -- about us -- full ---tmp. need to use admin & db.......
 		if($this->uri->segment(1)=='aboutus'){
 			
 			$this->load->model('news_model');
@@ -87,6 +94,7 @@ $this->output->enable_profiler(true);
 			$page = $this->news_model->render($params);
 			$this->template->write('page',$page);
 		}
+
 
 
 		//news links
@@ -105,6 +113,11 @@ $this->output->enable_profiler(true);
 		$this->load->library('poll_library');
 		$poll = $this->poll_library->render_poll();
 		$this->template->write('poll',$poll);
+
+		//feedback
+		$this->load->library('feedback_library');
+		$feedback = $this->feedback_library->render();
+		$this->template->write('feedback',$feedback);
 
 		//faqs
 		$this->load->model('faqs_model');

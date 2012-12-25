@@ -165,6 +165,8 @@ class Faqs_model extends CI_Model{
 		$res = $this->db->get($this->types);
 
 		foreach($res->result() as $value){
+//print_r($value);echo $value->created_by;			
+//print_r($this->ion_auth->get_user($value->created_by));
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->description = html_entity_decode($value->description,ENT_QUOTES, 'UTF-8');
 		}

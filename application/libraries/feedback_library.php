@@ -1,24 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Poll_library{
+class Feedback_library{
 
 	protected $ci;
 
-	/**
-	 * db tables
-	 */
-	protected $table 		= 'poll';
-//	protected $table_coln 	= array( 'question', 		'option1',
-//									 'option2',  		'option3',
-//									 'option4',  		'created_by',
-//									 'date_created',	'date_published',
-//									 'date_removed',	'count_option1',
-//									 'count_option2',	'count_option3',
-//									 'count_option4',	'id'
-//									);
+
 	protected $history 		= 'poll_history';
-//	protected $history_coln	= array('question_id','user_id',
-//									);
 
 
 	/**
@@ -30,6 +17,128 @@ class Poll_library{
 		$this->ci =& get_instance();
 		$this->ci->load->database();
 	}
+
+
+
+	/**
+	 * render feedback form
+	 *
+	 * @returns string html
+	 */
+	public function render(){
+		$validation = validation_errors();
+
+//echo $this->ci->session->flashdata('feedback_status');
+		$html =	'<div class="item1 fl">
+					<h2><span>Feedback</span> &amp; Suggestions</h2>
+					<p class="textblock fl">
+						Please fillup the form below to submit your valuable suggestion.
+					</p>
+					<p class="textblock fl">'.
+						$this->ci->session->flashdata('feedback_status').
+					'</p>'.
+						$validation.
+					form_open('submit_feedback',array('id'=>'feedback')).'
+						<div class="form_holder2">
+							<span class="text">Name</span>
+							<input type="text" value="'.set_value('sender_name').'" name="sender_name" class="textbox fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';"
+								selected="selected"/>
+						</div> 
+						<div class="form_holder2">
+							<span class="text">Email</span>
+							<input type="email" value="'.set_value('sender_email').'" name="sender_email" class="textbox fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';"/>
+						</div> 
+						<div class="form_holder2">
+							<span class="text">Comments</span>
+							<textarea value="'.set_value('sender_comments').'" name="sender_comments" class="textarea fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';">
+							</textarea>
+						</div> 
+						<div class="form_holder2">
+							<input class="btn_red fr" type="submit" value="Submit"/>
+						</div>
+					</form>
+				</div>';
+		if(($validation)){
+			$html .= '<script>'.
+						'$(function(){'.
+							'$("#feedback").find("input[type=text]").first().focus();'.
+						'})'.
+					'</script>';
+		}
+
+		return $html;
+	}
+
+
+	/**
+	 * send email feedback form
+	 *
+	 */
+	public function send($data){
+		if(!$this->_validate($data)){
+			return false;
+		}
+		$this->ci->load->library('email');
+
+		$this->ci->email->from($data['sender_email'], $data['sender_name']);
+//echo $this->ci->config->config['ion_auth']['admin_email'];
+		$this->ci->email->to($this->ci->config->config['ion_auth']['admin_email']);
+		
+		$this->ci->email->subject('Site Email');
+		$this->ci->email->message($data['sender_comments']);
+
+//		$this->ci->email->send();
+		$this->ci->session->set_flashdata('feedback_status', 'Thank You for your feedback.');		
+//		redirect('aboutus');
+	}
+
+	private function _validate($data=array()){
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
+		$this->ci->load->library('form_validation');
+
+		$this->ci->form_validation->set_rules('sender_name', 'Name', 'required|trim');
+		$this->ci->form_validation->set_rules('sender_comments', 'Comments', 'required|trim');
+		$this->ci->form_validation->set_rules('sender_email', 'Email', 'required|trim|valid_email');
+
+		if (! $this->ci->form_validation->run()){
+//echo form_error();			
+			return false;
+		}
+		
+		return true;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,52 +269,6 @@ class Poll_library{
 		}
 //print_r($items);
 		return $items;
-	}
-
-	/**
-	 * render active poll
-	 *
-	 * @returns string html
-	 */
-	public function render_poll(){
-		$poll = $this->list_poll(false,null,null,true);
-
-		if(!$poll){
-			return null;
-		}
-
-		$html = '<div class="item1 fl">
-					<h2><span>Public </span>Poll</h2>
-					<div class="poll_block">
-						<p class="poll_topic">'.$poll[0]->question.'</p>
-						<!--<form method="post" action="'.site_url('pages/vote').'">-->
-						'.form_open(site_url('pages/vote')).'
-							<div class="form_holder1 fl">
-								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="radio-choice-1">
-								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
-							</div>
-							<div class="form_holder1 fl">
-								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="radio-choice-1">
-								<label for="radio-choice-2">'.$poll[0]->option2.'</label>
-							</div>
-							<div class="form_holder1 fl">
-								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="radio-choice-1">
-								<label for="radio-choice-3">'.$poll[0]->option3.'</label>
-							</div>
-							<div class="form_holder1 fl">
-								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="radio-choice-1">
-								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
-							</div>
-							<div class="form_holder1 fl mar_top">
-								<a href="#" class="btn_red fr">Result</a>
-								<input class="btn_red fr" type="submit" value="Vote"/>
-							</div>
-						</form>
-					</div>
-				</div>';
-
-
-		return $html;
 	}
 
 

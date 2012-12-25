@@ -25,6 +25,7 @@
 	<link href='<?php echo CSSPATH?>tmp.css' rel='stylesheet' type='text/css'>
 	<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
 	<script src="<?php echo JSPATH?>jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<?php echo JSPATH?>jquery.jqprint-0.3.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.superfish.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
