@@ -54,15 +54,16 @@ class Employments extends CI_Controller {
 
 		//if there are no polls at present ...
 		if($config['total_rows']==0){
-			$item->id			='--';
-			$item->title		='--';
-			$item->title_link	='--';
-			$item->date_created	='--';
+			$item->id			= '--';
+			$item->title		= '--';
+			$item->title_link	= '--';
+			$item->date_created	= '--';
 			$item->employments_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->edit			='--';
-			$item->del			='--';
+			$item->active		= '--';
+			$item->edit			= '--';
+			$item->del			= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -130,7 +131,7 @@ class Employments extends CI_Controller {
 	 * activate/deactivate employments
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('employments_id');
 		$active = $this->input->post('activate');
 		$this->employments_model->change_active($id,$active);
 

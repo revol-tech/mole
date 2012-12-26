@@ -46,18 +46,19 @@ class Vip extends CI_Controller {
 
 		//if no data, set then to display null
 		if($config['total_rows']==0){
-			$item->id			='--';
-			$item->filename		='--';
-			$item->title		='--';
-			$item->title_link	='--';
-			$item->description	='--';
-			$item->timestamp	='--';
-			$item->date_created	='--';
-			$item->press_type	='--';
+			$item->id			= '--';
+			$item->filename		= '--';
+			$item->title		= '--';
+			$item->title_link	= '--';
+			$item->description	= '--';
+			$item->timestamp	=' --';
+			$item->date_created	= '--';
+			$item->press_type	=' --';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->edit			='--';
-			$item->del			='--';
+			$item->activate		= '--';
+			$item->edit			= '--';
+			$item->del			= '--';
 
 			return array('data'=>array($item));
 		}
@@ -103,11 +104,35 @@ class Vip extends CI_Controller {
 			//convert the userid into username
 			$tmp_user = $data[$key]->created_by;
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
+
+			//add activate/deactivate button
+			$str = form_open(site_url('admin/vip/active/')).
+						'<input type="hidden" name="vips_id" value="'.$data[$key]->id.'"/>';
+			if($data[$key]->active == 1){
+				$str .=	'<input type="hidden" name="activate" value="false"/>';
+				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
+			}else{
+				$str .=	'<input type="hidden" name="activate" value="true"/>';
+				$str .=	'<input type="submit" name="active"   value="Activate"/>';
+			}
+			$str .= '</form>';
+			$data[$key]->active = $str;
 		}
 
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
+
+	/**
+	 * activate/deactivate networks
+	 */
+	public function active(){
+		$id = $this->input->post('vips_id');
+		$active = $this->input->post('activate');
+		$this->vip_model->change_active($id,$active);
+
+		redirect('admin/vip');
+	}
 
 	/**
 	 * vip form

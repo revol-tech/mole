@@ -14,6 +14,7 @@
 		<th>date created</th>
 		<th>created by</th>
 		<th>date published</th>
+		<th>active</th>
 		<th>edit</th>
 		<th>delete</th>
 	</tr>
@@ -26,6 +27,7 @@
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
 			<td><?php echo $item->date_published?></td>
+			<th><?php echo $item->active?></th>
 			<td><?php echo $item->edit?></td>
 			<td><?php echo $item->del?></td>
 		</tr>

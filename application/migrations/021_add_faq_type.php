@@ -18,10 +18,11 @@ class Migration_Add_album extends CI_Migration {
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',
 						'`date_removed` timestamp NULL DEFAULT NULL',
-						'`active` tinyint default 1',
+						'`active` tinyint not null default 1',
 					);
 		$this->dbforge->add_field($fields);
 
+		$this->dbforge->add_key('active');
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('faq_type');
 

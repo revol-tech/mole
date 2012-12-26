@@ -31,7 +31,7 @@ class Networks_model extends CI_Model{
 
 
 	/**
-	 * change the active poll
+	 * change the active network
 	 *
 	 * @param id int
 	 * @param active boolean

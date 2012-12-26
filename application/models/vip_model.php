@@ -33,8 +33,8 @@ class Vip_model extends CI_Model{
 	 *
 	 * @return
 	 */
-	public function render(){
-		$data = $this->get();
+	public function render($params){
+		$data = $this->get($params);
 
 		$count = 1;
 
@@ -154,7 +154,7 @@ class Vip_model extends CI_Model{
 
 
 	/**
-	 * change the active poll
+	 * change the active vips
 	 *
 	 * @param id int
 	 * @param active boolean
@@ -163,7 +163,8 @@ class Vip_model extends CI_Model{
 
 		$this->db->set(	'active',$active=='true'?1:0 )
 				->where('id',$ids)
-				->update('news');
+				->update($this->table);
+//echo $this->db->last_query();				
 	}
 
 

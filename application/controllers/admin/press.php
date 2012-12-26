@@ -132,7 +132,7 @@ class Press extends CI_Controller {
 	 * activate/deactivate press
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('press_id');
 		$active = $this->input->post('activate');
 		$this->press_model->change_active($id,$active);
 

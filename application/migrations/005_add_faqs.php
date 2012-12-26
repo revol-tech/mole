@@ -19,10 +19,12 @@ class Migration_Add_faqs extends CI_Migration {
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',
 						'`date_removed` timestamp NULL DEFAULT NULL',
+						'`active` tinyint not null default 1',
 					);
 		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->add_key('active');
 		$this->dbforge->add_key('faqs_type_id');
 		$this->dbforge->create_table('faqs');
 		//--------------------------------------------

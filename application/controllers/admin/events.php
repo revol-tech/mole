@@ -138,7 +138,7 @@ class Events extends CI_Controller {
 	 * activate/deactivate events
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('events_id');
 		$active = $this->input->post('activate');
 		$this->events_model->change_active($id,$active);
 

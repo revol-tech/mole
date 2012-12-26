@@ -63,6 +63,7 @@ class Usefullinks extends CI_Controller {
 			$item->date_removed		= '--';
 			$item->active			= '--';
 			$item->homepage			= '--';
+			$item->active			= '--';
 			$item->edit				= '--';
 			$item->del				= '--';
 

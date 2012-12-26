@@ -61,6 +61,7 @@ class Health extends CI_Controller {
 			$item->health_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
+			$item->active		= '--';
 			$item->edit			='--';
 			$item->del			='--';
 
@@ -130,7 +131,7 @@ class Health extends CI_Controller {
 	 * activate/deactivate health
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('health_id');
 		$active = $this->input->post('activate');
 		$this->health_model->change_active($id,$active);
 

@@ -128,12 +128,12 @@ class Faqs_model extends CI_Model{
 
 
 	/**
-	 * change the active faqs
+	 * set the active faqs
 	 *
 	 * @param id int
 	 * @param active boolean
 	 */
-	public function change_active($ids=false,$active=false){
+	public function set_active($ids=false,$active=false){
 
 		$this->db->set(	'active',$active=='true'?1:0 )
 				->where('id',$ids)
@@ -152,11 +152,18 @@ class Faqs_model extends CI_Model{
 
 		return $x;
 	}
+	public function set_active_type($ids=false,$active=false){
+		$ids ? $this->db->where('id',$ids) : '';
+
+		$this->db->set(	'active',$active )
+				->update($this->types);
+	}
 	public function get_type($faqs_type=null,$limit=null,$start=null){
 
 		if($limit){
 			$this->db->limit($limit,$start);
 		}
+
 		if($faqs_type){
 			foreach($faqs_type as $key=>$value){
 				$this->db->where($key,$value);

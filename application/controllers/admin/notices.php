@@ -63,6 +63,7 @@ class Notices extends CI_Controller {
 			$item->date_published='--';
 			$item->edit			= '--';
 			$item->del			= '--';
+			$item->active		= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -131,7 +132,7 @@ class Notices extends CI_Controller {
 	 * activate/deactivate notices
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('notices_id');
 		$active = $this->input->post('activate');
 		$this->notices_model->change_active($id,$active);
 

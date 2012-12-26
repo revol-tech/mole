@@ -111,7 +111,7 @@ class Networks extends CI_Controller {
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/neworks/active/')).
+			$str = form_open(site_url('admin/networks/active/')).
 						'<input type="hidden" name="networks_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
@@ -135,7 +135,7 @@ class Networks extends CI_Controller {
 	 * activate/deactivate networks
 	 */
 	public function active(){
-		$id = $this->input->post('networks');
+		$id = $this->input->post('networks_id');
 		$active = $this->input->post('activate');
 		$this->networks_model->change_active($id,$active);
 

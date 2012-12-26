@@ -33,7 +33,7 @@ class Pages_loader extends MY_MOLE_Controller {
 
 		//VIP
 		$this->load->model('vip_model');
-		$vip = $this->vip_model->render();
+		$vip = $this->vip_model->render(array('active'=>1));
 		$this->template->write('vip',$vip);
 
 		//vertical slider notices
@@ -121,9 +121,7 @@ class Pages_loader extends MY_MOLE_Controller {
 
 		//faqs
 		$this->load->model('faqs_model');
-		$faqs = $this->faqs_model->render(array('link_type'=>'about'));
-//$faqs = $this->faqs_model->render(array('link_type'=>'about'));
-//print_r($faqs);
+		$faqs = $this->faqs_model->render(array('link_type'=>'about','active'=>1));
 		$this->template->write('faqs',$faqs);
 
 		//notices
@@ -163,12 +161,12 @@ class Pages_loader extends MY_MOLE_Controller {
 
 		//userful links
 		$this->load->model('usefullinks_model');
-		$usefullinks = $this->usefullinks_model->render();
+		$usefullinks = $this->usefullinks_model->render(array('active'=>1));
 		$this->template->write('usefullinks',$usefullinks);		
 
 		//network
 		$this->load->model('networks_model');
-		$networks = $this->networks_model->render();
+		$networks = $this->networks_model->render(array('active'=>1));
 		$this->template->write('network',$networks);
 
 		//employments

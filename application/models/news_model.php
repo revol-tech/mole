@@ -40,6 +40,7 @@ class News_model extends CI_Model{
 		$this->db->set(	'active',$active=='true'?1:0 )
 				->where('id',$ids)
 				->update($this->table);
+//echo $this->db->last_query();
 	}
 
 

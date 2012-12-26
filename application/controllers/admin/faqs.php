@@ -63,6 +63,7 @@ class Faqs extends CI_Controller {
 			$item->date_published	= '--';
 			$item->edit				= '--';
 			$item->del				= '--';
+			$item->active			= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));
@@ -103,7 +104,7 @@ class Faqs extends CI_Controller {
 
 			
 			//show selected faq's type
-			$faqs_type = $this->faqs_model->get_type($val->faqs_type_id);
+			$faqs_type = $this->faqs_model->get_type(array('id'=>$val->faqs_type_id));
 			$data[$key]->faqs_type = $faqs_type[0]->title;
 
 
@@ -114,17 +115,17 @@ class Faqs extends CI_Controller {
 
 			
 
-//			//add activate/deactivate button
-//			$str = form_open(site_url('admin/faqs/active/')).
-//						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
-//			if($data[$key]->active == 1){
-//				$str .=	'<input type="hidden" name="activate" value="false"/>';
-//				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
-//			}else{
-//				$str .=	'<input type="hidden" name="activate" value="true"/>';
-//				$str .=	'<input type="submit" name="active"   value="Activate"/>';
-//			}
-//			$str .= '</form>';
+			//add activate/deactivate button
+			$str = form_open(site_url('admin/faqs/set_active/')).
+						'<input type="hidden" name="faqs_id" value="'.$data[$key]->id.'"/>';
+			if($data[$key]->active == 1){
+				$str .=	'<input type="hidden" name="activate" value="false"/>';
+				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
+			}else{
+				$str .=	'<input type="hidden" name="activate" value="true"/>';
+				$str .=	'<input type="submit" name="active"   value="Activate"/>';
+			}
+			$str .= '</form>';
 
 			$data[$key]->active = $str;
 		}
@@ -263,6 +264,14 @@ print_r($data[0]);
 	}
 
 
+	public function set_active(){
+		$id = $this->input->post('faqs_id');
+		$activate = $this->input->post('activate');
+		$this->faqs_model->set_active($id,$activate);
+		
+		redirect('admin/faqs');
+	}	
+
 	/**
 	 * del selected faqs
 	 */
@@ -295,6 +304,13 @@ print_r($data[0]);
 		}
 		$this->list_type();
 	}
+	public function set_active_type(){
+		$id = $this->input->post('faqs_type_id');
+		$activate = $this->input->post('activate');
+		$this->faqs_model->set_active_type($id,$activate);
+		
+		redirect('admin/faqs/faqs_type');
+	}	
 	public function list_type(){
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/faqs/faqs_type');
@@ -311,6 +327,7 @@ print_r($data[0]);
 			$item->created_by		= '--';
 			$item->date_published	= '--';
 			$item->edit				= '--';
+			$item->active			= '--';
 			$item->del				= '--';
 
 			$data['items'] = $item;
@@ -363,17 +380,17 @@ print_r($data[0]);
 			$data[$key]->created_by = $this->ion_auth->get_user((int)$tmp_user)->username;
 
 
-//			//add activate/deactivate button
-//			$str = form_open(site_url('admin/faqs/active/')).
-//						'<input type="hidden" name="notices_id" value="'.$data[$key]->id.'"/>';
-//			if($data[$key]->active == 1){
-//				$str .=	'<input type="hidden" name="activate" value="false"/>';
-//				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
-//			}else{
-//				$str .=	'<input type="hidden" name="activate" value="true"/>';
-//				$str .=	'<input type="submit" name="active"   value="Activate"/>';
-//			}
-//			$str .= '</form>';
+			//add activate/deactivate button
+			$str = form_open(site_url('admin/faqs/set_active_type/')).
+						'<input type="hidden" name="faqs_type_id" value="'.$data[$key]->id.'"/>';
+			if($data[$key]->active == 1){
+				$str .=	'<input type="hidden" name="activate" value="0"/>';
+				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
+			}else{
+				$str .=	'<input type="hidden" name="activate" value="1"/>';
+				$str .=	'<input type="submit" name="active"   value="Activate"/>';
+			}
+			$str .= '</form>';
 
 			$data[$key]->active = $str;
 		}

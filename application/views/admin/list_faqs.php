@@ -13,7 +13,7 @@
 		<th>type</th>
 		<th>date created</th>
 		<th>created by</th>
-		<!--<th>active</th>-->
+		<th>active</th>
 		<th>edit</th>
 		<th>delete</th>
 	</tr>
@@ -26,7 +26,7 @@
 			<td><?php echo $item->faqs_type?></td>
 			<td><?php echo $item->date_created?></td>
 			<td><?php echo $item->created_by?></td>
-			<!--<td><?php echo $item->active?></td>-->
+			<td><?php echo $item->active?></td>
 			<td><?php echo $item->edit?></td>
 			<td><?php echo $item->del?></td>
 		</tr>
