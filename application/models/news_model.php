@@ -59,6 +59,19 @@ class News_model extends CI_Model{
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->table, $update);
 
+
+		$nu_data_links = array(
+			'table' => $this->table,
+			'row_id'=> $data['id']
+		);
+
+		$old_data_links = $this->links_model->get($nu_data_links);
+
+		$nu_data_links['id']   = $old_data_links[0]->id ;
+		$nu_data_links['link'] = $this->input->post('linktype').'/'.$this->input->post('link');
+
+		$this->links_model->save($nu_data_links);
+
 		return $data['id'];
 	}
 
@@ -76,7 +89,7 @@ class News_model extends CI_Model{
 					$this->input->post('date_published'),
 					$this->input->post('date_removed')
 				);
-
+				
 		//update existing news
 		if(($this->input->post('id'))){
 			$data['id'] = $this->input->post('id');
@@ -96,7 +109,17 @@ class News_model extends CI_Model{
 				return $this->db->_error_message();
 			}
 
-			return $this->db->insert_id();
+			$id = $this->db->insert_id();
+			
+			$data_links = array(
+				'link'	=> $this->input->post('linktype').'/'.$this->input->post('link'),
+				'table' => $this->table,
+				'row_id'=> $id
+			);
+			
+			$this->links_model->save($data_links);
+
+			return $id;
 		}
 	}
 
@@ -117,10 +140,13 @@ class News_model extends CI_Model{
 		$res = $this->db->get($this->table);
 
 		foreach($res->result() as $value){
+			$tmp_link = $this->links_model->get(array('table'=>'news','row_id'=>$value->id));
+
+			$value->link = isset($tmp_link[0]->link)?$tmp_link[0]->link:'';
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 		}
-//print_r($res->result());
+
 		return $res->result();
 	}
 
@@ -213,7 +239,6 @@ class News_model extends CI_Model{
 			return $str;
 		}
 	}
-	
 	private function _render_employments($data){
 		if(!(count($data)>0)){
 			return '';
@@ -260,7 +285,6 @@ class News_model extends CI_Model{
 
 		return $str;
 	}
-
 	private function _render_events($data){
 		if(count($data)==0){
 			return '';
@@ -274,24 +298,20 @@ class News_model extends CI_Model{
 
 		return $str;
 	}
-
-	/**
-	 * render news links
-	 */
 	private function _render_news($data,$type=null){
 		$str = '';
-		$str .=	'<div class="highlight fl">'.
-				'	<div class="title1">'.
-				'		<h2><span>Latest</span> News </h2>'.
-				'		<div class="piece"></div>'.
-				'	</div>'.
-				'	<div class="highlight_content fl"><ul>';
 
 		if(count($data)==0){
 			$str .= '</ul></div></div>';
 			return $str;
 		}
 		if($type=='about'){
+			$str .=	'<div class="highlight fl">'.
+					'	<div class="title1">'.
+					'		<h2><span>Latest</span> News </h2>'.
+					'		<div class="piece"></div>'.
+					'	</div>'.
+					'	<div class="highlight_content fl"><ul>';
 			foreach($data as $key=>$val){
 				$str .= '<li><a href="#">'.$val->title.'</a></li>';
 			
@@ -300,8 +320,7 @@ class News_model extends CI_Model{
 			$str .= '</ul></div></div>';
 			return $str;
 		}
-	}
-	
+	}	
 	private function _render_flash_news($data){
 		$count = count($data);
 		if($count==0){
@@ -357,12 +376,12 @@ class News_model extends CI_Model{
 					})
 				})</script>';
 
-
+		//$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
 		$str .=	'<div class="ticker_title fl">'.
 				'	<h3>News</h3>'.
 				'</div>';
 
-		$str .= '<ul id="flash-slider">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
+		$str .= '<ul id="flash-slider" style="" class="ticker_block fl jcarousel-skin-tango">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
 			foreach($data as $key=>$val){
 				$str .= '<li>';
@@ -376,7 +395,6 @@ class News_model extends CI_Model{
 		$str.= '</ul></div></div>';
 		return $str;
 	}
-
 	private function _render_notices($data,$link_type){
 		$count = count($data);
 		if($count==0){
@@ -462,7 +480,6 @@ class News_model extends CI_Model{
 		$str.= '</ul></div>';
 		return $str;
 	}
-
 	private function _render_page($data,$type=null){
 		$str = '';
 		if(count($data)==0){
@@ -481,7 +498,7 @@ class News_model extends CI_Model{
 		$str = '<div class="about">';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
 		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
-		$str.= '<a href="aboutus" class="btn_red fr">read more</a>'; // <--- link not set properly
+		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">read more</a>'; // <--- link not set properly
 		$str.= '</div>';
 
 		return $str;

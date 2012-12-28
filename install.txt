@@ -1,0 +1,24 @@
+- in ur database server, login & create a database 
+
+- configure the database settings at :- 
+    ./application/config/database.php
+		$db['default']['hostname'] <-- database server
+		$db['default']['username'] <-- database username
+		$db['default']['password'] <-- database password
+		$db['default']['database'] <-- database name
+		
+- on the browser, goto :
+	http://site.com/update_db
+	
+	The database should be created.
+	U could import the sample data into the database.
+
+- u might want to delete the ./application/controller/update_db.php file
+  once the project is installed & is running.
+
+-----------------------------------------------------------
+
+default database server   : localhost
+default database username : root
+default database password : password
+default database database : mole

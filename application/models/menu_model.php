@@ -23,12 +23,10 @@ class Menu_model extends CI_Model{
 	 */
 	public function update($data){
 
-//print_r($data);
 		$id = $data['id'];
 		unset($data['id']);
 
 		$this->db->where('id', $id);
-//print_r($data);
 		$this->db->update($this->table, $data);
 
 		return $id;
@@ -41,13 +39,9 @@ class Menu_model extends CI_Model{
 	private function _validate(){
 		$arr = array();
 		if($this->input->post('link') || $this->input->post('title')){
-//print_r(array('link'=>$this->input->post('link',true)));
-//echo 'asdf';
-//print_r($this->get(array('link'=>$this->input->post('link',true))));
 
 			array_merge($arr, $this->get(array('link'=>$this->input->post('link'))));
 			array_merge($arr, $this->get(array('title'=>$this->input->post('title'))));
-//print_r(count($arr));
 			if(count($arr) > 0){
 				return false;
 			}
@@ -63,13 +57,10 @@ class Menu_model extends CI_Model{
 	 * @return int id
 	 */
 	public function save($data){
-//print_r($data);die;
 		if(($this->input->post('id'))){
 		//update existing link
 
 			$data['id'] = $this->input->post('id');
-//print_r($data);
-//print_r('asdf');
 			return $this->update($data);
 
 
@@ -80,7 +71,6 @@ class Menu_model extends CI_Model{
 				return $this->db->_error_message();
 			}
 
-//echo $this->db->last_query();
 			return $this->db->insert_id();
 		}
 	}
@@ -137,7 +127,7 @@ class Menu_model extends CI_Model{
 			if($v->parent_id==$parent_id){
 
 				$str.='<li>';
-				$str.='<a href="'.$v->link.'" title="'.$v->comments.'">';
+				$str.='<a href="'.site_url($v->link).'" title="'.$v->comments.'">';
 				$str.=$v->title;
 				$str.='</a>';
 
@@ -173,7 +163,6 @@ class Menu_model extends CI_Model{
 				->or_where('parent_id',$ids)
 				->delete($this->table);
 
-//echo $this->db->last_query();
 		return true;
 	}
 

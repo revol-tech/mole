@@ -28,18 +28,7 @@ class Contacts extends CI_Controller {
 
 	public function index(){
 		$this->view();
-/*
-		$data['items'] = $this->list_contacts();
-//echo '<pre>';
-//print_r($data);
-//echo '</pre>';
-
-		//display
-		$this->load->view('templates/header');
-		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_contacts.php',$data);
-		$this->load->view('templates/footer');
-*/	}
+	}
 
 
 	/**
@@ -161,6 +150,8 @@ class Contacts extends CI_Controller {
 		if(!isset($this->data['created_by'])){
 			$this->data['created_by'] = $this->ion_auth->get_user()->username;
 		}
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
 
 		//display
 		$this->load->view('templates/admin_header');

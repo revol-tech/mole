@@ -41,7 +41,6 @@
 				</div>
 				<div class="grid_2 fr">
 					<div id="search-box">
-						<!--<form>-->
 						<?php echo form_open()?>
 							<input type="text" value="Search..." name="" class="search fl" onfocus="if(this.value=='Search...')this.value='';" onblur="if(this.value=='')this.value='Search...';"/>
 							<input class="btn-search fr" type="submit" value=""/>
@@ -54,15 +53,6 @@
 				</div>
 				<!-- Main menu end -->
 				<div class="clear"></div>
-			</div>
-		</div>
-		<div id="header_bottom">
-			<div class="container_1">
-				<ul class="sub_nav">
-					<li ><a href="#">Signin</a> </li>
-					<li><a href="#">Register Now</a> </li>
-					<li><a href="#">Forgot Password</a> </li>
-				</ul>
 			</div>
 		</div>
 		<!--Header End -->

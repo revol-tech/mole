@@ -4,8 +4,8 @@ class Pages_loader extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
-//$this->output->enable_profiler(true);
-//$this->db->cache_on();
+//		$this->output->enable_profiler(true);
+//		$this->db->cache_on();
 	}
 
 
@@ -79,12 +79,13 @@ class Pages_loader extends MY_MOLE_Controller {
 	public function routes(){
 		$this->template->set_template('template_inner');
 
-		//page -- submit feedback -- full ---tmp. need to use admin & db.......
-		if($this->uri->segment(1)=='submit_feedback'){
-			$this->load->library('feedback_library');
-			$this->feedback_library->send($this->input->post());
-		}
+		if(($this->uri->segment(1))){
+$aa = 'pages';
+$this->load->controller($aa);
+			$x=$this->links_model->get(array('link'=>$this->uri->segment(1).'/'.$this->uri->segment(2)));
+print_r($x);die;			
 			
+		}
 
 		//page -- about us -- full ---tmp. need to use admin & db.......
 		if($this->uri->segment(1)=='aboutus'){
@@ -103,33 +104,6 @@ class Pages_loader extends MY_MOLE_Controller {
 		$news = $this->news_model->render($params);
 		$this->template->write('news',$news);
 
-		//act
-		$this->load->model('news_model');
-		$params = array('news_type'=>8,'active'=>1,'link_type'=>'about');
-		$acts = $this->news_model->render($params);
-		$this->template->write('acts',$acts);
-
-		//poll
-		$this->load->library('poll_library');
-		$poll = $this->poll_library->render_poll();
-		$this->template->write('poll',$poll);
-
-		//feedback
-		$this->load->library('feedback_library');
-		$feedback = $this->feedback_library->render();
-		$this->template->write('feedback',$feedback);
-
-		//faqs
-		$this->load->model('faqs_model');
-		$faqs = $this->faqs_model->render(array('link_type'=>'about','active'=>1));
-		$this->template->write('faqs',$faqs);
-
-		//notices
-		$this->load->model('news_model');
-		$params = array('news_type'=>2,'active'=>1,'link_type'=>'about');
-		$notices = $this->news_model->render($params);
-		$this->template->write('notices',$notices);
-
 
 		$this->_header_view();
 		$this->_footer_view();
@@ -146,7 +120,6 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->load->model('menu_model');
 		$menu = $this->menu_model->render_menu(array('active'=>1));
 		$this->template->write('menu',$menu);	
-//echo($menu);die;
 	}
 
 	/**
@@ -178,15 +151,5 @@ class Pages_loader extends MY_MOLE_Controller {
 		//counter
 		$counter = get_count_visitors();
 		$this->template->write('counter',$counter);
-	}
-
-
-
-
-
-
-	public function vote(){
-echo 'u just voted';
-print_r($_POST);
 	}
 }

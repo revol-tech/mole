@@ -25,6 +25,13 @@
 	</label>
 	<br/>
 
+	<label>
+		link :
+		<?php echo site_url('contacts').'/'?>
+		<input type='text' name='link' value='<?php echo @$link?>' />
+	</label>
+	<br/>
+	<input type='hidden' name='linktype' value='contacts' />
 
 	<label>
 		created on

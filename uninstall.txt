@@ -1,0 +1,2 @@
+Deleting the folder is enough to uninstall the project
+You might also want to delete the database created.

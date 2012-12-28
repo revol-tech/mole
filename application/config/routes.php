@@ -42,7 +42,16 @@
 $route['default_controller']= 'pages_loader';
 $route['admin/login'] = 'admin/admin/login';
 $route['admin'] = 'admin/admin';
-$route['(?!admin).*'] = 'pages_loader/routes/$1';	//<<---- incomplete yet
+
+$route['pages/(:any)'] = 'general/pages';
+$route['pages'] = 'general/pages';
+
+$route['contacts/(:any)'] = 'general/contacts';
+$route['contacts'] = 'general/contacts';
+
+$route['news/(:any)'] = 'general/news';
+$route['news'] = 'general/news';
+
 $route['404_override'] = '';
 
 /* End of file routes.php */

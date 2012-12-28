@@ -64,7 +64,7 @@ class Update_db extends CI_Controller {
 				(2, 'resources', 'resources', 0, 1, ''),
 				(3, 'publications', 'publications', 0, 1, ''),
 				(4, 'media', 'media', 0, 1, ''),
-				(5, 'contact us', 'contactus', 0, 1, '');";
+				(5, 'contacts', 'contacts', 0, 1, '');";
 		$this->db->query($sql);
 
 		$sql =	"INSERT INTO `networks` (`id`, `title`, `link`, `description`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`) VALUES
