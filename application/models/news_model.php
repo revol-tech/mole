@@ -163,23 +163,28 @@ class News_model extends CI_Model{
 			$link_type = $params['link_type'];
 			unset($params['link_type']);
 		}
-//cho '<pre>';
+//echo '<pre>';
 //echo 'params : ';
 //print_r($params);		
 //echo '</pre>';
 //die;
 		$this->load->helper('text');
 		$data = $this->get($params);
-//echo '<pre>';
-//print_r($data);		
-//echo '</pre>';
+echo '<pre>';
+print_r($data);		
+print_r($params);
+echo $link_type;
+echo '</pre>';
+
 //die;
 		switch($params['news_type']){
 
 			//render news/Flash News
 			case '1':
-				if($link_type != null){
+				if($link_type == 'about'){
 					$str = $this->_render_news($data,$link_type);
+				}else if($link_type == 'page'){
+					$str = $this->_render_full_news($data);
 				}else{
 					$str = $this->_render_flash_news($data);
 				}
@@ -221,6 +226,17 @@ class News_model extends CI_Model{
 				$str = $this->_render_acts($data,$link_type);
 				break;
 		}
+		return $str;
+	}
+	private function _render_full_news($data){
+print_r($data);		
+		$str = '';
+		$str =	'<div class="fl">
+					<h1>
+						'.$data[0]->title.'
+					</h1>
+					<div class="text_box fr">'.$data[0]->content.'</div>
+				</div>';
 		return $str;
 	}
 

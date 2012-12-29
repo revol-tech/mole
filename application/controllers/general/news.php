@@ -14,7 +14,7 @@ class News extends MY_MOLE_Controller {
 	public function index(){
 		$this->load->library('render_library');
 		$this->render_library->render_inner();
-
+//die('in general/news');
 		$data = $this->links_model->get(array(
 											'link'=>$this->uri->segment(1).
 													'/'.
@@ -27,8 +27,12 @@ class News extends MY_MOLE_Controller {
 						'news_type'	=> 1,
 						'link_type' => 'news'
 					);
-		isset($data[0]->row_id)?$params['id']=$id:'';
-		
+//echo $this->uri->segment(2);die;
+		if ($this->uri->segment(2)){
+			$params['id']=$this->uri->segment(2);
+			$params['link_type'] = 'page';
+		}
+//print_r($params);die;
 		$page = $this->news_model->render($params);
 		$this->template->write('page',$page);
 
