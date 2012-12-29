@@ -14,7 +14,6 @@ class Menu_model extends CI_Model{
 		$this->load->library('form_validation');
 	}
 
-
 	/**
 	 * update existing link
 	 *
@@ -94,52 +93,6 @@ class Menu_model extends CI_Model{
 		$res = $this->db->get($this->table);
 
 		return $res->result();
-	}
-
-
-	/**
-	 * render the links [droopdown menus]
-	 *
-	 * @return string <li><a href="...." title="...">....</a></li>
-	 */
-	public function render_menu(){
-		$data = $this->get(array('active'=>1));
-
-		if(count($data)==0){
-			return '';
-		}
-		$str = '<ul class="menu sf-menu">';
-		$str.=$this->_render_recursive($data,0);
-		$str.='</ul>';
-
-		return $str;
-	}
-
-	/**
-	 * for recursive rendering
-	 */
-	private function _render_recursive($data,$parent_id){
-		if(!(count($data)>0))
-			return '';
-		$str = $parent_id!=0?'<ul>':'';
-
-		foreach($data as $k=>$v){
-			if($v->parent_id==$parent_id){
-
-				$str.='<li>';
-				$str.='<a href="'.site_url($v->link).'" title="'.$v->comments.'">';
-				$str.=$v->title;
-				$str.='</a>';
-
-				unset($data[$k]);
-
-				$str .= $this->_render_recursive($data,$v->id);
-				$str.='</li>';
-			}
-		}
-
-		$str .= $parent_id!=0?'</ul>':'';
-		return $str;
 	}
 
 

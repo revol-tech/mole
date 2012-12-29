@@ -20,12 +20,11 @@ class News_model extends CI_Model{
 				->where('id',$ids)
 				->where('news_type',$type)
 				->update($this->table);
-//echo $this->db->last_query();echo '<br/>';
+
 		$this->db->set(	'homepage',0 )
 				->where('id !=',$ids)
 				->where('news_type',$type)
 				->update($this->table);
-//echo $this->db->last_query();echo '<br/>';
 	}
 
 
@@ -40,7 +39,6 @@ class News_model extends CI_Model{
 		$this->db->set(	'active',$active=='true'?1:0 )
 				->where('id',$ids)
 				->update($this->table);
-//echo $this->db->last_query();
 	}
 
 
@@ -134,10 +132,6 @@ class News_model extends CI_Model{
 		}
 		if($news){
 			foreach($news as $key=>$value){
-//echo '<pre>';
-//print_r($value);
-//echo '</pre>';
-//die;
 				$this->db->where($key,$value);
 			}
 		}
@@ -163,29 +157,23 @@ class News_model extends CI_Model{
 			$link_type = $params['link_type'];
 			unset($params['link_type']);
 		}
-//echo '<pre>';
-//echo 'params : ';
-//print_r($params);		
-//echo '</pre>';
-//die;
 		$this->load->helper('text');
 		$data = $this->get($params);
-echo '<pre>';
-print_r($data);		
-print_r($params);
-echo $link_type;
-echo '</pre>';
 
-//die;
 		switch($params['news_type']){
 
 			//render news/Flash News
 			case '1':
 				if($link_type == 'about'){
+					//render partial news
 					$str = $this->_render_news($data,$link_type);
-				}else if($link_type == 'page'){
+				}else if($link_type == 'news'){
+					//render full news
 					$str = $this->_render_full_news($data);
+				}else if($link_type=='news_list'){
+					//render news list
 				}else{
+					//render flash news
 					$str = $this->_render_flash_news($data);
 				}
 				
@@ -229,7 +217,6 @@ echo '</pre>';
 		return $str;
 	}
 	private function _render_full_news($data){
-print_r($data);		
 		$str = '';
 		$str =	'<div class="fl">
 					<h1>
@@ -534,11 +521,6 @@ print_r($data);
 			return $str;
 		}
 
-		$str = '<div class="about">';
-		$str.= '<h1>'.$data[0]->title.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
-		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">read more</a>'; // <--- link not set properly
-		$str.= '</div>';
 
 		return $str;
 	}

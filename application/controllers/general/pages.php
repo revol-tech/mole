@@ -10,11 +10,14 @@ class Pages extends MY_MOLE_Controller {
 		parent::__construct();
 	}
 
-
+	/**
+	 * generate the inner page
+	 */
 	public function index(){
 		$this->load->library('render_library');
-		$this->render_library->render_inner();
+		$this->render_library->generate_inner();
 
+		// get the reqd. parameters
 		$data = $this->links_model->get(array(
 											'link'=>$this->uri->segment(1).
 													'/'.
@@ -25,12 +28,13 @@ class Pages extends MY_MOLE_Controller {
 		$params = array(
 						'id'		=> $data[0]->row_id,
 						'news_type'	=> 6,
-						'link_type' => 'news'
 					);
-		$page = $this->news_model->render($params);
-
-		$this->template->write('page',$page);
-
+		
+		//get thre reqd. contents
+		$page = $this->news_model->get($params);
+		
+		//render it
+		$this->render_library->generate_innermain($page[0],'about');
 
 
 		$this->template->render();
