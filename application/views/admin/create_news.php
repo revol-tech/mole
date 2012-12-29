@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-
-
 <!--
 	<!--for date picker
 
@@ -25,16 +23,27 @@
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>
+
 	<label>
 		Title
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>
+
+	<label>
+		link :
+		<?php echo site_url('news').'/'?>
+		<input type='text' name='link' value='<?php echo @$link?>' />
+	</label>
+	<br/>
+	<input type='hidden' name='linktype' value='news' />
+
 	<label>
 		created on
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>
 	</label>
 	<br/>
+
 	<label>
 		created by
 		<input type='text' name='created_by' disabled='disabled' value='<?php echo $created_by?>' />

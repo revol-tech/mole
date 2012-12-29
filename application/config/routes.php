@@ -46,8 +46,8 @@ $route['admin'] = 'admin/admin';
 $route['pages/(:any)'] = 'general/pages';
 $route['pages'] = 'general/pages';
 
-$route['contacts/(:any)'] = 'general/contacts';
-$route['contacts'] = 'general/contacts';
+//$route['contacts/(:any)'] = 'general/contacts';
+//$route['contacts'] = 'general/contacts';
 
 $route['news/(:any)'] = 'general/news';
 $route['news'] = 'general/news';

@@ -11,7 +11,7 @@ class MY_MOLE_Controller extends CI_Controller {
 		 * 
 		 */
 		set_count_visitors();
-    }    
+    }
 }
 
 /* End of file MY_MOLE_Controller.php */

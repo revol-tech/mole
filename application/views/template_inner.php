@@ -9,7 +9,6 @@
 	<title><?php echo @$title?></title>
 	<?php echo $_styles?>
 	<?php echo $_scripts?>
-
 </head>
 
 <body>
@@ -133,7 +132,7 @@
 			<?php echo @$contacts?>
 			<?php echo @$usefullinks?>
 			<?php echo @$network?>
-			<?php echo @$employments?>
+			<?php //echo @$employments?>
 			
 			<div class="clear"></div>
 		</div>

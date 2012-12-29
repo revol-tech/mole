@@ -190,6 +190,9 @@ class News extends CI_Controller {
 		//retrive that news
 		$this->get(array('id'=> $this->data['id']));
 
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		//display that news
 		$this->create();
 	}

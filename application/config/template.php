@@ -59,12 +59,6 @@ $template['active_template'] = 'default';
 $template['default']['template'] = 'template.php';
 
 $template['default']['regions'] = array(
-//		'header' => array(
-//				   'content' 	=> array('<div id="header"></div>','<div id="header_bottom"></div>'),
-//				   'name' 		=> 'Page Header',
-//				   'wrapper' 	=> '<div>',
-//				   'attributes' => array('id' => 'wrapper')
-//				),
 		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
 		'menu'	 	=> array('content'=>array(
 											'<div class="home fl">
@@ -104,12 +98,6 @@ $template['default']['parse_template'] = FALSE;
 $template['template_inner']['template'] = 'template_inner.php';
 
 $template['template_inner']['regions'] = array(
-//		'header' => array(
-//				   'content' 	=> array('<div id="header"></div>','<div id="header_bottom"></div>'),
-//				   'name' 		=> 'Page Header',
-//				   'wrapper' 	=> '<div>',
-//				   'attributes' => array('id' => 'wrapper')
-//				),
 		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
 		'menu'	 	=> array('content'=>array(
 											'<div class="home fl">
@@ -127,17 +115,11 @@ $template['template_inner']['regions'] = array(
 		'notices'	=> array(),
 		
 		
-//		'vip'		=> array(),
-//		'events' 	=> array(),
-//		'press'	 	=> array(),
-//		'health' 	=> array(),
-//		'gallery'	=> array(),
 		'contacts'	=> array(),
 		'usefullinks'=>array(),
 		'network'	=> array(),
 		'counter'	=> array(),
 		'employments'=>array(),
-//	   'content'=>'',
 	);
 
 
@@ -155,12 +137,6 @@ $template['template_inner']['parse_template'] = FALSE;
 $template['admin']['template'] = 'admin.php';
 
 $template['admin']['regions'] = array(
-//		'header' => array(
-//				   'content' 	=> array('<div id="header"></div>','<div id="header_bottom"></div>'),
-//				   'name' 		=> 'Page Header',
-//				   'wrapper' 	=> '<div>',
-//				   'attributes' => array('id' => 'wrapper')
-//				),
 		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
 		'menu'	 	=> array('content'=>array(
 											'<div class="home fl">
@@ -183,7 +159,6 @@ $template['admin']['regions'] = array(
 		'network'	=> array(),
 		'counter'	=> array(),
 		'employments'=>array(),
-//	   'content'=>'',
 	);
 
 

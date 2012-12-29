@@ -134,6 +134,10 @@ class News_model extends CI_Model{
 		}
 		if($news){
 			foreach($news as $key=>$value){
+//echo '<pre>';
+//print_r($value);
+//echo '</pre>';
+//die;
 				$this->db->where($key,$value);
 			}
 		}
@@ -159,10 +163,17 @@ class News_model extends CI_Model{
 			$link_type = $params['link_type'];
 			unset($params['link_type']);
 		}
-
+//cho '<pre>';
+//echo 'params : ';
+//print_r($params);		
+//echo '</pre>';
+//die;
 		$this->load->helper('text');
 		$data = $this->get($params);
-		
+//echo '<pre>';
+//print_r($data);		
+//echo '</pre>';
+//die;
 		switch($params['news_type']){
 
 			//render news/Flash News
@@ -305,6 +316,7 @@ class News_model extends CI_Model{
 			$str .= '</ul></div></div>';
 			return $str;
 		}
+
 		if($type=='about'){
 			$str .=	'<div class="highlight fl">'.
 					'	<div class="title1">'.
@@ -318,6 +330,17 @@ class News_model extends CI_Model{
 			}
 
 			$str .= '</ul></div></div>';
+			return $str;
+		}else if($type=='news'){
+//print_r($data);
+//die;			
+			$str =	'<div class="about_us fl">';
+			foreach($data as $key=>$val){
+				$str .= '<div class="text_box fr">
+							<a href="'.site_url('news/'.$val->id).'">'.$val->title.'</a>
+						</div>';
+			}
+			$str .= '</div>';
 			return $str;
 		}
 	}	
