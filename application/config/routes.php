@@ -46,6 +46,9 @@ $route = array(
 				'acts/(:any)'			=> 'general/acts',
 				'acts'					=> 'general/acts',
 
+				//$route['contacts/(:any)'] = 'general/contacts';
+				//$route['contacts'] = 'general/contacts';
+
 				'employments/(:any)'	=> 'general/employments',
 				'employments'			=> 'general/employments',
 				
@@ -58,11 +61,18 @@ $route = array(
 				'health/(:any)'			=> 'general/health',
 				'health'				=> 'general/health',
 
+				'notices/(:any)'		=> 'general/notices',
+				'notices'				=> 'general/notices',
+
 				'pages/(:any)'			=> 'general/pages',
 				'pages'					=> 'general/pages',
 
-				//$route['contacts/(:any)'] = 'general/contacts';
-				//$route['contacts'] = 'general/contacts';
+				'press/(:any)'			=> 'general/press',
+				'press'					=> 'general/press',
+
+//				'polls/(:any)'			=> 'general/polls/(:any)',
+				'polls'					=> 'general/polls',
+				'polls/vote'			=> 'general/polls/vote',
 
 				'news/(:any)'			=> 'general/news',
 				'news'					=> 'general/news',

@@ -145,11 +145,19 @@ class Poll_library{
 	 *
 	 * @return array of html
 	 */
-	public function result_compare($items){
+	public function result_compare($items=array()){
 		$data = array();
+		
+		//get the active poll if no parameter is passed.
+		if(count($items)==0){
+			$this->ci->db->where('active',1);
+			$data = $this->ci->db->get($this->table);
+			$items = $data->result();
+		}
 
+
+		//generate the poll result.
 		foreach($items as $key=>$value){
-//print_r();
 			$value->graph = '';
 			$value->graph .= '<div>';
 			$value->graph .= '<div><span>'.$value->option1.': </span>'.'<span>'.$value->count_option1.'</span></div>';
@@ -158,7 +166,6 @@ class Poll_library{
 			$value->graph .= '<div><span>'.$value->option4.': </span>'.'<span>'.$value->count_option4.'</span></div>';
 			$value->graph .= '</div>';
 		}
-//print_r($items);
 		return $items;
 	}
 
@@ -179,21 +186,21 @@ class Poll_library{
 					<div class="poll_block">
 						<p class="poll_topic">'.$poll[0]->question.'</p>
 						<!--<form method="post" action="'.site_url('pages/vote').'">-->
-						'.form_open(site_url('pages/vote')).'
+						'.form_open(site_url('polls/vote')).'
 							<div class="form_holder1 fl">
-								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="radio-choice-1">
-								<label for="radio-choice-1">'.$poll[0]->option1.'</label>
+								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="choice">
+								<label for="choice-1">'.$poll[0]->option1.'</label>
 							</div>
 							<div class="form_holder1 fl">
-								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="radio-choice-1">
+								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="choice">
 								<label for="radio-choice-2">'.$poll[0]->option2.'</label>
 							</div>
 							<div class="form_holder1 fl">
-								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="radio-choice-1">
+								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="choice">
 								<label for="radio-choice-3">'.$poll[0]->option3.'</label>
 							</div>
 							<div class="form_holder1 fl">
-								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="radio-choice-1">
+								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="choice">
 								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
 							</div>
 							<div class="form_holder1 fl mar_top">
@@ -209,9 +216,6 @@ class Poll_library{
 	}
 
 
-/**
- * fns below are not tested yet.
- */
 	/**
 	 * store vote count
 	 *
@@ -220,23 +224,54 @@ class Poll_library{
 	 * @param int answer_id
 	 * @returns boolean
 	 */
-	public function vote($user_id,$poll_id,$answer_id){
+	public function vote($user_id,$answer_id){
+		
+		//get the id of the active poll
+		$poll = $this->ci->db->get($this->table,array('active',1))->result();
+		
 		//store user id & timestamp for historical purposes
 		$this->ci->db->insert($this->history,array(
-													'question_id'	=> $poll_id,
+													'question_id'	=> $poll[0]->id,
 													'user_id'		=> $user_id,
 													'date_submitted'=> get_timestamp()
 													));
 
-//		$this->ci->db->set( 'count_option'.$answer_id,
-//							'count_option'.$answer_id + 1);
-		$this->ci->db->update($this->table)
-					->set(	'count_option'.$answer_id,
-							'count_option'.$answer_id + 1)
-					->where('id',$poll_id);
+
+		$data = array( 'count_option'.$answer_id => 'count_option'.$answer_id + 1	);
+
+		$this->ci->db->where('id',$poll[0]->id);
+		$this->ci->db->update($this->table,$data);
 
 		return true;
 	 }
+
+
+	/**
+	 * to check if the currently active poll is already voted 
+	 * by the current user/ip-address
+	 * 
+	 * @return true if already voted, false if not voted
+	 */
+	public function chk_history(){
+		$user = $this->ci->ion_auth->get_user();
+
+		if(count($user)==0){
+			$user['id'] = $this->ci->input->ip_address();
+		}
+		
+		$poll = $this->ci->db->get($this->table,array('user_id'=>$user['id'],'active'=>1));
+		
+		return ($poll->result()>0);
+	}
+	
+
+
+
+
+
+
+
+///not used anywhere yet
 
 	/**
 	 * search poll

@@ -5,7 +5,7 @@ class MY_MOLE_Controller extends CI_Controller {
     public function __construct(){
         parent::__construct();
 
-		$this->output->enable_profiler(true);
+//		$this->output->enable_profiler(true);
 //		$this->ci->db->cache_on();
         
 		/**
@@ -14,6 +14,10 @@ class MY_MOLE_Controller extends CI_Controller {
 		 * 
 		 */
 		set_count_visitors();		
+
+		/**
+		 * load the render library
+		 */
 		$this->load->library('render_library');
     }
 }

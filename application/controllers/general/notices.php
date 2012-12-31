@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Faqs extends MY_MOLE_Controller {
+class Notices extends MY_MOLE_Controller {
 	public function __construct(){
 		parent::__construct();
 	}
@@ -14,25 +14,30 @@ class Faqs extends MY_MOLE_Controller {
 
 		// get the reqd. parameters
 		$data = $this->links_model->get(array(
-											'link'=>$this->uri->segment(1)
+											'link'=>$this->uri->segment(1).
+													'/'.
+													$this->uri->segment(2)
 											)
 										);
 
-		$this->load->model('faqs_model');
+		$this->load->model('news_model');
 		$params = array(
 //						'id'		=> $data[0]->row_id,
-//						'news_type'	=> 3,
+						'news_type'	=> 2,
 					);
 
+		($this->uri->segment(2))?$params['id']=$this->uri->segment(2):'';
+
 		//get thre reqd. contents
-		$page = $this->faqs_model->get_type($params);
-		foreach($page as $key=>$val){
-			$questions = $this->faqs_model->get(array('faqs_type_id'=>$val->id));
-			$val->questions = $questions;
+		$page = $this->news_model->get($params);
+		
+		if ($this->uri->segment(2)){
+			$params['id']=$this->uri->segment(2);
+			$params['link_type'] = 'page';
 		}
 
 		//render it
-		$this->render_library->generate_innermain($page,'faqs');
+		$this->render_library->generate_innermain($page,($this->uri->segment(2))?'noticesfull':'noticeslist');
 
 
 		$this->template->render();
