@@ -17,8 +17,7 @@ class Faqs_model extends CI_Model{
 		if($limit){
 			$this->db->limit($limit,$start);
 		}
-//print_r(count($faqs));
-//print_r($faqs);		
+
 		if(count($faqs)>0 && is_array($faqs)){
 			foreach($faqs as $key=>$value){
 				$this->db->where($key,$value);

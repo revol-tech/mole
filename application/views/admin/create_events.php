@@ -6,11 +6,21 @@
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>
+
 	<label>
 		Title
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>
+
+	<label>
+		link :
+		<?php echo site_url('events').'/'?>
+		<input type='text' name='link' value='<?php echo @$link?>' />
+	</label>
+	<br/>
+	<input type='hidden' name='linktype' value='acts' />
+
 	<label>
 		created on
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>

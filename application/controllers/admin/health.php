@@ -187,6 +187,9 @@ class Health extends CI_Controller {
 		//retrive that health
 		$this->get(array('id'=> $this->data['id']));
 
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		//display that health
 		$this->create();
 	}
@@ -239,6 +242,11 @@ class Health extends CI_Controller {
 		if(count((array)$data)!=1){
 			show_404();
 		}
+		
+		$this->data = (array)$data[0];
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		$this->data = (array)$data[0];
 		$this->create();
 	}

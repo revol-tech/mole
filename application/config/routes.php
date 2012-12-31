@@ -38,21 +38,37 @@
 |
 */
 
+$route = array(
+				'default_controller'	=> 'pages_loader',
+				'admin/login'			=> 'admin/admin/login',
+				'admin'					=> 'admin/admin',
 
-$route['default_controller']= 'pages_loader';
-$route['admin/login'] = 'admin/admin/login';
-$route['admin'] = 'admin/admin';
+				'acts/(:any)'			=> 'general/acts',
+				'acts'					=> 'general/acts',
 
-$route['pages/(:any)'] = 'general/pages';
-$route['pages'] = 'general/pages';
+				'employments/(:any)'	=> 'general/employments',
+				'employments'			=> 'general/employments',
+				
+				'events/(:any)'			=> 'general/events',
+				'events'				=> 'general/events',
 
-//$route['contacts/(:any)'] = 'general/contacts';
-//$route['contacts'] = 'general/contacts';
+				'faqs/(:any)'			=> 'general/faqs',
+				'faqs'					=> 'general/faqs',
 
-$route['news/(:any)'] = 'general/news';
-$route['news'] = 'general/news';
+				'health/(:any)'			=> 'general/health',
+				'health'				=> 'general/health',
 
-$route['404_override'] = '';
+				'pages/(:any)'			=> 'general/pages',
+				'pages'					=> 'general/pages',
+
+				//$route['contacts/(:any)'] = 'general/contacts';
+				//$route['contacts'] = 'general/contacts';
+
+				'news/(:any)'			=> 'general/news',
+				'news'					=> 'general/news',
+
+				'404_override'			=> '',
+		);
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

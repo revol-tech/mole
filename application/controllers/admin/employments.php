@@ -187,6 +187,9 @@ class Employments extends CI_Controller {
 		//retrive that employments
 		$this->get(array('id'=> $this->data['id']));
 
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		//display that employments
 		$this->create();
 	}

@@ -188,6 +188,9 @@ class Acts extends CI_Controller {
 		//retrive that acts
 		$this->get(array('id'=> $this->data['id']));
 
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		//display that acts
 		$this->create();
 	}
@@ -242,6 +245,9 @@ class Acts extends CI_Controller {
 		}
 
 		$this->data = (array)$data[0];
+		$this->data['link'] = explode('/',$this->data['link']);
+		$this->data['link'] = $this->data['link'][1];
+
 		$this->create();
 	}
 

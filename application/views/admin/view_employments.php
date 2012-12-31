@@ -12,6 +12,12 @@
 	<span class='title'><?php echo $title;?></span>
 	<br/>
 
+	link :
+	<span class='link'>
+		<a href="<?php echo base_url().$link?>"><?php echo base_url().$link?></a>
+	</span>
+	<br/>
+
 	created by :
 	<span class='created_by'><?php echo $created_by;?></span>
 	<br/>

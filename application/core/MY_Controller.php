@@ -5,7 +5,7 @@ class MY_MOLE_Controller extends CI_Controller {
     public function __construct(){
         parent::__construct();
 
-//		$this->output->enable_profiler(true);
+		$this->output->enable_profiler(true);
 //		$this->ci->db->cache_on();
         
 		/**

@@ -42,54 +42,251 @@ class Render_library{
 		}
 
 		$str ='';
-		
-		if($type=='about'){
-			//display 'about' main content
-			$str .=	'<div class="about_us fl">
-						<h1>
-							<span>Welcome to</span> '.$data->title.'
-						</h1>
-						<div class="text_box fr">'.$data->content.'</div>
-					</div>';
 
-		}elseif($type=='newslist'){
+		switch($type){
+			case 'about' :
+				//display 'about' main content
+				$str .=	'<div class="about_us fl">
+							<h1>
+								<span>Welcome to</span> '.$data->title.'
+							</h1>
+							<div class="text_box fr">'.$data->content.'</div>
+						</div>';
+				break;
+			case 'newslist':
+				//display news previews ...
 
-			//display news previews ...
+				foreach($data as $key=>$val){
+					$str .=	'<div class="item1 fl">
+								<h3>'.$val->title.'</h3>
+								<div class="articleinfo fl">
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('news/'.$val->id).'">more</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'newsfull':
+				//display full single news article
 
-			foreach($data as $key=>$val){
 				$str .=	'<div class="item1 fl">
-							<h3>'.$val->title.'</h3>
+							<h3>'.$data[0]->title.'</h3>
 							<div class="articleinfo fl">
-								<span class="date-posted fl">'.$val->date_published.'</span>'.
-								//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
-								'<span class="author fl">'.$val->created_by.'</span>
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
 								<a class="print fr" href="#"></a>
 							</div>
 							<div class="item1_content fl">
-								<p>
-									'.word_limiter(strip_tags($val->content),20).'
-									<a class="more" href="'.site_url('news/'.$val->id).'">more</a> 
-								</p>
+								'.$data[0]->content.'
 							</div>
 						</div>';
-			}
-		}elseif($type=='newsfull'){
-			//display full single news article
+				break;
+			case 'actslist':
+				//display acts previews ...
 
-			$str .=	'<div class="item1 fl">
-						<h3>'.$data[0]->title.'</h3>
-						<div class="articleinfo fl">
-							<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
-							//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
-							'<span class="author fl">'.$data[0]->created_by.'</span>
-							<a class="print fr" href="#"></a>
-						</div>
-						<div class="item1_content fl">
-							'.$data[0]->content.'
-						</div>
-					</div>';
+				foreach($data as $key=>$val){
+					$str .=	'<div class="item1 fl">
+								<h3>'.$val->title.'</h3>
+								<div class="articleinfo fl">
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('acts/'.$val->id).'">more</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'actsfull':
+
+				//display full single news article
+
+				$str .=	'<div class="item1 fl">
+							<h3>'.$data[0]->title.'</h3>
+							<div class="articleinfo fl">
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
+								<a class="print fr" href="#"></a>
+							</div>
+							<div class="item1_content fl">
+								'.$data[0]->content.'
+							</div>
+						</div>';
+				break;
+			case 'empslist':
+				//display acts previews ...
+
+				foreach($data as $key=>$val){
+//echo '<pre>';
+//print_r($val);					
+//echo '</pre>';					
+
+					$str .=	'<div class="item1 fl">
+								<h3>'.$val->title.'</h3>
+								<div class="articleinfo fl">
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('employments/'.$val->id).'">more</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'empsfull':
+
+				//display full single news article
+
+				$str .=	'<div class="item1 fl">
+							<h3>'.$data[0]->title.'</h3>
+							<div class="articleinfo fl">
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
+								<a class="print fr" href="#"></a>
+							</div>
+							<div class="item1_content fl">
+								'.$data[0]->content.'
+							</div>
+						</div>';
+				break;
+			case 'eventslist':
+				//display acts previews ...
+
+				foreach($data as $key=>$val){
+//echo '<pre>';
+//print_r($val);					
+//echo '</pre>';					
+
+					$str .=	'<div class="item1 fl">
+								<h3>'.$val->title.'</h3>
+								<div class="articleinfo fl">
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('events/'.$val->id).'">more</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'eventsfull':
+
+				//display full single news article
+
+				$str .=	'<div class="item1 fl">
+							<h3>'.$data[0]->title.'</h3>
+							<div class="articleinfo fl">
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
+								<a class="print fr" href="#"></a>
+							</div>
+							<div class="item1_content fl">
+								'.$data[0]->content.'
+							</div>
+						</div>';
+				break;
+
+			case 'faqs':
+
+				//display faqs in accordion
+				$str .= '<div class="item2 fl" style="width:100%;">
+							<h2>FAQ\'s</h2>
+							<ul>';
+				foreach($data as $key=>$val){
+					$str .=	'<li style="float:none;">
+								<a 
+									title="'.$val->description.'">
+									<h3>'.$val->title.'</h3>
+									<span class="total_questions">
+										( Total '.count($val->questions).' Questions )
+									</span>
+								</a>
+								
+								<br/>'; 
+					if(($val->questions)){
+					foreach($val->questions as $kk=>$vv){
+						$str .=	'<div class="acc-item">
+									<a href="#" class="acc_trigger">
+										<span>'.$vv->question.'</span>
+									</a>
+									<div class="acc_container">
+										'.$vv->answer.'
+									</div>
+								</div>';
+					}
+					}
+					$str .= '</li>';
+				}
+				$str .= '	</ul>
+						</div>';
+				break;
 			
-		}	
+			case 'healthlist':
+				//display health previews ...
+
+				foreach($data as $key=>$val){
+					$str .=	'<div class="item1 fl">
+								<h3>'.$val->title.'</h3>
+								<div class="articleinfo fl">
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('acts/'.$val->id).'">more</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'healthfull':
+
+				//display full single news article
+
+				$str .=	'<div class="item1 fl">
+							<h3>'.$data[0]->title.'</h3>
+							<div class="articleinfo fl">
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
+								<a class="print fr" href="#"></a>
+							</div>
+							<div class="item1_content fl">
+								'.$data[0]->content.'
+							</div>
+						</div>';
+				break;
+		}
 		$this->ci->template->write('page',$str);
 	}
 
