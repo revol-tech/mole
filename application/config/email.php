@@ -7,12 +7,19 @@
 |
 */
 
-//$config['protocol']  = //mail	mail, sendmail, or smtp	The mail sending protocol.
-//$config['smtp_host'] = //SMTP Server Address.
-//$config['smtp_user'] = //SMTP Username.
-//$config['smtp_pass'] = //SMTP Password.
 
-$config['validate']  = TRUE; //(boolean)	Whether to validate the email address.
+//$config['validate']  = TRUE; //(boolean)	Whether to validate the email address.
+
+$config = Array(
+    'protocol' => 'smtp',
+    'smtp_host' => 'ssl://smtp.googlemail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'moletest123456',//tmp username -- for testing
+    'smtp_pass' => 'testmole123456',//tmp password -- for testing
+    'mailtype'  => 'html', 
+    'charset'   => 'utf-8',
+    'validate'	=> true
+);
 
 
 /* End of file email.php */

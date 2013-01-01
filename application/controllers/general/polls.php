@@ -35,8 +35,8 @@ class Polls extends MY_MOLE_Controller {
 		}
 //	print_r($_POST);	die;
 		$this->poll_library->vote($user['id'],$this->input->post('choice'));
-				
-		$this->view_results();
+
+		redirect('polls');
 	}
 	
 	
@@ -60,8 +60,11 @@ class Polls extends MY_MOLE_Controller {
 	 */
 	public function index(){
 		$this->load->library('render_library');
-	
-		if($this->poll_library->chk_history()){
+
+		//chk if this poll has already been voted by this user
+		//or thiss ip address
+//echo $this->poll_library->chk_history();die;		
+		if(($this->poll_library->chk_history()!=0)){
 			$this->view_results();
 			return;
 		}

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_Add_album extends CI_Migration {
+class Migration_Add_faqs_type extends CI_Migration {
 
 	public function __construct(){
 		parent::__construct();
@@ -24,7 +24,7 @@ class Migration_Add_album extends CI_Migration {
 
 		$this->dbforge->add_key('active');
 		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table('faq_type');
+		$this->dbforge->create_table('faqs_type');
 
 	//--------------------------------------------
 
@@ -32,7 +32,7 @@ class Migration_Add_album extends CI_Migration {
 
 	public function down()
 	{
-		$this->dbforge->drop_table('faq_type');
+		$this->dbforge->drop_table('faqs_type');
 	}
 }
 

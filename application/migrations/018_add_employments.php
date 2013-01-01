@@ -11,7 +11,7 @@ class Migration_Add_employments extends CI_Migration {
 	public function up()
 	{
 		$fields = array(
-						    '`id` int(11) NOT NULL',
+				'`id` int(11) NOT NULL',
                 '`title` varchar(127) CHARACTER SET utf8 NOT NULL',
                 '`content` varchar(255) CHARACTER SET utf8 NOT NULL',
                 '`usefullinks_type` int(127) NOT NULL',

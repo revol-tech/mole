@@ -259,9 +259,17 @@ class Poll_library{
 			$user['id'] = $this->ci->input->ip_address();
 		}
 		
-		$poll = $this->ci->db->get($this->table,array('user_id'=>$user['id'],'active'=>1));
-		
-		return ($poll->result()>0);
+		$sql = 'SELECT * FROM `'.$this->history.'` INNER JOIN `'.$this->table.'`
+				ON `'.$this->history.'`.`question_id` = `'.$this->table.'`.`id`
+
+				WHERE `'.$this->table.'`.`active` = 1
+				AND `'.$this->history.'`.`user_id` = "'.$user['id'].'";';
+
+		$poll = $this->ci->db->query($sql);
+//print_r(count($poll->result()));
+//echo $this->ci->db->last_query();
+//die;
+		return count($poll->result());
 	}
 	
 

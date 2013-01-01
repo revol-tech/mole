@@ -12,15 +12,15 @@ class Migration_Add_links extends CI_Migration {
 		$fields = array(
 						'`id` int(11) NOT NULL AUTO_INCREMENT',
 						'`link` VARCHAR( 127 ) NOT NULL' ,
-						'`table` varchar NOT NULL',
-						'`row_id` varchar NOT NULL',
+						'`table` varchar( 127 ) NOT NULL ',
+						'`row_id` varchar( 11 ) NOT NULL',
 					);
 		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('table');
 		$this->dbforge->add_key('row_id');
 		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table('faq_type');
+		$this->dbforge->create_table('links');
 
 		$this->db->query('ALTER TABLE `links` ADD UNIQUE `link` ( `link` ) ');
 

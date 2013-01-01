@@ -87,12 +87,18 @@ class Feedback_library{
 		$this->ci->load->library('email');
 
 		$this->ci->email->from($data['sender_email'], $data['sender_name']);
-		$this->ci->email->to($this->ci->config->config['ion_auth']['admin_email']);
+
+		//$this->ci->email->to($this->ci->config->config['ion_auth']['admin_email']);
+//setting the tmp address for testing.
+$this->ci->email->to('moletest123456@gmail.com');
 		
 		$this->ci->email->subject('Site Email');
 		$this->ci->email->message($data['sender_comments']);
 	
-		$this->ci->emal->send();
+		$this->ci->email->set_newline("\r\n");
+
+
+		$this->ci->email->send();
 
 		$this->ci->session->set_flashdata('feedback_status', 'Thank You for your feedback.');		
 	}
