@@ -253,7 +253,7 @@ class Poll_library{
 	 * @return true if already voted, false if not voted
 	 */
 	public function chk_history(){
-		$user = $this->ci->ion_auth->get_user();
+		$user = (array)$this->ci->ion_auth->get_user();
 
 		if(count($user)==0){
 			$user['id'] = $this->ci->input->ip_address();

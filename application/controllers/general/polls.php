@@ -66,6 +66,10 @@ class Polls extends MY_MOLE_Controller {
 			return;
 		}
 
+		if($method = $this->uri->segment(2)){
+			$this->$method();
+			return;
+		}
 
 		$active_poll = $this->poll_library->render_poll();
 		

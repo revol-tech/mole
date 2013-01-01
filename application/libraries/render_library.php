@@ -329,6 +329,31 @@ class Render_library{
 			case 'polls':
 				$str .= $data;
 				break;
+			case 'contacts':
+				$this->ci->load->library('feedback_library');
+
+				$str .= '<div class="grid_7 fl" style="float:right;">
+							'.$this->ci->feedback_library->render().'
+						</div>
+
+						<div class="grid_7 address pad_alpha fl" style="width:275px;">
+							<div class="item1 fl">
+								<h3><span>Contact</span> Details</h3>
+								<p>'.$data[0]->address.'</p>
+								<div class="contact_holder">
+									<div class="tel">
+										<p><strong>T</strong><span>'.$data[0]->tel.'</span></p>
+										<p><strong>F</strong><span>'.$data[0]->fax.'</span></p>
+									</div>
+								</div>
+								<div class="contact_holder">
+									<div class="email">
+										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
+									</div>
+								</div>
+							</div>
+						</div>';
+				break;
 		}
 		$this->ci->template->write('page',$str);
 	}

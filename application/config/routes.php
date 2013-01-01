@@ -40,14 +40,15 @@
 
 $route = array(
 				'default_controller'	=> 'pages_loader',
+
 				'admin/login'			=> 'admin/admin/login',
 				'admin'					=> 'admin/admin',
 
 				'acts/(:any)'			=> 'general/acts',
 				'acts'					=> 'general/acts',
 
-				//$route['contacts/(:any)'] = 'general/contacts';
-				//$route['contacts'] = 'general/contacts';
+				'contacts/(:any)'		=> 'general/contacts',
+				'contacts'				=> 'general/contacts',
 
 				'employments/(:any)'	=> 'general/employments',
 				'employments'			=> 'general/employments',
@@ -70,9 +71,8 @@ $route = array(
 				'press/(:any)'			=> 'general/press',
 				'press'					=> 'general/press',
 
-//				'polls/(:any)'			=> 'general/polls/(:any)',
+				'polls/(:any)'			=> 'general/polls',
 				'polls'					=> 'general/polls',
-				'polls/vote'			=> 'general/polls/vote',
 
 				'news/(:any)'			=> 'general/news',
 				'news'					=> 'general/news',

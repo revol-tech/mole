@@ -354,11 +354,11 @@ class News_model extends CI_Model{
 		}
 		
 		$str ='';
-
-		if(!isset($config['jcarousel'])){
+//$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery-1.8.2.min.js"></script>';
+//		if(!isset($config['jcarousel'])){
 			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
-			$this->config->set_item('jcarousel',true);
-		}
+//			$this->config->set_item('jcarousel',true);
+//		}
 		
 		$str.=	'<style>'.
 				'	.news_ticker_content{'.
@@ -373,7 +373,7 @@ class News_model extends CI_Model{
 				'</style>';
 		$str.='<div class="newsticker">';
 		$str.='<div class="news_ticker_content" style="">';
-		$str .= //'<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
+		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
 				'<script>
 				function flash_initCallback(carousel){
 					
@@ -402,7 +402,7 @@ class News_model extends CI_Model{
 					})
 				})</script>';
 
-		//$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
+		$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
 		$str .=	'<div class="ticker_title fl">'.
 				'	<h3>News</h3>'.
 				'</div>';
@@ -419,6 +419,7 @@ class News_model extends CI_Model{
 			}
 		}
 		$str.= '</ul></div></div>';
+//echo $str;die;		
 		return $str;
 	}
 	private function _render_notices($data,$link_type){

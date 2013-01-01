@@ -28,7 +28,6 @@ class Feedback_library{
 	public function render(){
 		$validation = validation_errors();
 
-//echo $this->ci->session->flashdata('feedback_status');
 		$html =	'<div class="item1 fl">
 					<h2><span>Feedback</span> &amp; Suggestions</h2>
 					<p class="textblock fl">
@@ -38,7 +37,7 @@ class Feedback_library{
 						$this->ci->session->flashdata('feedback_status').
 					'</p>'.
 						$validation.
-					form_open('submit_feedback',array('id'=>'feedback')).'
+					form_open('contacts/submit_feedback',array('id'=>'feedback')).'
 						<div class="form_holder2">
 							<span class="text">Name</span>
 							<input type="text" value="'.set_value('sender_name').'" name="sender_name" class="textbox fl" 
@@ -81,38 +80,41 @@ class Feedback_library{
 	 *
 	 */
 	public function send($data){
+
 		if(!$this->_validate($data)){
 			return false;
 		}
 		$this->ci->load->library('email');
 
 		$this->ci->email->from($data['sender_email'], $data['sender_name']);
-//echo $this->ci->config->config['ion_auth']['admin_email'];
 		$this->ci->email->to($this->ci->config->config['ion_auth']['admin_email']);
 		
 		$this->ci->email->subject('Site Email');
 		$this->ci->email->message($data['sender_comments']);
+	
+		$this->ci->emal->send();
 
-//		$this->ci->email->send();
 		$this->ci->session->set_flashdata('feedback_status', 'Thank You for your feedback.');		
-//		redirect('aboutus');
 	}
 
+	/**
+	 * validate email parameters
+	 * sets reply information in flashdata "feedback_status"
+	 * 
+	 * @returns boolean
+	 */
 	private function _validate($data=array()){
-//echo '<pre>';
-//print_r($data);
-//echo '</pre>';
 		$this->ci->load->library('form_validation');
+		$this->ci->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
 
 		$this->ci->form_validation->set_rules('sender_name', 'Name', 'required|trim');
 		$this->ci->form_validation->set_rules('sender_comments', 'Comments', 'required|trim');
 		$this->ci->form_validation->set_rules('sender_email', 'Email', 'required|trim|valid_email');
 
 		if (! $this->ci->form_validation->run()){
-//echo form_error();			
+			$this->ci->session->set_flashdata('feedback_status',validation_errors());
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -203,119 +205,4 @@ class Feedback_library{
 		$this->ci->db->set(	'active',$active )
 					->update($this->table);
 	}
-
-
-
-	/**
-	 * delete poll
-	 *
-	 * @param array of poll ids to be deleted
-	 * 		  OR int
-	 * @return boolean
-	 */
-	public function del_poll($ids){
-		$this->ci->db->where('id',$ids)
-					->delete($this->table);
-
-	}
-
-
-	/**
-	 * list polls
-	 *
-	 * @param id
-	 * @return polls
-	 */
-	public function list_poll($ids=false,$limit=null,$start=null,$active=false){
-		if($active){
-			$this->ci->db->where('active',1);
-		}
-		if($limit){
-			$this->ci->db->limit($limit,$start);
-		}
-		$ids ? $this->ci->db->where('id',$ids) : '';
-
-		$res = $this->ci->db->get($this->table);
-
-		if($res->result()){
-//			$data = ($res->result());
-			$data = $this->result_compare($res->result());
-//print_r($data);
-			return $data;
-		}else{
-			false;
-		}
-	}
-
-
-
-	/**
-	 * disp. results of a poll
-	 *
-	 * @return array of html
-	 */
-	public function result_compare($items){
-		$data = array();
-
-		foreach($items as $key=>$value){
-//print_r();
-			$value->graph = '';
-			$value->graph .= '<div>';
-			$value->graph .= '<div><span>'.$value->option1.': </span>'.'<span>'.$value->count_option1.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option2.': </span>'.'<span>'.$value->count_option2.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option3.': </span>'.'<span>'.$value->count_option3.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option4.': </span>'.'<span>'.$value->count_option4.'</span></div>';
-			$value->graph .= '</div>';
-		}
-//print_r($items);
-		return $items;
-	}
-
-
-/**
- * fns below are not tested yet.
- */
-	/**
-	 * store vote count
-	 *
-	 * @param int user_id
-	 * @param int poll_id
-	 * @param int answer_id
-	 * @returns boolean
-	 */
-	public function vote($user_id,$poll_id,$answer_id){
-		//store user id & timestamp for historical purposes
-		$this->ci->db->insert($this->history,array(
-													'question_id'	=> $poll_id,
-													'user_id'		=> $user_id,
-													'date_submitted'=> get_timestamp()
-													));
-
-//		$this->ci->db->set( 'count_option'.$answer_id,
-//							'count_option'.$answer_id + 1);
-		$this->ci->db->update($this->table)
-					->set(	'count_option'.$answer_id,
-							'count_option'.$answer_id + 1)
-					->where('id',$poll_id);
-
-		return true;
-	 }
-
-	/**
-	 * search poll
-	 *
-	 * @param array
-	 * @returns result
-	 */
-	public function search($data=null){
-
-		if($data==null){
-			return $this->results();
-		}
-
-		$res = $this->get_where($this->table,$data);
-
-		return $res->result() ? $res->result() : false ;
-	}
-
 }
