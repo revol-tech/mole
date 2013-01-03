@@ -18,7 +18,6 @@
 				<div class="grid_1 fl">
 					<?php echo $menu?>
 				</div>
-				<!--
 				<div class="grid_2 fr">
 					<div id="search-box">
 						<?php echo form_open()?>
@@ -33,7 +32,7 @@
 						<a href="#" class="active fl">English</a> 
 					</div>
 				</div>
-				-->
+
 				<!-- Main menu end -->
 				<div class="clear"></div>
 			</div>
@@ -72,6 +71,12 @@
 			</div>
 		</div>
 		
+		<div class="container_1 fl">
+			
+			<div class="grid_3 alpha fl">
+				<?php echo @$organizations?>
+			</div>
+		</div>
 		
 <!--		
 		<div class="container_2 fl">

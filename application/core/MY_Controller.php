@@ -19,6 +19,8 @@ class MY_MOLE_Controller extends CI_Controller {
 		 * load the render library
 		 */
 		$this->load->library('render_library');
+		
+		$this->session->set_userdata('lang','eng');
     }
 }
 

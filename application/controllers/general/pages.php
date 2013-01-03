@@ -28,6 +28,7 @@ class Pages extends MY_MOLE_Controller {
 		$params = array(
 						'id'		=> $data[0]->row_id,
 						'news_type'	=> 6,
+//						'lang'		=> $this->session->userdata('lang'),
 					);
 		
 		//get thre reqd. contents

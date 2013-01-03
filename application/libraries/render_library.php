@@ -30,6 +30,8 @@ class Render_library{
 		$this->_generate_header();
 		$this->_generate_footer();
 
+		$this->generate_organizations();
+
 //		$this->_right_view();
 	}
 
@@ -377,7 +379,7 @@ class Render_library{
 	public function generate_mainpage($data){
 		$str = '<div class="about">';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
+		$str.= '<p>'.word_limiter($data[0]->content,100).'</p>';
 		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">read more</a>'; // <--- link not set properly
 		$str.= '</div>';
 
@@ -444,6 +446,22 @@ class Render_library{
 		$menu=$this->_generate_menu_recursive($data,0);
 		$this->ci->template->write('menu',$menu);	
 	}
+
+
+
+	/**
+	 * fn. to generate organizations 
+	 */
+	public function generate_organizations(){
+
+		$this->ci->load->model('organizations_model');
+		$data = array('active'	=> 1,);
+		$str = $this->ci->organizations_model->render($data);
+		
+		$this->ci->template->write('organizations',$str);	
+	}
+
+
 	/**
 	* for recursive rendering
 	*/

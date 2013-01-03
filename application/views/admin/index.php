@@ -46,9 +46,9 @@
 		<td><a href='<?php echo site_url('admin/vip')?>'>VIP</a></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td><a href='<?php echo site_url('admin/organizations')?>'>Organizations</a></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 	</tr>
 </table>

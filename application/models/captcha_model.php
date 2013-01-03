@@ -18,8 +18,8 @@ class Captcha_model extends CI_Model{
 			'img_path' 	=> './public/imgs/captcha/',
 			'img_url' 	=> base_url().'public/imgs/captcha/',
 			'font_path' => './public/fonts/texb.ttf',
-			'img_width' => 120,
-			'img_height'=> 40,
+			'img_width' => 180,
+			'img_height'=> 60,
 			'expiration'=> CAPTCHATIME,
 			//'word'		=> 'hello'
 			);

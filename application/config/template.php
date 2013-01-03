@@ -108,6 +108,7 @@ $template['template_inner']['regions'] = array(
 		
 		'page'	 	=> array(),
 		'news'		=> array(),
+		'organizations'=>array(),
 		'acts'		=> array(),
 		'poll'	 	=> array(),
 		'feedback'	=> array(),

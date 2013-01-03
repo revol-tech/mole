@@ -9,7 +9,7 @@
 	<title><?php echo $title?></title>
 
 	<!-- CSS Start //-->
-	<link rel="shortcut icon" href="<?php echo CSSPATH?>images/favicon.png"/>
+	<link rel="shortcut icon" href="<?php echo CSSPATH?>images/favicon.ico" type="image/x-icon"/>
 	<!--<link rel="stylesheet" type="text/css" href="./style.css"/>-->
 
 	<!-- Import CSS Reset File -->
@@ -39,7 +39,7 @@
 				<div class="grid_1 fl">
 					<?php echo $menu?>
 				</div>
-				<!--
+
 				<div class="grid_2 fr">
 					<div id="search-box">
 						<?php echo form_open()?>
@@ -52,25 +52,36 @@
 						<a href="#" class="active fl">English</a>
 					</div>
 				</div>
-				-->
+
 				<!-- Main menu end -->
 				<div class="clear"></div>
 			</div>
 		</div>
 		<!--Header End -->
-
+		<div id="header_bottom">
+			<div class="container_1">
+			 <ul class="sub_nav">
+				<li><a href="#">Contact Us</a> </li>
+				<li><a href="feedback.html">Feedback</a> </li>
+				<li><a href="#">FAQs</a> </li>
+				<li><a href="events.html">events</a> </li>
+			  </ul>
+			</div>
+		  </div>
 	</div>
 
 
 	<!-- Contain starts Here -->
 	<div id="container">
+		<div class="wrap_flag"></div>		
+		
 		<div id="topheader">
 			<div class="grid_1 alpha fl">
 				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo">
 					Government of Nepal Ministry of Labour and Employment
 				</a>
 			</div>
-			<!--
+
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
@@ -79,7 +90,7 @@
 					</ul>
 				</div>
 			</div>
-			-->
+
 		</div>
 
 		<div class="slider-wrapper theme-default fl">

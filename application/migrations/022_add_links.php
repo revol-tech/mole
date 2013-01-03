@@ -34,5 +34,5 @@ class Migration_Add_links extends CI_Migration {
 	}
 }
 
-/* End of file 021_add_links.php */
+/* End of file 022_add_links.php */
 /* Location: ./application/migrations/022_add_links.php */
