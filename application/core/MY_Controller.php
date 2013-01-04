@@ -26,7 +26,7 @@ class MY_MOLE_Controller extends CI_Controller {
 		 * if nonthing is set, set default to english
 		 */
 		if(!($this->session->userdata('lang')))
-			$this->session->set_userdata('lang','eng');
+			$this->session->set_userdata('lang','en');
     }
 }
 

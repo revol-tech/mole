@@ -1,5 +1,33 @@
 
 $(function () {
+	//to get the url.
+	var url = '';
+	$('script').each(function(){
+		if( $(this).attr('src')!= undefined){
+			if($(this).attr('src').split('?')[1]!=undefined )
+				url = $(this).attr('src').split('?')[1];
+		}
+	})
+
+	//change language to nepali
+	$('.nepal').click(function(e){
+		e.preventDefault();
+		$('.np').show();
+		$('.en').hide();
+		$(this).addClass('active');
+		$('.english').removeClass('active');
+		$.get(url+"np");
+	})
+
+	//change language to english
+	$('.english').click(function(e){
+		e.preventDefault();
+		$('.en').show();
+		$('.np').hide();
+		$(this).addClass('active');
+		$('.nepal').removeClass('active');
+		$.get(url+"en");
+	})
 
 	//print only the selected div
 	$( ".print" ).click(function(e) {

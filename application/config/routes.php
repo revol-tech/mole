@@ -77,6 +77,9 @@ $route = array(
 				'news/(:any)'			=> 'general/news',
 				'news'					=> 'general/news',
 
+				'en'					=> 'pages_loader/set_language',
+				'np'					=> 'pages_loader/set_language',
+
 				'404_override'			=> '',
 		);
 

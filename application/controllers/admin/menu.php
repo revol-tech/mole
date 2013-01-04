@@ -78,10 +78,12 @@ class Menu extends CI_Controller {
 
 		$data = array(
 						'title' 	=> $this->input->post('title'),
+						'title_np'	=> $this->input->post('title_np'),
+						'comments'	=> $this->input->post('comments'),
+						'comments_np'=>$this->input->post('comments_np'),
 						'link'		=> $this->input->post('link'),
 						'parent_id'	=> $this->input->post('parent_id'),
 						'active'	=> $this->input->post('active'),
-						'comments'	=> $this->input->post('comments')
 					);
 
 

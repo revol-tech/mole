@@ -49,4 +49,13 @@ class Pages_loader extends MY_MOLE_Controller {
 
 		$this->template->render();	
 	}
+	
+	
+	/**
+	 * set the changed language into the session
+	 */
+	public function set_language(){
+		$lang = $this->uri->segment(1);
+		$this->session->set_userdata('lang',$lang);
+	}
 }

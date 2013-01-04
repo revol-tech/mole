@@ -432,11 +432,15 @@ class Render_library{
 		$this->ci->load->model('menu_model');
 		$menu_data = $this->ci->menu_model->get(array('active'=>1));
 		$this->generate_menu($menu_data);
-		
-		//language menu
+	
+		//language bar
 		$str =	'<div class="language fr">
-					<a href="#" class="nepal fl color">Nepali</a>
-					<a href="#" class="active fl">English</a>
+					<a href="#" class="nepal '.
+						(($this->ci->session->userdata('lang')=='np')?'active':'').
+						' fl color">Nepali</a>
+					<a href="#" class="english '.
+						(($this->ci->session->userdata('lang')=='en')?'active':'').
+						' fl color">English</a>
 				</div>';
 		$this->ci->template->write('lang_menu',$str);
 
@@ -499,12 +503,15 @@ class Render_library{
 			if($v->parent_id==$parent_id){
 
 				$str.='<li>';
-				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments.'">';
-if($this->ci->session->userdata('lang')=='eng')
+				//english
+				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments.'" class="en" '.
+						(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 				$str.=$v->title;
-else
-				$str.=$v->np_title;
-
+				$str.='</a>';
+				//nepali
+				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments_np.'" class="np" '.
+						(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+				$str.=$v->title_np;
 				$str.='</a>';
 
 				unset($data[$k]);
@@ -572,6 +579,6 @@ else
 		$this->ci->template->add_js(JSPATH.'jquery.superfish.js');
 		$this->ci->template->add_js(JSPATH.'jquery.supersubs.js');
 		$this->ci->template->add_js(JSPATH.'jquery.totop.js');
-		$this->ci->template->add_js(JSPATH.'functions.js');
+		$this->ci->template->add_js(JSPATH.'functions.js?'.base_url());
 	}
 }

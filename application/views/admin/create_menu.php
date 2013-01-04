@@ -4,7 +4,19 @@
 <?php echo form_open(site_url('admin/menu/save'))?>
 
 	title :
-	<input type='text' name='title' value='<?php echo @$title;?>'/>
+	<input type='text' name='title' value='<?php echo @$title?>'/>
+	<br/>
+
+	title (नेपाली) :
+	<input type='text' name='title_np' value='<?php echo @$title_np?>'/>
+	<br/>
+
+	comments :
+	<input type='text' name='comments' value='<?php echo @$comments?>'/>
+	<br/>
+
+	comments (नेपाली) :
+	<input type='text' name='comments_np' value='<?php echo @$comments_np?>'/>
 	<br/>
 
 	link :
@@ -19,10 +31,6 @@
 		active
 		<input type='checkbox' name='active' value='1'<?php echo @$active==1?'checked="checked"':''?>/>
 	</label>
-	<br/>
-
-	comments :
-	<input type='text' name='comments' value='<?php echo @$comments?>'/>
 	<br/>
 
 	<?php /* to get the id of the menu when editing. */?>

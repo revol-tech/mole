@@ -128,7 +128,7 @@ class Events extends CI_Controller {
 
 
 			//add  image
-			$str = '<img src="'.base_url.DOUMENTS.$data[$key]->timestamp.'" width="211" height="126" />';
+			$str = '<img src="'.base_url().DOCUMENTS.$data[$key]->timestamp.'" width="211" height="126" />';
 			$data[$key]->timestamp_img = $str;
 			
 		}

@@ -1,9 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div>
+	<br/>
+	<a href='<?php echo site_url('admin/menu/edit/'.$id)?>'>
+		edit
+	</a>
+	<br/>
 
 	title :
 	<?php echo $title;?>
+	<br/>
+
+	title (नेपाली) :
+	<?php echo $title_np;?>
+	<br/>
+
+	comments:
+	<?php echo @$comments;?>
+	<br/>
+
+	comments (नेपाली) :
+	<?php echo @$comments;?>
 	<br/>
 
 	link :
@@ -19,8 +36,5 @@
 		<?php echo $active?>
 	</label>
 	<br/>
-
-	comments:
-	<?php echo @$comments;?>
 
 </div>

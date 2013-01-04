@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.superfish.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.totop.js"></script>
-	<script type="text/javascript" src="<?php echo JSPATH?>functions.js"></script>
+	<script type="text/javascript" src="<?php echo JSPATH?>functions.js?<?php echo base_url()?>"></script>
 </head>
 
 <body>

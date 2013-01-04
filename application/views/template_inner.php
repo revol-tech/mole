@@ -27,10 +27,7 @@
 							<input class="btn-search fr" type="submit" value=""/>
 						</form>
 					</div>
-					<div class="language fr"> 
-						<a href="#" class="nepal fl color">Nepali</a> 
-						<a href="#" class="active fl">English</a> 
-					</div>
+					<?php echo $lang_menu ?>
 				</div>
 
 				<!-- Main menu end -->
