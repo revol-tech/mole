@@ -56,7 +56,7 @@ class Vip extends CI_Controller {
 			$item->press_type	=' --';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->activate		= '--';
+			$item->active		= '--';
 			$item->edit			= '--';
 			$item->del			= '--';
 

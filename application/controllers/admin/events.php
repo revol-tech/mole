@@ -3,16 +3,13 @@
 class Events extends CI_Controller {
 
 	public $data = array();
-	public $type = 3;
-
 
 	public function __construct(){
 		parent::__construct();
 
 		chk_admin();
 
-		$this->load->helper('ckeditor');
-		$this->load->model('news_model','events_model');
+		$this->load->model('events_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -29,6 +26,7 @@ class Events extends CI_Controller {
 
 
 	public function index(){
+
 
 		$data['items'] = $this->list_events();
 //echo '<pre>';
@@ -50,7 +48,7 @@ class Events extends CI_Controller {
 
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/events/index');
-		$config['total_rows'] = $this->events_model->record_count($this->type);
+		$config['total_rows'] = $this->events_model->record_count();
 		$config['per_page'] = PAGEITEMS;
 
 
@@ -63,6 +61,7 @@ class Events extends CI_Controller {
 			$item->events_type	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
+			$item->active		='--';
 			$item->edit			='--';
 			$item->del			='--';
 
@@ -81,9 +80,10 @@ class Events extends CI_Controller {
 		isset($config['uri_segment'])?'':$config['uri_segment']=$this->uri->total_segments();
 		$page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
 		//echo $page;
-
+		
 		//get reqd. page's data
-		$data = $this->events_model->get(array('news_type'=>$this->type),
+		$this->load->helper('text');
+		$data = $this->events_model->get(array(),
 											$config['per_page'],
 											$page
 										);
@@ -91,7 +91,7 @@ class Events extends CI_Controller {
 
 		foreach($data as $key=>$val){
 			$str =	'<a href="'.site_url('admin/events/view/'.$val->id).'">'.
-						$val->title.
+						word_limiter($val->title,5).
 					'</a>';
 			$data[$key]->title_link = $str;
 
@@ -124,8 +124,13 @@ class Events extends CI_Controller {
 				$str .=	'<input type="submit" name="active"   value="Activate"/>';
 			}
 			$str .= '</form>';
-
 			$data[$key]->active = $str;
+
+
+			//add  image
+			$str = '<img src="'.base_url.DOUMENTS.$data[$key]->timestamp.'" width="211" height="126" />';
+			$data[$key]->timestamp_img = $str;
+			
 		}
 //echo '<pre>';
 //print_r($data);
@@ -150,9 +155,10 @@ class Events extends CI_Controller {
 	 * events form
 	 */
     public function create(){
-		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+
+		if(isset($this->data['contents'])){
+			$this->data['contents'] = $this->data['contents'];
+		}
 
 		//generate username, current date if creating nu events [not editing]
 		if(!isset($this->data['date_created'])){
@@ -195,13 +201,13 @@ class Events extends CI_Controller {
     public function save(){
 		//save the events & return the id of that events
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->data['id'] = $this->events_model->save($this->type);
+		$this->data['id'] = $this->events_model->save();
 
 		//retrive that events
 		$this->get(array('id'=> $this->data['id']));
 
 		//display that events
-		$this->create();
+		redirect('admin/ebents');
 	}
 
 
@@ -211,7 +217,6 @@ class Events extends CI_Controller {
 	 */
 	public function view(){
 		$id=false;
-		$get_events = array('news_type'=>$this->type);
 
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='view'){
@@ -277,22 +282,9 @@ class Events extends CI_Controller {
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->events_model->del_poll($this->input->post('events_id'));
+		$this->events_model->del($this->input->post('events_id'));
 
-		redirect($this->session->flashdata('redirectToCurrent'));
-	}
-
-
-
-	/**
-	 * ckEditor's configurations.
-	 */
-	private function _ckeditor_conf(){
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content',
-			'path'	=>	CKEDITOR,
-		);
+		//redirect($this->session->flashdata('redirectToCurrent'));
+		redirect('admin/events');
 	}
 }

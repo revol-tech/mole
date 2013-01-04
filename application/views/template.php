@@ -47,10 +47,7 @@
 							<input class="btn-search fr" type="submit" value=""/>
 						</form>
 					</div>
-					<div class="language fr">
-						<a href="#" class="nepal fl color">Nepali</a>
-						<a href="#" class="active fl">English</a>
-					</div>
+					<?php echo $lang_menu ?>
 				</div>
 
 				<!-- Main menu end -->
@@ -113,17 +110,7 @@
 		</div>
 		<div class="container_3 fl">
 			<div class="grid_5 alpha omega fl">
-				<div class="item1 fl">
-					<div class="right_col fl">
-						<h2><span>Latest</span> Events</h2>
-						<?php echo $events?>
-					</div>
-					<div class="fr">
-						<div class="block_img2">
-							<img src="<?php echo IMGPATH?>event1.png" alt="" title=""/>
-						</div>
-					</div>
-				</div>
+				<?php echo $events?>
 				<div id="simple-tabs" class="fl">
 					<ul class="tabs">
 						<li><a href="#tab1">Press Release</a></li>

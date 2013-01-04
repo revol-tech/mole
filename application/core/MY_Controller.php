@@ -20,7 +20,13 @@ class MY_MOLE_Controller extends CI_Controller {
 		 */
 		$this->load->library('render_library');
 		
-		$this->session->set_userdata('lang','eng');
+		
+		/**
+		 * getting the set language.
+		 * if nonthing is set, set default to english
+		 */
+		if(!($this->session->userdata('lang')))
+			$this->session->set_userdata('lang','eng');
     }
 }
 

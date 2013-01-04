@@ -38,17 +38,12 @@
 	padding: 40px 40px 0px 40px;
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #E0E0E0;
-	-moz-border-radius: 0px 0px 5px 5px;
-	-webkit-border-radius: 0px 0px 5px 5px;
-	border-radius: 0px 0px 5px 5px;
 }
 #inner_container .container_1 {
 padding: 40px 0px 0px 0px;
 	background: #fff;
 	width:960px;
-	-moz-border-radius: 0px 0px 5px 5px;
-	-webkit-border-radius: 0px 0px 5px 5px;
-	border-radius: 0px 0px 5px 5px;
+	
 }
 #container, #inner_container{
 	width: 960px;

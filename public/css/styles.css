@@ -476,7 +476,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c50ad', end
 	padding: 10px 10px;
 	display: block;
 	margin: 0 0 10px 0;
-	cursor: pointer;
 	-webkit-transition: all .3s ease;
 	-moz-transition: all .3s ease;
 	-o-transition: all .3s ease;

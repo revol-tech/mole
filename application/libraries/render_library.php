@@ -432,6 +432,14 @@ class Render_library{
 		$this->ci->load->model('menu_model');
 		$menu_data = $this->ci->menu_model->get(array('active'=>1));
 		$this->generate_menu($menu_data);
+		
+		//language menu
+		$str =	'<div class="language fr">
+					<a href="#" class="nepal fl color">Nepali</a>
+					<a href="#" class="active fl">English</a>
+				</div>';
+		$this->ci->template->write('lang_menu',$str);
+
 	}
 
 
@@ -461,6 +469,22 @@ class Render_library{
 		$this->ci->template->write('organizations',$str);	
 	}
 
+	/**
+	 * fn to generate event.
+	 * list or a single
+	 */
+	public function generate_inner_event($data){
+		//set template
+		$this->ci->template->set_template('template_inner_events');
+
+		//set header & footer
+		$this->_generate_header();
+		$this->_generate_footer();
+
+		$str = $this->ci->events_model->render_events_page($data);
+
+		$this->ci->template->write('events',$str);
+	}
 
 	/**
 	* for recursive rendering
@@ -476,7 +500,11 @@ class Render_library{
 
 				$str.='<li>';
 				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments.'">';
+if($this->ci->session->userdata('lang')=='eng')
 				$str.=$v->title;
+else
+				$str.=$v->np_title;
+
 				$str.='</a>';
 
 				unset($data[$k]);
@@ -489,7 +517,6 @@ class Render_library{
 		$str .= '</ul>';
 		return $str;
 	}
-
 
 	/**
 	* footers

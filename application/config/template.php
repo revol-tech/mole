@@ -66,6 +66,7 @@ $template['default']['regions'] = array(
 											</div>',
 										)
 						),
+		'lang_menu'	=> array(),
 		'slider' 	=> array(),
 		'flash_news'=> array(),
 		'page'	 	=> array(),
@@ -105,6 +106,7 @@ $template['template_inner']['regions'] = array(
 											</div>',
 										)
 						),
+		'lang_menu'	=> array(),
 		
 		'page'	 	=> array(),
 		'news'		=> array(),
@@ -129,6 +131,47 @@ $template['template_inner']['parser_method'] = 'parse';
 $template['template_inner']['parse_template'] = FALSE;
 
 //=============================================================
+
+/*
+|--------------------------------------------------------------------------
+| Inner Page -- Events Template Configuration
+|--------------------------------------------------------------------------
+*/
+$template['template_inner_events']['template'] = 'template_inner_events.php';
+
+$template['template_inner_events']['regions'] = array(
+		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
+		'menu'	 	=> array('content'=>array(
+											'<div class="home fl">
+												<a href="'.base_url().'"></a>
+											</div>',
+										)
+						),
+		'lang_menu'	=> array(),
+		'events'	=> array(),
+		'news'		=> array(),
+		'organizations'=>array(),
+		'acts'		=> array(),
+		'poll'	 	=> array(),
+		'feedback'	=> array(),
+		'faqs'		=> array(),
+		'notices'	=> array(),
+		
+		
+		'contacts'	=> array(),
+		'usefullinks'=>array(),
+		'network'	=> array(),
+		'counter'	=> array(),
+		'employments'=>array(),
+	);
+
+
+$template['template_inner_events']['parser'] = 'parser';
+$template['template_inner_events']['parser_method'] = 'parse';
+$template['template_inner_events']['parse_template'] = FALSE;
+
+//=============================================================
+
 
 /*
 |--------------------------------------------------------------------------

@@ -38,6 +38,15 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->template->write('flash_news',$flash_news);
 
 		
+		//events
+		$this->load->model('events_model');
+		$params = array(/*'homepage'=>1,*/'active'=>1);
+		$events = $this->events_model->get($params);
+		$events = $this->events_model->render_events($events);
+		$this->template->write('events',$events);
+
+
+
 		$this->template->render();	
 	}
 }

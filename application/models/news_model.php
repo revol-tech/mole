@@ -299,20 +299,21 @@ class News_model extends CI_Model{
 
 		return $str;
 	}
-	private function _render_events($data){
-		if(count($data)==0){
-			return '';
-		}
-
-		$str = '<div class="item1_content fl">';
-		$str.= '	<p>'.word_limiter(strip_tags($data[0]->content),25);
-		$str.= '		<a href="#" class="more">read more</a></p>'; // <--- link not set properly
-		$str.= '<a href="#" class="view_all">View All Events +</a>';
-		$str.= '</div>';
-
-		return $str;
+/*
+private function _render_events($data){
+	if(count($data)==0){
+		return '';
 	}
-	private function _render_news($data,$type=null){
+
+	$str = '<div class="item1_content fl">';
+	$str.= '	<p>'.word_limiter(strip_tags($data[0]->content),25);
+	$str.= '		<a href="#" class="more">read more</a></p>'; // <--- link not set properly
+	$str.= '<a href="#" class="view_all">View All Events +</a>';
+	$str.= '</div>';
+
+	return $str;
+}
+*/	private function _render_news($data,$type=null){
 		$str = '';
 
 		if(count($data)==0){

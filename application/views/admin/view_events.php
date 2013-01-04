@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div>
-	<br/>
+	<!--<br/>
 	<a href='<?php echo site_url('admin/events/edit/'.$id)?>'>
 		edit
-	</a>
+	</a>-->
 	<br/>
 
 
@@ -14,7 +14,7 @@
 
 	link :
 	<span class='link'>
-		<a href="<?php echo base_url().$link?>"><?php echo base_url().$link?></a>
+		<a href="<?php //echo base_url().$link?>"><?php //echo base_url().$link?></a>
 	</span>
 	<br/>
 
@@ -27,9 +27,13 @@
 	<?php echo $active?>
 	<br/>
 
-	content :<br/>
+	image : 
+	<?php echo $timestamp_img?>
+	<br/>
+
+	contents :<br/>
 	<hr/>
-	<?php echo $content?>
+	<?php echo $contents?>
 	<br/>
 	<hr/>
 </div>
