@@ -6,12 +6,23 @@
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>
+
+	<textarea name="content_np" id="content_np" >
+		<?php echo @$content_np?>
+	</textarea>
+
 	<label>
 		Title
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>
 	
+	<label>
+		Title (नेपाली)
+		<input type='text' name='title_np' value='<?php echo @$title_np?>' />
+	</label>
+	<br/>
+
 	<label>
 		link :
 		<?php echo site_url('pages').'/'?>
@@ -25,6 +36,8 @@
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>
 	</label>
 	<br/>
+
+
 	<label>
 		created by
 		<input type='text' name='created_by' disabled='disabled' value='<?php echo $created_by?>' />
@@ -48,8 +61,10 @@
 	</label>
 --->
 	<input type='hidden' name='id' value='<?php echo @$id?>'>
+	
+	<input type='submit' nam='submit' value='save' />
 </form>
 
 <?php echo $generated_editor ?>
-
+<?php echo $generated_editor2 ?>
 <div id='preview'></div>

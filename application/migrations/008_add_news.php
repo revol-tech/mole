@@ -14,6 +14,8 @@ class Migration_Add_news extends CI_Migration {
 						'`id` int(10) unsigned NOT NULL AUTO_INCREMENT',
 						'`title` varchar(255) NOT NULL',
 						'`content` longtext NOT NULL',
+						'`title_np` varchar(255) NOT NULL',
+						'`content_np` longtext NOT NULL',
 						'`news_type` int(127) NOT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',

@@ -172,6 +172,7 @@ class Pages extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu pages [not editing]
 		if(!isset($this->data['date_created'])){
@@ -217,7 +218,8 @@ class Pages extends CI_Controller {
 		$this->data['link'] = $this->data['link'][1];
 
 		//display that pages
-		$this->create();
+		redirect('admin/pages');
+		//$this->create();
 	}
 
 
@@ -309,6 +311,11 @@ class Pages extends CI_Controller {
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
+			'path'	=>	CKEDITOR,
+		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
 			'path'	=>	CKEDITOR,
 		);
 	}

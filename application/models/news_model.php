@@ -50,8 +50,11 @@ class News_model extends CI_Model{
 		$update = array(
 					   'title' 		=> $data[0],
 					   'content' 	=> $data[1],
-					   'date_published' => $data[3],
-					   'date_removed' => $data[4]
+					   'title_np' 	=> $data[2],
+					   'content_np'	=> $data[3],
+					   
+					   'date_published' => $data[6],
+					   'date_removed' => $data[7]
 					);
 
 		$this->db->where('id', $data['id']);
@@ -82,15 +85,23 @@ class News_model extends CI_Model{
 		$data = array(
 					$this->input->post('title'),
 					htmlentities($this->input->post('content')),
+					$this->input->post('title_np'),
+						($this->input->post('content_np')),
+						//htmlentities($this->input->post('content_np')),
 					$this->session->userdata('user_id'),
 					$this->session->userdata('date_created'),
 					$this->input->post('date_published'),
 					$this->input->post('date_removed')
 				);
-				
+//echo '<pre>';
+//print_r($data);
+//print_r($this->input->post());
+//echo '</pre>';				
+//die;
 		//update existing news
 		if(($this->input->post('id'))){
 			$data['id'] = $this->input->post('id');
+//echo $this->db->last_query();
 
 			return $this->update($data);
 
@@ -98,15 +109,15 @@ class News_model extends CI_Model{
 		//insert new news
 		}else{
 			$sql =	'insert into '.$this->table.' ('.
-						'title,			content,		news_type,'.
+						'title,			content, title_np, content_np, news_type,'.
 						'created_by,	date_created,	date_published,'.
 						'date_removed'.
-					')values ( ?, ?, '.$type.',?,?,?,?);';
-
+					')values ( ?, ?, ?, ?,'.$type.',?,?,?,?);';
+//echo $sql;
 			if(! $this->db->query($sql,$data)){
 				return $this->db->_error_message();
 			}
-
+//echo $this->db->last_query();
 			$id = $this->db->insert_id();
 			
 			$data_links = array(
@@ -136,13 +147,16 @@ class News_model extends CI_Model{
 			}
 		}
 		$res = $this->db->get($this->table);
-
+//echo '<pre>';
+//print_r($res->result());
+//echo '</pre>';
 		foreach($res->result() as $value){
 			$tmp_link = $this->links_model->get(array('table'=>'news','row_id'=>$value->id));
 
 			$value->link = isset($tmp_link[0]->link)?$tmp_link[0]->link:'';
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
+			$value->content_np = html_entity_decode($value->content_np,ENT_QUOTES, 'UTF-8');
 		}
 
 		return $res->result();

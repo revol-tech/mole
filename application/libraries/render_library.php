@@ -51,10 +51,20 @@ class Render_library{
 			case 'about' :
 				//display 'about' main content
 				$str .=	'<div class="about_us fl">
-							<h1>
-								<span>Welcome to</span> '.$data->title.'
-							</h1>
-							<div class="text_box fr">'.$data->content.'</div>
+							<h1 class="en" '.
+								(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').
+								'>'.$data->title.'</h1>
+							<div class="text_box fr en" '.
+								(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').
+								'>'.$data->content.'</div>
+
+
+							<h1 class="np" '.
+								(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').
+								'>'.$data->title_np.'</h1>
+							<div class="text_box fr np" '.
+								(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').
+								'>'.$data->content_np.'</div>
 						</div>';
 				break;
 			case 'newslist':
@@ -377,10 +387,20 @@ class Render_library{
 	 * main contents for the homepage
 	 */
 	public function generate_mainpage($data){
-		$str = '<div class="about">';
+		//english
+		$str = '<div class="about en" ';
+		$str.= (($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
 		$str.= '<p>'.word_limiter($data[0]->content,100).'</p>';
 		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">read more</a>'; // <--- link not set properly
+		$str.= '</div>';
+	
+		//nepali
+		$str.= '<div class="about np" ';
+		$str.= (($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+		$str.= '<h1>'.$data[0]->title_np.'</h1>';
+		$str.= '<p>'.word_limiter($data[0]->content_np,100).'</p>';
+		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">अझै पठ्नहोस्</a>';
 		$str.= '</div>';
 
 		$this->ci->template->write('page',$str);

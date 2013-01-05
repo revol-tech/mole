@@ -148,6 +148,7 @@ class News extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+//		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 //print_r($this->data);
 
 		//generate username, current date if creating nu news [not editing]

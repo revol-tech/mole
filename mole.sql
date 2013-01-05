@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2013 at 04:42 AM
+-- Generation Time: Jan 05, 2013 at 11:47 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -59,14 +59,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(17, 1357312676, '127.0.0.1', 'Qs5dmK');
+(20, 1357397775, '127.0.0.1', 'tmh1gP');
 
 -- --------------------------------------------------------
 
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `links`
@@ -308,8 +308,13 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (7, 'employments/emp', 'news', '7'),
 (8, 'acts/event1', 'news', '3'),
 (9, 'acts/h1', 'news', '14'),
-(10, 'events/asdf', 'news', '27'),
-(11, 'events/ee', 'news', '28');
+(10, 'pages/asdf', 'news', '27'),
+(11, 'events/ee', 'news', '28'),
+(12, 'pages/aas', 'news', '27'),
+(13, 'pages/', 'news', '28'),
+(14, 'pages/ास', 'news', '29'),
+(15, 'pages/sf', 'news', '30'),
+(18, 'pages/sfg', 'news', '29');
 
 -- --------------------------------------------------------
 
@@ -337,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 --
 
 INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `parent_id`, `active`) VALUES
-(1, 'हाम्रो बारे', '', 'about us', '', 'pages/xx', 0, 1),
+(1, 'हाम्रो बारे', 'कलज;ाद;ल सकज;लसदकज', 'about us', 'as asdg asg sa sg s', 'pages/xx', 0, 1),
 (2, 'रिसोर्सेस', '', 'resources', '', 'resources', 0, 1),
 (3, '', '', 'publications', '', 'publications', 0, 0),
 (5, '', '', 'contact us', '', 'contacts/x4', 0, 0),
@@ -408,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1357312688, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1357397793, 1);
 
 -- --------------------------------------------------------
 
@@ -447,7 +452,9 @@ INSERT INTO `networks` (`id`, `title`, `link`, `description`, `created_by`, `dat
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `content` longtext NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `title_np` varchar(255) DEFAULT NULL,
+  `content_np` varchar(255) DEFAULT NULL,
   `news_type` int(127) NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
@@ -458,32 +465,32 @@ CREATE TABLE IF NOT EXISTS `news` (
   `lang` enum('en','np') NOT NULL DEFAULT 'en',
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `title`, `content`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`) VALUES
-(1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(4, 'The National Budget for 2013', '&lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry of Finance&lt;/p&gt;\n', 4, 1, '2012-12-18 23:46:08', '2012-12-18 23:46:08', '0000-00-00 00:00:00', 1, 0, 'en'),
-(5, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(6, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en'),
-(8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(10, 'Minimum employment rights', '&lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n', 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(14, 'WSH Regulatory Framework ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &lt;br /&gt;\n In nec faucibus ipsum. Integer vehicula congue sapien non tincidunt.&lt;br /&gt;\n Phasellus eget massa ligula, vitae consectetur risus. Cras sed nisi&lt;br /&gt;\n lorem. Aliquam erat volutpat. In vulputate sapien eget arcu sagittis&lt;br /&gt;\n lacinia. Curabitur et tortor nisi, a aliquet justo. Donec id purus at&lt;br /&gt;\n tellus eleifend tempor.&lt;br /&gt;\n &lt;br /&gt;\n Fusce mauris leo, dignissim id ornare sed, gravida in augue. Curabitur&lt;br /&gt;\n id quam massa, sit amet fermentum nulla. In a ipsum a elit eleifend&lt;br /&gt;\n lobortis at sit amet risus. Quisque eros ligula, imperdiet vitae&lt;br /&gt;\n dignissim a, rhoncus in est. Etiam ullamcorper metus eget quam ornare&lt;br /&gt;\n tristique vitae non sapien. In accumsan adipiscing lorem, eget faucibus&lt;br /&gt;\n leo tempor vel. Ut id mi eget turpis porta pharetra. Mauris elementum,&lt;br /&gt;\n quam consectetur hendrerit ultricies, purus velit congue quam, vulputate&lt;br /&gt;\n semper nibh mi quis mi. Etiam condimentum lobortis accumsan. Vestibulum&lt;br /&gt;\n felis erat, mattis vel viverra eget, laoreet quis est. Suspendisse&lt;br /&gt;\n congue pretium semper. Integer viverra tristique velit, in tincidunt&lt;br /&gt;\n sapien ultrices id. Morbi fringilla pellentesque leo sit amet congue.&lt;br /&gt;\n Quisque eget mi sed sem euismod bibendum id porttitor lorem.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 18:58:52', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(15, 'Safety & Health Management System ', '&lt;p&gt;\n Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 19:00:44', '2012-12-19 19:04:50', '0000-00-00 00:00:00', 1, 0, 'en'),
-(16, 'Monitoring and Surveillance ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 19:01:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(17, 'Work Injury Compensation', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 19:02:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
-(18, 'Certification & Registration', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 19:03:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(19, 'Incident Reporting ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius massa id elit posuere placerat. Integer tempor&lt;br /&gt;\n cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu&lt;br /&gt;\n purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum&lt;br /&gt;\n interdum in, cursus a nunc. Quisque varius libero id ligula congue&lt;br /&gt;\n euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;br /&gt;\n &lt;br /&gt;\n Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;br /&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros.&lt;br /&gt;\n Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in&lt;br /&gt;\n felis imperdiet dignissim. Integer lobortis, diam vel ultrices&lt;br /&gt;\n fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet&lt;br /&gt;\n eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget&lt;br /&gt;\n libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar&lt;br /&gt;\n sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices&lt;br /&gt;\n posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et&lt;br /&gt;\n netus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;br /&gt;\n &amp;nbsp;&lt;/p&gt;\n', 5, 1, '2012-12-19 19:04:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
-(21, ' Amendments to the Employment of Foreign Manpower Act', '&lt;p&gt;\r\n The Employment of Foreign Manpower Act (EFMA) prescribes the responsibilities and obligations pertaining to the employment of foreign workers. The EFMA was last amended in 2007.Since 2010, following the recommendations of the Economic Strategies Committee, MOM has been taking steps to moderate the inflow and raise the quality of foreign manpower in Singapore...\r\n', 8, 1, '2012-12-22 02:39:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(23, '.askldfjpwei;we g', '&lt;p&gt;\n ;oiasdf kjasd ;fowaf af aw&lt;/p&gt;\n', 5, 1, '2012-12-26 08:10:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(24, ' Ministry of Labour and Employment', '&lt;p&gt;\n Establishment Ministry of Labour &amp;amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp;amp; Transport Management, 2057 BS, Ministry of Labour &amp;amp; Employment, 2069. Objectives and Long Term vision of Ministry, &lt;span&gt;&lt;a href=&quot;#&quot;&gt;Development of Pure Industrial Relationship&lt;/a&gt;,&lt;/span&gt; Ending Unemployment and Development of Productive and Qualitative Employment System, Child Labour Alleviation, Development of Safety, Managed and help based transportation system.&lt;/p&gt;\n', 6, 1, '2012-12-27 10:57:01', '2013-01-03 15:33:33', '0000-00-00 00:00:00', 1, 1, 'en'),
-(25, 'uyi', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;\n', 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en');
+INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`) VALUES
+(1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', NULL, NULL, 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(4, 'The National Budget for 2013', '&lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o', NULL, NULL, 4, 1, '2012-12-18 23:46:08', '2012-12-18 23:46:08', '0000-00-00 00:00:00', 1, 0, 'en'),
+(5, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', NULL, NULL, 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(6, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', NULL, NULL, 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', NULL, NULL, 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en'),
+(8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', NULL, NULL, 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', NULL, NULL, 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(10, 'Minimum employment rights', '&lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n', NULL, NULL, 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(14, 'WSH Regulatory Framework ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', NULL, NULL, 5, 1, '2012-12-19 18:58:52', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(15, 'Safety & Health Management System ', '&lt;p&gt;\n Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius ', NULL, NULL, 5, 1, '2012-12-19 19:00:44', '2012-12-19 19:04:50', '0000-00-00 00:00:00', 1, 0, 'en'),
+(16, 'Monitoring and Surveillance ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', NULL, NULL, 5, 1, '2012-12-19 19:01:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(17, 'Work Injury Compensation', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', NULL, NULL, 5, 1, '2012-12-19 19:02:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
+(18, 'Certification & Registration', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', NULL, NULL, 5, 1, '2012-12-19 19:03:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(19, 'Incident Reporting ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', NULL, NULL, 5, 1, '2012-12-19 19:04:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
+(21, ' Amendments to the Employment of Foreign Manpower Act', '&lt;p&gt;\r\n The Employment of Foreign Manpower Act (EFMA) prescribes the responsibilities and obligations pertaining to the employment of foreign workers. The EFMA was last amended in 2007.Since 2010, following the recommendations of the Economic Strategi', NULL, NULL, 8, 1, '2012-12-22 02:39:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(23, '.askldfjpwei;we g', '&lt;p&gt;\n ;oiasdf kjasd ;fowaf af aw&lt;/p&gt;\n', NULL, NULL, 5, 1, '2012-12-26 08:10:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(24, ' Ministry of Labour and Employments', '&lt;p&gt;\n Establishment Ministry of Labour &amp;amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp;amp; Transport Management, 2057 BS, Ministry of Labour &amp;amp; Employment, 2069. Objectives and Long Term vision of Minis', 'छवबब', '<p>\n सग सउग ासगारग ासग ागासगा</p>\n', 6, 1, '2012-12-27 10:57:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en'),
+(25, 'uyi', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;\n', NULL, NULL, 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', NULL, NULL, 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en');
 
 -- --------------------------------------------------------
 
@@ -699,7 +706,7 @@ CREATE TABLE IF NOT EXISTS `visited_count` (
   `ip_address` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=361 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=135 ;
 
 --
 -- Dumping data for table `visited_count`
