@@ -3,14 +3,6 @@
 <!--<form method='post' action='<?php echo site_url('admin/pages/save')?>' style='width:700px;'>-->
 <?php echo form_open(site_url('admin/pages/save'),array('style'=>'width:700px;'))?>
 
-	<textarea name="content" id="content" >
-		<?php echo @$content?>
-	</textarea>
-
-	<textarea name="content_np" id="content_np" >
-		<?php echo @$content_np?>
-	</textarea>
-
 	<label>
 		Title
 		<input type='text' name='title' value='<?php echo @$title?>' />
@@ -21,6 +13,18 @@
 		Title (नेपाली)
 		<input type='text' name='title_np' value='<?php echo @$title_np?>' />
 	</label>
+	<br/>
+
+	content :
+	<textarea name="content" id="content" >
+		<?php echo @$content?>
+	</textarea>
+	<br/>
+	
+	content (नेपाली) : 
+	<textarea name="content_np" id="content_np" >
+		<?php echo @$content_np?>
+	</textarea>
 	<br/>
 
 	<label>
@@ -62,9 +66,9 @@
 --->
 	<input type='hidden' name='id' value='<?php echo @$id?>'>
 	
-	<input type='submit' nam='submit' value='save' />
+	<input type='submit' name='submit' value='save' />
 </form>
 
-<?php echo $generated_editor ?>
-<?php echo $generated_editor2 ?>
+<?php //echo $generated_editor ?>
+<?php //echo $generated_editor2 ?>
 <div id='preview'></div>

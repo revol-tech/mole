@@ -63,6 +63,13 @@ class Files_model extends CI_Model{
 			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' alt="'.$v->title.'" title="#htmlcaption'.$count.'"';
+			$str.=' class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"');
+			$str.=' />';
+
+			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
+			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
+			$str.=' alt="'.$v->title_np.'" title="#htmlcaption'.$count.'"';
+			$str.=' class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"');
 			$str.=' />';
 
 			$count++;
@@ -137,6 +144,8 @@ class Files_model extends CI_Model{
 						'filename' 		=> $_FILES['file']['name'],
 						'title' 		=> $this->input->post('title'),
 						'description'	=> $this->input->post('description'),
+						'title_np' 		=> $this->input->post('title_np'),
+						'description_np'=> $this->input->post('description_np'),
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
 						'date_created'	=> $this->session->userdata('date_created'),

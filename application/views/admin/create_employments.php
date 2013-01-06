@@ -22,14 +22,30 @@
 -->
 <!--<form method='post' action='<?php echo site_url('admin/employments/save')?>' style='width:700px;'>-->
 <?php echo form_open(site_url('admin/employments/save'),array('style'=>'width:700px;'))?>
-	<textarea name="content" id="content" >
-		<?php echo @$content?>
-	</textarea>
 	<label>
 		Title
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>
+
+	<label>
+		Title (नेपाली)
+		<input type='text' name='title_np' value='<?php echo @$title_np?>' />
+	</label>
+	<br/>
+
+	content : 
+	<textarea name="content" id="content" >
+		<?php echo @$content?>
+	</textarea>
+	<br/>
+	
+	content (नेपाली) : 
+	<textarea name="content_np" id="content_np" >
+		<?php echo @$content_np?>
+	</textarea>
+	<br/>
+	
 
 	<label>
 		link :
@@ -60,28 +76,10 @@
 	</label>
 --->
 	<input type='hidden' name='id' value='<?php echo @$id?>'>
+	<input type='submit' name='submit' value='save' />
 </form>
 
-<?php echo $generated_editor ?>
+<?php //echo $generated_editor ?>
+<?php //echo $generated_editor2 ?>
 
 <div id='preview'></div>
-
-<script>
-/*$(function() {
-    var editor = CKEDITOR.editor.replace('CKEditor'); // define CKEditor
-
-    $("#submit").click(function() {
-        var text = editor.getData(); // Use CKEditor inbuilt functionality to get the content
-        $.ajax({
-            type: "POST",
-            url: <?php echo site_url('admin/employments/save')?>,
-            data: "text=" + text,
-            dataType: "html",
-            success: function(data) {
-				alert('adsf');
-                $("#text-container").append(data);
-            });
-        });
-    });
-});
-*/</script>

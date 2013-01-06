@@ -9,7 +9,11 @@
 
 
 	title :
-	<span class='title'><?php echo $title;?></span>
+	<span class='title'><?php echo $title?></span>
+	<br/>
+
+	title (नेपाली) :
+	<span class='title_np'><?php echo $title_np?></span>
 	<br/>
 
 	link :
@@ -34,6 +38,12 @@
 	contents :<br/>
 	<hr/>
 	<?php echo $contents?>
+	<br/>
+	<hr/>
+
+	contents (नेपाली) :<br/>
+	<hr/>
+	<?php echo $contents_np?>
 	<br/>
 	<hr/>
 </div>

@@ -13,8 +13,10 @@ class Migration_Add_usefullinks extends CI_Migration {
 		$fields = array(
 			  '`id` int(11) NOT NULL auto_increment',
               '`title` varchar(127) CHARACTER SET utf8 NOT NULL',
+              '`title_np` varchar(127) CHARACTER SET utf8 NOT NULL',
               '`link` varchar(127) CHARACTER SET utf8 NOT NULL',
-              '`description` varchar(127) NOT NULL',
+              '`description` varchar(255) NOT NULL',
+              '`description_np` varchar(255) NOT NULL',
               '`created_by` int(11) NOT NULL',
               '`date_created` timestamp NULL DEFAULT NULL',
               '`date_published` timestamp NULL DEFAULT NULL',

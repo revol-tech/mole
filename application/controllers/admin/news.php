@@ -147,8 +147,8 @@ class News extends CI_Controller {
     public function create(){
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
-//		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
+		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		//$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 //print_r($this->data);
 
 		//generate username, current date if creating nu news [not editing]
@@ -194,8 +194,7 @@ class News extends CI_Controller {
 		$this->data['link'] = explode('/',$this->data['link']);
 		$this->data['link'] = $this->data['link'][1];
 
-		//display that news
-		$this->create();
+		redirect('admin/news');
 	}
 
 
@@ -288,5 +287,14 @@ class News extends CI_Controller {
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
 		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
+			'path'	=>	CKEDITOR,
+		);		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
+			'path'	=>	CKEDITOR,
+		);		
 	}
 }

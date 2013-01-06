@@ -10,6 +10,13 @@
 	</textarea>
 	<br/>
 
+	<hr/>
+	address (नेपाली) :<br/>
+	<textarea name='address_np' id='address_np'>
+		<?php echo @$address_np?>
+	</textarea>
+	<br/>
+
 	<label>tel :
 		<input type='text' name='tel' value='<?php echo @$tel?>' />
 	</label>

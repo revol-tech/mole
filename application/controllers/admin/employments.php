@@ -145,7 +145,8 @@ class Employments extends CI_Controller {
     public function create(){
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		//$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu employments [not editing]
 		if(!isset($this->data['date_created'])){
@@ -190,8 +191,8 @@ class Employments extends CI_Controller {
 		$this->data['link'] = explode('/',$this->data['link']);
 		$this->data['link'] = $this->data['link'][1];
 
-		//display that employments
-		$this->create();
+
+		redirect('admin/employments');
 	}
 
 
@@ -281,6 +282,11 @@ class Employments extends CI_Controller {
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
+			'path'	=>	CKEDITOR,
+		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
 			'path'	=>	CKEDITOR,
 		);
 	}

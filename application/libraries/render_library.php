@@ -348,8 +348,10 @@ class Render_library{
 							'.$this->ci->feedback_library->render().'
 						</div>
 
-						<div class="grid_7 address pad_alpha fl" style="width:275px;">
-							<div class="item1 fl">
+						<div class="grid_7 address pad_alpha fl" style="width:275px;">'.
+							
+							'<div class="item1 fl en" '.
+									(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >
 								<h3><span>Contact</span> Details</h3>
 								<p>'.$data[0]->address.'</p>
 								<div class="contact_holder">
@@ -364,6 +366,25 @@ class Render_library{
 									</div>
 								</div>
 							</div>
+							
+							
+							<div class="item1 fl np" '.
+								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
+								'<h3><span>सम्पर्क</span> ठेगाना</h3>
+								<p>'.$data[0]->address_np.'</p>
+								<div class="contact_holder">
+									<div class="tel">
+										<p><strong>फोन</strong><span>'.$data[0]->tel_np.'</span></p>
+										<p><strong>फाक्स</strong><span>'.$data[0]->fax_np.'</span></p>
+									</div>
+								</div>
+								<div class="contact_holder">
+									<div class="email">
+										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
+									</div>
+								</div>
+							</div>
+							
 						</div>';
 				break;
 		}
@@ -457,7 +478,7 @@ class Render_library{
 		$str =	'<div class="language fr">
 					<a href="#" class="nepal '.
 						(($this->ci->session->userdata('lang')=='np')?'active':'').
-						' fl color">Nepali</a>
+						' fl color">नेपाली</a>
 					<a href="#" class="english '.
 						(($this->ci->session->userdata('lang')=='en')?'active':'').
 						' fl color">English</a>

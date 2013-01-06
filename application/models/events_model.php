@@ -52,8 +52,10 @@ class Events_model extends CI_Model{
 		$update = array(
 					   'title' 		=> $data[0],
 					   'content' 	=> $data[1],
-					   'date_published' => $data[3],
-					   'date_removed' => $data[4]
+					   'title_np' 	=> $data[2],
+					   'content_np'	=> $data[3],
+					   'date_published' => $data[6],
+					   'date_removed'=>$data[7]
 					);
 
 		$this->db->where('id', $data['id']);
@@ -68,10 +70,12 @@ class Events_model extends CI_Model{
 	 * returns the id
 	 */
 	public function save(){
-echo '<pre>';
-print_r($_POST);
-print_r($_FILES);
-echo '</pre>';		
+//echo '<pre>';
+//print_r($_POST);
+//print_r($_FILES);
+//print_r($this->input->post());
+//echo '</pre>';
+//die;
 
 			$tmp = $_FILES['file']['name'];
 			$ext =  end(explode('.',$tmp));
@@ -80,6 +84,8 @@ echo '</pre>';
 		$data = array(
 					'title'			=>	$this->input->post('title'),
 					'contents'		=>	htmlentities($this->input->post('content')),
+					'title_np'		=>	$this->input->post('title_np'),
+					'contents_np'	=>	($this->input->post('content_np')),
 					'created_by'	=>	$this->session->userdata('user_id'),
 					'date_created'	=>	$this->session->userdata('date_created'),
 					'date_published'=>	$this->input->post('date_published'),
@@ -187,14 +193,28 @@ echo '</pre>';
 		if(count($data)==0){
 			return '';
 		}
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';		
 		$str =	'<div class="item1 fl">';
-		$str .=	'	<div class="right_col fl">';
+		$str .=	'	<div class="right_col fl en" '.
+								(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 		$str .=	'		<h2><span>Latest</span> Events</h2>';
-		$str .= '		<div class="item1_content fl">';
+		$str .= '		<div class="item1_content fl" >';
 		$str .= '			<p>'.word_limiter(strip_tags($data[0]->title),25);
 		$str .= '				<a href="'.site_url('events/view/'.$data[0]->id).'" class="more">read more</a>';
 		$str .= '			</p>';
 		$str .= '			<a href="'.site_url('events/list_events').'" class="view_all">View All Events +</a>';
+		$str .= '		</div>';
+		$str .=	'	</div>';
+		$str .=	'	<div class="right_col fl np" '.
+								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+		$str .=	'		<h2><span>प्रमुख</span> घटना</h2>';
+		$str .= '		<div class="item1_content fl">';
+		$str .= '			<p>'.word_limiter(strip_tags($data[0]->title_np),25);
+		$str .= '				<a href="'.site_url('events/view/'.$data[0]->id).'" class="more">बाकी ...</a>';
+		$str .= '			</p>';
+		$str .= '			<a href="'.site_url('events/list_events').'" class="view_all">अरु घटनाहरु +</a>';
 		$str .= '		</div>';
 		$str .=	'	</div>';
 		$str .=	'	<div class="fr">';
@@ -218,7 +238,8 @@ echo '</pre>';
 		$str = '';
 		foreach($data as $key=>$val){
 			$str .=	'<div class="grid_3 alpha fl">
-						<div class="about_us fl">
+						<div class="about_us fl en" '.
+								(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 							<p>
 								<strong style="color:#1C50AD;" class="spot">
 									'.$val->title.'
@@ -232,6 +253,25 @@ echo '</pre>';
 								</div>
 								<div class="text_box fr">
 									<p>'.$val->contents.'</p>
+								</div>
+							</div> 
+						</div>
+
+						<div class="about_us fl np" '.
+								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+							<p>
+								<strong style="color:#1C50AD;" class="spot">
+									'.$val->title_np.'
+								</strong>
+							</p>
+							<div class="lower_block fl">
+								<div class="block_img4 fl">
+									<img title="'.word_limiter(strip_tags($val->title_np),5).'" 
+										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'"
+										width="211" height="126" />
+								</div>
+								<div class="text_box fr">
+									<p>'.$val->contents_np.'</p>
 								</div>
 							</div> 
 						</div>

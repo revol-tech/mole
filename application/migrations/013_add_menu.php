@@ -12,14 +12,15 @@ class Migration_Add_menu extends CI_Migration {
 	{
 		$fields = array(
 						'`id` int(13) unsigned NOT NULL AUTO_INCREMENT',
-						'`title` varchar(127) NOT NULL',
 						'`title_np` varchar(127) NOT NULL',
+						'`comments_np` varchar(255)',
+						'`title` varchar(127) NOT NULL',
 						'`link` varchar(127) NOT NULL DEFAULT "#"',
 						'`parent_id` int(11) NOT NULL default 0',
 						'`active` tinyint(1) not null default 1',
 						'`comments` varchar(255)',
-						'`comments_np` varchar(255)',
 					);
+					
 		$this->dbforge->add_field($fields);
 
 		$this->dbforge->add_key('id', TRUE);

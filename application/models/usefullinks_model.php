@@ -48,28 +48,7 @@ class Usefullinks_model extends CI_Model{
 	 * update existing usefullinks
 	 */
 	private function update($data){
-/*
-Array
-(
-    [title] => adsfasdfasdfasdf
-    [link] => ikj;oij
-    [description] => ;ih;oiho
-    [created_by] => 
-    [date_created] => 
-    [date_published] => 
-    [date_removed] => 
-    [active] => 
-    [homepage] => 
-    [id] => 0
-)
 
-		$update = array(
-					   'title' 		=> $data[0],
-					   'content' 	=> $data[1],
-					   'date_published' => $data[3],
-					   'date_removed' => $data[4]
-					);
-*/
 		$id = $data['id'];
 		unset($data['id']);
 		
@@ -87,8 +66,10 @@ Array
 	public function save($type=1){
 		$data = array(
 				'title'			=> $this->input->post('title'),
+				'title_np'		=> $this->input->post('title_np'),
 				'link'			=> $this->input->post('link'),
 				'description'	=> $this->input->post('description'),
+				'description_np'=> $this->input->post('description_np'),
 				'created_by'	=> $this->ion_auth->get_user()->id,
 				'date_created'	=> get_timestamp(),
 				'date_published'=> $this->input->post('date_published'),
@@ -168,12 +149,19 @@ echo '</pre>';
 		}
 
 		$str =	'<div class="grid_7 useful_links border_rt_gray border_lt_white">'.
-				'	<h3><span>Useful</span> links</h3>'.
+				'	<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >'.
+				'	<span>Useful</span> links</h3>'.
+				
+				'	<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
+				'	<span>काम लाग्ने</span> लिक</h3>'.
 				'	<ul>';
 
 		foreach($data as $key=>$val){
-			$str .= '<li><a href="'.$val->link.'" title="'.$val->description.
-						'">'.$val->title.'</a></li>';
+			$str .= '<li class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'><a href="'.$val->link.'" title="'.$val->description.
+						'" >'.$val->title.'</a></li>';
+
+			$str .= '<li class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'><a href="'.$val->link.'" title="'.$val->description_np.
+						'" >'.$val->title_np.'</a></li>';
 		}
 
 		$str .= '</ul></div>';

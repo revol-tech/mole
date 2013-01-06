@@ -7,8 +7,16 @@
 	<span class='title'><?php echo $title?></span>
 	<br/>
 
+	title (नेपाली) :
+	<span class='title_np'><?php echo $title_np?></span>
+	<br/>
+
 	description :
 	<span class='description'><?php echo $description?></span>
+	<br/>
+
+	description (नेपाली):
+	<span class='description'><?php echo $description_np?></span>
 	<br/>
 
 	created by :

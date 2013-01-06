@@ -15,6 +15,8 @@ class Migration_Add_files extends CI_Migration {
 						'`filename` varchar(127) NOT NULL',
 						'`title` varchar(127) NOT NULL',
 						'`description` varchar(255) NOT NULL',
+						'`title` varchar(127) NOT NULL',
+						'`description` varchar(255) NOT NULL',
 						'`timestamp` varchar(127) NOT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',

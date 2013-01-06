@@ -273,10 +273,19 @@ class News_model extends CI_Model{
 		}
 		
 		$str = '<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">'.
-					'<h3><span>Employment </span>relations</h3><ul>';
+					'<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+						'<span>Employment </span>relations'.
+					'</h3>'.
+					'<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+						'<span>रोजगारी </span>सम्झोता'.
+					'</h3>'.
+					'<ul>';
 			foreach($data as $key=>$val){
 				$str.='<li>';
-				$str.='<a href="#" title='.$val->title.'>'.word_limiter($val->title,4).'</a>';
+				$str.='<a class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"'). 
+							'href="#" title="'.$val->title.'">'.word_limiter($val->title,4).'</a>';
+				$str.='<a class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"'). 
+							'href="#" title="'.$val->title_np.'">'.word_limiter($val->title_np,4).'</a>';
 				$str.='</li>';
 			}
 		$str.= '</ul></div>';
@@ -418,17 +427,24 @@ private function _render_events($data){
 				})</script>';
 
 		$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
+				
 		$str .=	'<div class="ticker_title fl">'.
-				'	<h3>News</h3>'.
+				'	<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>News</h3>'.
+				'	<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>समाचार</h3>'.
 				'</div>';
-
 		$str .= '<ul id="flash-slider" style="" class="ticker_block fl jcarousel-skin-tango">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
 			foreach($data as $key=>$val){
-				$str .= '<li>';
+				$str .= '<li class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 				$str .= '	<span>';
 				$str .= 		word_limiter(strip_tags($val->content),15);
 				$str .= '		<a href="#" class="more">more</a>';
+				$str .= '	</span>';
+				$str .= '</li>';
+				$str .= '<li class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+				$str .= '	<span>';
+				$str .= 		word_limiter(strip_tags($val->content_np),15);
+				$str .= '		<a href="#" class="more">अझै</a>';
 				$str .= '	</span>';
 				$str .= '</li>';
 			}

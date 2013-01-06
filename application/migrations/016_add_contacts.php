@@ -13,6 +13,7 @@ class Migration_Add_contacts extends CI_Migration {
 		$fields = array(
 			 '`id` int(11) NOT NULL',
               '`address` varchar(255) CHARACTER SET utf8 NOT NULL',
+              '`address_np` varchar(255) CHARACTER SET utf8 NOT NULL',
               '`tel` varchar(255) NULL',
               '`fax` varchar(127) NULL',
               '`email` varchar(127) NULL',

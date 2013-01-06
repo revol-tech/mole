@@ -207,7 +207,7 @@ class Events extends CI_Controller {
 		$this->get(array('id'=> $this->data['id']));
 
 		//display that events
-		redirect('admin/ebents');
+		redirect('admin/events');
 	}
 
 

@@ -8,15 +8,23 @@
 	<br/>
 
 	title :
-	<span class='title'><?php echo $title;?></span>
+	<span class='title'><?php echo $title?></span>
 	<br/>
 	
+	title (नेपाली) :
+	<span class='title_np॒॒॒॒॒॒॒॒॒॒॒॒॒'><?php echo $title_np?></span>
+	<br/>
+
 	link :
 	<span class='link'><?php echo $link;?></span>
 	<br/>
 	
 	description :
 	<span class='description'><?php echo $description;?></span>
+	<br/>
+	
+	description (नेपाली):
+	<span class='description_np'><?php echo $description_np?></span>
 	<br/>
 	
 	created by :

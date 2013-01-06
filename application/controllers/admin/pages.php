@@ -171,8 +171,8 @@ class Pages extends CI_Controller {
     public function create(){
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
-		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
+		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		//$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu pages [not editing]
 		if(!isset($this->data['date_created'])){

@@ -13,6 +13,8 @@ class Migration_Add_events extends CI_Migration {
 						'`id` int(11) NOT NULL AUTO_INCREMENT',
 						'`title` varchar(255) NOT NULL',
 						'`contents` text(255) NULL default null',
+						'`title_np` varchar(255) NOT NULL',
+						'`contents_np` text(255) NULL default null',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',

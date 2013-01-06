@@ -155,9 +155,20 @@
 	
 	
 	<div id="footer">
-		<div class="footer_content">
+		<div class="footer_content en" 
+				<?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>
 			<div class="grid_6">
-				<div class="copyright-text fl"> © 2012 Ministry of Labour and Employment. All Rights Reserved </div>
+				<div class="copyright-text fl"> © 2013 Ministry of Labour and Employment. All Rights Reserved </div>
+			</div>
+			<div class="grid_7 fr">
+				<div class="dev-text fl"> Designed By <a href="http://www.revol-tech.com.np" target="_blank">Revol-tech</a> </div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="footer_content np"
+				<?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>
+			<div class="grid_6">
+				<div class="copyright-text fl"> © २०१३  श्रम तथा यातायात ब्यबस्था मन्त्रालय . सर्बधिकार निहित </div>
 			</div>
 			<div class="grid_7 fr">
 				<div class="dev-text fl"> Designed By <a href="http://www.revol-tech.com.np" target="_blank">Revol-tech</a> </div>

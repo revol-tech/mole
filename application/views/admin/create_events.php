@@ -12,9 +12,25 @@
 	<br/>
 
 	<label>
+		Title (नेपाली) :
+		<textarea name='title_np'>
+			<?php echo @$title_np?>
+		</textarea>
+	</label>
+	<br/>
+
+	<label>
 		contents : 
 		<textarea name="content" id="content" >
 			<?php echo @$content?>
+		</textarea>
+	</label>
+	<br/>
+
+	<label>
+		contents (नेपाली) : 
+		<textarea name="content_np" id="content_np" >
+			<?php echo @$content_np?>
 		</textarea>
 	</label>
 	<br/>

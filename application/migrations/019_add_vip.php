@@ -15,6 +15,8 @@ class Migration_Add_vip extends CI_Migration {
 					  '`filename` varchar(127) CHARACTER SET utf8 NOT NULL',
 					  '`title` varchar(127) CHARACTER SET utf8 NOT NULL',
 					  '`description` varchar(255) CHARACTER SET utf8 NOT NULL',
+					  '`title_np` varchar(127) CHARACTER SET utf8 NOT NULL',
+					  '`description_np` varchar(255) CHARACTER SET utf8 NOT NULL',
 					  '`timestamp` varchar(127) CHARACTER SET utf8 NOT NULL',
 					  '`created_by` int(100) NOT NULL',
 					  '`date_created` timestamp NULL DEFAULT NULL',

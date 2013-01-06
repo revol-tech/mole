@@ -44,11 +44,25 @@ class Vip_model extends CI_Model{
 			$str .= '<div class="intro_block fl">';
 			$str .= 	'<div class="block_img1 fl">';
 			$str .=			'<img src="'.DOCUMENTS.'/'.$v->timestamp.'" ';
-			$str .=				'alt="'.$v->title.'" title="'.$v->description.'"/>';
+			$str .=				'alt="'.$v->title.'" title="'.$v->description.'" class="en" '.
+								(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'/>';			
+			$str .=			'<img src="'.DOCUMENTS.'/'.$v->timestamp.'" ';
+			$str .=				'alt="'.$v->title.'" title="'.$v->description.'" class="np" '.
+								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'/>';
 			$str .=		'</div>';
 			$str .=		'<div class="intro_box fr">';
-			$str .=			'<div class="name fl">'.$v->title.'</div>';
-			$str .=			'<div class="title fl">'.$v->description.'</div>';
+			$str .=			'<div class="name fl en" '.
+								(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$v->title.'</div>';
+			$str .=			'<div class="title fl en" '.
+								(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$v->description.'</div>';
+			$str .=			'<div class="name fl np" '.
+								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$v->title_np.'</div>';
+			$str .=			'<div class="title fl np" '.
+								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$v->description_np.'</div>';
 			$str .= 	'</div>';
 			$str .=	'</div>';
 			
@@ -113,6 +127,8 @@ class Vip_model extends CI_Model{
 						'filename' 		=> $_FILES['file']['name'],
 						'title' 		=> $this->input->post('title'),
 						'description'	=> $this->input->post('description'),
+						'title_np' 		=> $this->input->post('title_np'),
+						'description_np'=> $this->input->post('description_np'),
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
 						'date_created'	=> $this->session->userdata('date_created'),

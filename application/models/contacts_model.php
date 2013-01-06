@@ -72,15 +72,16 @@ class Contacts_model extends CI_Model{
 	public function save($type=1){
 		$data = array(
 					'address'	=> htmlentities($this->input->post('address')),
+					'address_np'=> ($this->input->post('address_np')),
 					'tel'		=> $this->input->post('tel'),
 					'fax'		=> $this->input->post('fax'),
 					'email'		=> $this->input->post('email'),
 					'created_by'=> $this->session->userdata('user_id'),
 					'date_created'=>$this->session->userdata('date_created'),
 					'date_published'=>$this->input->post('date_published'),
-					'date_removed'	=> $this->input->post('date_removed'),
+					'date_removed'=>$this->input->post('date_removed'),
 					'active'	=>$this->input->post('active'),
-					'homepage' => $this->input->post('homepage'),
+					'homepage'	=> $this->input->post('homepage'),
 				);
 
 		//update existing contacts
@@ -117,7 +118,10 @@ class Contacts_model extends CI_Model{
 	 */
 	public function get($contacts=null,$limit=null,$start=null){
 		$res = $this->db->get($this->table);
-
+//echo '<pre>';
+//print_r($res->result());
+//echo $this->db->last_query();
+//echo '</pre>';
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 
@@ -189,19 +193,37 @@ class Contacts_model extends CI_Model{
 			return $str;
 		}
 		
-		$str = 	'<div class="grid_7 address pad_alpha border_rt_gray">
+		$str = 	'<div class="grid_7 address pad_alpha border_rt_gray en" '.
+						(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >
 					<h3><span>Contact</span> Details</h3>'.
-					$data[0]->address.
+					'<p>'.$data[0]->address.'</p>'.
 					'<div class="contact_holder">
 						<div class="tel">
-							<p><strong>T</strong><span>'.$data[0]->tel.'</span></p>
-							<p><strong>F</strong><span>'.$data[0]->fax.'</span></p>
+							<p><strong>T</strong><span id="tel_en">'.$data[0]->tel.'</span></p>
+							<p><strong>F</strong><span id="fax_en">'.$data[0]->fax.'</span></p>
+						</div>
+					</div>
+					<div class="contact_holder">
+						<div class="email"><a href="mailto:'.$data[0]->email.'">'.$data[0]->email.'</a></div>
+					</div>
+				</div>
+				
+				
+				<div class="grid_7 address pad_alpha border_rt_gray np" '.
+						(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >
+					<h3><span>सम्पर्क</span> ठेगाना</h3>'.
+					'<p>'.$data[0]->address_np.'</p>'.
+					'<div class="contact_holder">
+						<div class="tel">
+							<p><strong>फोन</strong><span id="tel_np"></span></p>
+							<p><strong>फाक्स</strong><span id="fax_np"></span></p>
 						</div>
 					</div>
 					<div class="contact_holder">
 						<div class="email"><a href="mailto:'.$data[0]->email.'">'.$data[0]->email.'</a></div>
 					</div>
 				</div>';
+
 		return $str;
 	}
 

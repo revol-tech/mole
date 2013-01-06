@@ -41,6 +41,18 @@ $(function () {
 
 	});
 
+	//convert english numbers into nepali numbers
+	function convert(num){
+		var bstr = '';
+		var list=['&#2406;','&#2407;','&#2408;','&#2409;','&#2410;','&#2411;','&#2412;','&#2413;','&#2414;','&#2415;'];
+		for(i=0; i<num.length; i++){if(parseInt(num[i])) bstr += list[num[i]]; else bstr += num[i];}return bstr;
+	}
+	var tmp = convert($('#tel_en').text())
+	$('#tel_np').html(tmp);
+
+	var tmp = convert($('#fax_en').text())	
+	$('#fax_np').html(tmp);
+
 
 	$("ul.sf-menu").supersubs({minWidth:12, maxWidth:30, extraWidth:0}).superfish({hoverClass:'sfHover', pathClass:'sf-active', pathLevels:0, delay:500, animation:{height:'show'}, speed:'def', autoArrows:false, dropShadows:true});
 
