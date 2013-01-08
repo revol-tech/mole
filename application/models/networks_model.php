@@ -87,8 +87,10 @@ Array
 	public function save($type=1){
 		$data = array(
 				'title'			=> $this->input->post('title'),
+				'title_np'		=> $this->input->post('title_np'),
 				'link'			=> $this->input->post('link'),
 				'description'	=> $this->input->post('description'),
+				'description_np'=> $this->input->post('description_np'),
 				'created_by'	=> $this->ion_auth->get_user()->id,
 				'date_created'	=> get_timestamp(),
 				'date_published'=> $this->input->post('date_published'),
@@ -146,7 +148,7 @@ Array
 		if(!(count($data)>0))
 			return '';
 
-		$str =	'<div class="grid_7 social border_rt_gray border_lt_white">'.
+		$str =	'<div class="grid_7 social border_rt_gray border_lt_white en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 				'	<h3><span>Network</span> with us</h3>'.
 				'	<p>Connect with us via the social networks... </p><ul>';
 
@@ -157,6 +159,16 @@ Array
 
 		$str .= '</ul></div>';
 
+		$str .=	'<div class="grid_7 social border_rt_gray border_lt_white np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+				'	<h3><span>हामीसँग</span> कुरा गर्नुहोस्</h3>'.
+				'	<p>सोसल नेटवर्कबाट हामीसंग भेट्नुहोस् ... </p><ul>';
+
+		foreach($data as $key=>$val){
+			$str .= '<li><a href="'.$val->link.'" title="'.$val->description_np.
+						'">'.$val->title_np.'</a></li>';
+		}
+
+		$str .= '</ul></div>';
 		return $str;
 	}
 

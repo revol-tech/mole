@@ -115,7 +115,7 @@ class Files_model extends CI_Model{
 		$mtime = microtime(true).'.'.$ext;
 //echo $mtime.'<br/>';
 		$config = array(
-					  'allowed_types' => $allowd_types,
+					  'allowed_types' => $this->allowd_types,
 					  'upload_path' => DOCUMENTS,
 					  'maintain_ratio' => true,
 					  'max-size' => 20000,

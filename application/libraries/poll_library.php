@@ -159,12 +159,18 @@ class Poll_library{
 		//generate the poll result.
 		foreach($items as $key=>$value){
 			$value->graph = '';
-			$value->graph .= '<div>';
+			$value->graph .= '<div class="en" '.(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').'>';
 			$value->graph .= '<div><span>'.$value->option1.': </span>'.'<span>'.$value->count_option1.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option2.': </span>'.'<span>'.$value->count_option2.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option3.': </span>'.'<span>'.$value->count_option3.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option4.': </span>'.'<span>'.$value->count_option4.'</span></div>';
 			$value->graph .= '</div>';
+			$value->graph .= '<div class="np" '.(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').'>';
+			$value->graph .= '<div><span>'.$value->option1_np.': </span>'.'<span>'.$value->count_option1.'</span></div>';
+			$value->graph .= '<div><span>'.$value->option2_np.': </span>'.'<span>'.$value->count_option2.'</span></div>';
+			$value->graph .= '<div><span>'.$value->option3_np.': </span>'.'<span>'.$value->count_option3.'</span></div>';
+			$value->graph .= '<div><span>'.$value->option4_np.': </span>'.'<span>'.$value->count_option4.'</span></div>';
+			$value->graph .= '</div>'			;
 		}
 		return $items;
 	}
@@ -181,11 +187,13 @@ class Poll_library{
 			return null;
 		}
 
-		$html = '<div class="item1 fl">
-					<h2><span>Public </span>Poll</h2>
-					<div class="poll_block">
+		$html = '<div class="item1 fl">		
+					<h2 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+						<span>Public </span>Poll
+					</h2>
+					<h2 class="np"><span>सर्वसाधाण </span>बिचार</h2>
+					<div class="poll_block en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 						<p class="poll_topic">'.$poll[0]->question.'</p>
-						<!--<form method="post" action="'.site_url('pages/vote').'">-->
 						'.form_open(site_url('polls/vote')).'
 							<div class="form_holder1 fl">
 								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="choice">
@@ -205,7 +213,32 @@ class Poll_library{
 							</div>
 							<div class="form_holder1 fl mar_top">
 								<a href="#" class="btn_red fr">Result</a>
-								<input class="btn_red fr" type="submit" value="Vote"/>
+								<input class="btn_blue fr" type="submit" value="Vote"/>
+							</div>
+						</form>
+					</div>
+					<div class="poll_block np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+						<p class="poll_topic">'.$poll[0]->question_np.'</p>
+						'.form_open(site_url('polls/vote')).'
+							<div class="form_holder1 fl">
+								<input id="radio-choice-1" type="radio" value="1" tabindex="2" name="choice">
+								<label for="choice-1">'.$poll[0]->option1_np.'</label>
+							</div>
+							<div class="form_holder1 fl">
+								<input id="radio-choice-2" type="radio" value="2" tabindex="3" name="choice">
+								<label for="radio-choice-2">'.$poll[0]->option2_np.'</label>
+							</div>
+							<div class="form_holder1 fl">
+								<input id="radio-choice-3" type="radio" value="3" tabindex="3" name="choice">
+								<label for="radio-choice-3">'.$poll[0]->option3_np.'</label>
+							</div>
+							<div class="form_holder1 fl">
+								<input id="radio-choice-4" type="radio" value="4" tabindex="3" name="choice">
+								<label for="radio-choice-4">'.$poll[0]->option4_np.'</label>
+							</div>
+							<div class="form_holder1 fl mar_top np">
+								<a href="#" class="btn_red fr">नतिजा</a>
+								<input class="btn_blue fr" type="submit" value="भोट"/>
 							</div>
 						</form>
 					</div>

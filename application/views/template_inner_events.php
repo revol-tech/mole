@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title><?php echo @$title?></title>
 	<?php echo $_styles?>
+	<link rel="shortcut icon" href="<?php echo base_url().CSSPATH?>images/favicon.ico" type="image/x-icon"/>	
 	<?php echo $_scripts?>
 </head>
 
@@ -58,16 +59,6 @@
 			-->
 		</div>
 
-		<div class="container_1 fl">
-			
-			<div class="grid_3 alpha fl">
-				<?php echo @$page?>
-			</div>
-			<div class="grid_4 omega fl">
-				<?php echo @$news?>
-			</div>
-		</div>
-    		
 		<div class="container_1 fl">
 			
 			<div class="grid_3 alpha fl">

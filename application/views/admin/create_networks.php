@@ -10,14 +10,26 @@
 	<br/>
 
 	<label>
-		link
-		<input type='text' name='link' value='<?php echo @$link?>' />
+		title (नेपाली)
+		<input type='text' name='title_np' value='<?php echo @$title_np?>' />
 	</label>
 	<br/>
 
 	<label>
 		description
 		<input type='text' name='description' value='<?php echo @$description?>' />
+	</label>
+	<br/>
+
+	<label>
+		description (नेपाली)
+		<input type='text' name='description_np' value='<?php echo @$description_np?>' />
+	</label>
+	<br/>
+
+	<label>
+		link
+		<input type='text' name='link' value='<?php echo @$link?>' />
 	</label>
 	<br/>
 

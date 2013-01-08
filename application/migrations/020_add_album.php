@@ -14,6 +14,8 @@ class Migration_Add_album extends CI_Migration {
 						  '`id` int(11) NOT NULL AUTO_INCREMENT',
 						  '`title` varchar(127) NOT NULL',
 						  '`description` varchar(255) NOT NULL',
+						  '`title_np` varchar(127) NOT NULL',
+						  '`description_np` varchar(255) NOT NULL',
 						  '`created_by` int(11) NOT NULL',
 						  '`date_created` timestamp NULL DEFAULT NULL',
 						  '`date_published` timestamp NULL DEFAULT NULL',

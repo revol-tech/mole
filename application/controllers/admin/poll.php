@@ -63,10 +63,15 @@ class Poll extends CI_Controller {
 
 		$data = array(
 						'question' 		=> $this->input->post('question'),
+						'question_np'	=> $this->input->post('question_np'),
 						'option1'		=> $this->input->post('option1'),
 						'option2'		=> $this->input->post('option2'),
 						'option3'		=> $this->input->post('option3'),
 						'option4'		=> $this->input->post('option4'),
+						'option1_np'	=> $this->input->post('option1_np'),
+						'option2_np'	=> $this->input->post('option2_np'),
+						'option3_np'	=> $this->input->post('option3_np'),
+						'option4_np'	=> $this->input->post('option4_np'),
 						'active'		=> $this->input->post('publish')
 					);
 

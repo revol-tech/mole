@@ -144,9 +144,9 @@ class Notices extends CI_Controller {
 	 * notices form
 	 */
     public function create(){
-		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		////generate WYSIWYG editor
+		//$this->_ckeditor_conf();
+		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 
 		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
@@ -188,8 +188,9 @@ class Notices extends CI_Controller {
 		//retrive that notices
 		$this->get(array('id'=> $this->data['id']));
 
-		//display that notices
-		$this->create();
+		////display that notices
+		//$this->create();\
+		$this->index();
 	}
 
 
@@ -217,7 +218,7 @@ class Notices extends CI_Controller {
 //print_r($data[0]);
 
 		//display
-		$this->load->view('templates/admin_admin_header');
+		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 		$this->load->view('admin/view_notices.php',$data[0]);
 		$this->load->view('templates/admin_footer');

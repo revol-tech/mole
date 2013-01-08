@@ -267,6 +267,31 @@ class Gallery extends CI_Controller {
 
 
 	/**
+	 * edit selected album
+	 */
+	public function edit(){
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='edit'){
+				$id = $this->uri->segment($key+1);
+				break;
+			}
+		}
+
+		$data = $this->gallery_model->get(array('id'=>$id));
+		if(count((array)$data)!=1){
+			show_404();
+		}
+		
+		//$this->data = (array)$data[0];
+		//$this->data['link'] = explode('/',$this->data['link']);
+		//$this->data['link'] = $this->data['link'][1];
+
+		$this->data = (array)$data[0];
+		$this->create();
+	}
+
+	/**
 	 * images upload form + images upload & store
 	 */
     public function upload_imgs(){
@@ -333,6 +358,7 @@ class Gallery extends CI_Controller {
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/files/index');
 		$config['total_rows'] = $this->gallery_model->count_photos(@$imgs['album_id']);
+echo $this->db->last_query();		
 		$config['per_page'] = PAGEITEMS;
 
 

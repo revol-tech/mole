@@ -113,23 +113,31 @@
 				<?php echo $events?>
 				<div id="simple-tabs" class="fl">
 					<ul class="tabs">
-						<li><a href="#tab1">Press Release</a></li>
-						<li><a href="#tab2">Health and Safety</a></li>
-						<li><a href="#tab3">Activities Photos</a></li>
+						<li>
+							<a class='en' href="#tab3" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Activities Photos</a>
+							<a class='np' href="#tab3" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>तस्विर</a>
+						</li>
+						<li>
+							<a class='en' href="#tab2" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Health and Safety</a>
+							<a class='np' href="#tab2" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>स्वास्थ</a>
+						</li>
+						<li>
+							<a class='en' href="#tab1" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Press Release</a>
+							<a class='np' href="#tab1" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>प्रेस</a>
+						</li>
 					</ul>
 					<div class="tab_container">
-						<!---gallery not done yet-->
+						<div id="tab3" class="tab_content">
+							<?php echo $gallery?>
+						</div>
+						<div id="tab2" class="tab_content">
+							<?php echo $health?>
+						</div>
 						<div id="tab1" class="tab_content">
 							<div class="block_img1 fl"> 
 								<img src="<?php echo IMGPATH?>Minister.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
 							</div>
 							<?php echo $press?>
-						</div>
-						<div id="tab2" class="tab_content">
-							<?php echo $health?>
-						</div>
-						<div id="tab3" class="tab_content">
-							<?php echo $gallery?>
 						</div>
 				</div>
 			</div>
@@ -181,7 +189,7 @@
 	<a href="#" id="top-link">Scroll to top</a>
 
 	<span style='border:1px solid black;'>
-		unique visited upto now : <?php echo $counter?>
+		unique visitors upto now : <?php echo $counter?>
 	</span>
 
 </body>

@@ -146,8 +146,9 @@ class Events extends CI_Controller {
 		$id = $this->input->post('events_id');
 		$active = $this->input->post('activate');
 		$this->events_model->change_active($id,$active);
-
-		redirect($this->session->flashdata('redirectToCurrent'));
+	
+		redirect('admin/events');
+		//redirect($this->session->flashdata('redirectToCurrent'));
 	}
 
 

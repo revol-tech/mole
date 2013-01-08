@@ -24,7 +24,16 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->load->model('vip_model');
 		$vip = $this->vip_model->render(array('active'=>1));
 		$this->template->write('vip',$vip);
-
+		
+		//poll
+		$this->load->library('poll_library');
+		$poll = $this->poll_library->render_poll();
+		$this->template->write('poll',$poll);
+		
+		//latest notices
+		$this->load->model('news_model');
+		$notices = $this->news_model->render(array('news_type'=>2,'active'=>1));
+		$this->template->write('notices',$notices);
 
 		//slider
 		$this->load->model('files_model','slider_model');
@@ -46,6 +55,22 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->template->write('events',$events);
 
 
+		//health
+		$this->load->model('news_model');
+		$params = array('news_type'=>5,'active'=>1);
+		$health = $this->news_model->render($params);
+		$this->template->write('health',$health);
+
+		//press
+		$this->load->model('news_model');
+		$params = array('news_type'=>4,'active'=>1);
+		$press = $this->news_model->render($params);
+		$this->template->write('press',$press);
+
+		//activites photos
+		$this->load->model('gallery_model');
+		$gallery = $this->gallery_model->render();
+		$this->template->write('gallery',$gallery);
 
 		$this->template->render();	
 	}

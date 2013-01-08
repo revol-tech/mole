@@ -16,8 +16,20 @@
 	<br/>
 
 	<label>
+		file title (नेपाली) :
+		<input type='text' name='title_np' />
+	</label>
+	<br/>
+
+	<label>
 		description :
 		<input type='text' name='description' />
+	</label>
+	<br/>
+
+	<label>
+		description (नेपाली):
+		<input type='text' name='description_np' />
 	</label>
 	<br/>
 

@@ -153,7 +153,7 @@ echo '</pre>';
 				'	<span>Useful</span> links</h3>'.
 				
 				'	<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
-				'	<span>काम लाग्ने</span> लिक</h3>'.
+				'	<span>काम लाग्ने</span> लिकं</h3>'.
 				'	<ul>';
 
 		foreach($data as $key=>$val){

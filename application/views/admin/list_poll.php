@@ -17,7 +17,7 @@
 		<th>option 2</th>
 		<th>option 3</th>
 		<th>option 4</th>
-		<th>results</th>
+		<!--<th>results</th>-->
 		<th>active</th>
 		<th>edit</th>
 		<th>delete</th>
@@ -34,7 +34,7 @@
 			<td><?php echo $item->option2?></td>
 			<td><?php echo $item->option3?></td>
 			<td><?php echo $item->option4?></td>
-			<td><?php echo $item->graph?></td>
+			<!--<td><?php //echo $item->graph?></td>-->
 			<td><?php echo $item->active?></td>
 			<td><?php echo $item->edit?></td>
 			<td><?php echo $item->del?></td>

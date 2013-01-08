@@ -47,17 +47,31 @@ class Gallery_model extends CI_Model{
 				//do not disp. empty albums...
 				if(!isset($imgs[0]->timestamp))
 					continue;
-//echo $this->db->last_query();
 
-				$str.='<div class="block_img3 fl alpha">';
+				$str.='<div class="block_img3 fl alpha en" '.
+						(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 				$str.='	<a href="#">';
 				$str.='		<img src="'.DOCUMENTS.$imgs[0]->timestamp.'" alt="'.$val->title.'" title="'.$val->description.'" width="140" height="100"/>';
 				$str.='		<span>'.$val->title.'</span>';
 				$str.='	</a>';
 				$str.='</div>';
+
+				$str.='<div class="block_img3 fl alpha np" '.
+						(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+				$str.='	<a href="#">';
+				$str.='		<img src="'.DOCUMENTS.$imgs[0]->timestamp.'" alt="'.$val->title_np.'" title="'.$val->description_np.'" width="140" height="100"/>';
+				$str.='		<span>'.$val->title_np.'</span>';
+				$str.='	</a>';
+				$str.='</div>';
 			}
 		}
-		$str.= '</div><a href="#" class="view_all">View All Gallery +</a>';
+		$str.= '</div>';
+		$str.= '<a href="#" class="view_all en" '.
+					(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >'.
+					'View All Gallery +</a>';
+		$str.= '<a href="#" class="view_all np" '.
+					(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
+					'सबै आल्बमहरु हेर्नुहोस् +</a>';
 		return $str;
 	}
 
@@ -179,10 +193,13 @@ class Gallery_model extends CI_Model{
 						'filename' 		=> $_FILES['file']['name'],
 						'title' 		=> $this->input->post('title'),
 						'description'	=> $this->input->post('description'),
+						'title_np' 		=> $this->input->post('title_np'),
+						'description_np'=> $this->input->post('description_np'),
 						'timestamp'		=> $mtime,
 						'created_by'	=> $this->ion_auth->get_user()->username,
 						'date_created'	=> $this->session->userdata('date_created'),
 						'album_id'		=> $this->input->post('album_id'),
+						'file_type'		=> 'album_image',
 					);
 
 //print_r($_POST);

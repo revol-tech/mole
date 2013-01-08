@@ -190,8 +190,9 @@ class Health extends CI_Controller {
 		$this->data['link'] = explode('/',$this->data['link']);
 		$this->data['link'] = $this->data['link'][1];
 
-		//display that health
-		$this->create();
+		////display that health
+		//$this->create();\
+		redirect('admin/health');
 	}
 
 

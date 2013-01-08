@@ -12,11 +12,14 @@
 	<span class='question'><?php echo $question;?></span>
 	<br/>
 
+	question (नेपाली):
+	<span class='question'><?php echo $question;?></span>
+	<br/>
+
 	Publish :
 	<?php echo $active?>
 	<br/>
 
 	<h4>result:</h4>
 	<div class='result'><?php echo $graph?></div>
-
 </div>

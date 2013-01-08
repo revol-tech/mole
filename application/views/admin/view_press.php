@@ -7,9 +7,12 @@
 	</a>
 	<br/>
 
-
 	title :
 	<span class='title'><?php echo $title;?></span>
+	<br/>
+
+	title (नेपाली):
+	<span class='title_np'><?php echo $title;?></span>
 	<br/>
 
 	created by :
@@ -19,11 +22,17 @@
 
 	Publish :
 	<?php echo $active?>
-	<br/>
+	<br/>0
 
 	content :<br/>
 	<hr/>
 	<?php echo $content?>
+	<br/>
+	<hr/>
+
+	content (नेपाली):<br/>
+	<hr/>
+	<?php echo $content_np?>
 	<br/>
 	<hr/>
 </div>

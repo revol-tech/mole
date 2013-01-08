@@ -770,6 +770,7 @@ background:#f8f8f8;
 #simple-tabs .tab_content {
 	padding: 40px 20px 0;
 	float:left;
+	width:502px;/* added ...... */
 }
 .tabs-minimal-style ul.tabs li {
 	float: left;

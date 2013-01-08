@@ -233,7 +233,9 @@ echo '</pre>';
 		if(count($data)==0){
 			return '';
 		}
-		
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';		
 
 		$str = '';
 		foreach($data as $key=>$val){
@@ -248,8 +250,7 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title),5).'" 
-										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'"
-										width="211" height="126" />
+										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'" />
 								</div>
 								<div class="text_box fr">
 									<p>'.$val->contents.'</p>
@@ -267,8 +268,7 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title_np),5).'" 
-										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'"
-										width="211" height="126" />
+										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'" />
 								</div>
 								<div class="text_box fr">
 									<p>'.$val->contents_np.'</p>

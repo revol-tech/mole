@@ -607,7 +607,7 @@ class Render_library{
 		$this->ci->template->add_css(CSSPATH.'superfish.css','link');
 		$this->ci->template->add_css(CSSPATH.'default.css','link');
 		$this->ci->template->add_css(CSSPATH.'tmp.css','link');
-		$this->ci->template->add_css(CSSPATH.'images/favicon.png.css','link');
+		//$this->ci->template->add_css(CSSPATH.'images/favicon.png','link');
 	}
 
 	/**

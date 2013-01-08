@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 06, 2013 at 02:01 PM
+-- Generation Time: Jan 08, 2013 at 05:49 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS `album` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(127) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `title_np` varchar(127) NOT NULL,
+  `description_np` varchar(255) NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -41,10 +43,10 @@ CREATE TABLE IF NOT EXISTS `album` (
 -- Dumping data for table `album`
 --
 
-INSERT INTO `album` (`id`, `title`, `description`, `created_by`, `date_created`, `date_published`, `active`) VALUES
-(1, 'Album 1', 'More about album 1', 1, '2012-12-20 13:20:58', NULL, 1),
-(2, 'Album 2', 'More about album 2', 1, '2012-12-20 13:21:16', NULL, 1),
-(3, 'Album 3', 'More about album 3', 1, '2012-12-20 13:21:29', NULL, 1);
+INSERT INTO `album` (`id`, `title`, `description`, `title_np`, `description_np`, `created_by`, `date_created`, `date_published`, `active`) VALUES
+(1, 'Album 1', 'More about album 1', 'आल्बम १', 'आल्बम १ को बारे', 1, '2012-12-20 13:20:58', NULL, 1),
+(2, 'Album 2', 'More about album 2', 'आल्बम २', 'आल्बम २ को बारे', 1, '2012-12-20 13:21:16', NULL, 1),
+(3, 'Album 3', 'More about album 3', 'आल्बम ३', 'आल्बम ३ को बारे', 1, '2012-12-20 13:21:29', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -59,15 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(22, 1357453481, '192.168.1.2', 'ZCRt4B'),
-(23, 1357453495, '192.168.1.2', '8gJKOw');
+(26, 1357601956, '127.0.0.1', 'FWDhWM');
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `address`, `address_np`, `tel`, `fax`, `email`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `contacts_type`) VALUES
-(0, '             Ministry of Labour and Employment   Minbhawan, Baneshwor, Kathmandu, Nepal      ', '', '+977-1-4107124, 4107288', '+977-1-4107288', 'info@mole.gov.np', 1, '2013-01-06 06:43:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, NULL);
+(0, '                 Ministry of Labour and Employment   Minbhawan, Baneshwor, Kathmandu, Nepal        ', 'नेपाल सरकार\nश्रम तथा रोजगार मन्त्रालय\nसिहंदरबार, \nकाठमाडौ, \nनेपाल    ', '+977-1-4107124, 4107288', '+977-1-4107288', 'info@mole.gov.np', 1, '2013-01-07 21:13:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,14 +156,15 @@ CREATE TABLE IF NOT EXISTS `events` (
   `filename` varchar(127) DEFAULT NULL,
   `timestamp` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`id`, `title`, `contents`, `title_np`, `contents_np`, `date_created`, `created_by`, `date_published`, `date_removed`, `active`, `homepage`, `filename`, `timestamp`) VALUES
-(15, 'as fasg asg ag asg a     ', '  asg asg asg asg asg asg asg asg asg asg asgas  ', '   ासगासग बउह ासग  ', ' वनब वनहसग हसउहब सबडब सबउ उबउउस  उब उबस गस ग    ', '2013-01-05 23:22:19', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'Screenshot from 2012-11-17 15:33:50.png', '1357428456.8681.png');
+(16, 'The Ministry of Labour and Employment is entrusted to promote economic development of the country by creating an investment-friendly environment by means of mobilizing and managing public-private partnership, cooperative.', 'And domestic and foreign private investments, and for making the process of industrialization orderly and rapid, and for the development of infrastructure and other sectors to create employment opportunities, and to offer meaningful contribution to poverty alleviation.\n\nThe Ministry of Labour and Employment is entrusted to promote economic development of the country by creating an investment-friendly environment by means of mobilizing and managing public-private partnership, cooperative and domestic and foreign private investments, and for making the process of industrialization orderly and rapid, and for the development of infrastructure and other sectors to create employment opportunities, and to offer meaningful contribution to poverty alleviation.', 'हल िलिासजउ हलािसज लासकजसउ लाकसज ालकसज ालकसज ालकसज ालकज', 'लकह ालजहालसकज ालसकज ालसकज लाकसजहलकाजहलिासुह ोािु गहसलजकगह लसजगह ालसिजहग लासिजह लासजुह ;लहिो लासकजह लािह ालसजकहउ टाजो; ालसकजहउ ालिज ालिजउह ालसकजहउ ला;िजउ लासकउह ाल;ि उालसिजउह ालउालसुउज ालजउासलकहउाल कसजबह ालसकज लािज लासिजुह टिला ालिगु ापोग पा;ज गालसिजगुह पािजग पािुगह पिुजगह सािप     ', '2013-01-07 22:48:59', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'about_img.jpg', '1357599026.9384.jpg'),
+(17, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan\narcu et orci ultricies condimentum sed sed enim. Phasellus sed augue\nnisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla\nlobortis erat tristique. Morbi pulvinar au', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan\narcu et orci ultricies condimentum sed sed enim. Phasellus sed augue\nnisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla\nlobortis erat tristique. Morbi pulvinar augue in metus euismod id porta\narcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.\nPellentesque varius massa id elit posuere placerat. Integer tempor\ncursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu\npurus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum\ninterdum in, cursus a nunc. Quisque varius libero id ligula congue\neuismod. In consequat ultrices diam, eu gravida tortor suscipit et.\n\nUt pellentesque dolor ut sem ornare non malesuada nisl pellentesque.\nNulla convallis scelerisque dignissim. Quisque vitae venenatis eros.\nQuisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in\nfelis imperdiet dignissim. Integer lobortis, diam vel ultrices\nfringilla, ipsum magna fermentum felis, in semper lacus neque sit amet\neros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget\nlibero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar\nsapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices\nposuere cubilia Curae; Pellentesque habitant morbi tristique senectus et\nnetus et malesuada fames ac turpis egestas. Nullam eget est eros.\n', 'किुसक उजगासलकाुगलुया कलाजिुज गगपिाु लासकजु गहला;सज लासु', 'किुसक उजगासलकाुगलुया कलाजिुज गगपिाु लासकजु गहला;सज लासुलकजास ज।लक;सह;ासलकउ;ाोसजसउ।ास,हउलकाजसह उलकाउ।कासउह पि;ासज ल;ासह क,ह सलकजहगलास गुहापु;हलाुगय ािु हाह लसाकहग पटलि लटिगसुगतिल ाु गहलसुोुिाग सकलगो', '2013-01-07 23:39:41', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'Screenshot from 2013-01-06 02:23:20.png', '1357602095.2935.png');
 
 -- --------------------------------------------------------
 
@@ -247,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `album_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `timestamp` (`timestamp`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `files`
@@ -258,10 +260,10 @@ INSERT INTO `files` (`id`, `filename`, `title`, `description`, `title_np`, `desc
 (2, 'slide2.jpg', 'The Labour Relations', 'Employment Law Practice', 'ासग', 'उगजह तततहतह', '1355935275.3907.jpg', 0, '2012-12-19 10:55:50', NULL, 'slider', NULL),
 (3, 'slide3.jpg', 'Labour''s Alternative', 'Employment Law Practice', 'उगह सरतह', 'हबमनजहगबजनयज रय त', '1355935328.0733.jpg', 0, '2012-12-19 10:56:18', NULL, 'slider', NULL),
 (4, 'slide4.jpg', 'Children', 'Have rights too', 'तु ह गगह स', 'उगज उग हतजु ', '1355935352.8419.jpg', 0, '2012-12-19 10:57:11', NULL, 'slider', NULL),
-(5, 'gallery_1.png', 'Album 1', 'More about album 1', '', '', '1356033859.9995.png', 0, '2012-12-20 14:19:07', NULL, NULL, 1),
-(6, 'gallery_2.png', 'Album 2', 'More about album 2', '', '', '1356033913.3109.png', 0, '2012-12-20 14:19:53', NULL, NULL, 2),
-(7, 'gallery_3.png', 'Album 2', 'More about album 2', '', '', '1356033941.4707.png', 0, '2012-12-20 14:20:17', NULL, NULL, 2),
-(8, 'gallery_4.png', 'Album 3', 'More about album 3', '', '', '1356033966.351.png', 0, '2012-12-20 14:20:46', NULL, NULL, 3);
+(5, 'gallery_1.png', 'Album 1', 'More about album 1', '', '', '1356033859.9995.png', 0, '2012-12-20 14:19:07', NULL, 'album_image', 1),
+(6, 'gallery_2.png', 'Album 2', 'More about album 2', '', '', '1356033913.3109.png', 0, '2012-12-20 14:19:53', NULL, 'album_image', 2),
+(7, 'gallery_3.png', 'Album 2', 'More about album 2', '', '', '1356033941.4707.png', 0, '2012-12-20 14:20:17', NULL, 'album_image', 2),
+(8, 'gallery_4.png', 'Album 3', 'More about album 3', '', '', '1356033966.351.png', 0, '2012-12-20 14:20:46', NULL, 'album_image', 3);
 
 -- --------------------------------------------------------
 
@@ -298,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `links`
@@ -322,7 +324,15 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (19, 'employments/hts', 'news', '30'),
 (20, 'employments/nsn', 'news', '8'),
 (21, 'news/news/lkjuh', 'news', '31'),
-(22, 'news/sh', 'news', '1');
+(22, 'news/sh', 'news', '1'),
+(23, 'acts/acts/acts/fs', 'news', '32'),
+(24, 'acts/fff', 'news', '33'),
+(25, 'acts/', 'news', '34'),
+(26, '/', 'news', '4'),
+(32, 'pages/hnt', 'news', '37'),
+(33, 'pages/fgh', 'news', '38'),
+(34, 'pages/sfa', 'news', '6'),
+(35, 'pages/oli', 'news', '5');
 
 -- --------------------------------------------------------
 
@@ -421,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1357453524, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1357601969, 1);
 
 -- --------------------------------------------------------
 
@@ -432,8 +442,10 @@ INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`
 CREATE TABLE IF NOT EXISTS `networks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(127) NOT NULL,
+  `title_np` varchar(127) NOT NULL,
   `link` varchar(127) NOT NULL,
   `description` varchar(127) NOT NULL,
+  `description_np` varchar(127) NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -447,9 +459,9 @@ CREATE TABLE IF NOT EXISTS `networks` (
 -- Dumping data for table `networks`
 --
 
-INSERT INTO `networks` (`id`, `title`, `link`, `description`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`) VALUES
-(1, 'Like us on Facebook', 'http://facebook.com', '', 1, '2012-12-19 11:40:44', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
-(2, 'Follow us on Twitter', 'http://twitter.com', '', 1, '2012-12-19 11:39:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0);
+INSERT INTO `networks` (`id`, `title`, `title_np`, `link`, `description`, `description_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`) VALUES
+(1, 'Like us on Facebook', 'फेसबुक', 'http://facebook.com', 'like from facebook ...................', 'फेसबुक .........', 1, '2013-01-07 23:57:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
+(2, 'Follow us on Twitter', 'ट्विटर', 'http://twitter.com', 'Follow us on Twitter ..............', 'ट्विटर ...........', 1, '2013-01-07 23:57:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -473,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `lang` enum('en','np') NOT NULL DEFAULT 'en',
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `news`
@@ -481,9 +493,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 
 INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`) VALUES
 (1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', 'सउगसग सगर', '<p>\n ासग उासगह ासउगोि ु;ासगहगिो;सोिुह ;ासजगह;ाोुरगह ;ासगह;ाोिगहस;हलगह;;सोिुयह सोिग हसह;ोग सरह</p>\n', 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(4, 'The National Budget for 2013', '&lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o', '', '', 4, 1, '2012-12-18 23:46:08', '2012-12-18 23:46:08', '0000-00-00 00:00:00', 1, 0, 'en'),
-(5, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', '', '', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(6, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n', '', '', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(4, 'The National Budget for 2013', '  &lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &quot;Challenges in formulating the National Budget for 2013&quot; by Dr. P. B. Jayasundera, Secretary, Ministry o ', 'नेपाल बद्जोट २०१३', 'उब हब ा सर ', 4, 1, '2012-12-18 23:46:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(5, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'उगह', 'गउजह उगहजत ', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(6, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'हजगज गयजतज ', 'सह ससउगससह', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
 (7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en'),
 (8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', 'न्युनतम पारिशमिक दर', '<p>\n सब वह स डवगस हतजसगउह तगहस हतस</p>\n', 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
 (9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
@@ -500,7 +512,11 @@ INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_ty
 (25, 'uyi', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;\n', '', '', 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
 (26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', '', '', 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
 (30, 'sghsfs', '&lt;p&gt;\n sa asfg sfh stjh sgfhb stsh sgh sh ts&lt;/p&gt;\n', 'वबगहनस', '<p>\n &nbsp;गवब छवहबवसह उस उस उहस सउगस सउ सह</p>\n', 7, 1, '2013-01-05 22:18:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(31, 'kjgh kjfgk u', '&lt;p&gt;\n kug kjgy lkutfyjyt juyt jytj tgmnf jytfhgf j su&lt;/p&gt;\n', 'लिुतग', '<p>\n ुकयउ कुयगउ िकतु किुयउत ियतस जुयस जयस जतय जुयर जु यत ुजय</p>\n', 1, 1, '2013-01-06 04:52:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en');
+(31, 'kjgh kjfgk u', '&lt;p&gt;\n kug kjgy lkutfyjyt juyt jytj tgmnf jytfhgf j su&lt;/p&gt;\n', 'लिुतग', '<p>\n ुकयउ कुयगउ िकतु किुयउत ियतस जुयस जयस जतय जुयर जु यत ुजय</p>\n', 1, 1, '2013-01-06 04:52:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(32, 'उगहज', '      sfg safg sh   ', '0', '      सह सस   ', 5, 1, '2013-01-07 07:11:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(33, 'दद', 'qqqqqqqqqqqqq', '0', 'सससससससससस   ', 5, 1, '2013-01-07 07:43:07', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(34, 'dfg', 'asg sfg ah fhb sfhs hsfhbg b sth bsjhs jvbg hsthg sf hgshs fhs', 'गह', 'उ गहउगवह सहन गवजनसगज वगबहव बवबहसउ गउबह तह त तह त', 5, 1, '2013-01-07 07:54:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
+(38, 'vh sgs yg', 's hsfhg vgh sfgh sfgas gsfgh sg sfgs ', 'सहगसगहस', 'ससगय सउग सग सउग सग ', 2, 1, '2013-01-07 11:59:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en');
 
 -- --------------------------------------------------------
 
@@ -589,10 +605,15 @@ INSERT INTO `organizations` (`id`, `title`, `sub_title`, `date_created`, `create
 CREATE TABLE IF NOT EXISTS `poll` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
+  `question_np` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
   `option3` text NOT NULL,
   `option4` text NOT NULL,
+  `option1_np` text NOT NULL,
+  `option2_np` text NOT NULL,
+  `option3_np` text NOT NULL,
+  `option4_np` text NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -609,8 +630,8 @@ CREATE TABLE IF NOT EXISTS `poll` (
 -- Dumping data for table `poll`
 --
 
-INSERT INTO `poll` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `created_by`, `date_created`, `date_published`, `date_removed`, `count_option1`, `count_option2`, `count_option3`, `count_option4`, `active`) VALUES
-(1, 'How much should the minimum wage be increased by?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 1, '2012-12-20 00:40:51', NULL, NULL, 0, 0, 0, 0, 1);
+INSERT INTO `poll` (`id`, `question`, `question_np`, `option1`, `option2`, `option3`, `option4`, `option1_np`, `option2_np`, `option3_np`, `option4_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `count_option1`, `count_option2`, `count_option3`, `count_option4`, `active`) VALUES
+(1, 'How much should the minimum wage be increased by?', 'न्युनतम पारिमिक कतिले बढाउनु पर्छ ?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 'बिचार १', 'बिचार २', 'बिचार ३', 'बिचार ४', 1, '2012-12-20 00:40:51', NULL, NULL, 0, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -706,8 +727,8 @@ CREATE TABLE IF NOT EXISTS `vip` (
 --
 
 INSERT INTO `vip` (`id`, `filename`, `title`, `description`, `title_np`, `description_np`, `timestamp`, `created_by`, `date_created`, `date_published`, `file_type`, `active`) VALUES
-(3, 'Honorable_Minister_Posta_Bahadur_Bogati.jpg', 'Posta Bahadur Bogati', 'Honorable Minister', 'पोष्ट बहादुर बोगटी', 'मन्त', '1357231226.2148.jpg', 0, '2013-01-03 16:39:14', NULL, '', 1),
-(4, 'secretary_Somlal_Subedi.jpg', 'Somlal Subedi', 'Secretry', 'सोम लाल  सुबेदि', '', '1357231267.7461.jpg', 0, '2013-01-03 16:40:31', NULL, '', 1);
+(3, 'Honorable_Minister_Posta_Bahadur_Bogati.jpg', 'Posta Bahadur Bogati', 'Honorable Minister', 'पोष्ट बहादुर बोगटी', 'मन्त्री', '1357231226.2148.jpg', 0, '2013-01-03 16:39:14', NULL, '', 1),
+(4, 'secretary_Somlal_Subedi.jpg', 'Somlal Subedi', 'Secretry', 'सोम लाल  सुबेदि', 'सचिव', '1357231267.7461.jpg', 0, '2013-01-03 16:40:31', NULL, '', 1);
 
 -- --------------------------------------------------------
 

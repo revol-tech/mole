@@ -94,8 +94,9 @@ class News_model extends CI_Model{
 					$this->input->post('date_removed')
 				);
 //echo '<pre>';
-//print_r($data);
+//print_r($_POST);
 //print_r($this->input->post());
+//print_r($data);
 //echo '</pre>';				
 //die;
 		//update existing news
@@ -137,6 +138,9 @@ class News_model extends CI_Model{
 	 * get news [of selected parameter]
 	 */
 	public function get($news,$limit=null,$start=null){
+//echo '<pre>';
+//print_r($news);
+//echo '</pre>';
 
 		if($limit){
 			$this->db->limit($limit,$start);
@@ -167,6 +171,7 @@ class News_model extends CI_Model{
 	 */
 	public function render($params){
 		$link_type=null;	// render for selected page. default = homepage
+		$str=null;
 		if(isset($params['link_type'])){
 			$link_type = $params['link_type'];
 			unset($params['link_type']);
@@ -301,10 +306,21 @@ class News_model extends CI_Model{
 		foreach($data as $key=>$val){
 			$str.='<li>';
 			$str.='<span class="list_style_red_dot fl"></span>';
-			$str.='<a href="#">'.word_limiter($val->title,4).'</a>';
+			$str .= '<a href="#" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
+			$str .= 	word_limiter($val->title,4).'</a>';
+			$str .= '<a href="#" class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+			$str .= 	word_limiter($val->title_np,4).'</a>';
 			$str.='</li>';
 		}
-		$str.= '</ul><a href="#" class="btn_red fr alpha">View more</a></div>';
+		$str.= '</ul>';
+		
+		$str.=	'<a href="#" class="btn_red fr alpha en" '.
+					(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
+		$str.=	'View more</a>';
+		$str.=	'<a href="#" class="btn_red fr alpha np" '.
+					(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
+		$str.=	'अझै पठ्नुहोस्</a>';
+		$str.='</div>';
 		return $str;
 	}
 	private function _render_press($data){
@@ -312,7 +328,7 @@ class News_model extends CI_Model{
 			return '';
 		}
 
-		$str ='<div class="tab_grid1 fr">';
+		$str ='<div class="tab_grid1 fr en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 		$str.='		<h5>'.$data[0]->title.'</h5>';
 		$str.='		<p>'.word_limiter(strip_tags($data[0]->content),25);
 		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
@@ -320,6 +336,13 @@ class News_model extends CI_Model{
 		$str.='		<a href="#" class="btn_red fl alpha">Read more</a>';
 		$str.='</div>';
 
+		$str.='<div class="tab_grid1 fr np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
+		$str.='		<h5>'.$data[0]->title_np.'</h5>';
+		$str.='		<p>'.word_limiter(strip_tags($data[0]->content_np),25);
+		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
+		$str.='		</p>';
+		$str.='		<a href="#" class="btn_red fl alpha">बाँकीको पढ्नुहोस्</a>';
+		$str.='</div>';
 		return $str;
 	}
 /*
@@ -463,18 +486,28 @@ private function _render_events($data){
 
 		if($link_type=='about'){
 			$str .=	'<div class="item3 fl">'.
-						'<h2><span>Latest</span> Notices</h2>'.
+						'<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+							<span>Latest</span> Notices</h2>'.
+						'<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+							<span>प्रमुख</span> समाचार</h2>'.
 						'<div id="accordion">';
 					
 			foreach($data as $key=>$value){
 //echo '<pre>';print_r($value);echo '</pre>';				
-				$str .=	'<div class="acc-item last">'.
-						'	<a href="#" class="acc_trigger">'.
+				$str .=	'<div class="acc-item en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+						'	<a href="#" class="acc_trigger en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 						'		<span>'.$value->title.'</span>'.
 						'	</a>'.
-						'	<div class="acc_container">'.
+						'	<a href="#" class="acc_trigger np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+						'		<span>'.$value->title_np.'</span>'.
+						'	</a>'.
+						'	<div class="acc_container en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 								word_limiter($value->content,20) .
 						'		<a href="#" class="btn_red">Read more</a>'.
+						'	</div>'.
+						'	<div class="acc_container np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								word_limiter($value->content_np,20) .
+						'		<a href="#" class="btn_red">अझै पढ्नुहोस्</a>'.
 						'	</div>'.
 						'</div>';
 			}
@@ -515,15 +548,25 @@ private function _render_events($data){
 				'		buttonPrevHTML:"null",'.
 				'		initCallback: notice_initCallback,'.
 				'	});'.
+				'	jQuery("#notice-slider2").jcarousel({'.
+				'		vertical: true,'.
+				'		visible	: 2,'.
+				'		scroll 	: 1,'.
+				'		auto	: 10,'.
+				'		wrap	: "circular",'.
+				'		buttonNextHTML:"null",'.
+				'		buttonPrevHTML:"null",'.
+				'		initCallback: notice_initCallback,'.
+				'	});'.
 				'});'.
 				'</script>';
 
-		$str .=	'<div class="item1 fl">'.
+		$str .=	'<div class="item1 fl en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 				'<h2 id="carousel_header">'.
 				'	<span>Latest</span> Notices'.
 				'</h2>';
 
-		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango">';
+		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 		if(count($data)){
 			foreach($data as $key=>$val){
 				$str .= '<li>';
@@ -536,6 +579,27 @@ private function _render_events($data){
 			}
 		}
 		$str.= '</ul></div>';
+
+
+		$str .=	'<div class="item1 fl np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+				'<h2 id="carousel_header">'.
+				'	<span>प्रमुख</span> समाचार'.
+				'</h2>';
+
+		$str .= '<ul id="notice-slider2" class="jcarousel-skin-tango np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
+		if(count($data)){
+			foreach($data as $key=>$val){
+				$str .= '<li>';
+				$str .= '	<h4>'.$val->title_np.'</h4><a href="#" class="title_date">'.$val->date_created.'</a>';
+				$str .= '	<span>';
+				$str .= 		word_limiter(strip_tags($val->content_np),25);
+				$str .= '		<a href="#" class="more">अझै</a>';
+				$str .= '	</span>';
+				$str .= '</li>';
+			}
+		}
+		$str.= '</ul></div>';
+
 		return $str;
 	}
 	private function _render_page($data,$type=null){
