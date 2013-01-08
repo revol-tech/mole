@@ -82,7 +82,7 @@
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
-						<li><a href="#" class="download"><span>Downloads</span></a></li>
+						<li><a href="<?php echo base_url().'general/files'?>" class="download"><span>Downloads</span></a></li>
 						<li><a href="#" class="login"><span>Login</span></a></li>
 					</ul>
 				</div>

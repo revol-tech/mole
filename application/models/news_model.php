@@ -301,9 +301,10 @@ class News_model extends CI_Model{
 		if(!(count($data)>0)){
 			return '';
 		}
-		
+$count=0;		
 		$str = '<div class="tab_grid2"><ul>';
 		foreach($data as $key=>$val){
+if((++$count)>6) break;			
 			$str.='<li>';
 			$str.='<span class="list_style_red_dot fl"></span>';
 			$str .= '<a href="#" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';

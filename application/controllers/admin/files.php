@@ -41,7 +41,7 @@ class Files extends CI_Controller {
 		//initial configurations for pagination
 		$config['base_url'] = site_url('admin/files/index');
 		$config['total_rows'] = $this->files_model->record_count(array('file_type is null'=>null));
-echo $this->db->last_query();		
+//echo $this->db->last_query();		
 		$config['per_page'] = PAGEITEMS;
 
 
