@@ -93,6 +93,18 @@ class News_model extends CI_Model{
 					$this->input->post('date_published'),
 					$this->input->post('date_removed')
 				);
+
+				
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('title_np', 'Nepali Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('content', 'Content', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('content_np', 'Nepali Content', 'trim|required|min_length[5]|xss_clean');
+		if($this->form_validation->run()==false){
+			
+			return false;
+		}
+
 //echo '<pre>';
 //print_r($_POST);
 //print_r($this->input->post());

@@ -165,7 +165,8 @@ class Contacts extends CI_Controller {
     public function save(){
 		//save the contacts & return the id of that contacts
 		$this->data['date_created'] = $this->session->userdata('date_created');
-		$this->contacts_model->save($this->type);
+		if($this->contacts_model->save($this->type)==false)
+			return $this->edit();
 
 		//display that contacts
 		redirect('admin/contacts');

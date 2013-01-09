@@ -77,9 +77,9 @@ class Events_model extends CI_Model{
 //echo '</pre>';
 //die;
 
-			$tmp = $_FILES['file']['name'];
-			$ext =  end(explode('.',$tmp));
-			$mtime = microtime(true).'.'.$ext;
+		$tmp = $_FILES['file']['name'];
+		$ext =  end(explode('.',$tmp));
+		$mtime = microtime(true).'.'.$ext;
 
 		$data = array(
 					'title'			=>	$this->input->post('title'),
@@ -95,6 +95,15 @@ class Events_model extends CI_Model{
 					'filename'		=>	$_FILES['file']['name'],
 					'timestamp'		=>	$mtime,
 				);
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('title_np', 'Nepali Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('content', 'Content', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('content_np', 'Nepali Content', 'trim|required|min_length[5]|xss_clean');
+		if($this->form_validation->run()==false){
+			return false;
+		}
 
 		//update existing employments
 		if(($this->input->post('id'))){

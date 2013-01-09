@@ -204,6 +204,11 @@ class Events extends CI_Controller {
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->events_model->save();
 
+		if($this->data['id'] == false){
+			return $this->create();
+		}
+
+
 		//retrive that events
 		$this->get(array('id'=> $this->data['id']));
 

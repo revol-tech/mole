@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<?php echo validation_errors()?>
+
 <?php echo form_open(site_url('admin/poll/save'))?>
 
 	question :

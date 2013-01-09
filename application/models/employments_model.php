@@ -1,5 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * !!!!!!!!!
+ * this is not used.
+ * placed for backup only
+ * !!!!!!!!!
+ */
+ 
 class Employments_model extends CI_Model{
 
 	//the table to be used in the db

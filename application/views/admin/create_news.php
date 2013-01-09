@@ -1,24 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<!--
-	<!--for date picker
+<?php echo validation_errors()?>
 
-	<script src='<?php echo base_url().JSPATH?>jquery-ui.js'></script>
-	<link href='<?php echo base_url().JSPATH ?>jquery-ui.css' rel='stylesheet'/>
-	<script>
-	$(function() {
-		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd",defaultDate: 0 });
-	});
-	</script>
-	<style>
-	#ui-datepicker-div {
-		font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-		font-size: 62.5%;
-	}
-	body{height:1000px;} /*temporoary. be edited in better format*/
-	</style>
--->
-<!--<form method='post' action='<?php echo site_url('admin/news/save')?>' style='width:700px;'>-->
 <?php echo form_open(site_url('admin/news/save'),array('style'=>'width:700px;'))?>
 
 	<label>
@@ -33,11 +16,13 @@
 	</label>
 	<br/>
 
+	content :
 	<textarea name="content" id="content" >
 		<?php echo @$content?>
 	</textarea>
 	<br/>
 
+	content (नेपाली):
 	<textarea name="content_np" id="content_np" >
 		<?php echo @$content_np?>
 	</textarea>
@@ -76,7 +61,5 @@
 	<input type='submit' name='submit' value='save' />
 </form>
 
-<?php //echo $generated_editor ?>
-<?php //echo $generated_editor2 ?>
 
 <div id='preview'></div>

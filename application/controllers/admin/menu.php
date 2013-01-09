@@ -50,7 +50,7 @@ class Menu extends CI_Controller {
 	/**
 	 * disp form for new/edit menu
 	 */
-	public function create($data=false){
+	public function create($data=null){
 		//creating the parent drop down
 		$tmp = $this->menu_model->get();
 		$parent_id = '<select name="parent_id">';
@@ -67,7 +67,9 @@ class Menu extends CI_Controller {
 			$parent_id .= '>'.$val->title.'</option>';
 		}
 		$parent_id .= '</select>';
-		$data->parent_id = $parent_id;
+		$data = (array)$data;
+		$data['parent_id'] = $parent_id;
+		$data = (object)$data;
 
 
 		//display
@@ -100,6 +102,15 @@ class Menu extends CI_Controller {
 						'active'	=> $this->input->post('active'),
 					);
 
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('title_np', 'Nepali Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('comments', 'Comments', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('comments_np', 'Nepali Comments', 'trim|required|min_length[5]|xss_clean');
+		if($this->form_validation->run()==false){
+			//$this->data = $data;
+			return $this->create($data);
+		}
 
 		//store new link
 		if($this->input->post('id')==null){

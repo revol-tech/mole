@@ -184,6 +184,22 @@ class Health extends CI_Controller {
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->health_model->save($this->type);
 
+		if($this->data['id'] == false){
+			$this->data = array(
+						'title'			=>	$this->input->post('title'),
+						'content'		=>	htmlentities($this->input->post('content')),
+						'title_np'		=>	$this->input->post('title_np'),
+						'content_np'	=>		($this->input->post('content_np')),
+							//htmlentities($this->input->post('content_np')),
+						'user_id'		=>	$this->session->userdata('user_id'),
+						'date_created'	=>	$this->session->userdata('date_created'),
+						'date_published'=>	$this->input->post('date_published'),
+						'date_removed'	=>	$this->input->post('date_removed')
+					);
+			
+			return $this->create();
+		}
+
 		//retrive that health
 		$this->get(array('id'=> $this->data['id']));
 

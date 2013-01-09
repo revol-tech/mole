@@ -144,7 +144,7 @@ class Employments extends CI_Controller {
 	 */
     public function create(){
 		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
+		//$this->_ckeditor_conf();
 		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 		//$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
@@ -184,6 +184,22 @@ class Employments extends CI_Controller {
 		//save the employments & return the id of that employments
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->employments_model->save($this->type);
+
+		if($this->data['id'] == false){
+			$this->data = array(
+						'title'			=>	$this->input->post('title'),
+						'content'		=>	htmlentities($this->input->post('content')),
+						'title_np'		=>	$this->input->post('title_np'),
+						'content_np'	=>		($this->input->post('content_np')),
+							//htmlentities($this->input->post('content_np')),
+						'user_id'		=>	$this->session->userdata('user_id'),
+						'date_created'	=>	$this->session->userdata('date_created'),
+						'date_published'=>	$this->input->post('date_published'),
+						'date_removed'	=>	$this->input->post('date_removed')
+					);
+			
+			return $this->create();
+		}
 
 		//retrive that employments
 		$this->get(array('id'=> $this->data['id']));

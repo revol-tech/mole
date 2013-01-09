@@ -183,6 +183,17 @@ class Networks extends CI_Controller {
 	 * save/update networks form
 	 */
     public function save(){
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('title_np', 'Nepali Title', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('comments', 'Comments', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('comments_np', 'Nepali Comments', 'trim|required|min_length[5]|xss_clean');
+		if($this->form_validation->run()==false){
+			//$this->data = $data;
+			return $this->create();
+		}
+
 		//save the neworks & return the id of that usefullinks
 		$this->data['date_created'] = $this->session->userdata('date_created');
 		$this->data['id'] = $this->networks_model->save($this->type);

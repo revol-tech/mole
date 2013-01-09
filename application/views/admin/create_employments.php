@@ -1,26 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<?php echo validation_errors()?>
 
-
-<!--
-	<!--for date picker
-
-	<script src='<?php echo base_url().JSPATH?>jquery-ui.js'></script>
-	<link href='<?php echo base_url().JSPATH ?>jquery-ui.css' rel='stylesheet'/>
-	<script>
-	$(function() {
-		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd",defaultDate: 0 });
-	});
-	</script>
-	<style>
-	#ui-datepicker-div {
-		font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-		font-size: 62.5%;
-	}
-	body{height:1000px;} /*temporoary. be edited in better format*/
-	</style>
--->
-<!--<form method='post' action='<?php echo site_url('admin/employments/save')?>' style='width:700px;'>-->
 <?php echo form_open(site_url('admin/employments/save'),array('style'=>'width:700px;'))?>
 	<label>
 		Title

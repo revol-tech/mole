@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<!--<form method='post' action='<?php echo site_url('admin/notices/save')?>' style='width:700px;'>-->
+<?php echo validation_errors()?>
+
 <?php echo form_open(site_url('admin/notices/save'),array('style'=>'width:700px;'))?>
 	<label>
 		Title

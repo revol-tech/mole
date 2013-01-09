@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<?php echo validation_errors()?>
 
 <!--<form method='post' action='<?php echo site_url('admin/networks/save')?>' style='width:700px;'>-->
 <?php echo form_open(site_url('admin/networks/save'),array('style'=>'width:700px;'))?>
