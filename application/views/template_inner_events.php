@@ -37,6 +37,7 @@
 		</div>
 
 		<!--Header End --> 
+		<?php echo $sub_menu?>
 	</div>
 	
 	<!-- Contain starts Here -->
@@ -47,16 +48,14 @@
 					Government of Nepal Ministry of Labour and Employment
 				</a> 
 			</div>
-			<!--
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
-						<li><a href="#" class="download"><span>Downloads</span></a></li>
+						<li><a href="<?php echo base_url().'acts'?>" class="download"><span>Downloads</span></a></li>
 						<li><a href="#" class="login"><span>Login</span></a></li>
 					</ul>
 				</div>
 			</div>
-			-->
 		</div>
 
 		<div class="container_1 fl">

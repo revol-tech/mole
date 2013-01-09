@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title><?php echo @$title?></title>
 	<?php echo $_styles?>
+	<link rel="shortcut icon" href="<?php echo base_url().CSSPATH?>images/favicon.ico" type="image/x-icon"/>	
 	<?php echo $_scripts?>
 </head>
 
@@ -36,6 +37,7 @@
 		</div>
 
 		<!--Header End --> 
+		<?php echo $sub_menu?>
 	</div>
 	
 	<!-- Contain starts Here -->
@@ -46,16 +48,14 @@
 					Government of Nepal Ministry of Labour and Employment
 				</a> 
 			</div>
-			<!--
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
-						<li><a href="#" class="download"><span>Downloads</span></a></li>
+						<li><a href="<?php echo base_url().'acts'?>" class="download"><span>Downloads</span></a></li>
 						<li><a href="#" class="login"><span>Login</span></a></li>
 					</ul>
 				</div>
 			</div>
-			-->
 		</div>
 
 		<div class="container_1 fl">

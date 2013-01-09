@@ -43,11 +43,11 @@
 		<td><a href='<?php echo site_url('admin/pages')?>'>Pages</a></td>
 		<td><a href='<?php echo site_url('admin/poll')?>'>Polls</a></td>
 		<td><a href='<?php echo site_url('admin/press')?>'>Press</a></td>
-		<td><a href='<?php echo site_url('admin/usefullinks')?>'>Usefullinks</a></td>
+		<td><a href='<?php echo site_url('admin/submenu')?>'>Submenu</a></td>
 	</tr>
 	<tr>
+		<td><a href='<?php echo site_url('admin/usefullinks')?>'>Usefullinks</a></td>
 		<td><a href='<?php echo site_url('admin/vip')?>'>VIP</a></td>
-		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>

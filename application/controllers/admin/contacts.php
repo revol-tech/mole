@@ -137,9 +137,6 @@ class Contacts extends CI_Controller {
 	 * contacts form
 	 */
     public function create(){
-		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
-		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 //print_r($this->data);
 
 		//generate username, current date if creating nu contacts [not editing]

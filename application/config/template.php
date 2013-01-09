@@ -67,6 +67,7 @@ $template['default']['regions'] = array(
 										)
 						),
 		'lang_menu'	=> array(),
+		'sub_menu'	=> array(),
 		'slider' 	=> array(),
 		'flash_news'=> array(),
 		'page'	 	=> array(),
@@ -107,6 +108,7 @@ $template['template_inner']['regions'] = array(
 										)
 						),
 		'lang_menu'	=> array(),
+		'sub_menu'	=> array(),
 		
 		'page'	 	=> array(),
 		'news'		=> array(),
@@ -148,6 +150,7 @@ $template['template_inner_events']['regions'] = array(
 										)
 						),
 		'lang_menu'	=> array(),
+		'sub_menu'	=> array(),
 		'events'	=> array(),
 		'news'		=> array(),
 		'organizations'=>array(),

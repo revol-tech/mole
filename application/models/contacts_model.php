@@ -83,6 +83,13 @@ class Contacts_model extends CI_Model{
 					'active'	=>$this->input->post('active'),
 					'homepage'	=> $this->input->post('homepage'),
 				);
+				
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('address_np', 'Address Nepali', 'trim|required|min_length[5]|xss_clean');
+		if($this->form_validation->run()==false){
+			redirect('admin/contacts/edit');
+		}
 
 		//update existing contacts
 		if(strlen($this->input->post('id'))){
