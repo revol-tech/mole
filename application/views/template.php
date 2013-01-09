@@ -55,16 +55,8 @@
 			</div>
 		</div>
 		<!--Header End -->
-		<div id="header_bottom">
-			<div class="container_1">
-			 <ul class="sub_nav">
-				<li><a href="#">Contact Us</a> </li>
-				<li><a href="feedback.html">Feedback</a> </li>
-				<li><a href="#">FAQs</a> </li>
-				<li><a href="events.html">events</a> </li>
-			  </ul>
-			</div>
-		  </div>
+
+		<?php echo $sub_menu?>
 	</div>
 
 
@@ -82,7 +74,11 @@
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
+<<<<<<< HEAD
 						<li><a href="<?php echo base_url().'general/files'?>" class="download"><span>Downloads</span></a></li>
+=======
+						<li><a href="<?php echo base_url().'acts'?>" class="download"><span>Downloads</span></a></li>
+>>>>>>> develop
 						<li><a href="#" class="login"><span>Login</span></a></li>
 					</ul>
 				</div>

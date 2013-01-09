@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<!--<form method='post' action='<?php echo site_url('admin/contacts/save')?>' style='width:700px;'>-->
+<?php echo validation_errors(); ?>
+
 <?php echo form_open(site_url('admin/contacts/save'),array('style'=>'width:700px;'))?>
 
 	<hr/>

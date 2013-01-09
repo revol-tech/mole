@@ -459,14 +459,12 @@ private function _render_events($data){
 		$str .= '<ul id="flash-slider" style="" class="ticker_block fl jcarousel-skin-tango">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
 			foreach($data as $key=>$val){
-				$str .= '<li class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
-				$str .= '	<span>';
+				$str .= '<li>';
+				$str .= '	<span class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 				$str .= 		word_limiter(strip_tags($val->content),15);
 				$str .= '		<a href="#" class="more">more</a>';
 				$str .= '	</span>';
-				$str .= '</li>';
-				$str .= '<li class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
-				$str .= '	<span>';
+				$str .= '	<span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
 				$str .= 		word_limiter(strip_tags($val->content_np),15);
 				$str .= '		<a href="#" class="more">अझै</a>';
 				$str .= '	</span>';
@@ -495,7 +493,7 @@ private function _render_events($data){
 					
 			foreach($data as $key=>$value){
 //echo '<pre>';print_r($value);echo '</pre>';				
-				$str .=	'<div class="acc-item en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+				$str .=	'<div class="acc-item" >'.
 						'	<a href="#" class="acc_trigger en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 						'		<span>'.$value->title.'</span>'.
 						'	</a>'.
@@ -562,37 +560,27 @@ private function _render_events($data){
 				'});'.
 				'</script>';
 
-		$str .=	'<div class="item1 fl en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
-				'<h2 id="carousel_header">'.
+		$str .=	'<div class="item1 fl" >'.
+				'<h2 id="carousel_header" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 				'	<span>Latest</span> Notices'.
+				'</h2>'.
+				'<h2 id="carousel_header" class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+				'	<span>प्रमुख</span> नोटिस्'.
 				'</h2>';
 
-		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
+		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango" >';
 		if(count($data)){
 			foreach($data as $key=>$val){
 				$str .= '<li>';
-				$str .= '	<h4>'.$val->title.'</h4><a href="#" class="title_date">'.$val->date_created.'</a>';
-				$str .= '	<span>';
+				$str .= '	<h4 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->title.'</h4>';
+				$str .= '	<h4 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->title_np.'</h4>';
+				$str .= '	<a href="#" class="title_date en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->date_created.'</a>';
+				$str .= '	<a href="#" class="title_date np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->date_created.'</a>';
+				$str .= '	<span class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 				$str .= 		word_limiter(strip_tags($val->content),25);
 				$str .= '		<a href="#" class="more">more</a>';
 				$str .= '	</span>';
-				$str .= '</li>';
-			}
-		}
-		$str.= '</ul></div>';
-
-
-		$str .=	'<div class="item1 fl np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
-				'<h2 id="carousel_header">'.
-				'	<span>प्रमुख</span> समाचार'.
-				'</h2>';
-
-		$str .= '<ul id="notice-slider2" class="jcarousel-skin-tango np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
-		if(count($data)){
-			foreach($data as $key=>$val){
-				$str .= '<li>';
-				$str .= '	<h4>'.$val->title_np.'</h4><a href="#" class="title_date">'.$val->date_created.'</a>';
-				$str .= '	<span>';
+				$str .= '	<span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
 				$str .= 		word_limiter(strip_tags($val->content_np),25);
 				$str .= '		<a href="#" class="more">अझै</a>';
 				$str .= '	</span>';

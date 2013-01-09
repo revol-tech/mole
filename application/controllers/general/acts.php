@@ -12,32 +12,21 @@ class Acts extends MY_MOLE_Controller {
 		$this->load->library('render_library');
 		$this->render_library->generate_inner();
 
-		// get the reqd. parameters
-		$data = $this->links_model->get(array(
-											'link'=>$this->uri->segment(1).
-													'/'.
-													$this->uri->segment(2)
-											)
-										);
-
-		$this->load->model('news_model');
-		$params = array(
-//						'id'		=> $data[0]->row_id,
-						'news_type'	=> 8,
-					);
-		($this->uri->segment(2))?$params['id']=$this->uri->segment(2):'';
+		$this->load->model('files_model');
 
 		//get thre reqd. contents
-		$page = $this->news_model->get($params);
-		
-		if ($this->uri->segment(2)){
-			$params['id']=$this->uri->segment(2);
-			$params['link_type'] = 'page';
-		}
+		$page = $this->files_model->get(array('file_type is null'=>null));
+//echo '<pre>';
+//print_r($page);
+//echo '</pre>';		
+//die;
+//		if ($this->uri->segment(2)){
+//			$params['id']=$this->uri->segment(2);
+//			$params['link_type'] = 'page';
+//		}
 
 		//render it
 		$this->render_library->generate_innermain($page,($this->uri->segment(2))?'actsfull':'actslist');
-
 
 		$this->template->render();
 	}

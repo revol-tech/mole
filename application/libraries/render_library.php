@@ -112,15 +112,13 @@ class Render_library{
 								<h3>'.$val->title.'</h3>
 								<div class="articleinfo fl">
 									<span class="date-posted fl">'.$val->date_published.'</span>'.
-									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
 									'<span class="author fl">'.$val->created_by.'</span>
-									<a class="print fr" href="#"></a>
 								</div>
 								<div class="item1_content fl">
 									<p>
-										'.word_limiter(strip_tags($val->content),20).'
-										<a class="more" href="'.site_url('acts/'.$val->id).'">more</a> 
-									</p>
+										<a href="'.site_url('admin/files/download/'.$val->id).'">
+										download
+									</a>
 								</div>
 							</div>';
 				}
@@ -485,6 +483,24 @@ class Render_library{
 				</div>';
 		$this->ci->template->write('lang_menu',$str);
 
+		
+		//submenu
+		$this->ci->load->model('submenu_model');
+		$submenu_data = $this->ci->submenu_model->get(array('active'=>1));
+		$str = '<div id="header_bottom">
+					<div class="container_1">
+						<ul class="sub_nav">';
+		foreach($submenu_data as $key=>$val){
+			$str .=	'<li>';
+			$str .= '<a class="en" href="'.base_url().$val->link.'" title="'.$val->comments.'"'.
+						(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->title.'</a>';
+			$str .= '<a class="np" href="'.base_url().$val->link.'" title="'.$val->comments_np.'"'.
+						(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->title_np.'</a>';
+			$str .= '</li>';
+		}
+		$str .=	'</ul></div></div>';
+		
+		$this->ci->template->write('sub_menu',$str);
 	}
 
 

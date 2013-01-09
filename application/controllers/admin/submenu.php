@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class Submenu extends CI_Controller {
 
 	public $data = array();
 
@@ -9,7 +9,7 @@ class Menu extends CI_Controller {
 
 		chk_admin();
 
-		$this->load->model('menu_model');
+		$this->load->model('submenu_model');
 
 		/**
 		 * set headers to prevent back after logout
@@ -25,60 +25,28 @@ class Menu extends CI_Controller {
 
 
 	public function index(){
-		$data['items'] = $this->list_menu();
+		$data['items'] = $this->list_submenu();
 
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/list_menu.php',$data);
+		$this->load->view('admin/list_submenu.php',$data);
 		$this->load->view('templates/admin_footer');
 	}
 
 	/**
-	 * fn to count the number of roots links
-	 */
-	private function _count_root($tmp){
-		$count = 0;
-		foreach($tmp as $key=>$val){
-			if($val->parent_id==0 && $val->active==1){
-				$count++;
-			}
-		}
-		return $count;
-	}
-
-	/**
-	 * disp form for new/edit menu
+	 * disp form for new/edit submenu
 	 */
 	public function create($data=false){
-		//creating the parent drop down
-		$tmp = $this->menu_model->get();
-		$parent_id = '<select name="parent_id">';
-		
-		//limit num. of roots to less than or equal to 5
-		if($this->_count_root($tmp)<5){	
-			$parent_id .= '<option value="0">Root</option>';
-		}
-		foreach($tmp as $val){
-			$parent_id .= '<option value="'.$val->id.'" ';
-			if(isset($data->parent_id) && $data->parent_id==$val->id){
-				$parent_id .= 'selected="selected"';
-			}
-			$parent_id .= '>'.$val->title.'</option>';
-		}
-		$parent_id .= '</select>';
-		$data->parent_id = $parent_id;
-
 
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
 
 		if($data){
-			$this->load->view('admin/create_menu.php',$data);
-//print_r($data);
+			$this->load->view('admin/create_submenu.php',$data);
 		}else{
-			$this->load->view('admin/create_menu.php');
+			$this->load->view('admin/create_submenu.php');
 		}
 
 		$this->load->view('templates/admin_footer');
@@ -86,7 +54,7 @@ class Menu extends CI_Controller {
 
 
 	/**
-	 * save nu menu
+	 * save nu submenu
 	 */
 	public function save(){
 
@@ -96,7 +64,6 @@ class Menu extends CI_Controller {
 						'comments'	=> $this->input->post('comments'),
 						'comments_np'=>$this->input->post('comments_np'),
 						'link'		=> $this->input->post('link'),
-						'parent_id'	=> $this->input->post('parent_id'),
 						'active'	=> $this->input->post('active'),
 					);
 
@@ -104,29 +71,28 @@ class Menu extends CI_Controller {
 		//store new link
 		if($this->input->post('id')==null){
 
-			$this->menu_model->save($data);
+			$this->submenu_model->save($data);
 
 
-		//update existing menu
+		//update existing submenu
 		}else{
 			$data['id']= $this->input->post('id');
 //print_r($data);
-			$this->menu_model->update($data);
+			$this->submenu_model->update($data);
 		}
 
-
-		redirect('admin/menu');
+		redirect('admin/submenu');
 	}
 
 
 	/**
-	 * list all menus
+	 * list all submenus
 	 */
-	public function list_menu(){
+	public function list_submenu(){
 
 		//initial configurations for pagination
-		$config['base_url'] = site_url('admin/menu/index');
-		$config['total_rows'] = $this->menu_model->record_count();
+		$config['base_url'] = site_url('admin/submenu/index');
+		$config['total_rows'] = $this->submenu_model->record_count();
 		$config['per_page'] = PAGEITEMS;
 
 
@@ -136,7 +102,6 @@ class Menu extends CI_Controller {
 			$item->title	='--';
 			$item->title_link='--';
 			$item->link		='--';
-			$item->parent_id='--';
 			$item->active	='--';
 			$item->comments	='--';
 			$item->edit		='--';
@@ -160,30 +125,30 @@ class Menu extends CI_Controller {
 		//echo $page;
 
 		//get reqd. page's data
-		$data = $this->menu_model->get(null,$config['per_page'],$page);
+		$data = $this->submenu_model->get(null,$config['per_page'],$page);
 
 
 		foreach($data as $key=>$val){
-			$str =	'<a href="'.site_url('admin/menu/view/'.$val->id).'">'.
+			$str =	'<a href="'.site_url('admin/submenu/view/'.$val->id).'">'.
 						$val->title.
 					'</a>';
 			$data[$key]->title_link = $str;
 
 
-			$str =	'<a href="'.site_url('admin/menu/edit/'.$val->id).'">edit</a>';
+			$str =	'<a href="'.site_url('admin/submenu/edit/'.$val->id).'">edit</a>';
 			$data[$key]->edit = $str;
 
 
-			$str = 	form_open(site_url('admin/menu/del/')).//'<form method="post" action="'.site_url('admin/menu/del/').'">'.
-						'<input type="hidden" name="menu_id" value="'.$val->id.'"/>'.
+			$str = 	form_open(site_url('admin/submenu/del/')).
+						'<input type="hidden" name="submenu_id" value="'.$val->id.'"/>'.
 						'<input type="submit" name="del" value="Delete"/>'.
 					'</form>';
 			$data[$key]->del = $str;
 
 
 			//add activate/deactivate button
-			$str = form_open(site_url('admin/menu/active/')).
-						'<input type="hidden" name="menu_id" value="'.$data[$key]->id.'"/>';
+			$str = form_open(site_url('admin/submenu/active/')).
+						'<input type="hidden" name="submenu_id" value="'.$data[$key]->id.'"/>';
 			if($data[$key]->active == 1){
 				$str .=	'<input type="hidden" name="activate" value="false"/>';
 				$str .=	'<input type="submit" name="active"   value="Deactivate"/>';
@@ -202,7 +167,7 @@ class Menu extends CI_Controller {
 
 
 	/**
-	 * get 1 menu for editing
+	 * get 1 submenu for editing
 	 */
 	public function edit(){
 
@@ -214,7 +179,7 @@ class Menu extends CI_Controller {
 			}
 		}
 
-		$data = $this->menu_model->get(array('id'=>$id));
+		$data = $this->submenu_model->get(array('id'=>$id));
 
 		if(count($data)!=1){
 			show_404();
@@ -226,7 +191,7 @@ class Menu extends CI_Controller {
 
 
 	/**
-	 * view a menu for viewing
+	 * view a submenu for viewing
 	 */
 	public function view(){
 		$id=false;
@@ -237,7 +202,7 @@ class Menu extends CI_Controller {
 			}
 		}
 
-		$data = $this->menu_model->get(array('id'=>$id));
+		$data = $this->submenu_model->get(array('id'=>$id));
 
 		if(count($data)!=1){
 			show_404();
@@ -247,40 +212,40 @@ class Menu extends CI_Controller {
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
-		$this->load->view('admin/view_menu.php',$data[0]);
+		$this->load->view('admin/view_submenu.php',$data[0]);
 		$this->load->view('templates/admin_footer');
 	}
 
 
 	/**
-	 * activate/deactivate a menu
+	 * activate/deactivate a submenu
 	 *
-	 * only one menu can be active.
+	 * only one submenu can be active.
 	 */
 	public function active(){
 		$active = $this->input->post('active')=='Activate'?1:0;
-		$ids = $this->input->post('menu_id');
+		$ids = $this->input->post('submenu_id');
 //echo $active;
 //echo $this->input->post('active');
 
-		$this->menu_model->update(array(
+		$this->submenu_model->update(array(
 										'id'=>$ids,
 										'active'=>$active
 										)
 								);
 
-		redirect('admin/menu');
+		redirect('admin/submenu');
 	}
 
 
 
 	/**
-	 * del selected menu
+	 * del selected submenu
 	 */
 	public function del(){
 //echo 'in delete polll';
-		$this->menu_model->del($this->input->post('menu_id'));
-		redirect('admin/menu');
+		$this->submenu_model->del($this->input->post('submenu_id'));
+		redirect('admin/submenu');
 	}
 
 }
