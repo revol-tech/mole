@@ -74,12 +74,16 @@
 			<div class="grid_2 omega fr">
 				<div class="links fr">
 					<ul>
-<<<<<<< HEAD
-						<li><a href="<?php echo base_url().'general/files'?>" class="download"><span>Downloads</span></a></li>
-=======
-						<li><a href="<?php echo base_url().'acts'?>" class="download"><span>Downloads</span></a></li>
->>>>>>> develop
-						<li><a href="#" class="login"><span>Login</span></a></li>
+						<li>
+							<a href="<?php echo base_url().'acts'?>" class="download">
+								<span>Downloads</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="login">
+								<span>Login</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
