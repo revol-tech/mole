@@ -92,15 +92,23 @@ class Render_library{
 				//display full single news article
 
 				$str .=	'<div class="item1 fl">
-							<h3>'.$data[0]->title.'</h3>
+							<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$data[0]->title.
+							'</h3>
+							<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								$data[0]->title_np.
+							'</h3>
 							<div class="articleinfo fl">
 								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
 								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
 								'<span class="author fl">'.$data[0]->created_by.'</span>
 								<a class="print fr" href="#"></a>
 							</div>
-							<div class="item1_content fl">
+							<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 								'.$data[0]->content.'
+							</div>
+							<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+								'.$data[0]->content_np.'
 							</div>
 						</div>';
 				break;
@@ -303,17 +311,28 @@ class Render_library{
 
 				foreach($data as $key=>$val){
 					$str .=	'<div class="item1 fl">
-								<h3>'.$val->title.'</h3>
+								<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').'>'.
+									$val->title.
+								'</h3>
+								<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').'>'.
+									$val->title_np.
+								'</h3>
 								<div class="articleinfo fl">
 									<span class="date-posted fl">'.$val->date_published.'</span>'.
 									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
 									'<span class="author fl">'.$val->created_by.'</span>
 									<a class="print fr" href="#"></a>
 								</div>
-								<div class="item1_content fl">
+								<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').'>
 									<p>
 										'.word_limiter(strip_tags($val->content),20).'
 										<a class="more" href="'.site_url('notices/'.$val->id).'">more</a> 
+									</p>
+								</div>
+								<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').'>
+									<p>
+										'.word_limiter(strip_tags($val->content_np),20).'
+										<a class="more" href="'.site_url('notices/'.$val->id).'">अझै</a> 
 									</p>
 								</div>
 							</div>';
@@ -322,17 +341,24 @@ class Render_library{
 			case 'noticesfull':
 
 				//display full single news article
-
 				$str .=	'<div class="item1 fl">
-							<h3>'.$data[0]->title.'</h3>
+							<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$data[0]->title.
+							'</h3>
+							<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								$data[0]->title_np.
+							'</h3>
 							<div class="articleinfo fl">
 								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
 								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
 								'<span class="author fl">'.$data[0]->created_by.'</span>
 								<a class="print fr" href="#"></a>
 							</div>
-							<div class="item1_content fl">
+							<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 								'.$data[0]->content.'
+							</div>
+							<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+								'.$data[0]->content_np.'
 							</div>
 						</div>';
 				break;

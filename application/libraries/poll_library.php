@@ -191,7 +191,9 @@ class Poll_library{
 					<h2 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 						<span>Public </span>Poll
 					</h2>
-					<h2 class="np"><span>सर्वसाधाण </span>बिचार</h2>
+					<h2 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+						<span>सर्वसाधाण </span>बिचार
+					</h2>
 					<div class="poll_block en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 						<p class="poll_topic">'.$poll[0]->question.'</p>
 						'.form_open(site_url('polls/vote')).'

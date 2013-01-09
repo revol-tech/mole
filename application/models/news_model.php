@@ -250,10 +250,18 @@ class News_model extends CI_Model{
 	private function _render_full_news($data){
 		$str = '';
 		$str =	'<div class="fl">
-					<h1>
+					<h1 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 						'.$data[0]->title.'
 					</h1>
-					<div class="text_box fr">'.$data[0]->content.'</div>
+					<h1 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+						'.$data[0]->title_np.'
+					</h1>
+					<div class="text_box fr en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+						$data[0]->content.
+					'</div>
+					<div class="text_box fr np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+						$data[0]->content_np.
+					'</div>
 				</div>';
 		return $str;
 	}
@@ -478,7 +486,7 @@ private function _render_events($data){
 				$str .= '	</span>';
 				$str .= '	<span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
 				$str .= 		word_limiter(strip_tags($val->content_np),15);
-				$str .= '		<a href="#" class="more">अझै</a>';
+				$str .= '		<a href="'.base_url().'news/'.$val->id.'" class="more">अझै</a>';
 				$str .= '	</span>';
 				$str .= '</li>';
 			}
@@ -590,11 +598,11 @@ private function _render_events($data){
 				$str .= '	<a href="#" class="title_date np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->date_created.'</a>';
 				$str .= '	<span class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 				$str .= 		word_limiter(strip_tags($val->content),25);
-				$str .= '		<a href="#" class="more">more</a>';
+				$str .= '		<a href="'.base_url().'notices/'.$val->id.'" class="more">more</a>';
 				$str .= '	</span>';
 				$str .= '	<span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
 				$str .= 		word_limiter(strip_tags($val->content_np),25);
-				$str .= '		<a href="#" class="more">अझै</a>';
+				$str .= '		<a href="'.base_url().'notices/'.$val->id.'" class="more">अझै</a>';
 				$str .= '	</span>';
 				$str .= '</li>';
 			}
