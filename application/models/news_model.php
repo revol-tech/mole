@@ -181,7 +181,7 @@ class News_model extends CI_Model{
 	/**
 	 * render news for display
 	 */
-	public function render($params){
+	public function render($params,$limit=null){
 		$link_type=null;	// render for selected page. default = homepage
 		$str=null;
 		if(isset($params['link_type'])){
@@ -189,7 +189,7 @@ class News_model extends CI_Model{
 			unset($params['link_type']);
 		}
 		$this->load->helper('text');
-		$data = $this->get($params);
+		$data = $this->get($params,$limit);
 
 		switch($params['news_type']){
 
@@ -391,12 +391,24 @@ private function _render_events($data){
 		if($type=='about'){
 			$str .=	'<div class="highlight fl">'.
 					'	<div class="title1">'.
-					'		<h2><span>Latest</span> News </h2>'.
+					'		<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+					'			<span>Latest</span> News '.
+					'		</h2>'.
+					'		<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+					'			<span>प्रमुख</span> समाचार '.
+					'		</h2>'.
 					'		<div class="piece"></div>'.
 					'	</div>'.
 					'	<div class="highlight_content fl"><ul>';
 			foreach($data as $key=>$val){
-				$str .= '<li><a href="#">'.$val->title.'</a></li>';
+				$str .= '<li>'.
+						'	<a class="en" href="#" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$val->title.
+							'</a>'.
+						'	<a class="en" href="#" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								$val->title_np.
+							'</a>'.
+						'</li>';
 			
 			}
 
@@ -422,7 +434,6 @@ private function _render_events($data){
 		}
 		
 		$str ='';
-//$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery-1.8.2.min.js"></script>';
 //		if(!isset($config['jcarousel'])){
 			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
 //			$this->config->set_item('jcarousel',true);
@@ -482,7 +493,7 @@ private function _render_events($data){
 				$str .= '<li>';
 				$str .= '	<span class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 				$str .= 		word_limiter(strip_tags($val->content),15);
-				$str .= '		<a href="#" class="more">more</a>';
+				$str .= '		<a href="'.base_url().'news/'.$val->id.'" class="more">more</a>';
 				$str .= '	</span>';
 				$str .= '	<span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
 				$str .= 		word_limiter(strip_tags($val->content_np),15);

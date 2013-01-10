@@ -142,8 +142,8 @@ Array
 	/**
 	 * render networks for display
 	 */
-	public function render($params=null){
-		$data = $this->get($params);
+	public function render($params=null,$limit=null){
+		$data = $this->get($params,$limit);
 
 		if(!(count($data)>0))
 			return '';

@@ -259,14 +259,22 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title),5).'" 
-										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'" />
+										alt="" src="'.
+											//(isset($val->timestamp))?base_url().DOCUMENTS.$val->timestamp:''.
+										'" />
 								</div>
+							
 								<div class="text_box fr">
-									<p>'.$val->contents.'</p>
+									<p>';
+										if(isset($val->content)){
+											$str .= $val->content;
+										}else{
+											$str .= $val->contents;
+										}
+							$str.=	'</p>
 								</div>
 							</div> 
 						</div>
-
 						<div class="about_us fl np" '.
 								(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
 							<p>
@@ -277,15 +285,23 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title_np),5).'" 
-										alt="" src="'.base_url().DOCUMENTS.$val->timestamp.'" />
+										alt="" src="'.
+											//(isset($val->timestamp))?base_url().DOCUMENTS.$val->timestamp:''.
+										'" />
 								</div>
+							
 								<div class="text_box fr">
-									<p>'.$val->contents_np.'</p>
+									<p>';
+										if(isset($val->content)){
+											$str .= $val->content_np;
+										}else{
+											$str .= $val->contents_np;
+										}
+							$str.=	'</p>
 								</div>
 							</div> 
 						</div>
 					</div>';
-
 		}
 		return $str;
 	}

@@ -75,13 +75,19 @@
 				<div class="links fr">
 					<ul>
 						<li>
-							<a href="<?php echo base_url().'acts'?>" class="download">
+							<a href="<?php echo base_url().'acts'?>" class="download en" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>
 								<span>Downloads</span>
+							</a>
+							<a href="<?php echo base_url().'acts'?>" class="download np" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>
+								<span>डाउनलोड</span>
 							</a>
 						</li>
 						<li>
-							<a href="#" class="login">
+							<a href="#" class="login en" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>
 								<span>Login</span>
+							</a>
+							<a href="#" class="login np" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>
+								<span>लगिन</span>
 							</a>
 						</li>
 					</ul>

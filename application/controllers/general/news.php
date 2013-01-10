@@ -14,8 +14,7 @@ class News extends MY_MOLE_Controller {
 	public function index(){
 		
 		$this->load->library('render_library');
-		$this->render_library->generate_inner();
-
+		
 		$data = $this->links_model->get(array(
 											'link'=>$this->uri->segment(1).
 													'/'.
@@ -36,12 +35,26 @@ class News extends MY_MOLE_Controller {
 			$params['id']=$this->uri->segment(2);
 			$params['link_type'] = 'page';
 		}
-
+		
+		
+//		if(isset($page->content)){
+//			$page = (array)$page;
+//			$page['contents'] = $page['content'];
+//			$page['contents_np'] = $page['content_np'];
+//			$page['timestamp'] = '';
+//			$page = (object)$page;
+//		}
+//echo '<pre>';
+//print_r($page);
+//echo '</pre>';
 		//render it
-		$this->render_library->generate_innermain($page,($this->uri->segment(2))?'newsfull':'newslist');
+		//$this->render_library->generate_innermain($page,($this->uri->segment(2))?'newsfull':'newslist');
+		//$this->render_library->generate_inner();
+		$this->render_library->generate_inner_event($page);
+		$this->template->render();
 		
 
-		$this->template->render();
+		//$this->template->render();
 	}
 }
 

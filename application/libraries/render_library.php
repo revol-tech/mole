@@ -22,7 +22,7 @@ class Render_library{
 	/**
 	* rendring header & footer for inner pages
 	*/
-	public function generate_inner(){
+	public function generate_inner($cond = array()){
 		//set template
 		$this->ci->template->set_template('template_inner');
 
@@ -30,7 +30,9 @@ class Render_library{
 		$this->_generate_header();
 		$this->_generate_footer();
 
-		$this->generate_organizations();
+		if(isset($cond['organization'])){
+			$this->generate_organizations();
+		}
 
 //		$this->_right_view();
 	}
@@ -117,19 +119,27 @@ class Render_library{
 
 				foreach($data as $key=>$val){
 					$str .=	'<div class="item1 fl">
-								<h3>'.$val->title.'</h3>
-								<div class="articleinfo fl">
-									<span class="date-posted fl">'.$val->date_published.'</span>'.
-									'<span class="author fl">'.$val->created_by.'</span>
+								<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$val->title.
+								'</h3>
+								<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$val->title_np.
+								'</h3>
+								<div class="articleinfo fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+									<span class="date-posted fl">'.$val->date_created.'</span>
+									<!--<span class="author fl">'.$val->created_by.'</span>-->
+									<a class="fl" href="'.site_url('admin/files/download/'.$val->id).'" style="">Download</a>
+									<a class="print fr" href="#"></a>
 								</div>
-								<div class="item1_content fl">
-									<p>
-										<a href="'.site_url('admin/files/download/'.$val->id).'">
-										download
-									</a>
+								<div class="articleinfo fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+									<span class="date-posted fl">'.$val->date_created.'</span>
+									<!--<span class="author fl">'.$val->created_by.'</span>-->
+									<a class="fl" href="'.site_url('admin/files/download/'.$val->id).'" style="">डाउनलोड</a>
+									<a class="print fr" href="#"></a>
 								</div>
 							</div>';
 				}
+ 
 				break;
 			case 'actsfull':
 
@@ -464,17 +474,30 @@ class Render_library{
 		$news = $this->ci->news_model->get($data);
 
 		$str = '<div class="highlight fl">
-					<div class="title1">
-						<h2><span>Latest</span> News </h2>
-						<div class="piece"></div>
+					<div class="title1">'.
+				'		<h2 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+				'			<span>Latest</span> News '.
+				'		</h2>'.
+				'		<h2 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+				'			<span>प्रमुख</span> समाचार '.
+				'		</h2>'.
+				'		<div class="piece"></div>
 					</div>
 					<div class="highlight_content fl">
 						<ul>';
 		foreach($news as $key=>$value){
-			$str .= '<li><a href="'.site_url('news/'.$value->id).
-						'" title="'.word_limiter(strip_tags($value->content),5).'" >'.
-								$value->title.
-					'</a></li>';
+			$str .= '<li>'.
+						'<a href="'.site_url('news/'.$value->id).
+							'" title="'.word_limiter(strip_tags($value->content),5).'" '.
+							'class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$value->title.
+						'</a>'.
+						'<a href="'.site_url('news/'.$value->id).
+							'" title="'.word_limiter(strip_tags($value->content_np),5).'" '.
+							'class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$value->title_np.
+						'</a>'.
+					'</li>';
 		}
 		$str .=	'</ul>
 				</div>
@@ -568,6 +591,7 @@ class Render_library{
 		$this->_generate_header();
 		$this->_generate_footer();
 
+		$this->ci->load->model('events_model');
 		$str = $this->ci->events_model->render_events_page($data);
 
 		$this->ci->template->write('events',$str);
@@ -620,18 +644,18 @@ class Render_library{
 
 		//userful links
 		$this->ci->load->model('usefullinks_model');
-		$usefullinks = $this->ci->usefullinks_model->render(array('active'=>1));
+		$usefullinks = $this->ci->usefullinks_model->render(array('active'=>1),5);
 		$this->ci->template->write('usefullinks',$usefullinks);	
 
 		//network
 		$this->ci->load->model('networks_model');
-		$networks = $this->ci->networks_model->render(array('active'=>1));
+		$networks = $this->ci->networks_model->render(array('active'=>1),5);
 		$this->ci->template->write('network',$networks);
 
 		//employments
 		$this->ci->load->model('news_model');
 		$params = array('news_type'=>7,'active'=>1);
-		$employments = $this->ci->news_model->render($params);
+		$employments = $this->ci->news_model->render($params,5);
 		$this->ci->template->write('employments',$employments);
 
 		//counter

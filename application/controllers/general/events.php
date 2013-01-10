@@ -29,7 +29,6 @@ class Events extends MY_MOLE_Controller {
 
 		//render it
 		$this->render_library->generate_inner_event($page);
-
 		$this->template->render();
 	}
 	

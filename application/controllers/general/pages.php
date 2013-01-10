@@ -15,6 +15,13 @@ class Pages extends MY_MOLE_Controller {
 	 */
 	public function index(){
 		$this->load->library('render_library');
+		
+		//show introduction ONLY .....
+		if($this->uri->segment(1)=='pages' && $this->uri->segment(2)=='introduction'){
+			$this->introduction();
+			return;
+		}
+													
 		$this->render_library->generate_inner();
 
 		// get the reqd. parameters
@@ -38,6 +45,14 @@ class Pages extends MY_MOLE_Controller {
 		$this->render_library->generate_innermain($page[0],'about');
 
 
+		$this->template->render();
+	}
+	
+	/**
+	 * fn to generate organizations...
+	 */
+	public function introduction(){
+		$this->render_library->generate_inner(array('organization'=>true));
 		$this->template->render();
 	}
 }
