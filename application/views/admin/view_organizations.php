@@ -8,12 +8,22 @@
 	<br/>
 
 	title :
-	<span class='title'><?php echo $title;?></span>
+	<span class='title'><?php echo $title?></span>
+	<br/>
+
+	title (नेपाली):
+	<span class='title'><?php echo $title_np?></span>
 	<br/>
 
 	sub title :
 	<hr/>
 	<div class='sub_title'><?php echo $sub_title?></div>
+	<hr/>
+	<br/>
+
+	sub title (नेपाली):
+	<hr/>
+	<div class='sub_title'><?php echo $sub_title_np?></div>
 	<hr/>
 	<br/>
 

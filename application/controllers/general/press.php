@@ -36,7 +36,7 @@ class Press extends MY_MOLE_Controller {
 		}
 
 		//render it
-		$this->render_library->generate_innermain($page,($this->uri->segment(2))?'healthfull':'healthlist');
+		$this->render_library->generate_innermain($page,($this->uri->segment(2))?'pressfull':'presslist');
 
 
 		$this->template->render();

@@ -187,10 +187,10 @@ class Usefullinks extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|min_length[5]|xss_clean');
 		$this->form_validation->set_rules('title_np', 'Nepali Title', 'trim|required|min_length[5]|xss_clean');
-		$this->form_validation->set_rules('content', 'Content', 'trim|required|min_length[5]|xss_clean');
-		$this->form_validation->set_rules('content_np', 'Nepali Content', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('description_np', 'Nepali Description', 'trim|required|min_length[5]|xss_clean');
 		if($this->form_validation->run()==false){
-			//$this->data = $data;
+			$this->data = $this->input->post();
 			return $this->create();
 		}
 

@@ -162,7 +162,7 @@ class News_model extends CI_Model{
 				$this->db->where($key,$value);
 			}
 		}
-		$res = $this->db->get($this->table);
+		$res = $this->db->order_by('date_created','desc')->get($this->table);
 //echo '<pre>';
 //print_r($res->result());
 //echo '</pre>';
@@ -351,18 +351,18 @@ if((++$count)>6) break;
 
 		$str ='<div class="tab_grid1 fr en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 		$str.='		<h5>'.$data[0]->title.'</h5>';
-		$str.='		<p>'.word_limiter(strip_tags($data[0]->content),25);
+		$str.='		<p>'.word_limiter(strip_tags($data[0]->content),30);
 		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
 		$str.='		</p>';
-		$str.='		<a href="#" class="btn_red fl alpha">Read more</a>';
+		$str.='		<a href="'.site_url('press').'" class="btn_red fl alpha">Read more</a>';
 		$str.='</div>';
 
 		$str.='<div class="tab_grid1 fr np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
 		$str.='		<h5>'.$data[0]->title_np.'</h5>';
-		$str.='		<p>'.word_limiter(strip_tags($data[0]->content_np),25);
+		$str.='		<p>'.word_limiter(strip_tags($data[0]->content_np),30);
 		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
 		$str.='		</p>';
-		$str.='		<a href="#" class="btn_red fl alpha">बाँकीको पढ्नुहोस्</a>';
+		$str.='		<a href="'.site_url('press').'" class="btn_red fl alpha">बाँकीको पढ्नुहोस्</a>';
 		$str.='</div>';
 		return $str;
 	}
@@ -646,9 +646,7 @@ private function _render_events($data){
 	 */
 	public function record_count($type){
 		$this->db->where('news_type',$type);
-		$x = $this->db->count_all_results($this->table);
-
-		return $x;
+		return $this->db->count_all_results($this->table);
 	}
 
 

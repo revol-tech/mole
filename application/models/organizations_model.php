@@ -16,6 +16,7 @@ class Organizations_model extends CI_Model{
 		if($distinct){
 			$this->db->distinct();
 			$this->db->select('title');
+			$this->db->select('title_np');			
 		}
 		if($limit){
 			$this->db->limit($limit,$start);
@@ -26,7 +27,13 @@ class Organizations_model extends CI_Model{
 			}
 		}
 		$res = $this->db->get($this->table);
-
+/*
+echo $this->db->last_query();
+echo '<pre>';
+print_r($res->result());
+echo '</pre>';
+die; 
+*/
 		return $res->result();
 	}
 
@@ -123,7 +130,12 @@ class Organizations_model extends CI_Model{
 //die;
 		$str = 		
 		'<div class="about_us fl">
-			<h1><span>Organization</span>- Ministry of Labour and Employment</h1>
+			<h1 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+				<span>Organization</span>- Ministry of Labour and Employment
+			</h1>
+			<h1 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+				<span>संगठन</span>- श्रम तथा रोजगार मन्त्रालय
+			</h1>
 			<div class="lower_block fl">
 				<section>';
 				
@@ -135,11 +147,21 @@ class Organizations_model extends CI_Model{
 //echo $this->db->last_query();
 //echo '</pre>';		
 
-			$str .= '<h2>'.$val->title.'</h2><br/>';
-			$str .=	'<ul>';
+			$str .= '<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+						$val->title.
+					'</h2>'.
+					'<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+						$val->title_np.
+					'</h2>';
+			$str .=	'<br/><ul>';
 			
 			foreach($data2 as $kk => $vv){
-				$str .=	'<li>'.$vv->sub_title.'</li>';
+				$str .=	'<li class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+							$vv->sub_title.
+						'</li>'.
+						'<li class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+							$vv->sub_title_np.
+						'</li>';
 			}
 			$str .= '</ul>';
 

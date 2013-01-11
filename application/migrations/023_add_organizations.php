@@ -12,7 +12,9 @@ class Migration_Add_organizations extends CI_Migration {
 		$fields = array(
 						'`id` int(11) NOT NULL AUTO_INCREMENT',
 						'`title` varchar(127) NOT NULL',
-						'`sub_title` text(255) NULL default null',
+						'`sub_title` text NULL default null',
+						'`title_np` varchar(127) NOT NULL',
+						'`sub_title_np` text NULL default null',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',

@@ -117,7 +117,7 @@ echo '</pre>';
 				$this->db->where($key,$value);
 			}
 		}
-		$res = $this->db->get($this->table);
+		$res = $this->db->order_by('date_created','desc')->get($this->table);
 
 		foreach($res->result() as $value){
 /*			
@@ -143,7 +143,10 @@ echo '</pre>';
 	 */
 	public function render($params=null,$limit=null){
 		$data = $this->get($params,$limit);
-
+//echo $this->db->last_query();
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
 		if(count($data)==0){
 			return '';
 		}

@@ -12,6 +12,15 @@
 	</label>
 	<br/>
 
+	<label>
+		Title (नेपाली)
+		<!--<input type='text' name='title' value='<?php echo @$title?>' />-->
+		<select style="width: 200px;" onchange="$('#title').val($(this).val());">
+			<?php echo @$title_dropdown_np?>
+		</select>
+		<input id='title_np' type='text' name='title_np' value='<?php echo @$title_np?>' style="margin-left: -200px; width: 170px; height: 1.2em; border: 0;z-index:5;" />
+	</label>
+	<br/>
 
 
 
@@ -21,13 +30,19 @@
 	</label>
 	<br/>
 
+	<label>
+		Sub Title (नेपाली)
+		<textarea name='sub_title_np'><?php echo @$sub_title_np?></textarea>
+	</label>
+	<br/>
 
+<!--
 	<label>
 		image :
 		<input type='file' name='about_img' />
 	</label>
-
-
+	<br/>
+-->
 
 	<label>
 		created on

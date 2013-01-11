@@ -69,6 +69,52 @@ class Render_library{
 								'>'.$data->content_np.'</div>
 						</div>';
 				break;
+			case 'contacts':
+				$this->ci->load->library('feedback_library');
+
+				$str .= '<div class="grid_7 fl" style="float:right;">
+							'.$this->ci->feedback_library->render().'
+						</div>
+
+						<div class="grid_7 address pad_alpha fl" style="width:275px;">'.
+							
+							'<div class="item1 fl en" '.
+									(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >
+								<h3><span>Contact</span> Details</h3>
+								<p>'.$data[0]->address.'</p>
+								<div class="contact_holder">
+									<div class="tel">
+										<p><strong>T</strong><span id="tel_en">'.$data[0]->tel.'</span></p>
+										<p><strong>F</strong><span id="fax_en">'.$data[0]->fax.'</span></p>
+									</div>
+								</div>
+								<div class="contact_holder">
+									<div class="email">
+										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="item1 fl np" '.
+								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
+								'<h3><span>सम्पर्क</span> ठेगाना</h3>
+								<p>'.$data[0]->address_np.'</p>
+								<div class="contact_holder">
+									<div class="tel">
+										<p><strong>फोन</strong><span id="tel_np"></span></p>
+										<p><strong>फाक्स</strong><span id="fax_np"></span></p>
+									</div>
+								</div>
+								<div class="contact_holder">
+									<div class="email">
+										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
+									</div>
+								</div>
+							</div>
+							
+						</div>';
+				break;
 			case 'newslist':
 				//display news previews ...
 
@@ -372,54 +418,55 @@ class Render_library{
 							</div>
 						</div>';
 				break;
+			case 'presslist':
+				//display health previews ...
+
+				foreach($data as $key=>$val){
+					$str .=	'<div class="item1 fl">
+								<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$val->title.
+								'</h3>
+								<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$val->title_np.
+								'</h3>
+								<div class="articleinfo fl en" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+									<span class="date-posted fl">'.$val->date_published.'</span>'.
+									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
+									'<span class="author fl">'.$val->created_by.'</span>
+									<a class="print fr" href="#"></a>
+								</div>
+								<div class="item1_content fl">
+									<p class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+										'.($val->content).'
+										<a class="more fr" href="'.site_url('press/'.$val->id).'">Download</a> 
+									</p>
+									<p class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+										'.($val->content_np).'
+										<a class="more fr" href="'.site_url('press/'.$val->id).'">डाउनलोड</a> 
+									</p>
+								</div>
+							</div>';
+				}
+				break;
+			case 'pressfull':
+
+				//display full single news article
+
+				$str .=	'<div class="item1 fl">
+							<h3>'.$data[0]->title.'</h3>
+							<div class="articleinfo fl">
+								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
+								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
+								'<span class="author fl">'.$data[0]->created_by.'</span>
+								<a class="print fr" href="#"></a>
+							</div>
+							<div class="item1_content fl">
+								'.$data[0]->content.'
+							</div>
+						</div>';
+				break;
 			case 'polls':
 				$str .= $data;
-				break;
-			case 'contacts':
-				$this->ci->load->library('feedback_library');
-
-				$str .= '<div class="grid_7 fl" style="float:right;">
-							'.$this->ci->feedback_library->render().'
-						</div>
-
-						<div class="grid_7 address pad_alpha fl" style="width:275px;">'.
-							
-							'<div class="item1 fl en" '.
-									(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >
-								<h3><span>Contact</span> Details</h3>
-								<p>'.$data[0]->address.'</p>
-								<div class="contact_holder">
-									<div class="tel">
-										<p><strong>T</strong><span>'.$data[0]->tel.'</span></p>
-										<p><strong>F</strong><span>'.$data[0]->fax.'</span></p>
-									</div>
-								</div>
-								<div class="contact_holder">
-									<div class="email">
-										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
-									</div>
-								</div>
-							</div>
-							
-							
-							<div class="item1 fl np" '.
-								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
-								'<h3><span>सम्पर्क</span> ठेगाना</h3>
-								<p>'.$data[0]->address_np.'</p>
-								<div class="contact_holder">
-									<div class="tel">
-										<p><strong>फोन</strong><span>'.$data[0]->tel_np.'</span></p>
-										<p><strong>फाक्स</strong><span>'.$data[0]->fax_np.'</span></p>
-									</div>
-								</div>
-								<div class="contact_holder">
-									<div class="email">
-										<a href="mailto:'.$data[0]->email.'"</a>'.$data[0]->email.'</a>
-									</div>
-								</div>
-							</div>
-							
-						</div>';
 				break;
 		}
 		$this->ci->template->write('page',$str);

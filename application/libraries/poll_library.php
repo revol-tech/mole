@@ -159,13 +159,13 @@ class Poll_library{
 		//generate the poll result.
 		foreach($items as $key=>$value){
 			$value->graph = '';
-			$value->graph .= '<div class="en" '.(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').'>';
+			$value->graph .= '<div class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 			$value->graph .= '<div><span>'.$value->option1.': </span>'.'<span>'.$value->count_option1.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option2.': </span>'.'<span>'.$value->count_option2.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option3.': </span>'.'<span>'.$value->count_option3.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option4.': </span>'.'<span>'.$value->count_option4.'</span></div>';
 			$value->graph .= '</div>';
-			$value->graph .= '<div class="np" '.(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').'>';
+			$value->graph .= '<div class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
 			$value->graph .= '<div><span>'.$value->option1_np.': </span>'.'<span>'.$value->count_option1.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option2_np.': </span>'.'<span>'.$value->count_option2.'</span></div>';
 			$value->graph .= '<div><span>'.$value->option3_np.': </span>'.'<span>'.$value->count_option3.'</span></div>';
@@ -214,7 +214,7 @@ class Poll_library{
 								<label for="radio-choice-4">'.$poll[0]->option4.'</label>
 							</div>
 							<div class="form_holder1 fl mar_top">
-								<a href="#" class="btn_red fr">Result</a>
+								<a href="'.site_url('polls/view_results').'" class="btn_red fr">Result</a>
 								<input class="btn_blue fr" type="submit" value="Vote"/>
 							</div>
 						</form>
@@ -239,7 +239,7 @@ class Poll_library{
 								<label for="radio-choice-4">'.$poll[0]->option4_np.'</label>
 							</div>
 							<div class="form_holder1 fl mar_top np">
-								<a href="#" class="btn_red fr">नतिजा</a>
+								<a href="'.site_url('polls/view_results').'" class="btn_red fr">नतिजा</a>
 								<input class="btn_blue fr" type="submit" value="भोट"/>
 							</div>
 						</form>

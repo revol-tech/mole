@@ -33,8 +33,12 @@ class Polls extends MY_MOLE_Controller {
 		if(count($user)==0){
 			$user['id'] = $this->input->ip_address();
 		}
-//	print_r($_POST);	die;
-		$this->poll_library->vote($user['id'],$this->input->post('choice'));
+//echo '<pre>';
+//print_r($_POST);	
+//print_r($user);
+//echo '</pre>';
+//die;
+		$this->poll_library->vote($user->id,$this->input->post('choice'));
 
 		redirect('polls');
 	}

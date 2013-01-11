@@ -22,7 +22,7 @@
 
 	Publish :
 	<?php echo $active?>
-	<br/>0
+	<br/>
 
 	content :<br/>
 	<hr/>
