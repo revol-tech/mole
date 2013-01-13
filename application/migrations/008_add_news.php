@@ -23,6 +23,7 @@ class Migration_Add_news extends CI_Migration {
 						'`date_removed` timestamp NULL DEFAULT NULL',
 						'`active` tinyint(4) NOT NULL DEFAULT 1',
 						'`homepage` tinyint(4) NOT NULL DEFAULT 0',
+						'`filename` varchar(127) null default null',
 					);
 		$this->dbforge->add_field($fields);
 

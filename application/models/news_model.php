@@ -82,6 +82,10 @@ class News_model extends CI_Model{
 	 * returns the id
 	 */
 	public function save($type=1){
+		$tmp = $_FILES['file']['name'];
+		$ext =  end(explode('.',$tmp));
+		$mtime = microtime(true).'.'.$ext;
+
 		$data = array(
 					$this->input->post('title'),
 					htmlentities($this->input->post('content')),
@@ -91,7 +95,8 @@ class News_model extends CI_Model{
 					$this->session->userdata('user_id'),
 					$this->session->userdata('date_created'),
 					$this->input->post('date_published'),
-					$this->input->post('date_removed')
+					$this->input->post('date_removed'),
+					$mtime
 				);
 
 				
@@ -121,11 +126,38 @@ class News_model extends CI_Model{
 
 		//insert new news
 		}else{
+			//================================
+			//echo $mtime.'<br/>';
+			$config = array(
+						  'allowed_types' => 'jpg|jpeg|png',
+						  'upload_path' => DOCUMENTS,
+						  'maintain_ratio' => true,
+						  'max-size' => 20000,
+						  'width' => 2000,
+						  'height' => 1500,
+						  'overwrite' => true,
+						  'file_name' => $mtime
+						);
+			//echo '<pre>';
+			//print_r($config);
+			//echo '</pre>';
+
+
+			$this->load->library('upload',$config);
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('file')){
+				echo $this->upload->display_errors();
+				return;
+			}
+			//===========================		
+
+			
 			$sql =	'insert into '.$this->table.' ('.
 						'title,			content, title_np, content_np, news_type,'.
 						'created_by,	date_created,	date_published,'.
-						'date_removed'.
-					')values ( ?, ?, ?, ?,'.$type.',?,?,?,?);';
+						'date_removed,	filename'.
+					')values ( ?, ?, ?, ?,'.$type.',?,?,?,?,?);';
 //echo $sql;
 			if(! $this->db->query($sql,$data)){
 				return $this->db->_error_message();
@@ -173,6 +205,7 @@ class News_model extends CI_Model{
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 			$value->content_np = html_entity_decode($value->content_np,ENT_QUOTES, 'UTF-8');
+			
 		}
 
 		return $res->result();

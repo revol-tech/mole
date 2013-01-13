@@ -186,14 +186,22 @@ class Pages extends CI_Controller {
 			//get the username of the person who created the pages
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
-
-//print_r($this->data[0]);
+		if(!isset($this->data['output'])){
+			$this->data = array_merge($this->data, 
+							array(	'output' 	=> '' , 
+									'js_files' 	=> array() , 
+									'css_files' => array()
+								)
+							);
+		}
 //array_push($this->data,$this->data[0]);
 //array_push($this->data,(array)$this->data[0]);
 //array_merge($this->data[0],$this->data);
 //echo '<pre>';
 //print_r($this->data);
 //echo '</pre>';
+
+
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
@@ -229,7 +237,6 @@ class Pages extends CI_Controller {
 
 		//display that pages
 		redirect('admin/pages');
-		//$this->create();
 	}
 
 
@@ -305,7 +312,6 @@ class Pages extends CI_Controller {
 	 * del selected pages
 	 */
 	public function del(){
-//echo 'in delete polll';
 		$this->pages_model->del_poll($this->input->post('pages_id'));
 
 		redirect('admin/pages');

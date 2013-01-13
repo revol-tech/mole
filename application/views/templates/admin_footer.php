@@ -1,5 +1,5 @@
 <div>
-<strong>&copy; 20123</strong>
+<strong>&copy; 2013</strong>
 </div>
 </body>
 </html>

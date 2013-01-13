@@ -51,22 +51,44 @@ class Render_library{
 
 		switch($type){
 			case 'about' :
+			
 				//display 'about' main content
 				$str .=	'<div class="about_us fl">
 							<h1 class="en" '.
 								(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').
 								'>'.$data->title.'</h1>
-							<div class="text_box fr en" '.
-								(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').
-								'>'.$data->content.'</div>
-
-
+							<p>
+								<strong class="spot">
+								</strong>
+							</p>
+							<div class="lower_block fl en" '.
+									(($this->ci->session->userdata('lang')=='np')?'style="display:none;"':'').
+									'>
+								<div class="block_img4 fl">
+									<img src="'.base_url().DOCUMENTS.$data->filename.'" 
+										alt="'.$data->title.'" title="'.$data->title.'"
+										width="150" height="140" />
+								</div>
+								<div class="text_box fr" ><p>'.$data->content.'</p></div>
+							</div>
+									
 							<h1 class="np" '.
 								(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').
 								'>'.$data->title_np.'</h1>
-							<div class="text_box fr np" '.
-								(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').
-								'>'.$data->content_np.'</div>
+							<p>
+								<strong class="spot">
+								</strong>
+							</p>
+							<div class="lower_block fl np" '.
+									(($this->ci->session->userdata('lang')=='en')?'style="display:none;"':'').
+									'>
+								<div class="block_img4 fl">
+									<img src="'.base_url().DOCUMENTS.$data->filename.'" 
+										alt="'.$data->title_np.'" title="'.$data->title_np.'
+										width="150" height="140" />
+								</div>
+								<div class="text_box fr" ><p>'.$data->content_np.'</p></div>
+							</div>
 						</div>';
 				break;
 			case 'contacts':
@@ -489,6 +511,9 @@ class Render_library{
 	 * main contents for the homepage
 	 */
 	public function generate_mainpage($data){
+		if(count($data)==0)
+			return '';
+		
 		//english
 		$str = '<div class="about en" ';
 		$str.= (($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';

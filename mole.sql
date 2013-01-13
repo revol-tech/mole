@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 10, 2013 at 06:32 PM
+-- Generation Time: Jan 13, 2013 at 05:57 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -61,15 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(35, 1357805419, '127.0.0.1', 'BaEdqj'),
-(36, 1357805438, '127.0.0.1', '79fDtY');
+(44, 1358061282, '127.0.0.1', 'enILFy');
 
 -- --------------------------------------------------------
 
@@ -157,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `filename` varchar(127) DEFAULT NULL,
   `timestamp` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `events`
@@ -303,14 +302,13 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `links`
 --
 
 INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
-(1, 'pages/xx', 'news', '24'),
 (4, 'contacts/x4', 'contacts', '0'),
 (5, 'news/news/gtd', 'news', '25'),
 (6, 'acts/nn', 'news', '26'),
@@ -340,7 +338,10 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (38, 'employments/employments/uhiu', 'news', '41'),
 (39, 'employments/gfds', 'news', '42'),
 (40, 'acts/gre', 'news', '43'),
-(42, 'acts/dsff', 'news', '45');
+(42, 'acts/dsff', 'news', '45'),
+(44, 'pages/xx', 'news', '47'),
+(45, 'pages/uiouiui', 'news', '49'),
+(46, 'pages/yutyt', 'news', '50');
 
 -- --------------------------------------------------------
 
@@ -439,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1357805452, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358061296, 1);
 
 -- --------------------------------------------------------
 
@@ -491,39 +492,40 @@ CREATE TABLE IF NOT EXISTS `news` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `homepage` tinyint(4) NOT NULL DEFAULT '0',
   `lang` enum('en','np') NOT NULL DEFAULT 'en',
+  `filename` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`) VALUES
-(1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', 'सउगसग सगर', '<p>\n ासग उासगह ासउगोि ु;ासगहगिो;सोिुह ;ासजगह;ाोुरगह ;ासगह;ाोिगहस;हलगह;;सोिुयह सोिग हसह;ोग सरह</p>\n', 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(4, 'The National Budget for 2013', '  &lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &quot;Challenges in formulating the National Budget for 2013&quot; by Dr. P. B. Jayasundera, Secretary, Ministry o ', 'नेपाल बद्जोट २०१३', 'उब हब ा सर ', 4, 1, '2012-12-18 23:46:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(5, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'उगह', 'गउजह उगहजत ', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(6, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'हजगज गयजतज ', 'सह ससउगससह', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en'),
-(8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', 'न्युनतम पारिशमिक दर', '<p>\n सब वह स डवगस हतजसगउह तगहस हतस</p>\n', 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(10, 'Minimum employment rights', '&lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(14, 'WSH Regulatory Framework ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 18:58:52', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(15, 'Safety & Health Management System ', '&lt;p&gt;\n Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius ', '', '', 5, 1, '2012-12-19 19:00:44', '2012-12-19 19:04:50', '0000-00-00 00:00:00', 1, 0, 'en'),
-(16, 'Monitoring and Surveillance ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:01:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(17, 'Work Injury Compensation', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:02:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
-(18, 'Certification & Registration', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:03:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(19, 'Incident Reporting ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:04:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en'),
-(21, ' Amendments to the Employment of Foreign Manpower Act', '&lt;p&gt;\r\n The Employment of Foreign Manpower Act (EFMA) prescribes the responsibilities and obligations pertaining to the employment of foreign workers. The EFMA was last amended in 2007.Since 2010, following the recommendations of the Economic Strategi', '', '', 8, 1, '2012-12-22 02:39:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(24, ' Ministry of Labour and Employments', '      &lt;p&gt;\n Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis   Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis  \n Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis   Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis  \n Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis   Establishment Ministry of Labour &amp; Social Welfare, 2038 BS, Ministry of Labour, 2052 BS, Ministry of Labour &amp; Transport Management, 2057 BS, Ministry of Labour &amp; Employment, 2069. Objectives and Long Term vision of Minis   \nfl asidh alsdh alsdj alks jalkd jalks jalk jhask halskh aksd jhlaks lask jhlask jlkd jlak lkasd alskj lask jhlaskd jflaksd jlaksd jlks hlask jlask jalks lask jlask lask jhlakd jhlaks haksd jalk jlk jlakd jlkad jlkad jhalk jlak lak laksj lakj', 'नेपाल सरकार श्रम तथा रोजगार मन्त्रालय सिहंदरबार, काठमाडौ, नेपाल ।', '       असल श्रम सम्बन्ध कायम गरी  श्रम क्षेत्रलाई व्यवस्थित र मर्यादित गराउँदै लगानी र औद्योगिक उत्पादनलाई सहज वातावरण सिर्जना गर्नका साथै श्रमिकहरुको हकहित र कल्याण अभिवृद्धि गर्न तत्कालीन उद्योग वाणिज्य तथा आपूर्ति मन्त्रालय अन्तर्गत रहने गरी २०२८ सालमा श्र      असल श्रम सम्बन्ध कायम गरी  श्रम क्षेत्रलाई व्यवस्थित र मर्यादित गराउँदै लगानी र औद्योगिक उत्पादनलाई सहज वातावरण सिर्जना गर्नका साथै श्रमिकहरुको हकहित र कल्याण अभिवृद्धि गर्न तत्कालीन उद्योग वाणिज्य तथा आपूर्ति मन्त्रालय अन्तर्गत रहने गरी २०२८ सालमा श्र      असल श्रम सम्बन्ध कायम गरी  श्रम क्षेत्रलाई व्यवस्थित र मर्यादित गराउँदै लगानी र औद्योगिक उत्पादनलाई सहज वातावरण सिर्जना गर्नका साथै श्रमिकहरुको हकहित र कल्याण अभिवृद्धि गर्न तत्कालीन उद्योग वाणिज्य तथा आपूर्ति मन्त्रालय अन्तर्गत रहने गरी २०२८ सालमा श्र      असल श्रम सम्बन्ध कायम गरी  श्रम क्षेत्रलाई व्यवस्थित र मर्यादित गराउँदै लगानी र औद्योगिक उत्पादनलाई सहज वातावरण सिर्जना गर्नका साथै श्रमिकहरुको हकहित र कल्याण अभिवृद्धि गर्न तत्कालीन उद्योग वाणिज्य तथा आपूर्ति मन्त्रालय अन्तर्गत रहने गरी २०२८ सालमा श्र      असल श्रम सम्बन्ध कायम गरी  श्रम क्षेत्रलाई व्यवस्थित र मर्यादित गराउँदै लगानी र औद्योगिक उत्पादनलाई सहज वातावरण सिर्जना गर्नका साथै श्रमिकहरुको हकहित र कल्याण अभिवृद्धि गर्न तत्कालीन उद्योग वाणिज्य तथा आपूर्ति मन्त्रालय अन्तर्गत रहने गरी २०२८ सालमा श्र  सदह ाकलसह ालिकह सलदहजा िलदहजसउ लजउ लिज उलसकादजह िलौ जुहलासदह ािसजद हलाकसदहज ालकह ालकहलाकौटहिे लाकदजहउिौ लासकदहज लासक ासिुदह  लािसौसकहजुुुुुुुुुुुुुुु       जुुुुुुुिउािुहउौ उौु', 6, 1, '2012-12-27 10:57:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en'),
-(25, 'uyis hsfg g sfg gs fgs gsfg s', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;', 'उगह उगहसत', 'उगवह उगह सतह सगह सरतह सहगहस त', 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', '', '', 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(30, 'sghsfs', '&lt;p&gt;\n sa asfg sfh stjh sgfhb stsh sgh sh ts&lt;/p&gt;\n', 'वबगहनस', '<p>\n &nbsp;गवब छवहबवसह उस उस उहस सउगस सउ सह</p>\n', 7, 1, '2013-01-05 22:18:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(31, 'kjgh kjfgk u', '&lt;p&gt;\n kug kjgy lkutfyjyt juyt jytj tgmnf jytfhgf j su&lt;/p&gt;\n', 'लिुतग', '<p>\n ुकयउ कुयगउ िकतु किुयउत ियतस जुयस जयस जतय जुयर जु यत ुजय</p>\n', 1, 1, '2013-01-06 04:52:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(41, 'iujhio', '  ih giuh gyiuyh giu    ', 'षडउगरगर', '  h yiuyh giuhy giuy i    ', 7, 1, '2013-01-09 09:33:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(43, 'regwrter', '  sdvasd asdf awef aef  ', 'सद गसदउग ौेर', '  सदग सउग ौग ौरग सग ', 5, 1, '2013-01-09 10:55:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(44, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'ासलदजा लकदजउहा लसकजाउलज लाकज', '  ासकलजउह;ासकदउ ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en'),
-(45, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'sdfas', '   ासदउासदउ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en');
+INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`, `filename`) VALUES
+(1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', 'सउगसग सगर', '<p>\n ासग उासगह ासउगोि ु;ासगहगिो;सोिुह ;ासजगह;ाोुरगह ;ासगह;ाोिगहस;हलगह;;सोिुयह सोिग हसह;ोग सरह</p>\n', 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(4, 'The National Budget for 2013', '9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &quot;Challenges in formulating the National Budget for 2013&quot; by Dr. P. B. Jayasundera, Secretary, Ministry o', 'नेपाल बद्जोट २०१३', 'उब हब ा सर', 4, 1, '2012-12-18 23:46:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(5, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'उगह', 'गउजह उगहजत ', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(6, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'हजगज गयजतज ', 'सह ससउगससह', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', 'न्युनतम पारिशमिक दर', '<p>\n सब वह स डवगस हतजसगउह तगहस हतस</p>\n', 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(10, 'Minimum employment rights', '&lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(14, 'WSH Regulatory Framework ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 18:58:52', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(15, 'Safety & Health Management System ', '&lt;p&gt;\n Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius ', '', '', 5, 1, '2012-12-19 19:00:44', '2012-12-19 19:04:50', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(16, 'Monitoring and Surveillance ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:01:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(17, 'Work Injury Compensation', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:02:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en', NULL),
+(18, 'Certification & Registration', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:03:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(19, 'Incident Reporting ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:04:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en', NULL),
+(21, ' Amendments to the Employment of Foreign Manpower Act', '&lt;p&gt;\r\n The Employment of Foreign Manpower Act (EFMA) prescribes the responsibilities and obligations pertaining to the employment of foreign workers. The EFMA was last amended in 2007.Since 2010, following the recommendations of the Economic Strategi', '', '', 8, 1, '2012-12-22 02:39:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(25, 'uyis hsfg g sfg gs fgs gsfg s', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;', 'उगह उगहसत', 'उगवह उगह सतह सगह सरतह सहगहस त', 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', '', '', 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(30, 'sghsfs', '&lt;p&gt;\n sa asfg sfh stjh sgfhb stsh sgh sh ts&lt;/p&gt;\n', 'वबगहनस', '<p>\n &nbsp;गवब छवहबवसह उस उस उहस सउगस सउ सह</p>\n', 7, 1, '2013-01-05 22:18:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(31, 'kjgh kjfgk u', '&lt;p&gt;\n kug kjgy lkutfyjyt juyt jytj tgmnf jytfhgf j su&lt;/p&gt;\n', 'लिुतग', '<p>\n ुकयउ कुयगउ िकतु किुयउत ियतस जुयस जयस जतय जुयर जु यत ुजय</p>\n', 1, 1, '2013-01-06 04:52:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(41, 'iujhio', '  ih giuh gyiuyh giu    ', 'षडउगरगर', '  h yiuyh giuhy giuy i    ', 7, 1, '2013-01-09 09:33:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(43, 'regwrter', '  sdvasd asdf awef aef  ', 'सद गसदउग ौेर', '  सदग सउग ौग ौरग सग ', 5, 1, '2013-01-09 10:55:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(44, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'ासलदजा लकदजउहा लसकजाउलज लाकज', '  ासकलजउह;ासकदउ ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(45, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'sdfas', '   ासदउासदउ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(50, 'fsgh sfgh g', 'tb yy shy sgh sh fgh hgjh gj fghj ghk ghjlkgu ptyu ty t st qsfhb bjhn tghjurt yit', 'गब कजउगहकज यि', 'स सग सगउह ह टगजु उगहि तुपय यगकमग हहमउगब जउगह रतगह उग हत हउगुज तरयि ुपोतयुजतय जउगहज  उगहज त', 6, 1, '2013-01-13 09:21:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358068912.4925.png');
 
 -- --------------------------------------------------------
 
@@ -562,8 +564,10 @@ CREATE TABLE IF NOT EXISTS `news_types` (
 
 CREATE TABLE IF NOT EXISTS `organizations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(127) NOT NULL,
-  `sub_title` text,
+  `title` varchar(127) CHARACTER SET utf8 NOT NULL,
+  `sub_title` text CHARACTER SET utf8,
+  `title_np` varchar(127) CHARACTER SET utf8 NOT NULL,
+  `sub_title_np` text CHARACTER SET utf8,
   `date_created` timestamp NULL DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -577,31 +581,31 @@ CREATE TABLE IF NOT EXISTS `organizations` (
 -- Dumping data for table `organizations`
 --
 
-INSERT INTO `organizations` (`id`, `title`, `sub_title`, `date_created`, `created_by`, `date_published`, `date_removed`, `active`) VALUES
-(7, 'Establishment', 'Ministry of Labour & Social Welfare, 2038 BS', '2013-01-03 14:40:29', 0, NULL, NULL, 1),
-(8, 'Establishment', 'Ministry of Labour, 2052 BS', '2013-01-03 14:40:29', 0, NULL, NULL, 1),
-(9, 'Establishment', 'Ministry of Labour & Transport Management, 2057 BS', '2013-01-03 15:23:43', 0, NULL, NULL, 1),
-(10, 'Establishment', 'inistry of Labour & Employment, 2069', '2013-01-03 15:24:02', 0, NULL, NULL, 1),
-(11, 'Objectives and Long Term vision of Ministry', 'Development of Pure Industrial Relationship', '2013-01-03 15:24:30', 0, NULL, NULL, 1),
-(12, 'Objectives and Long Term vision of Ministry', 'Ending Unemployment and Development of Productive and Qualitative Employment System', '2013-01-03 15:25:32', 0, NULL, NULL, 1),
-(13, 'Objectives and Long Term vision of Ministry', 'Child Labour Alleviation', '2013-01-03 15:27:07', 0, NULL, NULL, 1),
-(14, 'Objectives and Long Term vision of Ministry', 'Development of Safety, Managed and help based transportation system', '2013-01-03 15:27:23', 0, NULL, NULL, 1),
-(15, 'Responsibilities of Ministry', ' Labour policy and Work completion ', '2013-01-03 15:29:52', 0, NULL, NULL, 1),
-(16, 'Responsibilities of Ministry', ' Study, investigation, data collection and verification of labour power and labour market. ', '2013-01-03 15:30:13', 0, NULL, NULL, 1),
-(17, 'Responsibilities of Ministry', ' Contact and relationship development of labour with national and international chambers and corporations ', '2013-01-03 15:30:31', 0, NULL, NULL, 1),
-(18, 'Responsibilities of Ministry', ' Relationship between Labour and management. ', '2013-01-03 15:30:44', 0, NULL, NULL, 1),
-(19, 'Responsibilities of Ministry', ' Help Employee and Labour supply. ', '2013-01-03 15:30:57', 0, NULL, NULL, 1),
-(20, 'Responsibilities of Ministry', ' Foreign Employments ', '2013-01-03 15:31:16', 0, NULL, NULL, 1),
-(21, 'Responsibilities of Ministry', ' Promotion, supply and organize vocational trainings ', '2013-01-03 15:31:31', 0, NULL, NULL, 1),
-(22, 'Responsibilities of Ministry', ' Training on child, women and disabled labours. ', '2013-01-03 15:31:44', 0, NULL, NULL, 1),
-(23, 'Responsibilities of Ministry', ' Trade unions ', '2013-01-03 15:31:59', 0, NULL, NULL, 1),
-(24, 'Responsibilities of Ministry', ' For social safety of Labour ', '2013-01-03 15:32:17', 0, NULL, NULL, 1),
-(25, 'Responsibilities of Ministry', ' Permission for Foreign Employees ', '2013-01-03 15:32:29', 0, NULL, NULL, 1),
-(26, 'Responsibilities of Ministry', ' Labour Administration and Management. ', '2013-01-03 15:32:42', 0, NULL, NULL, 1),
-(27, 'Responsibilities of Ministry', 'Bonus', '2013-01-03 15:32:53', 0, NULL, NULL, 1),
-(28, 'Responsibilities of Ministry', ' Manage, organize Transportation (Air transport not included) Policies and Planning, Regulations and Work completions. ', '2013-01-03 15:33:08', 0, NULL, NULL, 1),
-(29, 'Responsibilities of Ministry', ' Manage, organize Transportation (Air transport not included) with other chambers and corporation ', '2013-01-03 15:33:21', 0, NULL, NULL, 1),
-(30, 'Responsibilities of Ministry', ' Relationship between Transportation (Air transport not included) with other related and managed international corporations ', '2013-01-03 15:33:33', 0, NULL, NULL, 1);
+INSERT INTO `organizations` (`id`, `title`, `sub_title`, `title_np`, `sub_title_np`, `date_created`, `created_by`, `date_published`, `date_removed`, `active`) VALUES
+(7, 'Establishment', 'Ministry of Labour & Social Welfare, 2038 BS', 'संगठन', 'श्रम तथा जनहित मन्त्रालय', '2013-01-11 08:36:27', 0, NULL, NULL, 1),
+(8, 'Establishment', 'Ministry of Labour, 2052 BS', 'संगठन', 'श्रम मन्त्रालय, बि स२०५२ ', '2013-01-11 08:36:27', 0, NULL, NULL, 1),
+(9, 'Establishment', 'Ministry of Labour & Transport Management, 2057 BS', 'संगठन', 'श्रम तथा यातायात मन्त्रालय, बि स २०५७ ', '2013-01-03 15:23:43', 0, NULL, NULL, 1),
+(10, 'Establishment', 'Ministry of Labour & Employment, 2069', 'संगठन', 'श्रम तथा रोजगार मन्त्रालय, बि स२०६९', '2013-01-11 09:02:17', 0, NULL, NULL, 1),
+(11, 'Objectives and Long Term vision of Ministry', 'Development of Pure Industrial Relationship', 'भविश्यका चुनौती', 'ह कज गहकजग हकजगह जकगह जकह', '2013-01-03 15:24:30', 0, NULL, NULL, 1),
+(12, 'Objectives and Long Term vision of Ministry', 'Ending Unemployment and Development of Productive and Qualitative Employment System', 'भविश्यका चुनौती', 'कजह कजह गजकहग कजगह कज', '2013-01-03 15:25:32', 0, NULL, NULL, 1),
+(13, 'Objectives and Long Term vision of Ministry', 'Child Labour Alleviation', 'भविश्यका चुनौती', 'जकह गजकह गकजहग कजह गकजहग ', '2013-01-03 15:27:07', 0, NULL, NULL, 1),
+(14, 'Objectives and Long Term vision of Ministry', 'Development of Safety, Managed and help based transportation system', 'भविश्यका चुनौती', 'जकह गकजह कजह कजह ', '2013-01-03 15:27:23', 0, NULL, NULL, 1),
+(15, 'Responsibilities of Ministry', ' Labour policy and Work completion ', 'मन्त्रालयको जिम्मेवारी', 'कजगह कजगह कजह कजगह कजगह जकह ', '2013-01-03 15:29:52', 0, NULL, NULL, 1),
+(16, 'Responsibilities of Ministry', ' Study, investigation, data collection and verification of labour power and labour market. ', 'मन्त्रालयको जिम्मेवारी', 'कजगह कजह गकजह जकह जकह गजक', '2013-01-03 15:30:13', 0, NULL, NULL, 1),
+(17, 'Responsibilities of Ministry', ' Contact and relationship development of labour with national and international chambers and corporations ', 'मन्त्रालयको जिम्मेवारी', 'जकहग कजह जकह जकह गजकहब ', '2013-01-03 15:30:31', 0, NULL, NULL, 1),
+(18, 'Responsibilities of Ministry', ' Relationship between Labour and management. ', 'मन्त्रालयको जिम्मेवारी', 'कजग जनबकजहग ुकयह कजगन ुक ', '2013-01-03 15:30:44', 0, NULL, NULL, 1),
+(19, 'Responsibilities of Ministry', ' Help Employee and Labour supply. ', 'मन्त्रालयको जिम्मेवारी', 'कजगह जनब ुकहय कजबनव कुहकजह ', '2013-01-03 15:30:57', 0, NULL, NULL, 1),
+(20, 'Responsibilities of Ministry', ' Foreign Employments ', 'मन्त्रालयको जिम्मेवारी', 'बैदेशिक रोजगार', '2013-01-11 09:02:17', 0, NULL, NULL, 1),
+(21, 'Responsibilities of Ministry', ' Promotion, supply and organize vocational trainings ', 'मन्त्रालयको जिम्मेवारी', 'जकगह कजह गोलगकजगह ुोय कजगह ु', '2013-01-03 15:31:31', 0, NULL, NULL, 1),
+(22, 'Responsibilities of Ministry', ' Training on child, women and disabled labours. ', 'मन्त्रालयको जिम्मेवारी', 'क जबुोगह कजगहवकुयतहग जहग ुक', '2013-01-03 15:31:44', 0, NULL, NULL, 1),
+(23, 'Responsibilities of Ministry', ' Trade unions ', 'मन्त्रालयको जिम्मेवारी', 'कजगह िुयकहगउ यिकगतउ जयुत ुयतउयग', '2013-01-03 15:31:59', 0, NULL, NULL, 1),
+(24, 'Responsibilities of Ministry', ' For social safety of Labour ', 'मन्त्रालयको जिम्मेवारी', 'जयहउ जगयतउ जहग उजयतग जहगउ य७', '2013-01-03 15:32:17', 0, NULL, NULL, 1),
+(25, 'Responsibilities of Ministry', ' Permission for Foreign Employees ', 'मन्त्रालयको जिम्मेवारी', 'जहग यजहतगउ जयहग जगउ िुगय जगउ यग जहगउ य', '2013-01-03 15:32:29', 0, NULL, NULL, 1),
+(26, 'Responsibilities of Ministry', ' Labour Administration and Management. ', 'मन्त्रालयको जिम्मेवारी', 'जहगउ यउ जहगउ यगि जगउ यिक', '2013-01-03 15:32:42', 0, NULL, NULL, 1),
+(27, 'Responsibilities of Ministry', 'Bonus', 'मन्त्रालयको जिम्मेवारी', 'जहउ िकुय जयग उयुग जग ुयजग ', '2013-01-03 15:32:53', 0, NULL, NULL, 1),
+(28, 'Responsibilities of Ministry', ' Manage, organize Transportation (Air transport not included) Policies and Planning, Regulations and Work completions. ', 'मन्त्रालयको जिम्मेवारी', 'जयगत जयत जगह युग जगउ ियग जगउ ', '2013-01-03 15:33:08', 0, NULL, NULL, 1),
+(29, 'Responsibilities of Ministry', ' Manage, organize Transportation (Air transport not included) with other chambers and corporation ', 'मन्त्रालयको जिम्मेवारी', 'जयगत जयत हग ियग जग यिग जग', '2013-01-03 15:33:21', 0, NULL, NULL, 1),
+(30, 'Responsibilities of Ministry', ' Relationship between Transportation (Air transport not included) with other related and managed international corporations ', 'मन्त्रालयको जिम्मेवारी', 'जयग जयत यजुग जहग हजगउ हजग हगब उियकग जह', '2013-01-03 15:33:33', 0, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -638,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `poll` (
 --
 
 INSERT INTO `poll` (`id`, `question`, `question_np`, `option1`, `option2`, `option3`, `option4`, `option1_np`, `option2_np`, `option3_np`, `option4_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `count_option1`, `count_option2`, `count_option3`, `count_option4`, `active`) VALUES
-(1, 'How much should the minimum wage be increased by?', 'न्युनतम पारिमिक कतिले बढाउनु पर्छ ?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 'बिचार १', 'बिचार २', 'बिचार ३', 'बिचार ४', 1, '2012-12-20 00:40:51', NULL, NULL, 0, 0, 0, 0, 1);
+(1, 'How much should the minimum wage be increased by?', 'न्युनतम पारिमिक कतिले बढाउनु पर्छ ?', 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 'बिचार १', 'बिचार २', 'बिचार ३', 'बिचार ४', 1, '2012-12-20 00:40:51', NULL, NULL, 0, 0, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -652,7 +656,14 @@ CREATE TABLE IF NOT EXISTS `poll_history` (
   `user_id` varchar(11) NOT NULL,
   `date_submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `poll_history`
+--
+
+INSERT INTO `poll_history` (`id`, `question_id`, `user_id`, `date_submitted`) VALUES
+(2, 1, '1', '2013-01-11 16:29:55');
 
 -- --------------------------------------------------------
 
@@ -678,8 +689,8 @@ CREATE TABLE IF NOT EXISTS `submenu` (
 INSERT INTO `submenu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `active`) VALUES
 (1, 'घटना', 'घटनाको बारे .................', 'Events', 'about events ..........', 'events', 1),
 (2, 'प्रश्न-उत्तर', 'प्रश्न-उत्तर ..........', 'FAQs', 'about faqs ........', '0', 1),
-(3, 'सुझाव', 'सुझाव बारे', 'Feedback', 'about feedbacks ........', '0', 1),
-(4, 'भेटघाट', 'भेटघाट बारे', 'contactus', 'about contactus ..........', '0', 1);
+(3, 'सुझाव', 'सुझाव बारे', 'Feedback', 'about feedbacks ........', 'contacts', 1),
+(4, 'भेटघाट', 'भेटघाट बारे', 'contactus', 'about contactus ..........', 'contacts', 1);
 
 -- --------------------------------------------------------
 
@@ -701,18 +712,19 @@ CREATE TABLE IF NOT EXISTS `usefullinks` (
   `active` tinyint(4) NOT NULL,
   `homepage` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `usefullinks`
 --
 
 INSERT INTO `usefullinks` (`id`, `title`, `title_np`, `link`, `description`, `description_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`) VALUES
-(1, 'Employment Agreement Builder', '', 'http://google.com', 'description of usefullinks', '', 1, '2012-12-19 11:34:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
-(2, 'Paid Parental Leave Calculator', '', 'http://google.com', 'description of Paid Parental', '', 1, '2012-12-19 11:35:14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
-(3, 'Employment Law Database', 'बनमयक', 'http://google.com', 'description of Database', 'गवजबह,उगय', 1, '2013-01-05 21:43:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
+(1, 'Employment Agreement Builder', 'श्रम सम्झौता', 'http://google.com', 'description of usefullinks', 'श्रम सम्झौताको बारे', 1, '2013-01-11 16:47:44', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
+(2, 'Paid Parental Leave Calculator', ' उगहसगह त', 'http://google.com', 'description of Paid Parental', 'स ाग सउ ग याह सतहगय तह सत ', 1, '2012-12-19 11:35:14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
+(3, 'Employment Law Database', 'बनमयक', 'http://google.com', 'description of Database', 'गवजबह,उगय', 1, '2013-01-05 21:43:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
 (4, 'Collective Baiganing Resource', 'ासग', 'http://google.com', 'description of resource', 'वछनरगहस', 1, '2013-01-05 21:43:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
-(5, 'cc', 'गगग', 'sfgs', 'ssfgsg', 'मनततत', 1, '2013-01-05 21:07:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0);
+(5, 'cc', 'गगग', 'sfgs', 'ssfgsg', 'मनततत', 1, '2013-01-05 21:07:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
+(6, 'jkbh kjhg kjhg kjhg', 'जयहउग जहगउय', 'kjghkjh kjgh', 'kjy uy ytsytrs yt y', 'जयतग ुजयत ुयजउु', 1, '2013-01-11 16:59:37', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -776,7 +788,7 @@ CREATE TABLE IF NOT EXISTS `visited_count` (
   `ip_address` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=560 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=267 ;
 
 --
 -- Dumping data for table `visited_count`
