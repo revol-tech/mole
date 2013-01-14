@@ -287,6 +287,9 @@ class Acts extends CI_Controller {
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
 		);
 	}
 }

@@ -48,16 +48,19 @@ class Menu extends CI_Controller {
 	}
 
 	/**
-	 * disp form for new/edit menu
+	 * create dropdown menu
 	 */
-	public function create($data=null){
-		//creating the parent drop down
+	private function _create_dropdown($data){
 		$tmp = $this->menu_model->get();
 		$parent_id = '<select name="parent_id">';
 		
-		//limit num. of roots to less than or equal to 5
+		//limit num. of roots to less than 
+		//or equal to 5 when creating nu menu
 		if($this->_count_root($tmp)<5){	
 			$parent_id .= '<option value="0">Root</option>';
+		}
+		elseif(($data!=null)&&($data['parent_id']==0)){
+			$parent_id .= '<option value="0">Root</option>';			
 		}
 		foreach($tmp as $val){
 			$parent_id .= '<option value="'.$val->id.'" ';
@@ -66,11 +69,18 @@ class Menu extends CI_Controller {
 			}
 			$parent_id .= '>'.$val->title.'</option>';
 		}
-		$parent_id .= '</select>';
-		$data = (array)$data;
-		$data['parent_id'] = $parent_id;
-		$data = (object)$data;
+		$parent_id .= '</select>';	
+		return $parent_id;
+	}
 
+	/**
+	 * disp form for new/edit menu
+	 */
+	public function create($data=null){
+		//creating the parent drop down
+		$data = (array)$data;
+		$data['parent_id']=$this->_create_dropdown($data);			
+		$data = (object)$data;
 
 		//display
 		$this->load->view('templates/admin_header');

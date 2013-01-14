@@ -144,9 +144,10 @@ class Notices extends CI_Controller {
 	 * notices form
 	 */
     public function create(){
-		////generate WYSIWYG editor
-		//$this->_ckeditor_conf();
-		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		//generate WYSIWYG editor
+		$this->_ckeditor_conf();
+		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
@@ -293,6 +294,17 @@ class Notices extends CI_Controller {
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
+		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
 		);
 	}
 }

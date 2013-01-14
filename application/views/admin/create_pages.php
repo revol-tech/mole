@@ -75,6 +75,6 @@
 	<input type='submit' name='submit' value='save' />
 </form>
 
-<?php //echo $generated_editor ?>
-<?php //echo $generated_editor2 ?>
+<?php echo $generated_editor ?>
+<?php echo $generated_editor2 ?>
 <div id='preview'></div>

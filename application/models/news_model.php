@@ -82,9 +82,6 @@ class News_model extends CI_Model{
 	 * returns the id
 	 */
 	public function save($type=1){
-		$tmp = $_FILES['file']['name'];
-		$ext =  end(explode('.',$tmp));
-		$mtime = microtime(true).'.'.$ext;
 
 		$data = array(
 					$this->input->post('title'),
@@ -96,8 +93,15 @@ class News_model extends CI_Model{
 					$this->session->userdata('date_created'),
 					$this->input->post('date_published'),
 					$this->input->post('date_removed'),
-					$mtime
 				);
+
+		//add files to upload
+		if($_FILES){
+			$tmp = $_FILES['file']['name'];
+			$ext =  end(explode('.',$tmp));
+			$mtime = microtime(true).'.'.$ext;
+			array_push($data,$mtime);
+		}
 
 				
 		$this->load->library('form_validation');
@@ -106,7 +110,6 @@ class News_model extends CI_Model{
 		$this->form_validation->set_rules('content', 'Content', 'trim|required|min_length[5]|xss_clean');
 		$this->form_validation->set_rules('content_np', 'Nepali Content', 'trim|required|min_length[5]|xss_clean');
 		if($this->form_validation->run()==false){
-			
 			return false;
 		}
 
@@ -329,7 +332,6 @@ class News_model extends CI_Model{
 		if(!(count($data)>0)){
 			return '';
 		}
-		
 		$str = '<div class="grid_7 useful_links pad_omega border_lt_white bottom_fancy">'.
 					'<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 						'<span>Employment </span>relations'.
@@ -338,12 +340,15 @@ class News_model extends CI_Model{
 						'<span>रोजगारी </span>सम्झोता'.
 					'</h3>'.
 					'<ul>';
+			$count = 0;
 			foreach($data as $key=>$val){
+				if((++$count)>6) break;	//to limit shortcuts
+				
 				$str.='<li>';
 				$str.='<a class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"'). 
-							'href="#" title="'.$val->title.'">'.word_limiter($val->title,4).'</a>';
+							'href="'.site_url('employments/'.$val->id).'" title="'.$val->title.'">'.word_limiter($val->title,4).'</a>';
 				$str.='<a class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"'). 
-							'href="#" title="'.$val->title_np.'">'.word_limiter($val->title_np,4).'</a>';
+							'href="'.site_url('employments/'.$val->id).'" title="'.$val->title_np.'">'.word_limiter($val->title_np,4).'</a>';
 				$str.='</li>';
 			}
 		$str.= '</ul></div>';
@@ -354,10 +359,11 @@ class News_model extends CI_Model{
 		if(!(count($data)>0)){
 			return '';
 		}
-$count=0;		
+		$count=0;		
 		$str = '<div class="tab_grid2"><ul>';
 		foreach($data as $key=>$val){
-if((++$count)>6) break;			
+			if((++$count)>6) break;	//to limit shortcuts
+			
 			$str.='<li>';
 			$str.='<span class="list_style_red_dot fl"></span>';
 			$str .= '<a href="#" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >';

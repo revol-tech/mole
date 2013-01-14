@@ -10,6 +10,7 @@ class Events extends CI_Controller {
 		chk_admin();
 
 		$this->load->model('events_model');
+		$this->load->helper('ckeditor');
 
 		/**
 		 * set headers to prevent back after logout
@@ -157,6 +158,11 @@ class Events extends CI_Controller {
 	 */
     public function create(){
 
+		//generate WYSIWYG editor
+		$this->_ckeditor_conf();
+		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
+
 		if(isset($this->data['contents'])){
 			$this->data['contents'] = $this->data['contents'];
 		}
@@ -292,5 +298,22 @@ class Events extends CI_Controller {
 
 		//redirect($this->session->flashdata('redirectToCurrent'));
 		redirect('admin/events');
+	}
+
+	/**
+	 * ckEditor's configurations.
+	 */
+	private function _ckeditor_conf(){
+		//Ckeditor's configuration
+		$this->data['ckeditor'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content',
+			'path'	=>	CKEDITOR,
+		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
+			'path'	=>	CKEDITOR,
+		);		
 	}
 }

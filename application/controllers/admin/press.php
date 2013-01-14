@@ -11,7 +11,7 @@ class Press extends CI_Controller {
 
 		chk_admin();
 
-		//$this->load->helper('ckeditor');
+		$this->load->helper('ckeditor');
 		$this->load->model('news_model','press_model');
 
 		/**
@@ -145,8 +145,9 @@ class Press extends CI_Controller {
 	 */
     public function create(){
 		//generate WYSIWYG editor
-		//$this->_ckeditor_conf();
-		//$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->_ckeditor_conf();
+		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu press [not editing]
 		if(!isset($this->data['date_created'])){
@@ -285,12 +286,23 @@ class Press extends CI_Controller {
 	/**
 	 * ckEditor's configurations.
 	 */
-	//private function _ckeditor_conf(){
-	//	//Ckeditor's configuration
-	//	$this->data['ckeditor'] = array(
-	//		//ID of the textarea that will be replaced
-	//		'id' 	=> 	'content',
-	//		'path'	=>	CKEDITOR,
-	//	);
-	//}
+	private function _ckeditor_conf(){
+		//Ckeditor's configuration
+		$this->data['ckeditor'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
+		);
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'content_np',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
+		);
+	}
 }

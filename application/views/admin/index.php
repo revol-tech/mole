@@ -16,7 +16,7 @@
 
 <table border='1' style='width:700px;'>
 	<tr>
-		<td><a href='<?php echo site_url('admin/acts')?>'>Acts and Laws</a></td>
+		<td><!--<a href='<?php echo site_url('admin/acts')?>'>Acts and Laws</a>--></td>
 		<td><a href='<?php echo site_url('admin/gallery')?>'>Albums</a></td>
 		<td><a href='<?php echo site_url('admin/contacts')?>'>Contactus</a></td>
 		<td><a href='<?php echo site_url('admin/employments')?>'>Employments</a></td>
