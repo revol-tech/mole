@@ -82,7 +82,7 @@ class News_model extends CI_Model{
 	 * returns the id
 	 */
 	public function save($type=1){
-
+		$mtime=null;
 		$data = array(
 					$this->input->post('title'),
 					htmlentities($this->input->post('content')),
@@ -130,7 +130,7 @@ class News_model extends CI_Model{
 		//insert new news
 		}else{
 			//================================
-			//echo $mtime.'<br/>';
+//echo $mtime.'<br/>';die;
 			$config = array(
 						  'allowed_types' => 'jpg|jpeg|png',
 						  'upload_path' => DOCUMENTS,

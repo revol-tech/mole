@@ -15,14 +15,9 @@
 	<span class='title_np'><?php echo $title;?></span>
 	<br/>
 
-	created by :
-	<span class='created_by'><?php echo $created_by;?></span>
-	<br/>
-
-
-	Publish :
-	<?php echo $active?>
-	<br/>
+	image : 
+	<img src="<?php echo base_url().DOCUMENTS.$filename?>" width='150' height='140'/>
+	<br/>	
 
 	content :<br/>
 	<hr/>
@@ -35,4 +30,12 @@
 	<?php echo $content_np?>
 	<br/>
 	<hr/>
+
+	created by :
+	<span class='created_by'><?php echo $created_by;?></span>
+	<br/>
+
+	Publish :
+	<?php echo $active?>
+	<br/>
 </div>

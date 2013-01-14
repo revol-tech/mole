@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<?php echo form_open(site_url('admin/press/save'),array('style'=>'width:700px;'))?>
+<?php echo form_open_multipart(site_url('admin/press/save'),array('style'=>'width:700px;'))?>
 	<label>
 		Title :
 		<input type='text' name='title' value='<?php echo @$title?>' />
@@ -23,6 +23,12 @@
 	<textarea name="content_np" id="content_np" >
 		<?php echo @$content_np?>
 	</textarea>
+	<br/>
+
+	<label>
+		image : 
+		<input type='file' name='file' />
+	</label>
 	<br/>
 
 	<label>

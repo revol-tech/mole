@@ -476,15 +476,13 @@ class Render_library{
 									'<span class="author fl">'.$val->created_by.'</span>
 									<a class="print fr" href="#"></a>
 								</div>
-								<div class="item1_content fl">
-									<p class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
-										'.($val->content).'
-										<a class="more fr" href="'.site_url('press/'.$val->id).'">Download</a> 
-									</p>
-									<p class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
-										'.($val->content_np).'
-										<a class="more fr" href="'.site_url('press/'.$val->id).'">डाउनलोड</a> 
-									</p>
+								<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+									'.($val->content).'
+									<a class="more fr" href="'.site_url('press/download/'.$val->id).'">Download</a> 
+								</div>
+								<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+									'.($val->content_np).'
+									<a class="more fr" href="'.site_url('press/download/'.$val->id).'">डाउनलोड</a> 
 								</div>
 							</div>';
 				}
@@ -507,10 +505,10 @@ class Render_library{
 								<a class="print fr" href="#"></a>
 							</div>
 							<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
-								'.$data[0]->content.'
+								'.word_limiter($data[0]->content,100).'
 							</div>
 							<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
-								'.$data[0]->content_np.'
+								'.word_limiter($data[0]->content,100).'
 							</div>
 						</div>';
 				break;

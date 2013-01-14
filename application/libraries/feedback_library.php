@@ -28,7 +28,7 @@ class Feedback_library{
 	public function render(){
 		$validation = validation_errors();
 
-		$html =	'<div class="item1 fl">
+		$html =	'<div class="item1 fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 					<h2><span>Feedback</span> &amp; Suggestions</h2>
 					<p class="textblock fl">
 						Please fillup the form below to submit your valuable suggestion.
@@ -37,7 +37,7 @@ class Feedback_library{
 						$this->ci->session->flashdata('feedback_status').
 					'</p>'.
 						$validation.
-					form_open('contacts/submit_feedback',array('id'=>'feedback')).'
+					form_open('contacts/submit_feedback',array('class'=>'feedback')).'
 						<div class="form_holder2">
 							<span class="text">Name</span>
 							<input type="text" value="'.set_value('sender_name').'" name="sender_name" class="textbox fl" 
@@ -63,10 +63,45 @@ class Feedback_library{
 						</div>
 					</form>
 				</div>';
+		$html .=	'<div class="item1 fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+					<h2><span>सुझाव</span> तथा सल्लाह</h2>
+					<p class="textblock fl">
+						मुनीको फर्म भरेर बुझाउनुहोस्
+					</p>
+					<p class="textblock fl">'.
+						$this->ci->session->flashdata('feedback_status').
+					'</p>'.
+						$validation.
+					form_open('contacts/submit_feedback',array('class'=>'feedback')).'
+						<div class="form_holder2">
+							<span class="text">नाम</span>
+							<input type="text" value="'.set_value('sender_name').'" name="sender_name" class="textbox fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';"
+								selected="selected"/>
+						</div> 
+						<div class="form_holder2">
+							<span class="text">इमेल</span>
+							<input type="email" value="'.set_value('sender_email').'" name="sender_email" class="textbox fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';"/>
+						</div> 
+						<div class="form_holder2">
+							<span class="text">सुझाव</span>
+							<textarea value="'.set_value('sender_comments').'" name="sender_comments" class="textarea fl" 
+								onfocus="if(this.value==\'\')this.value=\'\';" 
+								onblur="if(this.value==\'\')this.value=\'\';">
+							</textarea>
+						</div> 
+						<div class="form_holder2">
+							<input class="btn_red fr" type="submit" value="बुझाउनुहोस्"/>
+						</div>
+					</form>
+				</div>';
 		if(($validation)){
 			$html .= '<script>'.
 						'$(function(){'.
-							'$("#feedback").find("input[type=text]").first().focus();'.
+							'$(".feedback").find("input[type=text]").first().focus();'.
 						'})'.
 					'</script>';
 		}
