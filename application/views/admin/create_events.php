@@ -2,7 +2,6 @@
 
 <?php echo validation_errors()?>
 
-<!--<form method='post' action='<?php echo site_url('admin/events/save')?>' style='width:700px;'>-->
 <?php echo form_open_multipart(site_url('admin/events/save'),array('style'=>'width:700px;'))?>
 	<label>
 		Title

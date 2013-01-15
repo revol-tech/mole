@@ -200,7 +200,7 @@ class Press extends CI_Controller {
 		$this->get(array('id'=> $this->data['id']));
 
 		//display that press
-		$this->create();
+		redirect('admin/press/view/'.$this->data['id']);
 	}
 
 

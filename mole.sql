@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2013 at 05:57 PM
+-- Generation Time: Jan 15, 2013 at 09:55 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(44, 1358061282, '127.0.0.1', 'enILFy');
+(46, 1358211791, '127.0.0.1', 'COGqbo');
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `filename` varchar(127) DEFAULT NULL,
   `timestamp` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `events`
@@ -302,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `links`
@@ -341,7 +341,11 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (42, 'acts/dsff', 'news', '45'),
 (44, 'pages/xx', 'news', '47'),
 (45, 'pages/uiouiui', 'news', '49'),
-(46, 'pages/yutyt', 'news', '50');
+(46, 'pages/yutyt', 'news', '50'),
+(47, 'pages/qwq', 'news', '51'),
+(48, 'pages/fgyhkoityjuj', 'news', '52'),
+(49, 'employments/employments/vb', 'news', '10'),
+(50, 'employments/shr', 'news', '9');
 
 -- --------------------------------------------------------
 
@@ -369,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 --
 
 INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `parent_id`, `active`) VALUES
-(1, 'हाम्रो बारे', 'कलज;ाद;ल सकज;लसदकज', 'about us', 'as asdg asg sa sg s', 'pages/xx', 0, 1),
+(1, 'हाम्रो बारे', 'कलज;ाद;ल सकज;लसदकज', 'about us', 'as asdg asg sa sg s', 'pages/fgyhkoityjuj', 0, 1),
 (2, 'रिसोर्सेस', '', 'resources', '', 'resources', 0, 1),
 (3, '', '', 'publications', '', 'publications', 0, 0),
 (5, '', '', 'contact us', '', 'contacts/x4', 0, 0),
@@ -440,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358061296, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358211821, 1);
 
 -- --------------------------------------------------------
 
@@ -495,7 +499,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `filename` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `news`
@@ -503,13 +507,13 @@ CREATE TABLE IF NOT EXISTS `news` (
 
 INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_type`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`, `homepage`, `lang`, `filename`) VALUES
 (1, ' Development of Labour Administrator', '&lt;p&gt;\n The Development of Labour Administrator for the strengthening of Trade Cooperation in ASEAN Community Program&lt;/p&gt;\n', 'सउगसग सगर', '<p>\n ासग उासगह ासउगोि ु;ासगहगिो;सोिुह ;ासजगह;ाोुरगह ;ासगह;ाोिगहस;हलगह;;सोिुयह सोिग हसह;ोग सरह</p>\n', 1, 1, '2012-12-18 23:28:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(4, 'The National Budget for 2013', '9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &quot;Challenges in formulating the National Budget for 2013&quot; by Dr. P. B. Jayasundera, Secretary, Ministry o', 'नेपाल बद्जोट २०१३', 'उब हब ा सर', 4, 1, '2012-12-18 23:46:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(5, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'उगह', 'गउजह उगहजत ', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(6, 'The floods submits documents', '  &lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;\n ', 'हजगज गयजतज ', 'सह ससउगससह', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(7, 'Restricated Trading Days', '&lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:11:06', '2012-12-30 02:37:40', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(4, 'The National Budget for 2013', '&lt;p&gt;\n 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by&lt;/p&gt;\n&lt;p&gt;\n tAlumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association, University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o 9th Annual Sujatha Jayawardena Memorial Oration, organized by Alumini Association,&lt;/p&gt;\n&lt;p&gt;\n University of Colombo was delivered on &amp;quot;Challenges in formulating the National Budget for 2013&amp;quot; by Dr. P. B. Jayasundera, Secretary, Ministry o&lt;/p&gt;', 'नेपाल बद्जोट २०१३', '<p>\n उब हब ा सरल कासजलसकज हगलिह गलसकजह गलि सल गोिलरग लसुजह पिुर हसोिलुउह सिुह गोिुरह सलहजु गलस जगलेरगसग सेर</p>', 4, 1, '2012-12-18 23:46:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 'en', '1358219639.2027.JPG'),
+(5, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;', 'The floods submits documents', '<p>\n ो कहसउज हलसकजउ गहलसकजउ गहलसकजउगह स</p>\n<p>\n ग ा&#39;ोगज ा&#39;पस जग;ासजग ;ाोसजि ग;ासकज ग;ालसज ग;ागिज ग;ासि जप;िोज ;ासोिजग ा;िोग ागत</p>', 2, 1, '2012-12-18 23:55:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(6, 'The floods submits documents', '&lt;p&gt;\n An employer or an establishment hit by the floods submits dicuments concerned to the Provincial Office of Labour&lt;/p&gt;', 'ुयग कजह गकौेहजर', '<p>\n सह ससउगससह</p>', 2, 1, '2012-12-18 23:58:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(7, 'Restricated Trading Days', '  &lt;p&gt;\n Restricated Trading Days&lt;/p&gt;\n ', 'उगजगजहउग उगज उगज', 'ास छासग सगह गबजन वबगजन सरतगह सगहसतह सउह सह सउह स', 7, 1, '2012-12-19 00:11:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (8, 'Minimum wage rates', '&lt;p&gt;\n Minimum wage rates&lt;/p&gt;\n', 'न्युनतम पारिशमिक दर', '<p>\n सब वह स डवगस हतजसगउह तगहस हतस</p>\n', 7, 1, '2012-12-19 00:12:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(9, 'Public holidays dates 2012', '&lt;p&gt;\n Public holidays dates 2012&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(10, 'Minimum employment rights', '&lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n', '', '', 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(9, 'Public holidays dates 2012', '  &lt;p&gt;\n Public holidays dates 2012 a;lskj ;alskjg ;aosgh a;ohg ;ahop gp aoh gpaohg paoh ghpaoi gpoai ghpaoi gpasg&lt;/p&gt;\n ', 'सह सहस', 'स उहग सहब बहस तह सगह ासह सउहब उह सतह गहन सतगह गउजहउ सगह हउतगज उगज ', 7, 1, '2012-12-19 00:13:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(10, 'Minimum employment rights', '    &lt;p&gt;\n Minimum employment rights&lt;/p&gt;\n  ', 'उग जमउगहज ', '     गतज उगज उग गह सहगह सगज वबनवब ाहब ब सउहब बग सउसहग सउगह गह सउहग सह सह सहगस हस हसह  ', 7, 1, '2012-12-19 00:14:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (14, 'WSH Regulatory Framework ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 18:58:52', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (15, 'Safety & Health Management System ', '&lt;p&gt;\n Nunc aliquet tortor in lectus porttitor fringilla&lt;br /&gt;\n lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta&lt;br /&gt;\n arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.&lt;br /&gt;\n Pellentesque varius ', '', '', 5, 1, '2012-12-19 19:00:44', '2012-12-19 19:04:50', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (16, 'Monitoring and Surveillance ', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&lt;br /&gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&lt;br /&gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&lt;br', '', '', 5, 1, '2012-12-19 19:01:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
@@ -519,13 +523,12 @@ INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_ty
 (21, ' Amendments to the Employment of Foreign Manpower Act', '&lt;p&gt;\r\n The Employment of Foreign Manpower Act (EFMA) prescribes the responsibilities and obligations pertaining to the employment of foreign workers. The EFMA was last amended in 2007.Since 2010, following the recommendations of the Economic Strategi', '', '', 8, 1, '2012-12-22 02:39:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (25, 'uyis hsfg g sfg gs fgs gsfg s', '&lt;p&gt;\n ;h iuhpiu hpiu hoiu hoi ugoi oi&lt;/p&gt;', 'उगह उगहसत', 'उगवह उगह सतह सगह सरतह सहगहस त', 1, 1, '2012-12-28 12:47:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (26, 'nnnn', '&lt;p&gt;\n ndaoijad iof jweopf japsodif jaoeijf aposija w&lt;/p&gt;\n', '', '', 8, 1, '2012-12-30 02:37:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(30, 'sghsfs', '&lt;p&gt;\n sa asfg sfh stjh sgfhb stsh sgh sh ts&lt;/p&gt;\n', 'वबगहनस', '<p>\n &nbsp;गवब छवहबवसह उस उस उहस सउगस सउ सह</p>\n', 7, 1, '2013-01-05 22:18:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (31, 'kjgh kjfgk u', '&lt;p&gt;\n kug kjgy lkutfyjyt juyt jytj tgmnf jytfhgf j su&lt;/p&gt;\n', 'लिुतग', '<p>\n ुकयउ कुयगउ िकतु किुयउत ियतस जुयस जयस जतय जुयर जु यत ुजय</p>\n', 1, 1, '2013-01-06 04:52:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(41, 'iujhio', '  ih giuh gyiuyh giu    ', 'षडउगरगर', '  h yiuyh giuhy giuy i    ', 7, 1, '2013-01-09 09:33:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (43, 'regwrter', '  sdvasd asdf awef aef  ', 'सद गसदउग ौेर', '  सदग सउग ौग ौरग सग ', 5, 1, '2013-01-09 10:55:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (44, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'ासलदजा लकदजउहा लसकजाउलज लाकज', '  ासकलजउह;ासकदउ ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (45, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'sdfas', '   ासदउासदउ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(50, 'fsgh sfgh g', 'tb yy shy sgh sh fgh hgjh gj fghj ghk ghjlkgu ptyu ty t st qsfhb bjhn tghjurt yit', 'गब कजउगहकज यि', 'स सग सगउह ह टगजु उगहि तुपय यगकमग हहमउगब जउगह रतगह उग हत हउगुज तरयि ुपोतयुजतय जउगहज  उगहज त', 6, 1, '2013-01-13 09:21:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358068912.4925.png');
+(52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज&nbsp; स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलक<em>उगह लकज</em>स स हस उ;<strong>सलउजग;सोकस;लउजग </strong>स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज</p>\n<p>\n हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358217765.471.png'),
+(53, 'jy jygf jyg fjyh', '&lt;p&gt;\n lh kj hlkjh lijuhg liug lig kihg kuyhg ku&lt;/p&gt;', 'लकजह लाकसदजह ालकसज गौ', '<p>\n ासग ासदग टौेग सदग ेरह&nbsp; गौटरग सग टेग सग टेरग सरग टौरग सरग ौरगसग े</p>', 4, 1, '2013-01-14 03:35:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217420.817.png');
 
 -- --------------------------------------------------------
 
@@ -688,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `submenu` (
 
 INSERT INTO `submenu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `active`) VALUES
 (1, 'घटना', 'घटनाको बारे .................', 'Events', 'about events ..........', 'events', 1),
-(2, 'प्रश्न-उत्तर', 'प्रश्न-उत्तर ..........', 'FAQs', 'about faqs ........', '0', 1),
+(2, 'प्रश्न-उत्तर', 'प्रश्न-उत्तर ..........', 'FAQs', 'about faqs ........', 'faqs', 1),
 (3, 'सुझाव', 'सुझाव बारे', 'Feedback', 'about feedbacks ........', 'contacts', 1),
 (4, 'भेटघाट', 'भेटघाट बारे', 'contactus', 'about contactus ..........', 'contacts', 1);
 
@@ -788,7 +791,7 @@ CREATE TABLE IF NOT EXISTS `visited_count` (
   `ip_address` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=267 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=296 ;
 
 --
 -- Dumping data for table `visited_count`

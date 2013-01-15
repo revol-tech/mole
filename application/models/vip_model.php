@@ -120,7 +120,6 @@ class Vip_model extends CI_Model{
 
 		}else{
 
-
 			$image_data = $this->upload->data();
 
 			$data = array(

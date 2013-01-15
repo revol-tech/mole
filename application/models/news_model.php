@@ -29,7 +29,7 @@ class News_model extends CI_Model{
 
 
 	/**
-	 * change the active poll
+	 * change the active
 	 *
 	 * @param id int
 	 * @param active boolean
@@ -57,22 +57,51 @@ class News_model extends CI_Model{
 					   'date_removed' => $data[7]
 					);
 
+		//update files to upload
+		if($_FILES){
+			$tmp = $_FILES['file']['name'];
+			$ext =  end(explode('.',$tmp));
+			$mtime = microtime(true).'.'.$ext;
+			$update['filename'] = $mtime;
+
+
+			$config = array(
+						  'allowed_types' => 'jpg|jpeg|png',
+						  'upload_path' => DOCUMENTS,
+						  'maintain_ratio' => true,
+						  'max-size' => 20000,
+						  'width' => 2000,
+						  'height' => 1500,
+						  'overwrite' => true,
+						  'file_name' => $mtime
+						);
+
+			$this->load->library('upload',$config);
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('file')){
+				echo $this->upload->display_errors();
+				return;
+			}
+		}
+
+
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->table, $update);
 
 
-		$nu_data_links = array(
-			'table' => $this->table,
-			'row_id'=> $data['id']
-		);
-
-		$old_data_links = $this->links_model->get($nu_data_links);
-
-		$nu_data_links['id']   = $old_data_links[0]->id ;
-		$nu_data_links['link'] = $this->input->post('linktype').'/'.$this->input->post('link');
-
-		$this->links_model->save($nu_data_links);
-
+//		$nu_data_links = array(
+//			'table' => $this->table,
+//			'row_id'=> $data['id']
+//		);
+//
+//		$old_data_links = $this->links_model->get($nu_data_links);
+//
+//		$nu_data_links['id']   = $old_data_links[0]->id ;
+//		$nu_data_links['link'] = $this->input->post('linktype').'/'.$this->input->post('link');
+//
+//		$this->links_model->save($nu_data_links);
+//
 		return $data['id'];
 	}
 
@@ -388,7 +417,16 @@ class News_model extends CI_Model{
 			return '';
 		}
 
-		$str ='<div class="tab_grid1 fr en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
+
+		$str =	'<div class="block_img1 fl en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+					<img src="'.base_url().DOCUMENTS.$data[0]->filename.'" width="105" height="99"
+						alt="'.$data[0]->title.'" title="'.$data[0]->title.'"/>
+				</div>
+				<div class="block_img1 fl np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+					<img src="'.base_url().DOCUMENTS.$data[0]->filename.'" width="105" height="99"
+						alt="'.$data[0]->title_np.'" title="'.$data[0]->title_np.'"/>
+				</div>';
+		$str.='<div class="tab_grid1 fr en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
 		$str.='		<h5>'.$data[0]->title.'</h5>';
 		$str.='		<p>'.word_limiter(strip_tags($data[0]->content),30);
 		$str.='			<span>'.date('M j Y',strtotime($data[0]->date_created)).'</span>';
@@ -675,8 +713,6 @@ private function _render_events($data){
 					</div>';
 			return $str;
 		}
-
-
 		return $str;
 	}
 

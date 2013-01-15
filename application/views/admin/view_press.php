@@ -6,6 +6,10 @@
 		edit
 	</a>
 	<br/>
+	<?php echo form_open(site_url('admin/press/del/'))?>
+		<input type="hidden" name="press_id" value="<?php echo $id?>"/>
+		<input type="submit" name="del" value="Delete"/>
+	</form>
 
 	title :
 	<span class='title'><?php echo $title;?></span>

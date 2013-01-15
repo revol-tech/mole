@@ -140,9 +140,6 @@
 							<?php echo $health?>
 						</div>
 						<div id="tab1" class="tab_content">
-							<div class="block_img1 fl"> 
-								<img src="<?php echo IMGPATH?>Minister.jpg" alt="Prime Minister Baburam Bhattarai" title="Prime Minister Baburam Bhattarai"/>
-							</div>
 							<?php echo $press?>
 						</div>
 				</div>

@@ -8,6 +8,7 @@
 		 */
 	?>
 	<script type='text/javascript' src='<?php echo base_url().JSPATH?>jquery-1.8.2.min.js'></script>
+	<script type='text/javascript' src='<?php echo base_url().JSPATH?>admin_functions.js'></script>
 	<meta charset="UTF-8"/>
 </head>
 <body>

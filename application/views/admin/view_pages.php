@@ -2,10 +2,10 @@
 
 <div>
 	<br/>
-	<!--<a href='<?php echo site_url('admin/pages/edit/'.$id)?>'>
+	<a href='<?php echo site_url('admin/pages/edit/'.$id)?>'>
 		edit
 	</a>
-	<br/> -->
+	<br/>
 	<?php echo form_open(site_url('admin/pages/del/'))?>
 		<input type="hidden" name="pages_id" value="<?php echo $id?>"/>
 		<input type="submit" name="del" value="Delete"/>

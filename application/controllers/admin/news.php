@@ -297,15 +297,17 @@ class News extends CI_Controller {
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
 		);
 		$this->data['ckeditor2'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content_np',
 			'path'	=>	CKEDITOR,
-		);		$this->data['ckeditor2'] = array(
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'content_np',
-			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
 		);		
 	}
 }
