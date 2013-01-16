@@ -513,6 +513,23 @@ class Render_library{
 						</div>';
 				break;
 			case 'polls':
+				//add poll's js/css requirements
+				$str .= '<!--[if lt IE 9]> 
+							<script language="javascript" type="text/javascript" src="'.
+									base_url().JSPATH.'jqplot/excanvas.min.js"></script>
+						>![endif]-->
+						<script language="javascript" type="text/javascript" src="'.
+										base_url().JSPATH.'jqplot/jquery.jqplot.js"></script>
+						<script language="javascript" type="text/javascript" src="'.
+										base_url().JSPATH.'jqplot/jqplot.barRenderer.js"></script>
+						<script type="text/javascript" src="'.
+										base_url().JSPATH.'jqplot/jqplot.categoryAxisRenderer.js"></script>
+						<script type="text/javascript" src="'.
+										base_url().JSPATH.'jqplot/jqplot.pointLabels.js"></script>
+						<link rel="stylesheet" type="text/css" href="'.
+										base_url().JSPATH.'jqplot/jquery.jqplot.css" />';
+
+			
 				$str .= $data;
 				break;
 		}

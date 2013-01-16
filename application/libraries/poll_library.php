@@ -158,19 +158,99 @@ class Poll_library{
 
 		//generate the poll result.
 		foreach($items as $key=>$value){
-			$value->graph = '';
+			$value->graph .= 
+					'<script>
+					$(document).ready(function(){
+						var s1 = [	'.$value->count_option1.', 
+									'.$value->count_option2.', 
+									'.$value->count_option3.', 
+									'.$value->count_option4.'
+								];
+
+						plot3 = $.jqplot("chart", [s1], {
+
+							captureRightClick: true,
+							seriesDefaults:{
+								renderer:$.jqplot.BarRenderer,
+								rendererOptions: {
+									barMargin: 30,
+									highlightMouseDown: true,
+									barDirection: "horizontal"   
+								},
+								pointLabels: {
+									show: true,
+									//labels:["aa - 2","bb k hgh yytfut urd - 6","cc - 7","dd - 10"] //needs to be edited
+								}
+							},
+							axesDefaults: {
+							show: false,
+							min: null,  
+							max: null,  
+							pad: 1.2,   
+
+							ticks: [],  
+
+							numberTicks: undefined,
+							renderer: $.jqplot.LinearAxisRenderer,  // renderer to use to draw the axis,
+							rendererOptions: {},  
+
+							tickOptions: {
+								mark: "outside",  
+
+								showMark: false,
+								showGridline: false,
+								markSize: 4,        
+
+								show: false,        
+								showLabel: false,   
+								formatString: "",   
+							},
+								showTicks: false,       
+								showTickMarks: false,   
+							},
+							axes: {
+								yaxis: {
+									padMin: 0
+								}
+							},
+							grid:{
+								drawGridLines: false,
+								borderWidth:	0,
+								shadow:	false,
+							}
+						});
+						$("#chart").bind("jqplotDataClick",
+							function (ev, seriesIndex, pointIndex, data) {
+								$("#info3").html("series: "+seriesIndex+", point: "+pointIndex+", data: "+data);
+							}
+						);
+					});
+					</script>';
+			
+			$value->graph .= '<p class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
+			$value->graph .= $value->question.'</p>';
 			$value->graph .= '<div class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>';
-			$value->graph .= '<div><span>'.$value->option1.': </span>'.'<span>'.$value->count_option1.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option2.': </span>'.'<span>'.$value->count_option2.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option3.': </span>'.'<span>'.$value->count_option3.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option4.': </span>'.'<span>'.$value->count_option4.'</span></div>';
+			$value->graph .= '<div>Options : </div>';
+			$value->graph .= '<div>1. <span>'.$value->option1.' </span></div>';
+			$value->graph .= '<div>2. <span>'.$value->option2.' </span></div>';
+			$value->graph .= '<div>3. <span>'.$value->option3.' </span></div>';
+			$value->graph .= '<div>4. <span>'.$value->option4.' </span></div>';
 			$value->graph .= '</div>';
+			
+			$value->graph .= '<p class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
+			$value->graph .= $value->question_np.'</p>';
 			$value->graph .= '<div class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>';
-			$value->graph .= '<div><span>'.$value->option1_np.': </span>'.'<span>'.$value->count_option1.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option2_np.': </span>'.'<span>'.$value->count_option2.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option3_np.': </span>'.'<span>'.$value->count_option3.'</span></div>';
-			$value->graph .= '<div><span>'.$value->option4_np.': </span>'.'<span>'.$value->count_option4.'</span></div>';
+			$value->graph .= '<div>तपाईको रोजाइ : </div>';
+			$value->graph .= '<div>१. <span>'.$value->option1_np.' </span></div>';
+			$value->graph .= '<div>२. <span>'.$value->option2_np.' </span></div>';
+			$value->graph .= '<div>३. <span>'.$value->option3_np.' </span></div>';
+			$value->graph .= '<div>४. <span>'.$value->option4_np.' </span></div>';
 			$value->graph .= '</div>'			;
+
+			//generate & disp. js graph
+			$value->graph .= '<br/><div class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'><span>Results :</span></div>';
+			$value->graph .= '<br/><div class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'><span>नतिजा :</span></div>';
+			$value->graph .= '<div id="chart" style="height:200px;width:70%;left:50%;margin-Left:-25%;"></div>';
 		}
 		return $items;
 	}
@@ -182,11 +262,21 @@ class Poll_library{
 	 */
 	public function render_poll(){
 		$poll = $this->list_poll(false,null,null,true);
+//echo '<pre>';
+//print_r($poll);
+//echo '</pre>';
+//die;
 
 		if(!$poll){
 			return null;
 		}
-
+//		if(($this->chk_history()!=0)){
+//			return $poll[0]->graph;
+//			$arr =  $this->result_compare($poll);
+//			return $arr[0]->graph;
+//
+//		}
+	
 		$html = '<div class="item1 fl">		
 					<h2 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 						<span>Public </span>Poll

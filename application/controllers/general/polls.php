@@ -69,8 +69,7 @@ class Polls extends MY_MOLE_Controller {
 		//or thiss ip address
 //echo $this->poll_library->chk_history();die;		
 		if(($this->poll_library->chk_history()!=0)){
-			$this->view_results();
-			return;
+			return $this->view_results();;
 		}
 
 		if($method = $this->uri->segment(2)){
