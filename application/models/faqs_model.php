@@ -28,6 +28,7 @@ class Faqs_model extends CI_Model{
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->answer = html_entity_decode($value->answer,ENT_QUOTES, 'UTF-8');
+			$value->answer_np = html_entity_decode($value->answer_np,ENT_QUOTES, 'UTF-8');
 		}
 //print_r($res->result());
 		return $res->result();
@@ -42,6 +43,9 @@ class Faqs_model extends CI_Model{
 		$data = array(
 					'question'		=> $this->input->post('question'),
 					'answer'		=> htmlentities($this->input->post('answer')),
+					'question_np'	=> $this->input->post('question_np'),
+					//'answer_np'		=> htmlentities($this->input->post('answer_np')),
+					'answer_np'		=> $this->input->post('answer_np'),
 					'faqs_type_id'	=> $this->input->post('faqs_type_id'),
 					'created_by'	=> $this->session->userdata('user_id'),
 					'date_created'	=> $this->session->userdata('date_created'),
@@ -75,6 +79,8 @@ class Faqs_model extends CI_Model{
 		$update = array(
 					   'question' 		=> $data['question'],
 					   'answer' 		=> $data['answer'],
+					   'question_np'	=> $data['question_np'],
+					   'answer_np' 		=> $data['answer_np'],
 					   'faqs_type_id'	=> $data['faqs_type_id'],
 					   'date_published' => $data['date_published'],
 					   'date_removed' 	=> $data['date_removed']
@@ -82,7 +88,7 @@ class Faqs_model extends CI_Model{
 
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->table, $update);
-
+//echo $this->db->last_query();die;
 		return $data['id'];
 	}
 
@@ -188,6 +194,8 @@ class Faqs_model extends CI_Model{
 		$data = array(
 					'title'			=> $this->input->post('title'),
 					'description'	=> htmlentities($this->input->post('description')),
+					'title_np'		=> $this->input->post('title_np'),
+					'description_np'=> $this->input->post('description_np'),
 					'created_by'	=> $this->session->userdata('user_id'),
 					'date_created'	=> $this->session->userdata('date_created'),
 					'date_published'=> $this->input->post('date_published'),
@@ -218,10 +226,12 @@ class Faqs_model extends CI_Model{
 	private function update_type($data){
 
 		$update = array(
-					   'title' 			=> $data['title'],
-					   'description'	=> $data['description'],
-					   'date_published' => $data['date_published'],
-					   'date_removed' 	=> $data['date_removed']
+						'title' 		=> $data['title'],
+						'description'	=> $data['description'],
+						'title_np'		=> $this->input->post('title_np'),
+						'description_np'=> htmlentities($this->input->post('description_np')),
+						'date_published' => $data['date_published'],
+						'date_removed' 	=> $data['date_removed']
 					);
 
 		$this->db->where('id', $data['id']);
@@ -285,15 +295,29 @@ class Faqs_model extends CI_Model{
 //echo $link_type;		
 		if($link_type=='about'){
 			$str .= '<div class="item1 fl">';
-			$str .= '<h2>FAQ\'s</h2>';
+			$str .= '<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+							FAQ\'s</h2>';
+			$str .= '<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+							प्रश्न-उत्तर</h2>';
 			$str .= '<ul>';
 			for($i=0;$i<count($data);$i++){
 				$str .=	'<li>'.
-						'	<a href="#" class="title1"><h3>'.$data[$i]->title.'</h3></a> '.
-						'	<span class="total_questions">'.
+						'	<a href="#" class="title1">
+								<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+									$data[$i]->title.'</h3>
+								<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+									$data[$i]->title_np.'</h3>
+							</a> '.
+						'	<span class="total_questions en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 								'( Total '.count($this->get(array('faqs_type_id'=>$data[$i]->id))).' Questions )'.
 						'	</span>'.
-						'	<em class="abt_questions">'.$data[$i]->description.'</em>'.
+						'	<span class="total_questions np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								'( जम्मा प्रश्न '.count($this->get(array('faqs_type_id'=>$data[$i]->id))).' )'.
+						'	</span>'.
+						'	<em class="abt_questions en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$data[$i]->description.'</em>'.
+						'	<em class="abt_questions np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'
+								.$data[$i]->description_np.'</em>'.
 						'</li>';
 //echo '<pre>';
 //print_r($data[$i]);

@@ -142,6 +142,7 @@ class Faqs extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
@@ -409,6 +410,10 @@ print_r($data[0]);
 	}
 
 	public function create_type(){
+		//generate WYSIWYG editor
+		$this->_ckeditor_conf();
+		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu notices [not editing]
 		if(!isset($this->data['date_created'])){
@@ -522,6 +527,18 @@ print_r($data[0]);
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'answer',
 			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
+		);
+		//Ckeditor's configuration
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'answer_np',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar'	=>	'Basic',
+						),
 		);
 	}
 }

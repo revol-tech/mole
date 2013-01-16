@@ -21,9 +21,19 @@
 	<span class='title'><?php echo $title;?></span>
 	<br/>
 
+	question (नेपाली) :
+	<span class='title_np'><?php echo $title_np;?></span>
+	<br/>
+
 	description :<br/>
 	<hr/>
-	<?php echo $description?>
+	<?php echo $description_np?>
+	<br/>
+	<hr/>
+
+	description नेपाली) :<br/>
+	<hr/>
+	<?php echo $description_np?>
 	<br/>
 	<hr/>
 </div>

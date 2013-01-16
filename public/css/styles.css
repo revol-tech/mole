@@ -1337,7 +1337,7 @@ margin:0 0 15px 0;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius:5px;
-	border: 1px solid #e0e0e0;
+	border: 1px solid /*#e0e0e0;*/ white; /*changed ..........*/
 
 	-moz-box-shadow: 0 0 2px #eaeaea;
 	-webkit-box-shadow: 0 0 2px #eaeaea;
@@ -1402,6 +1402,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 .acc_container p{
 	font: 12px 'Open Sans',Arial,Helvetica,sans-serif;
+	padding:10px;/*added .....................*/
 	
 	}
 .acc_container .btn_red{
@@ -1448,3 +1449,4 @@ float:left;
 	
 	
 	
+.question{}

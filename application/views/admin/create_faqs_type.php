@@ -7,11 +7,23 @@
 		<input type='text' name='title' value='<?php echo @$title?>' />
 	</label>
 	<br/>
+	<label>
+		title (नेपाली)
+		<input type='text' name='title_np' value='<?php echo @$title_np?>' />
+	</label>
+	<br/>
+
 	description :
 	<textarea name="description" id="description" >
 		<?php echo @$description?>
 	</textarea>
 	<br/>
+	description (नेपाली) :
+	<textarea name="description_np" id="description_np" >
+		<?php echo @$description_np?>
+	</textarea>
+	<br/>
+
 	<label>
 		created on
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>

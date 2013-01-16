@@ -9,6 +9,12 @@
 	<br/>
 
 	<label>
+		question (नेपाली)
+		<input type='text' name='question_np' value='<?php echo @$question_np?>' />
+	</label>
+	<br/>
+
+	<label>
 		faqs type :
 		<select name="faqs_type_id">
 			<?php foreach($faqs_type as $key=>$val){?>
@@ -27,6 +33,12 @@
 	</textarea>
 	<br/>
 
+	answer (नेपाली):
+	<textarea name="answer_np" id="answer_np" >
+		<?php echo @$answer_np?>
+	</textarea>
+	<br/>
+
 	<label>
 		created on
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>
@@ -39,8 +51,10 @@
 	</label>
 	<br/>
 	<input type='hidden' name='id' value='<?php echo @$id?>'>
+	<input type='submit' name='save' value='Save' />
 </form>
 
 <?php echo $generated_editor ?>
+<?php echo $generated_editor2 ?>
 
 <div id='preview'></div>

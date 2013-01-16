@@ -334,27 +334,49 @@ class Render_library{
 
 				//display faqs in accordion
 				$str .= '<div class="item2 fl" style="width:100%;">
-							<h2>FAQ\'s</h2>
+							<h2 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+								Frequently Asked Questions 
+							</h2>
+							<h2 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+								धेरै सोधिने प्रश्नहरु 
+							</h2>
 							<ul>';
 				foreach($data as $key=>$val){
 					$str .=	'<li style="float:none;">
 								<a 
-									title="'.$val->description.'">
+									'.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'
+									title="'.$val->description.'" class="en">
 									<h3>'.$val->title.'</h3>
 									<span class="total_questions">
 										( Total '.count($val->questions).' Questions )
+									</span>
+								</a>
+								<a 
+									'.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'
+									title="'.$val->description_np.'" class="np">
+									<h3>'.$val->title_np.'</h3>
+									<span class="total_questions">
+										( जम्मा प्रश्न - '.count($val->questions).' )
 									</span>
 								</a>
 								
 								<br/>'; 
 					if(($val->questions)){
 					foreach($val->questions as $kk=>$vv){
-						$str .=	'<div class="acc-item">
+						$str .=	'<div class="acc-item en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 									<a href="#" class="acc_trigger">
-										<span>'.$vv->question.'</span>
+										<span class="question">'.$vv->question.'</span>
 									</a>
 									<div class="acc_container">
-										'.$vv->answer.'
+										<br/>'.$vv->answer.'
+									</div>
+								</div>';
+						$str .=	'<div class="acc-item np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+									<a href="#" class="acc_trigger">
+										<span class="question">'.$vv->question_np.'</span>
+									</a>
+									<div class="acc_container">
+										<br/>'.$vv->answer_np.'
 									</div>
 								</div>';
 					}
@@ -655,9 +677,9 @@ class Render_library{
 						<ul class="sub_nav">';
 		foreach($submenu_data as $key=>$val){
 			$str .=	'<li>';
-			$str .= '<a class="en" href="'.base_url().$val->link.'" title="'.$val->comments.'"'.
+			$str .= '<a class="en" href="'.base_url().$val->link.'" title="'.$val->comments.'" '.
 						(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->title.'</a>';
-			$str .= '<a class="np" href="'.base_url().$val->link.'" title="'.$val->comments_np.'"'.
+			$str .= '<a class="np" href="'.base_url().$val->link.'" title="'.$val->comments_np.'" '.
 						(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->title_np.'</a>';
 			$str .= '</li>';
 		}

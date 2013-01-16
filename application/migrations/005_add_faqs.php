@@ -15,6 +15,8 @@ class Migration_Add_faqs extends CI_Migration {
 						'`faqs_type_id` int(11) NOT NULL',
 						'`question` text NOT NULL',
 						'`answer` mediumtext NOT NULL',
+						'`question_np` text NOT NULL',
+						'`answer_np` mediumtext NOT NULL',
 						'`created_by` int(11) NOT NULL',
 						'`date_created` timestamp NULL DEFAULT NULL',
 						'`date_published` timestamp NULL DEFAULT NULL',

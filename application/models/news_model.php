@@ -375,9 +375,9 @@ class News_model extends CI_Model{
 				
 				$str.='<li>';
 				$str.='<a class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"'). 
-							'href="'.site_url('employments/'.$val->id).'" title="'.$val->title.'">'.word_limiter($val->title,4).'</a>';
+							' href="'.site_url('employments/'.$val->id).'" title="'.$val->title.'">'.word_limiter($val->title,4).'</a>';
 				$str.='<a class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"'). 
-							'href="'.site_url('employments/'.$val->id).'" title="'.$val->title_np.'">'.word_limiter($val->title_np,4).'</a>';
+							' href="'.site_url('employments/'.$val->id).'" title="'.$val->title_np.'">'.word_limiter($val->title_np,4).'</a>';
 				$str.='</li>';
 			}
 		$str.= '</ul></div>';
