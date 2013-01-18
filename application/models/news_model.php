@@ -158,31 +158,32 @@ class News_model extends CI_Model{
 
 		//insert new news
 		}else{
-			//================================
-//echo $mtime.'<br/>';die;
-			$config = array(
-						  'allowed_types' => 'jpg|jpeg|png',
-						  'upload_path' => DOCUMENTS,
-						  'maintain_ratio' => true,
-						  'max-size' => 20000,
-						  'width' => 2000,
-						  'height' => 1500,
-						  'overwrite' => true,
-						  'file_name' => $mtime
-						);
-			//echo '<pre>';
-			//print_r($config);
-			//echo '</pre>';
+			//uploading imgs.
+			//no need to upload imgs for divisions
+			if($this->uri->segment(2)!='divisions'){
+				$config = array(
+							  'allowed_types' => 'jpg|jpeg|png',
+							  'upload_path' => DOCUMENTS,
+							  'maintain_ratio' => true,
+							  'max-size' => 20000,
+							  'width' => 2000,
+							  'height' => 1500,
+							  'overwrite' => true,
+							  'file_name' => $mtime
+							);
+				//echo '<pre>';
+				//print_r($config);
+				//echo '</pre>';
 
 
-			$this->load->library('upload',$config);
-			$this->upload->initialize($config);
+				$this->load->library('upload',$config);
+				$this->upload->initialize($config);
 
-			if(!$this->upload->do_upload('file')){
-				echo $this->upload->display_errors();
-				return;
-			}
-			//===========================		
+				if(!$this->upload->do_upload('file')){
+					echo $this->upload->display_errors();
+					return;
+				}
+			}else{array_push($data,$this->input->post('division_img'));}
 
 			
 			$sql =	'insert into '.$this->table.' ('.

@@ -167,13 +167,15 @@ class Vip extends CI_Controller {
 	 * edit selected vip
 	 */
 	public function edit(){
+echo 'editing is not good yet ...';		
+return ;
 		$id=false;
 		foreach($this->uri->segment_array() as $key=>$val){
 			if($val=='edit'){
 				$id = $this->uri->segment($key+1);
 				break;
 			}
-			show_error('Invalid link');
+//			show_error('Invalid link');
 		}
 
 		$data = $this->vip_model->get(array('id'=>$id));

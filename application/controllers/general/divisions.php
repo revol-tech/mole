@@ -1,10 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Class to be called when displaying "about us" page ,
-* or any static page for a general web surfer.
+* Class to be called when displaying "divisions" page ,
 */
-class Pages extends MY_MOLE_Controller {
+class Divisions extends MY_MOLE_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -34,7 +33,7 @@ class Pages extends MY_MOLE_Controller {
 		$this->load->model('news_model');
 		$params = array(
 							'id'	=> $data[0]->row_id,
-							'news_type'	=> 6,
+							'news_type'	=> 9,
 							// 'lang' => $this->session->userdata('lang'),
 						);
 
@@ -42,7 +41,7 @@ class Pages extends MY_MOLE_Controller {
 		$page = $this->news_model->get($params);
 
 		//render it
-		$this->render_library->generate_innermain($page[0],'about');
+		$this->render_library->generate_innermain($page[0],'divisions');
 
 
 		$this->template->render();

@@ -145,6 +145,12 @@ class Render_library{
 							
 						</div>';
 				break;
+			case 'divisions' :
+			
+				//display 'divisions' main content
+				$str .= 'in divisions';
+				$str .= print_r($data,true);
+				break;
 			case 'newslist':
 				//display news previews ...
 
