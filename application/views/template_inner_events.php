@@ -44,9 +44,14 @@
 	<div id="inner_container">
 		<div id="topheader">
 			<div class="grid_1 alpha fl"> 
-				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo">
+				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo"
+					class="en"	<?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?> >
 					Government of Nepal Ministry of Labour and Employment
-				</a> 
+				</a>
+				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo_np"
+					class="np" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?> >
+					Government of Nepal Ministry of Labour and Employment
+				</a>				
 			</div>
 			<div class="grid_2 omega fr">
 				<div class="links fr">
@@ -102,6 +107,11 @@
 			</div>
 		</div>
 -->
+
+		<div class="wrap_flag">
+			<img title="Flag Nepal.gif" alt="Nepal_Flag moving" src="<?php echo base_url().IMGPATH?>nepal_flag_animation.gif">
+		</div>	
+
 		<div class="clear"></div>
 	</div>
 	
@@ -164,10 +174,6 @@
 	</div>
 
 	<a href="#" id="top-link">Scroll to top</a> 
-
-	<span style='border:1px solid black;'>
-		unique visited upto now : <?php echo @$counter?>
-	</span>
 
 </body>
 </html>

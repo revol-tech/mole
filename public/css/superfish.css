@@ -150,9 +150,9 @@ background: -o-linear-gradient(top,  #1c50ad 0%,#0e3283 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #1c50ad 0%,#0e3283 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #1c50ad 0%,#0e3283 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c50ad', endColorstr='#0e3283',GradientType=0 ); /* IE6-8 */
-
+text-shadow:0px 0px 0px #FFFFFF;
 	color: #FFF;
-	border-bottom:1px solid #f4f4f4;
+	
 }
 .sf-menu li li li {
 }

@@ -49,14 +49,8 @@ class Files_model extends CI_Model{
 	private function _render_recursive($data,$parent_id){
 		$count = 1;
 
-		$str =	'<script type="text/javascript" src="'.JSPATH.'jquery.nivo.slider.js"></script>';
-		$str.=	'<script type="text/javascript">
-					$(window).load(function() {
-						$("#slider").nivoSlider({pauseTime:10000});
-					});
-				</script>';
 
-		$str .= '<div id="slider" class="nivoSlider">';
+		$str = '<div id="slider" class="nivoSlider">';
 
 		foreach($data as $k=>$v){
 

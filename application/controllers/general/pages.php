@@ -21,7 +21,7 @@ class Pages extends MY_MOLE_Controller {
 			$this->introduction();
 			return;
 		}
-													
+
 		$this->render_library->generate_inner();
 
 		// get the reqd. parameters
@@ -31,18 +31,25 @@ class Pages extends MY_MOLE_Controller {
 													$this->uri->segment(2)
 											)
 										);
-		$this->load->model('news_model');
-		$params = array(
-						'id'		=> $data[0]->row_id,
-						'news_type'	=> 6,
-//						'lang'		=> $this->session->userdata('lang'),
-					);
-		
-		//get thre reqd. contents
-		$page = $this->news_model->get($params);
-		
-		//render it
-		$this->render_library->generate_innermain($page[0],'about');
+//print_r($data);
+		//get data & render if ok
+//		if(count($data)){
+
+			$this->load->model('news_model');
+			$params = array(
+							'id'		=> $this->uri->segment(2),
+							'news_type'	=> 6,
+	//						'lang'		=> $this->session->userdata('lang'),
+						);
+			
+			//get thre reqd. contents
+			$page = $this->news_model->get($params);
+//echo $this->db->last_query();	
+//print_r($params);		
+			//render it
+			$this->render_library->generate_innermain($page[0],'about');
+
+//		}
 
 
 		$this->template->render();

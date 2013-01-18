@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2013 at 09:55 AM
+-- Generation Time: Jan 18, 2013 at 09:13 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(46, 1358211791, '127.0.0.1', 'COGqbo');
+(52, 1358437842, '127.0.0.1', 'Q9eVmE');
 
 -- --------------------------------------------------------
 
@@ -177,6 +177,8 @@ CREATE TABLE IF NOT EXISTS `faqs` (
   `faqs_type_id` int(11) NOT NULL,
   `question` text NOT NULL,
   `answer` mediumtext NOT NULL,
+  `question_np` text NOT NULL,
+  `answer_np` mediumtext NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -185,18 +187,19 @@ CREATE TABLE IF NOT EXISTS `faqs` (
   PRIMARY KEY (`id`),
   KEY `active` (`active`),
   KEY `faqs_type_id` (`faqs_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `faqs`
 --
 
-INSERT INTO `faqs` (`id`, `faqs_type_id`, `question`, `answer`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`) VALUES
-(1, 1, 'Lorem ipsum dolor sit amet?', '&lt;pre&gt;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan\narcu et orci ultricies condimentum sed sed enim. Phasellus sed augue\nnisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla\nlobortis erat tristique. Morbi pulvinar augue in metus euismod id porta\narcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.\nPellentesque varius massa id elit posuere placerat. Integer tempor\ncursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu\npurus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum\ninterdum in, cursus a nunc. Quisque varius libero id ligula congue\neuismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;/pre&gt;\n', 1, '2013-01-01 16:50:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(2, 2, 'Ut pellentesque dolor?', '&lt;pre&gt;\nUt pellentesque dolor ut sem ornare non malesuada nisl pellentesque.\nNulla convallis scelerisque dignissim. Quisque vitae venenatis eros.\nQuisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in\nfelis imperdiet dignissim. Integer lobortis, diam vel ultrices\nfringilla, ipsum magna fermentum felis, in semper lacus neque sit amet\neros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget\nlibero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar\nsapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices\nposuere cubilia Curae; Pellentesque habitant morbi tristique senectus et\nnetus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;/pre&gt;\n', 1, '2013-01-01 16:52:35', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(3, 2, 'In nec faucibus ipsum?', '&lt;pre&gt;\nIn nec faucibus ipsum. Integer vehicula congue sapien non tincidunt.\nPhasellus eget massa ligula, vitae consectetur risus. Cras sed nisi\nlorem. Aliquam erat volutpat. In vulputate sapien eget arcu sagittis\nlacinia. Curabitur et tortor nisi, a aliquet justo. Donec id purus at\ntellus eleifend tempor.\n\nFusce mauris leo, dignissim id ornare sed, gravida in augue. Curabitur\nid quam massa, sit amet fermentum nulla. In a ipsum a elit eleifend\nlobortis at sit amet risus. Quisque eros ligula, imperdiet vitae\ndignissim a, rhoncus in est. Etiam ullamcorper metus eget quam ornare\ntristique vitae non sapien. In accumsan adipiscing lorem, eget faucibus\nleo tempor vel. Ut id mi eget turpis porta pharetra. Mauris elementum,\nquam consectetur hendrerit ultricies, purus velit congue quam, vulputate\nsemper nibh mi quis mi. Etiam condimentum lobortis accumsan. Vestibulum\nfelis erat, mattis vel viverra eget, laoreet quis est. Suspendisse\ncongue pretium semper. Integer viverra tristique velit, in tincidunt\nsapien ultrices id. Morbi fringilla pellentesque leo sit amet congue.\nQuisque eget mi sed sem euismod bibendum id porttitor lorem.&lt;/pre&gt;\n', 1, '2013-01-01 16:53:16', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(4, 2, 'Praesent ac varius dui?', '&lt;pre&gt;\nPraesent ac varius dui. Maecenas in leo libero. Integer malesuada, neque\nnon interdum malesuada, dolor velit viverra nunc, nec suscipit sapien\nmetus vitae libero. Vestibulum eu quam nulla, ut facilisis tellus. Cras\nneque magna, pellentesque non sagittis sed, adipiscing convallis turpis.\nVivamus rhoncus ipsum nec purus convallis consectetur. In pretium\nultrices nisi, ut tincidunt odio porta sit amet. Curabitur vulputate\nquam at ipsum semper ut mollis ante dapibus. Suspendisse a sapien\nturpis, ac convallis mauris.&lt;/pre&gt;\n', 1, '2013-01-01 16:54:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(5, 1, 'In accumsan adipiscing lorem, eget?', '&lt;pre&gt;\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan\narcu et orci ultricies condimentum sed sed enim. Phasellus sed augue\nnisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla\nlobortis erat tristique. Morbi pulvinar augue in metus euismod id porta\narcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim.\nPellentesque varius massa id elit posuere placerat. Integer tempor\ncursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu\npurus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum\ninterdum in, cursus a nunc. Quisque varius libero id ligula congue\neuismod. In consequat ultrices diam, eu gravida tortor suscipit et.\n\nUt pellentesque dolor ut sem ornare non malesuada nisl pellentesque.\nNulla convallis scelerisque dignissim. Quisque vitae venenatis eros.\nQuisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in\nfelis imperdiet dignissim. Integer lobortis, diam vel ultrices\nfringilla, ipsum magna fermentum felis, in semper lacus neque sit amet\neros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget\nlibero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar\nsapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices\nposuere cubilia Curae; Pellentesque habitant morbi tristique senectus et\nnetus et malesuada fames ac turpis egestas. Nullam eget est eros.\n\nIn nec faucibus ipsum. Integer vehicula congue sapien non tincidunt.\nPhasellus eget massa ligula, vitae consectetur risus. Cras sed nisi\nlorem. Aliquam erat volutpat. In vulputate sapien eget arcu sagittis\nlacinia. Curabitur et tortor nisi, a aliquet justo. Donec id purus at\ntellus eleifend tempor.\n\nFusce mauris leo, dignissim id ornare sed, gravida in augue. Curabitur\nid quam massa, sit amet fermentum nulla. In a ipsum a elit eleifend\nlobortis at sit amet risus. Quisque eros ligula, imperdiet vitae\ndignissim a, rhoncus in est. Etiam ullamcorper metus eget quam ornare\ntristique vitae non sapien. In accumsan adipiscing lorem, eget faucibus\nleo tempor vel. Ut id mi eget turpis porta pharetra. Mauris elementum,\nquam consectetur hendrerit ultricies, purus velit congue quam, vulputate\nsemper nibh mi quis mi. Etiam condimentum lobortis accumsan. Vestibulum\nfelis erat, mattis vel viverra eget, laoreet quis est. Suspendisse\ncongue pretium semper. Integer viverra tristique velit, in tincidunt\nsapien ultrices id. Morbi fringilla pellentesque leo sit amet congue.\nQuisque eget mi sed sem euismod bibendum id porttitor lorem.&lt;/pre&gt;\n', 1, '2013-01-01 16:54:45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
+INSERT INTO `faqs` (`id`, `faqs_type_id`, `question`, `answer`, `question_np`, `answer_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`) VALUES
+(1, 1, 'Lorem ipsum dolor sit amet?', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim. Pellentesque varius massa id elit posuere placerat. Integer tempor cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum interdum in, cursus a nunc. Quisque varius libero id ligula congue euismod. In consequat ultrices diam, eu gravida tortor suscipit et.&lt;/p&gt;\n', 'ासग ौरजौेरह ौेर', '<p>\n ारउह दसरह ेर सउदग सदउग सरह सर ेसहसे५</p>\n', 1, '2013-01-01 16:50:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(2, 2, 'Ut pellentesque dolor?', '&lt;p&gt;\r\nUt pellentesque dolor ut sem ornare non malesuada nisl pellentesque.\r\nNulla convallis scelerisque dignissim. Quisque vitae venenatis eros.\r\nQuisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in\r\nfelis imperdiet dignissim. Integer lobortis, diam vel ultrices\r\nfringilla, ipsum magna fermentum felis, in semper lacus neque sit amet\r\neros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget\r\nlibero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar\r\nsapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices\r\nposuere cubilia Curae; Pellentesque habitant morbi tristique senectus et\r\nnetus et malesuada fames ac turpis egestas. Nullam eget est eros.&lt;/p&gt;\r\n', '0', '', 1, '2013-01-01 16:52:35', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(3, 2, 'In nec faucibus ipsum?', '&lt;p&gt;\r\nIn nec faucibus ipsum. Integer vehicula congue sapien non tincidunt.\r\nPhasellus eget massa ligula, vitae consectetur risus. Cras sed nisi\r\nlorem. Aliquam erat volutpat. In vulputate sapien eget arcu sagittis\r\nlacinia. Curabitur et tortor nisi, a aliquet justo. Donec id purus at\r\ntellus eleifend tempor.\r\n\r\nFusce mauris leo, dignissim id ornare sed, gravida in augue. Curabitur\r\nid quam massa, sit amet fermentum nulla. In a ipsum a elit eleifend\r\nlobortis at sit amet risus. Quisque eros ligula, imperdiet vitae\r\ndignissim a, rhoncus in est. Etiam ullamcorper metus eget quam ornare\r\ntristique vitae non sapien. In accumsan adipiscing lorem, eget faucibus\r\nleo tempor vel. Ut id mi eget turpis porta pharetra. Mauris elementum,\r\nquam consectetur hendrerit ultricies, purus velit congue quam, vulputate\r\nsemper nibh mi quis mi. Etiam condimentum lobortis accumsan. Vestibulum\r\nfelis erat, mattis vel viverra eget, laoreet quis est. Suspendisse\r\ncongue pretium semper. Integer viverra tristique velit, in tincidunt\r\nsapien ultrices id. Morbi fringilla pellentesque leo sit amet congue.\r\nQuisque eget mi sed sem euismod bibendum id porttitor lorem.&lt;/p&gt;\r\n', '0', '', 1, '2013-01-01 16:53:16', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(4, 2, 'Praesent ac varius dui?', '&lt;p&gt;\r\nPraesent ac varius dui. Maecenas in leo libero. Integer malesuada, neque\r\nnon interdum malesuada, dolor velit viverra nunc, nec suscipit sapien\r\nmetus vitae libero. Vestibulum eu quam nulla, ut facilisis tellus. Cras\r\nneque magna, pellentesque non sagittis sed, adipiscing convallis turpis.\r\nVivamus rhoncus ipsum nec purus convallis consectetur. In pretium\r\nultrices nisi, ut tincidunt odio porta sit amet. Curabitur vulputate\r\nquam at ipsum semper ut mollis ante dapibus. Suspendisse a sapien\r\nturpis, ac convallis mauris.&lt;/p&gt;\r\n', '0', '', 1, '2013-01-01 16:54:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(5, 1, 'In accumsan adipiscing lorem, eget?', '&lt;p&gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla lobortis erat tristique. Morbi pulvinar augue in metus euismod id porta arcu euismod. Fusce ut risus justo. Vivamus ac fermentum enim. Pellentesque varius massa id elit posuere placerat. Integer tempor cursus lorem vitae gravida. Duis vestibulum euismod accumsan. Duis eu purus mattis arcu feugiat feugiat. Integer augue lorem, accumsan rutrum interdum in, cursus a nunc. Quisque varius libero id ligula congue euismod. In consequat ultrices diam, eu gravida tortor suscipit et. Ut pellentesque dolor ut sem ornare non malesuada nisl pellentesque.&lt;/p&gt;\n&lt;p&gt;\n Nulla convallis scelerisque dignissim. Quisque vitae venenatis eros. Quisque quis mi vitae augue tristique mattis. Vivamus aliquet erat in felis imperdiet dignissim. Integer lobortis, diam vel ultrices fringilla, ipsum magna fermentum felis, in semper lacus neque sit amet eros. Vestibulum purus elit, consectetur eget luctus ut, fringilla eget libero. Fusce tempor molestie mollis. Duis sed erat purus, nec pulvinar sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam eget est eros. In nec faucibus ipsum. Integer vehicula congue sapien non tincidunt. Phasellus eget massa ligula, vitae consectetur risus. Cras sed nisi lorem. Aliquam erat volutpat. In vulputate sapien eget arcu sagittis lacinia.&lt;/p&gt;\n&lt;p&gt;\n Curabitur et tortor nisi, a aliquet justo. Donec id purus at tellus eleifend tempor. Fusce mauris leo, dignissim id ornare sed, gravida in augue. Curabitur id quam massa, sit amet fermentum nulla. In a ipsum a elit eleifend lobortis at sit amet risus. Quisque eros ligula, imperdiet vitae dignissim a, rhoncus in est. Etiam ullamcorper metus eget quam ornare tristique vitae non sapien. In accumsan adipiscing lorem, eget faucibus leo tempor vel. Ut id mi eget turpis porta pharetra. Mauris elementum, quam consectetur hendrerit ultricies, purus velit congue quam, vulputate semper nibh mi quis mi. Etiam condimentum lobortis accumsan. Vestibulum felis erat, mattis vel viverra eget, laoreet quis est. Suspendisse congue pretium semper. Integer viverra tristique velit, in tincidunt sapien ultrices id. Morbi fringilla pellentesque leo sit amet congue. Quisque eget mi sed sem euismod bibendum id porttitor lorem.&lt;/p&gt;\n', '0', '', 1, '2013-01-01 16:54:45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(6, 1, 'xcvb nser srgre ', '&lt;p&gt;\n asdf asdg aweas aw&lt;/p&gt;\n', '0', '', 1, '2013-01-16 08:27:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -208,6 +211,8 @@ CREATE TABLE IF NOT EXISTS `faqs_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(127) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `title_np` varchar(127) NOT NULL,
+  `description_np` varchar(255) NOT NULL,
   `created_by` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_published` timestamp NULL DEFAULT NULL,
@@ -221,12 +226,12 @@ CREATE TABLE IF NOT EXISTS `faqs_type` (
 -- Dumping data for table `faqs_type`
 --
 
-INSERT INTO `faqs_type` (`id`, `title`, `description`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`) VALUES
-(1, 'General', 'General questions   ', 1, '2013-01-01 16:46:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(2, 'Situations', 'About Labour unions', 1, '2013-01-01 16:47:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(3, ' Working Abroad', 'Foreign Employment ', 1, '2013-01-01 16:48:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(4, ' Labour Acts', 'Questions about Acts related to labour and Employment  ', 1, '2013-01-01 16:49:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-(5, ' Safety and Health', 'Smoke free law and employers responsibility ', 1, '2013-01-01 16:49:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
+INSERT INTO `faqs_type` (`id`, `title`, `description`, `title_np`, `description_np`, `created_by`, `date_created`, `date_published`, `date_removed`, `active`) VALUES
+(1, 'General', '  General questions    ', 'सषद ास गासग ४े ह', 'सेर हेरगौर गसदगाेर ासग ा', 1, '2013-01-01 16:46:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(2, 'Situations', '  About Labour unions ', ' हौा ाग४', 'सदग टौरय ासरग ौा ौ४ ाौसतग४', 1, '2013-01-01 16:47:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(3, ' Working Abroad', 'Foreign Employment ', '', '', 1, '2013-01-01 16:48:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(4, ' Labour Acts', 'Questions about Acts related to labour and Employment  ', '', '', 1, '2013-01-01 16:49:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(5, ' Safety and Health', 'Smoke free law and employers responsibility ', '', '', 1, '2013-01-01 16:49:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -302,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Dumping data for table `links`
@@ -345,7 +350,8 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (47, 'pages/qwq', 'news', '51'),
 (48, 'pages/fgyhkoityjuj', 'news', '52'),
 (49, 'employments/employments/vb', 'news', '10'),
-(50, 'employments/shr', 'news', '9');
+(50, 'employments/shr', 'news', '9'),
+(51, 'pages/finince', 'news', '54');
 
 -- --------------------------------------------------------
 
@@ -366,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   UNIQUE KEY `link` (`link`),
   UNIQUE KEY `title` (`title`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `menu`
@@ -397,7 +403,11 @@ INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`
 (27, 'समाचार', '', 'News and Alerts', '', 'pages/dofe-news-and-alerts', 24, 1),
 (28, 'ढि ओ ऐल', '', 'DOL', '', 'pages/dol', 23, 1),
 (29, 'ओ एस् एच पि', '', 'OSHP', '', 'pages/oshp', 23, 1),
-(30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 1);
+(30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 1),
+(31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', 'difivisons', 17, 1),
+(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Sector Management Division', 'about Financial Sector Management Division .......', 'pages/54', 31, 1),
+(33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'difivisons/budget', 31, 1),
+(34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'difivisons/legal', 31, 1);
 
 -- --------------------------------------------------------
 
@@ -444,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358211821, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358437856, 1);
 
 -- --------------------------------------------------------
 
@@ -527,7 +537,7 @@ INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_ty
 (43, 'regwrter', '  sdvasd asdf awef aef  ', 'सद गसदउग ौेर', '  सदग सउग ौग ौरग सग ', 5, 1, '2013-01-09 10:55:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (44, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'ासलदजा लकदजउहा लसकजाउलज लाकज', '  ासकलजउह;ासकदउ ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (45, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'sdfas', '   ासदउासदउ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज&nbsp; स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलक<em>उगह लकज</em>स स हस उ;<strong>सलउजग;सोकस;लउजग </strong>स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज स स हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज</p>\n<p>\n हस उ;सलउजग;सोकस;लउजग स;ोउकगज स;लउजग सल;कग सलकउगह लकज</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358217765.471.png'),
+(52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj&amp;nbsp; paragraph break here ...&lt;/p&gt;\n&lt;p&gt;\n &amp;nbsp;&lt;/p&gt;\n&lt;p&gt;\n &lt;strong&gt;BACKGROUND&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;\n ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n saga</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217765.471.png'),
 (53, 'jy jygf jyg fjyh', '&lt;p&gt;\n lh kj hlkjh lijuhg liug lig kihg kuyhg ku&lt;/p&gt;', 'लकजह लाकसदजह ालकसज गौ', '<p>\n ासग ासदग टौेग सदग ेरह&nbsp; गौटरग सग टेग सग टेरग सरग टौरग सरग ौरगसग े</p>', 4, 1, '2013-01-14 03:35:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217420.817.png');
 
 -- --------------------------------------------------------
@@ -791,7 +801,7 @@ CREATE TABLE IF NOT EXISTS `visited_count` (
   `ip_address` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=296 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=224 ;
 
 --
 -- Dumping data for table `visited_count`
@@ -803,7 +813,8 @@ INSERT INTO `visited_count` (`id`, `timestamp`, `ip_address`) VALUES
 (23, '2013-01-03 15:26:14', '192.168.1.3'),
 (135, '2013-01-05 18:07:42', '192.168.1.2'),
 (144, '2013-01-05 18:09:30', '192.168.1.6'),
-(210, '2013-01-05 20:10:42', '192.168.1.4');
+(210, '2013-01-05 20:10:42', '192.168.1.4'),
+(223, '2013-01-16 17:30:05', '192.168.1.8');
 
 -- --------------------------------------------------------
 

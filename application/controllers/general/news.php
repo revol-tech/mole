@@ -30,7 +30,7 @@ class News extends MY_MOLE_Controller {
 		($this->uri->segment(2))?$params['id']=$this->uri->segment(2):'';
 		
 		$page = $this->news_model->get($params);
-
+echo $this->db->last_query();
 		if ($this->uri->segment(2)){
 			$params['id']=$this->uri->segment(2);
 			$params['link_type'] = 'page';

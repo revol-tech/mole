@@ -582,7 +582,7 @@ class Render_library{
 		$str = '<div class="about en" ';
 		$str.= (($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
 		$str.= '<h1>'.$data[0]->title.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content,100).'</p>';
+		$str.= '<p>'.word_limiter($data[0]->content,50).'</p>';
 		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">read more</a>'; // <--- link not set properly
 		$str.= '</div>';
 	
@@ -590,7 +590,7 @@ class Render_library{
 		$str.= '<div class="about np" ';
 		$str.= (($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
 		$str.= '<h1>'.$data[0]->title_np.'</h1>';
-		$str.= '<p>'.word_limiter($data[0]->content_np,100).'</p>';
+		$str.= '<p>'.word_limiter($data[0]->content_np,50).'</p>';
 		$str.= '<a href="'.$data[0]->link.'" class="btn_red fr">अझै पठ्नहोस्</a>';
 		$str.= '</div>';
 

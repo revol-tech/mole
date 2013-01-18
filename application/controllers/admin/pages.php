@@ -63,6 +63,7 @@ class Pages extends CI_Controller {
 			$item->created_by	= '--';
 			$item->date_published='--';
 			$item->homepage		='--';
+			$item->active		= '--';
 			$item->edit			='--';
 			$item->del			='--';
 
@@ -121,6 +122,7 @@ class Pages extends CI_Controller {
 				$str .=	'<input type="submit" name="active"   value="Activate"/>';
 			}
 			$str .= '</form>';
+			$data[$key]->active = $str;
 
 			//display-hide page on homepage
 			$str = form_open(site_url('admin/pages/homepage/')).//'<form method="post" action='.site_url('admin/pages/homepage').'>'.
@@ -157,7 +159,7 @@ class Pages extends CI_Controller {
 	 * activate/deactivate pages
 	 */
 	public function active(){
-		$id = $this->input->post('notice_id');
+		$id = $this->input->post('pages_id');
 		$active = $this->input->post('activate');
 		$this->pages_model->change_active($id,$active);
 
