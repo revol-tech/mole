@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2013 at 09:13 AM
+-- Generation Time: Jan 18, 2013 at 09:44 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(52, 1358437842, '127.0.0.1', 'Q9eVmE');
+(53, 1358480024, '127.0.0.1', '5ei9h9');
 
 -- --------------------------------------------------------
 
@@ -307,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `links`
@@ -351,7 +351,8 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (48, 'pages/fgyhkoityjuj', 'news', '52'),
 (49, 'employments/employments/vb', 'news', '10'),
 (50, 'employments/shr', 'news', '9'),
-(51, 'pages/finince', 'news', '54');
+(51, 'pages/finince', 'news', '54'),
+(52, 'pages/difivisons/budget', 'news', '54');
 
 -- --------------------------------------------------------
 
@@ -405,7 +406,7 @@ INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`
 (29, 'ओ एस् एच पि', '', 'OSHP', '', 'pages/oshp', 23, 1),
 (30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 1),
 (31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', 'difivisons', 17, 1),
-(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Sector Management Division', 'about Financial Sector Management Division .......', 'pages/54', 31, 1),
+(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Sector Management Division', 'about Financial Sector Management Division .......', 'pages/finince', 31, 1),
 (33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'difivisons/budget', 31, 1),
 (34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'difivisons/legal', 31, 1);
 
@@ -454,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358437856, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1358480035, 1);
 
 -- --------------------------------------------------------
 
@@ -509,7 +510,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `filename` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `news`
@@ -537,8 +538,10 @@ INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_ty
 (43, 'regwrter', '  sdvasd asdf awef aef  ', 'सद गसदउग ौेर', '  सदग सउग ौग ौरग सग ', 5, 1, '2013-01-09 10:55:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (44, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'ासलदजा लकदजउहा लसकजाउलज लाकज', '  ासकलजउह;ासकदउ ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
 (45, 'WSH Regulatory Framework', '  &amp;lt;p&amp;gt;\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan&amp;lt;br /&amp;gt;\n arcu et orci ultricies condimentum sed sed enim. Phasellus sed augue&amp;lt;br /&amp;gt;\n nisi, eu auctor urna. Nunc aliquet tortor in lectus porttitor fringilla&amp;lt;br ', 'sdfas', '   ासदउासदउ', 5, 1, '2013-01-09 14:20:48', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
-(52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj&amp;nbsp; paragraph break here ...&lt;/p&gt;\n&lt;p&gt;\n &amp;nbsp;&lt;/p&gt;\n&lt;p&gt;\n &lt;strong&gt;BACKGROUND&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;\n ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n saga</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217765.471.png'),
-(53, 'jy jygf jyg fjyh', '&lt;p&gt;\n lh kj hlkjh lijuhg liug lig kihg kuyhg ku&lt;/p&gt;', 'लकजह लाकसदजह ालकसज गौ', '<p>\n ासग ासदग टौेग सदग ेरह&nbsp; गौटरग सग टेग सग टेरग सरग टौरग सरग ौरगसग े</p>', 4, 1, '2013-01-14 03:35:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217420.817.png');
+(52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj&amp;nbsp; paragraph break here ...&lt;/p&gt;\n&lt;p&gt;\n &amp;nbsp;&lt;/p&gt;\n&lt;p&gt;\n &lt;strong&gt;BACKGROUND&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;\n ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n saga</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358217765.471.png'),
+(53, 'jy jygf jyg fjyh', '&lt;p&gt;\n lh kj hlkjh lijuhg liug lig kihg kuyhg ku&lt;/p&gt;', 'लकजह लाकसदजह ालकसज गौ', '<p>\n ासग ासदग टौेग सदग ेरह&nbsp; गौटरग सग टेग सग टेरग सरग टौरग सरग ौरगसग े</p>', 4, 1, '2013-01-14 03:35:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217420.817.png'),
+(54, 'las jf;laskdf j;lk', '&lt;p&gt;\n lk; lk j;l k&lt;/p&gt;', '; कदउो; िजाग', '<p>\n ज ;लाक जउ;ालदउ ाौेउ</p>', 6, 1, '2013-01-18 03:34:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358480122.8287.png'),
+(55, 'las jf;laskdf j;lk', '&lt;p&gt;\n lk; lk j;l k&lt;/p&gt;', '; कदउो; िजाग', '<p>\n ज ;लाक जउ;ालदउ ाौेउ</p>', 6, 1, '2013-01-18 03:34:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358480174.6162.png');
 
 -- --------------------------------------------------------
 

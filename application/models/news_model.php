@@ -229,13 +229,13 @@ class News_model extends CI_Model{
 		$res = $this->db->order_by('date_created','desc')->get($this->table);
 		foreach($res->result() as $value){
 			$tmp_link = $this->links_model->get(array('table'=>'news','row_id'=>$value->id));
-print_r($value->content);
+//print_r($value->content);
 			$value->link = isset($tmp_link[0]->link)?$tmp_link[0]->link:'';
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->content = html_entity_decode($value->content,ENT_QUOTES, 'UTF-8');
 			$value->content_np = html_entity_decode($value->content_np,ENT_QUOTES, 'UTF-8');
-print_r($value->content);
-echo '<br>';			
+//print_r($value->content);
+//echo '<br>';			
 		}
 
 

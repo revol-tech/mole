@@ -71,7 +71,7 @@ class Render_library{
 								'>
 								'.$data->title.'
 							</p>
-							<p class="en" '.
+							<p class="np" '.
 								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
 								'>
 								'.$data->title_np.'
