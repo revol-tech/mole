@@ -523,12 +523,14 @@ print_r($data[0]);
 	 */
 	private function _ckeditor_conf(){
 		//Ckeditor's configuration
+		$this->config->load('ckeditor');
+
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'answer',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);
 		//Ckeditor's configuration
@@ -537,7 +539,7 @@ print_r($data[0]);
 			'id' 	=> 	'answer_np',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);
 	}

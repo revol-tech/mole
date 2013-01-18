@@ -32,13 +32,14 @@
 	<a href="<?php echo site_url('admin/vip/upload')?>">add different</a>
 	<br/>
 
+	<!--
 	<label>
 		link :
 		<?php echo site_url('divisions').'/'?>
 		<input type='text' name='link' value='<?php echo @$link?>' />
 	</label>
 	<br/>
-	<input type='hidden' name='linktype' value='pages' />
+	<input type='hidden' name='linktype' value='pages' />-->
 	
 	<label>
 		created on

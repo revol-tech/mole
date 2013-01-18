@@ -148,8 +148,49 @@ class Render_library{
 			case 'divisions' :
 			
 				//display 'divisions' main content
-				$str .= 'in divisions';
-				$str .= print_r($data,true);
+				$str .=	'<div class="about_us fl">
+							<h1 class="en" '.
+								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
+									'>
+								'.$data->title.'
+							 </h1>
+							<h1 class="np" '.
+								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
+									'>
+								'.$data->title_np.'
+							 </h1>
+							<p class="en" '.
+								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
+								'>
+								'.$data->person.'
+							</p>
+							<p class="np" '.
+								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
+								'>
+								'.$data->person_np.'
+							</p>
+							<div class="lower_block fl en" '.
+									(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
+									'>
+								<div class="block_img4 fl">
+									<img src="'.base_url().DOCUMENTS.$data->division_img.'" 
+										alt="'.$data->person.'" title="'.$data->person_post.'"
+										width="150" height="140" />
+								</div>
+								<div class="text_box fr" >'.$data->content.'</div>
+							</div>
+									
+							<div class="lower_block fl np" '.
+									(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
+									'>
+								<div class="block_img4 fl">
+									<img src="'.base_url().DOCUMENTS.$data->division_img.'" 
+										alt="'.$data->person_np.'" title="'.$data->person_post_np.'
+										width="150" height="140" />
+								</div>
+								<div class="text_box fr" >'.$data->content_np.'</div>
+							</div>
+						</div>';
 				break;
 			case 'newslist':
 				//display news previews ...

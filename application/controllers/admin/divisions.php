@@ -224,9 +224,9 @@ class Divisions extends CI_Controller {
 //array_push($this->data,$this->data[0]);
 //array_push($this->data,(array)$this->data[0]);
 //array_merge($this->data[0],$this->data);
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
+//echo '<pre>';
+//print_r($this->data);
+//echo '</pre>';
 
 
 		//display
@@ -291,6 +291,7 @@ echo '</pre>';
 		$data[0]->person 		= $tmp[0]->title;
 		$data[0]->person_post 	= $tmp[0]->description;
 		$data[0]->filename 		= $tmp[0]->timestamp;
+		$data[0]->link 			= 'divisions/'.$data[0]->id;
 
 		if(count($data)!=1){
 			show_404();
@@ -359,13 +360,16 @@ echo '</pre>';
 	 * ckEditor's configurations.
 	 */
 	private function _ckeditor_conf(){
+		
 		//Ckeditor's configuration
+		$this->config->load('ckeditor');
+
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);
 		$this->data['ckeditor2'] = array(
@@ -373,7 +377,7 @@ echo '</pre>';
 			'id' 	=> 	'content_np',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);
 	}

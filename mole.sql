@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2013 at 09:44 AM
+-- Generation Time: Jan 18, 2013 at 04:52 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -307,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   UNIQUE KEY `link` (`link`),
   KEY `table` (`table`),
   KEY `row_id` (`row_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `links`
@@ -352,7 +352,10 @@ INSERT INTO `links` (`id`, `link`, `table`, `row_id`) VALUES
 (49, 'employments/employments/vb', 'news', '10'),
 (50, 'employments/shr', 'news', '9'),
 (51, 'pages/finince', 'news', '54'),
-(52, 'pages/difivisons/budget', 'news', '54');
+(52, 'pages/difivisons/budget', 'news', '54'),
+(54, 'pages/aaa', 'news', '56'),
+(55, 'pages/dddddd', 'news', '57'),
+(56, 'pages/eeeeeee', 'news', '58');
 
 -- --------------------------------------------------------
 
@@ -373,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   UNIQUE KEY `link` (`link`),
   UNIQUE KEY `title` (`title`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `menu`
@@ -405,10 +408,11 @@ INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`
 (28, 'ढि ओ ऐल', '', 'DOL', '', 'pages/dol', 23, 1),
 (29, 'ओ एस् एच पि', '', 'OSHP', '', 'pages/oshp', 23, 1),
 (30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 1),
-(31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', 'difivisons', 17, 1),
-(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Sector Management Division', 'about Financial Sector Management Division .......', 'pages/finince', 31, 1),
-(33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'difivisons/budget', 31, 1),
-(34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'difivisons/legal', 31, 1);
+(31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', 'divisions', 17, 1),
+(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Sector Management Division', 'about Financial Sector Management Division .......', 'divisions/finince', 31, 1),
+(33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'divisions/budget', 31, 1),
+(34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'divisions/legal', 31, 1),
+(35, 'division test in nepali', 'division test comments in nepalie .....', 'division test', 'division test comments .........', 'divisions/eeeeeee', 31, 1);
 
 -- --------------------------------------------------------
 
@@ -510,7 +514,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `filename` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `news_type` (`news_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `news`
@@ -541,7 +545,10 @@ INSERT INTO `news` (`id`, `title`, `content`, `title_np`, `content_np`, `news_ty
 (52, 'asg hasfg asrg ag asg a', '&lt;p&gt;\n sf sf g;s&lt;strong&gt;lk gj;lkfgj ;oaigj &lt;/strong&gt;s;lfkg ogk&lt;em&gt; js;ofiut ;ig s;of&lt;/em&gt;gj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj&amp;nbsp; paragraph break here ...&lt;/p&gt;\n&lt;p&gt;\n &amp;nbsp;&lt;/p&gt;\n&lt;p&gt;\n &lt;strong&gt;BACKGROUND&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;\n ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi ht sf sf g;slk gj;lkfgj ;oaigj s;lfkg ogk js;ofiut ;ig s;ofgj ;oi jg;soi h&lt;/p&gt;', 'हबब हसउ हसउह सत हस', '<p>\n saga</p>', 6, 1, '2013-01-13 13:51:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1, 'en', '1358217765.471.png'),
 (53, 'jy jygf jyg fjyh', '&lt;p&gt;\n lh kj hlkjh lijuhg liug lig kihg kuyhg ku&lt;/p&gt;', 'लकजह लाकसदजह ालकसज गौ', '<p>\n ासग ासदग टौेग सदग ेरह&nbsp; गौटरग सग टेग सग टेरग सरग टौरग सरग ौरगसग े</p>', 4, 1, '2013-01-14 03:35:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358217420.817.png'),
 (54, 'las jf;laskdf j;lk', '&lt;p&gt;\n lk; lk j;l k&lt;/p&gt;', '; कदउो; िजाग', '<p>\n ज ;लाक जउ;ालदउ ाौेउ</p>', 6, 1, '2013-01-18 03:34:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358480122.8287.png'),
-(55, 'las jf;laskdf j;lk', '&lt;p&gt;\n lk; lk j;l k&lt;/p&gt;', '; कदउो; िजाग', '<p>\n ज ;लाक जउ;ालदउ ाौेउ</p>', 6, 1, '2013-01-18 03:34:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358480174.6162.png');
+(55, 'las jf;laskdf j;lk', '&lt;p&gt;\n lk; lk j;l k&lt;/p&gt;', '; कदउो; िजाग', '<p>\n ज ;लाक जउ;ालदउ ाौेउ</p>', 6, 1, '2013-01-18 03:34:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '1358480174.6162.png'),
+(56, 'as;ldkj ;lk', '&lt;p&gt;\n &amp;nbsp;jpoi po ipo&lt;/p&gt;', 'l; kj;lkj o', '<p>\n poi hpoiuhpiu hi</p>', 9, 1, '2013-01-18 06:30:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', NULL),
+(57, 'dddddd', '&lt;p&gt;\n dddddd&lt;/p&gt;', 'ddddddnpnp', '<p>\r\n ddddddnpnp</p>', 9, 1, '2013-01-18 06:30:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '3'),
+(58, 'div title', '&lt;p&gt;\n eeeeeeeeeeeeeeeeeeee&lt;/p&gt;', 'div title nepali', '<p>\n eeeeeeeeeeeeeeeeeee nepali</p>', 9, 1, '2013-01-18 07:57:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0, 'en', '4');
 
 -- --------------------------------------------------------
 
@@ -782,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `vip` (
   PRIMARY KEY (`id`),
   KEY `active` (`active`),
   KEY `timestamp` (`timestamp`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `vip`
@@ -790,7 +797,8 @@ CREATE TABLE IF NOT EXISTS `vip` (
 
 INSERT INTO `vip` (`id`, `filename`, `title`, `description`, `title_np`, `description_np`, `timestamp`, `created_by`, `date_created`, `date_published`, `file_type`, `active`) VALUES
 (3, 'Honorable_Minister_Posta_Bahadur_Bogati.jpg', 'Posta Bahadur Bogati', 'Honorable Minister', 'पोष्ट बहादुर बोगटी', 'मन्त्री', '1357231226.2148.jpg', 0, '2013-01-03 16:39:14', NULL, '', 1),
-(4, 'secretary_Somlal_Subedi.jpg', 'Somlal Subedi', 'Secretry', 'सोम लाल  सुबेदि', 'सचिव', '1357231267.7461.jpg', 0, '2013-01-03 16:40:31', NULL, '', 1);
+(4, 'secretary_Somlal_Subedi.jpg', 'Somlal Subedi', 'Secretry', 'सोम लाल  सुबेदि', 'सचिव', '1357231267.7461.jpg', 0, '2013-01-03 16:40:31', NULL, '', 1),
+(5, 'index.png', 'lkjhl kj', 'kj hlkjh lkj hl', 'ुयिुय', 'जहगदुत', '1358488243.2613.png', 0, '2013-01-18 05:50:20', NULL, '', 0);
 
 -- --------------------------------------------------------
 

@@ -300,12 +300,14 @@ class Health extends CI_Controller {
 	 */
 	private function _ckeditor_conf(){
 		//Ckeditor's configuration
+		$this->config->load('ckeditor');
+
 		$this->data['ckeditor'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'content',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);
 		$this->data['ckeditor2'] = array(
@@ -313,7 +315,7 @@ class Health extends CI_Controller {
 			'id' 	=> 	'content_np',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
-							'toolbar'	=>	'Basic',
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
 						),
 		);		
 	}

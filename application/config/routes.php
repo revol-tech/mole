@@ -50,6 +50,9 @@ $route = array(
 				'contacts/(:any)'		=> 'general/contacts',
 				'contacts'				=> 'general/contacts',
 
+				'divisions/(:any)'		=> 'general/divisions',
+				'divisions'				=> 'general/divisions',
+
 				'employments/(:any)'	=> 'general/employments',
 				'employments'			=> 'general/employments',
 				
