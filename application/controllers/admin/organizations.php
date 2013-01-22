@@ -63,6 +63,7 @@ class Organizations extends CI_Controller {
 			$item->date_created	='--';
 			$item->created_by	= '--';
 			$item->date_published='--';
+			$item->active		='--';
 			$item->edit			='--';
 			$item->del			='--';
 

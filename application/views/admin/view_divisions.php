@@ -6,7 +6,7 @@
 		edit
 	</a>
 	<br/>
-	<?php echo form_open(site_url('admin/divisons/del/'))?>
+	<?php echo form_open(site_url('admin/divisions/del/'))?>
 		<input type="hidden" name="divisions_id" value="<?php echo $id?>"/>
 		<input type="submit" name="del" value="Delete"/>
 	</form>

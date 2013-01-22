@@ -57,13 +57,6 @@ class Files_model extends CI_Model{
 			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' alt="'.$v->title.'" title="#htmlcaption'.$count.'"';
-			$str.=' class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"');
-			$str.=' />';
-
-			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
-			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
-			$str.=' alt="'.$v->title_np.'" title="#htmlcaption'.$count.'"';
-			$str.=' class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"');
 			$str.=' />';
 
 			$count++;
@@ -77,7 +70,6 @@ class Files_model extends CI_Model{
 			$str.='<div id="htmlcaption'.$count.'" class="nivo-html-caption">';
 			$str.= $v->description;
 			$str.='</div>';
-
 			$count++;
 		}
 

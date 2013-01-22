@@ -201,7 +201,7 @@ class Notices extends CI_Controller {
 
 		////display that notices
 		//$this->create();\
-		$this->index();
+		redirect('admin/notices');
 	}
 
 

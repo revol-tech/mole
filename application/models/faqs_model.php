@@ -193,7 +193,7 @@ class Faqs_model extends CI_Model{
 	public function save_type($type=1){		
 		$data = array(
 					'title'			=> $this->input->post('title'),
-					'description'	=> htmlentities($this->input->post('description')),
+					'description'	=> $this->input->post('description'),
 					'title_np'		=> $this->input->post('title_np'),
 					'description_np'=> $this->input->post('description_np'),
 					'created_by'	=> $this->session->userdata('user_id'),
@@ -201,7 +201,7 @@ class Faqs_model extends CI_Model{
 					'date_published'=> $this->input->post('date_published'),
 					'date_removed'	=> $this->input->post('date_removed')
 				);
-//print_r($data);
+//print_r($data);die;
 		//update existing faqs type
 		if(($this->input->post('id'))){
 			$data['id'] = $this->input->post('id');
@@ -229,7 +229,7 @@ class Faqs_model extends CI_Model{
 						'title' 		=> $data['title'],
 						'description'	=> $data['description'],
 						'title_np'		=> $this->input->post('title_np'),
-						'description_np'=> htmlentities($this->input->post('description_np')),
+						'description_np'=> $this->input->post('description_np'),
 						'date_published' => $data['date_published'],
 						'date_removed' 	=> $data['date_removed']
 					);

@@ -57,14 +57,16 @@ class Render_library{
 							<h1 class="en" '.
 								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
 									'>
-								<strong class="spot"> Welome to </strong>
-								 Ministry of Labour and Employment
+								<!--<strong class="spot"> Welome to </strong>-->
+								<span> Welome to </span>
+								Ministry of Labour and Employment
 							 </h1>
 							<h1 class="np" '.
 								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
 									'>
-								<strong class="spot">ास ा ा </strong>
-								 सउ हसउ हसउहस सउग सस तस
+								<!--<strong class="spot">स्वगतम् </strong>-->
+								<span>स्वागतम् </span>
+								 श्रम तथा रोजगार मन्त्रालयमा 
 							 </h1>
 							<p class="en" '.
 								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
@@ -390,22 +392,22 @@ class Render_library{
 							<ul>';
 				foreach($data as $key=>$val){
 					$str .=	'<li style="float:none;">
-								<a 
+								<div 
 									'.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'
 									title="'.$val->description.'" class="en">
 									<h3>'.$val->title.'</h3>
 									<span class="total_questions">
 										( Total '.count($val->questions).' Questions )
 									</span>
-								</a>
-								<a 
+								</div>
+								<div 
 									'.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'
 									title="'.$val->description_np.'" class="np">
 									<h3>'.$val->title_np.'</h3>
 									<span class="total_questions">
 										( जम्मा प्रश्न - '.count($val->questions).' )
 									</span>
-								</a>
+								</div>
 								
 								<br/>'; 
 					if(($val->questions)){
@@ -439,7 +441,8 @@ class Render_library{
 
 				foreach($data as $key=>$val){
 					$str .=	'<div class="item1 fl">
-								<h3>'.$val->title.'</h3>
+								<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->title.'</h3>
+								<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.$val->title.'</h3>
 								<div class="articleinfo fl">
 									<span class="date-posted fl">'.$val->date_published.'</span>'.
 									//'<span class="date-modified fl"> Last Updated on '.$val->date_modified.'</span>'.
@@ -447,9 +450,13 @@ class Render_library{
 									<a class="print fr" href="#"></a>
 								</div>
 								<div class="item1_content fl">
-									<p>
+									<p class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 										'.word_limiter(strip_tags($val->content),20).'
 										<a class="more" href="'.site_url('health/'.$val->id).'">more</a> 
+									</p>
+									<p class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+										'.word_limiter(strip_tags($val->content),20).'
+										<a class="more" href="'.site_url('health/'.$val->id).'">अझै पढ्नुहोस्</a> 
 									</p>
 								</div>
 							</div>';
@@ -460,15 +467,23 @@ class Render_library{
 				//display full single news article
 
 				$str .=	'<div class="item1 fl">
-							<h3>'.$data[0]->title.'</h3>
+							<h3 class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$data[0]->title.
+							'</h3>
+							<h3 class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								$data[0]->title_np.
+							'</h3>
 							<div class="articleinfo fl">
 								<span class="date-posted fl">'.$data[0]->date_published.'</span>'.
 								//'<span class="date-modified fl"> Last Updated on '.$data[0]->date_modified.'</span>'.
 								'<span class="author fl">'.$data[0]->created_by.'</span>
 								<a class="print fr" href="#"></a>
 							</div>
-							<div class="item1_content fl">
+							<div class="item1_content fl en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
 								'.$data[0]->content.'
+							</div>
+							<div class="item1_content fl np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+								'.$data[0]->content_np.'
 							</div>
 						</div>';
 				break;
@@ -793,17 +808,29 @@ class Render_library{
 			if($v->parent_id==$parent_id){
 
 				$str.='<li>';
-				//english
-				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments.'" class="en" '.
-						(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
-				$str.=$v->title;
-				$str.='</a>';
-				//nepali
-				$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments_np.'" class="np" '.
-						(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
-				$str.=$v->title_np;
-				$str.='</a>';
-
+				if(($v->link==null)||($v->link=='')||($v->link=='#')){
+					//english
+					$str.='	<a title="'.$v->comments.'" class="en" '.
+							(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
+					$str.=$v->title;
+					$str.='</a>';
+					//nepali
+					$str.='	<a title="'.$v->comments_np.'" class="np" '.
+							(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+					$str.=$v->title_np;
+					$str.='</a>';
+				}else{
+					//english
+					$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments.'" class="en" '.
+							(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').' >';
+					$str.=$v->title;
+					$str.='</a>';
+					//nepali
+					$str.='	<a href="'.site_url($v->link).'" title="'.$v->comments_np.'" class="np" '.
+							(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').' >';
+					$str.=$v->title_np;
+					$str.='</a>';
+				}
 				unset($data[$k]);
 
 				$str .= $this->_generate_menu_recursive($data,$v->id);
@@ -869,6 +896,7 @@ class Render_library{
 		$this->ci->template->add_js(JSPATH.'jquery.superfish.js');
 		$this->ci->template->add_js(JSPATH.'jquery.supersubs.js');
 		$this->ci->template->add_js(JSPATH.'jquery.totop.js');
+		$this->ci->template->add_js(JSPATH.'jquery.jcarousel.min.js');
 		$this->ci->template->add_js(JSPATH.'functions.js?'.base_url());
 	}
 }

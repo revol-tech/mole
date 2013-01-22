@@ -6,7 +6,7 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta charset="UTF-8">
-	<title><?php echo $title?></title>
+	<title id="main_title"><?php echo (($this->session->userdata('lang')=='en')?$title:$title_np)?></title>
 
 	<!-- CSS Start //-->
 	<link rel="shortcut icon" href="<?php echo CSSPATH?>images/favicon.ico" type="image/x-icon"/>
@@ -29,7 +29,16 @@
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.superfish.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.totop.js"></script>
+	<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
+	<script type="text/javascript" src="<?php echo JSPATH?>jquery.jcarousel.min.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>functions.js?<?php echo base_url()?>"></script>
+
+	<script type="text/javascript">
+	$(function(){
+		//homepage image slider
+		$("#slider").nivoSlider({pauseTime:1000000000});//return back to normal .......
+	});
+	</script>
 </head>
 
 <body>
@@ -63,16 +72,15 @@
 	<!-- Contain starts Here -->
 	<div id="container">
 		<div class="wrap_flag"></div>		
-		
 		<div id="topheader">
 			<div class="grid_1 alpha fl">
 				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo"
 					class="en"	<?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?> >
 					Government of Nepal Ministry of Labour and Employment
-				</a>
-				<a href="<?php echo base_url()?>" title="Government of Nepal Ministry of Labour and Employment" id="logo_np"
+				</a> 
+				<a href="<?php echo base_url()?>" title="नेपाल सरकार श्रम तथा रोजगार मन्त्रालय" id="logo_np"
 					class="np" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?> >
-					Government of Nepal Ministry of Labour and Employment
+					नेपाल सरकार श्रम तथा रोजगार मन्त्रालय
 				</a>				
 			</div>
 
@@ -128,10 +136,11 @@
 							<a class='en' href="#tab3" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Activities Photos</a>
 							<a class='np' href="#tab3" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>तस्विर</a>
 						</li>
-						<li>
+<!--					<li>
 							<a class='en' href="#tab2" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Health and Safety</a>
 							<a class='np' href="#tab2" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>स्वास्थ</a>
 						</li>
+-->						
 						<li>
 							<a class='en' href="#tab1" <?php echo (($this->session->userdata('lang')=='en')?'':'style="display:none;"')?>>Press Release</a>
 							<a class='np' href="#tab1" <?php echo (($this->session->userdata('lang')=='np')?'':'style="display:none;"')?>>प्रेस</a>
@@ -199,14 +208,6 @@
 	</div>
 		
 	<a href="#" id="top-link">Scroll to top</a>
-
-
-	<script type="text/javascript" src="<?php echo base_url().JSPATH?>jquery.nivo.slider.js"></script>
-	<script type="text/javascript">
-		$(window).load(function() {
-			$("#slider").nivoSlider({pauseTime:10000});
-		});
-	</script>
 
 </body>
 </html>

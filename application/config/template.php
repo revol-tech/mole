@@ -60,6 +60,7 @@ $template['default']['template'] = 'template.php';
 
 $template['default']['regions'] = array(
 		'title'	 	=> array('content'=>array('Ministry of Labour and Employment')),
+		'title_np' 	=> array('content'=>array('श्रम तथा रोजगार मन्त्रालय')),
 		'menu'	 	=> array('content'=>array(
 											'<div class="home fl">
 												<a href="'.base_url().'"></a>

@@ -55,11 +55,11 @@ class Pages_loader extends MY_MOLE_Controller {
 		$this->template->write('events',$events);
 
 
-		//health
-		$this->load->model('news_model');
-		$params = array('news_type'=>5,'active'=>1);
-		$health = $this->news_model->render($params);
-		$this->template->write('health',$health);
+//		//health
+//		$this->load->model('news_model');
+//		$params = array('news_type'=>5,'active'=>1);
+//		$health = $this->news_model->render($params);
+//		$this->template->write('health',$health);
 
 		//press
 		$this->load->model('news_model');

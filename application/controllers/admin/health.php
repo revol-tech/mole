@@ -146,6 +146,7 @@ class Health extends CI_Controller {
 		//generate WYSIWYG editor
 		$this->_ckeditor_conf();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
+		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
 		//generate username, current date if creating nu health [not editing]
 		if(!isset($this->data['date_created'])){
@@ -202,10 +203,10 @@ class Health extends CI_Controller {
 
 		//retrive that health
 		$this->get(array('id'=> $this->data['id']));
-
+/*
 		$this->data['link'] = explode('/',$this->data['link']);
 		$this->data['link'] = $this->data['link'][1];
-
+*/
 		////display that health
 		//$this->create();\
 		redirect('admin/health');
@@ -232,8 +233,9 @@ class Health extends CI_Controller {
 		if(count($data)!=1){
 			show_404();
 		}
-
-//print_r($data[0]);
+	
+		$data[0]->link = 'health/'.$data[0]->id;
+print_r($data[0]);
 
 		//display
 		$this->load->view('templates/admin_header');
@@ -260,9 +262,9 @@ class Health extends CI_Controller {
 			show_404();
 		}
 		
-		$this->data = (array)$data[0];
-		$this->data['link'] = explode('/',$this->data['link']);
-		$this->data['link'] = $this->data['link'][1];
+//		$this->data = (array)$data[0];
+//		$this->data['link'] = explode('/',$this->data['link']);
+//		$this->data['link'] = $this->data['link'][1];
 
 		$this->data = (array)$data[0];
 		$this->create();

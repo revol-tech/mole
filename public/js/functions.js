@@ -15,6 +15,7 @@ $(function () {
 		$('.np').show();
 		$('.en').hide();
 		$(this).addClass('active');
+		$('#main_title').text('श्रम तथा रोजगार मन्त्रालय');//change title to nepali
 		$('.english').removeClass('active');
 		$.get(url+"np");
 	})
@@ -25,6 +26,7 @@ $(function () {
 		$('.en').show();
 		$('.np').hide();
 		$(this).addClass('active');
+		$('#main_title').text('Ministry of Labour and Employment');//change title to english
 		$('.nepal').removeClass('active');
 		$.get(url+"en");
 	})
@@ -108,9 +110,6 @@ $('.acc_trigger').click(function(e){
 		$(this).toggleClass("active").next().slideToggle("slow");
 		return false; //Prevent the browser jump to the link anchor
 	});
-
-
-
 
 })// end of window load 
 

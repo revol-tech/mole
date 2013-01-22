@@ -32,7 +32,7 @@
 	<tr>
 		<td><a href='<?php echo site_url('admin/gallery/list_imgs')?>'>Images</a></td>
 		<td><a href='<?php echo site_url('admin/menu')?>'>Menu</a></td>
-		<td><a href='<?php echo site_url('admin/networks')?>'>Networks</a></td>
+		<td><!--<a href='<?php echo site_url('admin/networks')?>'>Networks</a>--></td>
 		<td><a href='<?php echo site_url('admin/news')?>'>News</a></td>	
 		<td><a href='<?php echo site_url('admin/notices')?>'>Notices</a></td>
 	</tr>

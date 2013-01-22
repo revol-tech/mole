@@ -27,7 +27,7 @@
 
 	description :<br/>
 	<hr/>
-	<?php echo $description_np?>
+	<?php echo $description?>
 	<br/>
 	<hr/>
 

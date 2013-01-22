@@ -411,7 +411,7 @@ print_r($data[0]);
 
 	public function create_type(){
 		//generate WYSIWYG editor
-		$this->_ckeditor_conf();
+		$this->_ckeditor_conf2();
 		$this->data['generated_editor'] = display_ckeditor($this->data['ckeditor']);
 		$this->data['generated_editor2'] = display_ckeditor($this->data['ckeditor2']);
 
@@ -428,13 +428,6 @@ print_r($data[0]);
 //			$this->data['created_by'] = $this->ion_auth->get_user($this->data['created_by'])->username;
 		}
 
-//print_r($this->data[0]);
-//array_push($this->data,$this->data[0]);
-//array_push($this->data,(array)$this->data[0]);
-//array_merge($this->data[0],$this->data);
-//echo '<pre>';
-//print_r($this->data);
-//echo '</pre>';
 		//display
 		$this->load->view('templates/admin_header');
 		$this->load->view('admin/index.php');
@@ -448,13 +441,15 @@ print_r($data[0]);
 	public function save_type(){	
 		//save the faqs & return the id of that faqs
 		$this->data['date_created'] = $this->session->userdata('date_created');
+
 		$this->data['id'] = $this->faqs_model->save_type();
-//print_r($this->data['id']);die;
+
 		//retrive that faqs
 		$this->get_type(array('id'=> $this->data['id']));
 
-		//display that faqs
-		$this->create_type();
+		////display that faqs
+		//$this->create_type();
+		redirect('admin/faqs/faqs_type');
 	}
 	
 	public function view_type(){
@@ -537,6 +532,28 @@ print_r($data[0]);
 		$this->data['ckeditor2'] = array(
 			//ID of the textarea that will be replaced
 			'id' 	=> 	'answer_np',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
+						),
+		);
+	}
+	private function _ckeditor_conf2(){
+		//Ckeditor's configuration
+		$this->config->load('ckeditor');
+
+		$this->data['ckeditor'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'description',
+			'path'	=>	CKEDITOR,
+			'config'=>	array(
+							'toolbar' 	=> 	$this->config->item('ck_toolbar'),
+						),
+		);
+		//Ckeditor's configuration
+		$this->data['ckeditor2'] = array(
+			//ID of the textarea that will be replaced
+			'id' 	=> 	'description_np',
 			'path'	=>	CKEDITOR,
 			'config'=>	array(
 							'toolbar' 	=> 	$this->config->item('ck_toolbar'),

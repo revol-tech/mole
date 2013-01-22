@@ -150,23 +150,32 @@ Array
 
 		$str =	'<div class="grid_7 social border_rt_gray border_lt_white en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 				'	<h3><span>Network</span> with us</h3>'.
-				'	<p>Connect with us via the social networks... </p><ul>';
-
+//				'	<p>Connect with us via the social networks... </p><ul>';
+				'	<p>Connect with us via FaceBook and Twitter.</p><ul>'; 
+/*
 		foreach($data as $key=>$val){
 			$str .= '<li><a href="'.$val->link.'" title="'.$val->description.
 						'">'.$val->title.'</a></li>';
 		}
-
+*/
+		$str .='<li class="facebook"><a href="http://facebook.com">Like us on Facebook</a></li>
+				<li class="twitter"><a href="http://twitter.com">Follow us on Twitter</a></li>';
+		  
 		$str .= '</ul></div>';
 
 		$str .=	'<div class="grid_7 social border_rt_gray border_lt_white np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
 				'	<h3><span>हामीसँग</span> कुरा गर्नुहोस्</h3>'.
-				'	<p>सोसल नेटवर्कबाट हामीसंग भेट्नुहोस् ... </p><ul>';
-
+//				'	<p>सोसल नेटवर्कबाट हामीसंग भेट्नुहोस् ... </p><ul>';
+				'	<p>फेसबुक तथा ट्विटरमा हामीलाई भेट्नुहोस् ... </p><ul>';
+/*
 		foreach($data as $key=>$val){
 			$str .= '<li><a href="'.$val->link.'" title="'.$val->description_np.
 						'">'.$val->title_np.'</a></li>';
 		}
+*/
+		$str .='<li class="facebook"><a href="http://facebook.com">फेसबुकमा हामीलाई हेर्नुहोस्</a></li>
+				<li class="twitter"><a href="http://twitter.com">ट्विटरमा हामीसंगै जानुहोस्</a></li>';
+		  
 
 		$str .= '</ul></div>';
 		return $str;

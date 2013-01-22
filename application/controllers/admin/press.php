@@ -55,15 +55,16 @@ class Press extends CI_Controller {
 //print_r($data);
 		//if there are no polls at present ...
 		if($config['total_rows']==0){
-			$item->id			='--';
-			$item->title		='--';
-			$item->title_link	='--';
-			$item->date_created	='--';
-			$item->press_type	='--';
+			$item->id			= '--';
+			$item->title		= '--';
+			$item->title_link	= '--';
+			$item->date_created	= '--';
+			$item->press_type	= '--';
 			$item->created_by	= '--';
 			$item->date_published='--';
-			$item->edit			='--';
-			$item->del			='--';
+			$item->active		= '--';
+			$item->edit			= '--';
+			$item->del			= '--';
 
 			$data['items'] = $item;
 			return array('data'=>array($item));

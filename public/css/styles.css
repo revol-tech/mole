@@ -96,6 +96,7 @@ h6 {
 a {
 	color: #1864E7;
 	text-decoration: none;
+	cursor:pointer;
 }
 a:hover {
 	color: #555555;
@@ -1471,4 +1472,10 @@ float:left;
 	
 	
 	
-.question{}
+.question:hover{
+	color:#D01A13;
+}
+.question {
+    position: absolute;
+    width: auto !important;
+}

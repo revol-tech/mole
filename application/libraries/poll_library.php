@@ -248,8 +248,12 @@ class Poll_library{
 			$value->graph .= '</div>'			;
 
 			//generate & disp. js graph
-			$value->graph .= '<br/><div class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'><span>Results :</span></div>';
-			$value->graph .= '<br/><div class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'><span>नतिजा :</span></div>';
+			$value->graph .= '<br/><div class="en" '.(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+									<span>Results upto now :</span>
+							  </div>';
+			$value->graph .= '<br/><div class="np" '.(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+									<span>हाल सम्मको नतिजा :</span>
+							  </div>';
 			$value->graph .= '<div id="chart" style="height:200px;width:70%;left:50%;margin-Left:-25%;"></div>';
 		}
 		return $items;

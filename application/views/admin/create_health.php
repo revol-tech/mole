@@ -27,6 +27,8 @@
 	</label>
 	<br/>
 
+	<input type='hidden' name='link' value='' />
+<!--
 	<label>
 		link :
 		<?php echo site_url('health').'/'?>
@@ -34,7 +36,7 @@
 	</label>
 	<br/>
 	<input type='hidden' name='linktype' value='acts' />
-
+-->
 	<label>
 		created on
 		<input type='text' name='date_created' disabled='disabled' value='<?php echo $date_created?>'/>
@@ -60,6 +62,7 @@
 	<input type='submit' name='submit' value='save' />
 </form>
 
-<?php //echo $generated_editor ?>
+<?php echo $generated_editor ?>
+<?php echo $generated_editor2 ?>
 
 <div id='preview'></div>
