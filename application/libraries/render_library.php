@@ -57,26 +57,24 @@ class Render_library{
 							<h1 class="en" '.
 								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
 									'>
-								<!--<strong class="spot"> Welome to </strong>-->
-								<span> Welome to </span>
+								<span> Welcome to </span>
 								Ministry of Labour and Employment
 							 </h1>
 							<h1 class="np" '.
 								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
 									'>
-								<!--<strong class="spot">स्वगतम् </strong>-->
 								<span>स्वागतम् </span>
 								 श्रम तथा रोजगार मन्त्रालयमा 
 							 </h1>
 							<p class="en" '.
 								(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
 								'>
-								'.$data->title.'
+								<strong class="spot">'.$data->title.'</strong>
 							</p>
 							<p class="np" '.
 								(($this->ci->session->userdata('lang')=='np')?'':'style="display:none;"').
 								'>
-								'.$data->title_np.'
+								<strong class="spot">'.$data->title_np.'</strong>
 							</p>
 							<div class="lower_block fl en" '.
 									(($this->ci->session->userdata('lang')=='en')?'':'style="display:none;"').
@@ -896,7 +894,7 @@ class Render_library{
 		$this->ci->template->add_js(JSPATH.'jquery.superfish.js');
 		$this->ci->template->add_js(JSPATH.'jquery.supersubs.js');
 		$this->ci->template->add_js(JSPATH.'jquery.totop.js');
-		$this->ci->template->add_js(JSPATH.'jquery.jcarousel.min.js');
+		//$this->ci->template->add_js(JSPATH.'jquery.jcarousel.min.js');
 		$this->ci->template->add_js(JSPATH.'functions.js?'.base_url());
 	}
 }

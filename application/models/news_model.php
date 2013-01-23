@@ -511,7 +511,7 @@ private function _render_events($data){
 		
 		$str ='';
 //		if(!isset($config['jcarousel'])){
-			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
+//			$str .=	'<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
 //			$this->config->set_item('jcarousel',true);
 //		}
 		
@@ -582,146 +582,119 @@ private function _render_events($data){
 //echo $str;die;		
 		return $str;
 	}
-        private function _render_notices($data,$link_type){
-                $count = count($data);
-                if($count==0){
-                        return '';
-                }
+	private function _render_notices($data,$link_type){
+		$count = count($data);
+		if($count==0){
+			return '';
+		}
 
-                $str ='';
+		$str ='';
 
-                if($link_type=='about'){
-                        $str .= '<div class="item3 fl">'.
-                                                '<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
-                                                        <span>Latest</span> Notices</h2>'.
-                                                '<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
-                                                        <span>������������������</span> ������������������</h2>'.
-                                                '<div id="accordion">';
-                                        
-                        foreach($data as $key=>$value){
+		if($link_type=='about'){
+			$str .= '<div class="item3 fl">'.
+									'<h2 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
+											<span>Latest</span> Notices</h2>'.
+									'<h2 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>
+											<span>������������������</span> ������������������</h2>'.
+									'<div id="accordion">';
+							
+			foreach($data as $key=>$value){
 //echo '<pre>';print_r($value);echo '</pre>';                           
-                                $str .= '<div class="acc-item" >'.
-                                                '       <a href="#" class="acc_trigger en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
-                                                '               <span>'.$value->title.'</span>'.
-                                                '       </a>'.
-                                                '       <a href="#" class="acc_trigger np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
-                                                '               <span>'.$value->title_np.'</span>'.
-                                                '       </a>'.
-                                                '       <div class="acc_container en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
-                                                                word_limiter($value->content,20) .
-                                                '               <a href="#" class="btn_red">Read more</a>'.
-                                                '       </div>'.
-                                                '       <div class="acc_container np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
-                                                                word_limiter($value->content_np,20) .
-                                                '               <a href="#" class="btn_red">��������� ���������������������������</a>'.
-                                                '       </div>'.
-                                                '</div>';
-                        }
-                        $str .= '</div></div>';
-                        return $str;
-                }
+				$str .= '<div class="acc-item" >'.
+						'	<a href="#" class="acc_trigger en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+						'   	<span>'.$value->title.'</span>'.
+						'   </a>'.
+						'   <a href="#" class="acc_trigger np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+						'       <span>'.$value->title_np.'</span>'.
+						'   </a>'.
+						'   <div class="acc_container en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								word_limiter($value->content,20) .
+						'       <a href="#" class="btn_red">Read more</a>'.
+						'   </div>'.
+						'   <div class="acc_container np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								word_limiter($value->content_np,20) .
+						'       <a href="#" class="btn_red">��������� ���������������������������</a>'.
+						'   </div>'.
+						'</div>';
+			}
+			$str .= '</div></div>';
+			return $str;
+		}
 
-                if(!isset($config['jcarousel'])){
-                        $str .= '<script type="text/javascript" src="'.JSPATH.'jquery.jcarousel.min.js"></script>';
-                        $this->config->set_item('jcarousel',true);
-                }
-
-                $str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-						'<script>'.
-							'function notice_initCallback_en(carousel){'.
-							'	jQuery(".btn_next_en").bind("click", function() {'.
-							'		carousel.next();'.
-							'		return false;'.
-							'	});'.
-							'	setInterval(function(){'.
-							'					$(".btn_next_en").trigger("click");'.
-							'					},3000'.
-							'				);'.
-							'}; '.
-							'function notice_initCallback_np(carousel){'.
-							'	jQuery(".btn_next_np").bind("click", function() {'.
-							'		carousel.next();'.
-							'		return false;'.
-							'	});'.
-							'	setInterval(function(){'.
-							'					$(".btn_next_np").trigger("click");'.
-							'					},3000'.
-							'				);'.
-							'}; '.
-							'$(function() {'.
-							'       jQuery("#notice-slider").jcarousel({'.
-							'               vertical: true,'.
-							'               scroll  : 1,'.
-							'               auto    : 0,'.
-							'               wrap    : "circular",'.
-							'				buttonNextHTML:null,'.
-							'				buttonPrevHTML:null,'.
-							'               initCallback: notice_initCallback_en,'.
-							'       });'.
-							'       jQuery("#notice-slider2").jcarousel({'.
-							'               vertical: true,'.
-							'               visible : 2,'.
-							'               scroll  : 1,'.
-							'               auto    : 0,'.
-							'               wrap    : "circular",'.
-							'				buttonNextHTML:null,'.
-							'				buttonPrevHTML:null,'.
-							'               initCallback: notice_initCallback_np,'.
-							'       });'.
-							'});'.
-						'</script>';
-				$str .='<style>
-						.btn_next_en,.btn_next_en,{
-							width:0;
-							height:0;
+		$str .=	'<script type="text/javascript">
+					$(function(){
+						$("#notice-slider-parent").jcarousel({
+							vertical: true,
+							"wrap":"circular",
+							"animation":500,
+						});
+						$("#notice-slider-next").jcarouselControl({
+							target: "+=1"
+						});
+						var repeat;
+						function scroll(){
+							repeat = setInterval(function(){
+													$("#notice-slider-next").trigger("click");
+									console.log("scrolled ...");
+												},10000
+											)
 						}
-						</style>';
+						scroll();
+						$("#notice-slider-parent").hover(
+							function(){
+								clearInterval(repeat);
+							},function(){
+								scroll();
+							}
+						)
+					})
+				</script>';
 
-				//english
-                $str .= '<div class="item1 fl en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').' >'.
-                                '<h2 id="carousel_header" >'.
-                                '       <span>Latest</span> Notices'.
-                                '</h2>'.
-                                '<div class="btn_next_en"></div>';
-				
-                $str .= '<ul id="notice-slider" class="jcarousel-skin-tango" >';
-                if(count($data)){
-                        foreach($data as $key=>$val){
-                                $str .= '<li>';
-                                $str .= '       <h4 >'.$val->title.'</h4>';
-                                $str .= '       <a href="#" class="title_date en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.$val->date_created.'</a>';
-                                $str .= '       <span >';
-                                $str .=                 word_limiter(strip_tags($val->content),25);
-                                $str .= '               <a href="'.base_url().'notices/'.$val->id.'" class="more">more</a>';
-                                $str .= '       </span>';
-                                $str .= '</li>';
-                        }
-                }
-                $str.= '</ul></div>';
 
-				//nepali
-                $str .= '<div class="item1 fl np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').' >'.
-                                '<h2 id="carousel_header" >'.
-                                '       <span>प्रमुख</span> खबर'.
-                                '</h2>'.
-                                '<div class="btn_next_np"></div>';
-				
-                $str .= '<ul id="notice-slider2" class="jcarousel-skin-tango" >';
-                if(count($data)){
-                        foreach($data as $key=>$val){
-                                $str .= '<li>';
-                                $str .= '       <h4 >'.$val->title_np.'</h4>';
-                                $str .= '       <a href="#" class="title_date" >'.$val->date_created.'</a>';
-                                $str .= '       <span >';
-                                $str .=                 word_limiter(strip_tags($val->content_np),25);
-                                $str .= '               <a href="'.base_url().'notices/'.$val->id.'" class="more">अझै पढ्नुहोस्</a>';
-                                $str .= '       </span>';
-                                $str .= '</li>';
-                        }
-                }
-                $str.= '</ul></div>';
-                return $str;
-        }
+		$str .='<style>
+				#notice-slider-next{
+					width:0;
+					height:0;
+				}
+				</style>';
+
+
+		$str .= '<div class="item1 fl" >'.
+					'<h2 id="carousel_header" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+					'	<span>Latest</span> Notices'.
+					'</h2>'.
+					'<h2 id="carousel_header" class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+					'	<span>प्रमुख</span> खबर'.
+					'</h2>'.
+					'<div id="notice-slider-next"></div>';
+		
+		$str .= '<div id="notice-slider-parent"><ul id="notice-slider" class="jcarousel-skin-tango" >';
+		if(count($data)){
+			$count=0;
+			foreach($data as $key=>$val){
+				$str .= '<li>'.$count++.
+						'	<h4 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								$val->title.
+						'	</h4>'.
+						'   <h4 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								$val->title_np.
+						'	</h4>'.
+						'   <a href="#" class="title_date" >'.$val->date_created.'</a>'.
+						'   <span class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
+								word_limiter(strip_tags($val->content),25).
+						'       <a href="'.base_url().'notices/'.$val->id.'" class="more">more</a>'.
+						'   </span>'.
+						'   <span class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>'.
+								word_limiter(strip_tags($val->content_np),25).
+						'       <a href="'.base_url().'notices/'.$val->id.'" class="more">अझै पढ्नुहोस् ...</a>'.
+						'   </span>'.
+						'</li>';
+			}
+		}
+		$str.= '</ul></div></div>';
+
+		return $str;
+	}
 	private function _render_page($data,$type=null){
 		$str = '';
 		if(count($data)==0){

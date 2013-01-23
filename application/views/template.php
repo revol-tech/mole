@@ -5,7 +5,7 @@
 <head>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
 	<title id="main_title"><?php echo (($this->session->userdata('lang')=='en')?$title:$title_np)?></title>
 
 	<!-- CSS Start //-->
@@ -30,15 +30,8 @@
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.totop.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
-	<script type="text/javascript" src="<?php echo JSPATH?>jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="<?php echo JSPATH?>jquery.jcarousel-all.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>functions.js?<?php echo base_url()?>"></script>
-
-	<script type="text/javascript">
-	$(function(){
-		//homepage image slider
-		$("#slider").nivoSlider({pauseTime:1000000000});//return back to normal .......
-	});
-	</script>
 </head>
 
 <body>
