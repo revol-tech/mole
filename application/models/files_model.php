@@ -49,11 +49,35 @@ class Files_model extends CI_Model{
 	private function _render_recursive($data,$parent_id){
 		$count = 1;
 
-		$str =	'<script type="text/javascript">
-					$(function(){
-						$("#slider").nivoSlider({pauseTime:10000});
-					});
-				</script>';
+		$str ='<script type="text/javascript">'.
+				'$(function(){'.
+				'	$("#slider").nivoSlider({
+						pauseTime:5000,
+						beforeChange: function(){
+								$(".nivo-caption")
+									.animate({opacity:0},1000)
+							},
+						afterChange: function(){
+								$(".nivo-caption")
+									.animate({opacity:0.6},2000)							
+							},
+       					
+					});'.
+				'})'.
+				'</script>';
+		$str .='<style type="text/css">'.
+				'.nivo-caption {'.
+				'	border-radius: 10px 0 0 10px;'.
+				'	color: #CCCCCC;'.
+				'	font-size: 30px;'.
+				'	font-weight: bold;'.
+				'	height: 155px;'.
+				'	left: 79%;'.
+				'	text-align: right;'.
+				'	top: 170px;'.
+				'	width: 21%;'.
+				'}'.
+				'</style>';
 		$str .= '<div id="slider" class="nivoSlider">';
 
 		foreach($data as $k=>$v){
@@ -61,7 +85,7 @@ class Files_model extends CI_Model{
 			$str.='<img src="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' data-thumb="'.DOCUMENTS.$v->timestamp.'"';
 			$str.=' alt="'.$v->title.'" title="#htmlcaption'.$count.'"';
-			$str.=' />';
+			$str.='   />';
 
 			$count++;
 		}
