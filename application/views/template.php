@@ -6,7 +6,9 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta charset="UTF-8"/>
-	<title id="main_title"><?php echo (($this->session->userdata('lang')=='en')?$title:$title_np)?></title>
+	<title id="main_title"><?php echo (($this->session->userdata('lang')=='en')?
+										'Ministry of Labour and Employment':
+										'श्रम तथा रोजगार मन्त्रालय')?></title>
 
 	<!-- CSS Start //-->
 	<link rel="shortcut icon" href="<?php echo CSSPATH?>images/favicon.ico" type="image/x-icon"/>
@@ -23,14 +25,14 @@
 	<link rel="stylesheet" href="<?php echo CSSPATH?>default.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="<?php echo CSSPATH?>nivo-slider.css" type="text/css" media="screen" />
 	<link href='<?php echo CSSPATH?>tmp.css' rel='stylesheet' type='text/css'>
-	<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 	<script src="<?php echo JSPATH?>jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.superfish.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.totop.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
-	<script type="text/javascript" src="<?php echo JSPATH?>jquery.jcarousel-all.js"></script>
+	<!--<script type="text/javascript" src="<?php echo JSPATH?>jquery.slider.js"></script>-->
 	<script type="text/javascript" src="<?php echo JSPATH?>functions.js?<?php echo base_url()?>"></script>
 </head>
 

@@ -168,6 +168,7 @@ class Events_model extends CI_Model{
 		foreach($res->result() as $value){
 			$value->created_by = $this->ion_auth->get_user($value->created_by)->username;
 			$value->contents = html_entity_decode($value->contents,ENT_QUOTES, 'UTF-8');
+			$value->filename = $value->timestamp;
 
 			//add  image
 			$value->timestamp_img = '<img src="'.base_url().DOCUMENTS.$value->timestamp.'" width="211" height="126" />';
@@ -259,9 +260,9 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title),5).'" 
-										alt="" src="'.
-											//(isset($val->timestamp))?base_url().DOCUMENTS.$val->timestamp:''.
-										'" />
+										alt="'.$val->title.'" src="'.
+											base_url().DOCUMENTS.$val->filename.
+										'" width="150" height="140" />
 								</div>
 							
 								<div class="text_box fr">
@@ -285,9 +286,9 @@ echo '</pre>';
 							<div class="lower_block fl">
 								<div class="block_img4 fl">
 									<img title="'.word_limiter(strip_tags($val->title_np),5).'" 
-										alt="" src="'.
-											//(isset($val->timestamp))?base_url().DOCUMENTS.$val->timestamp:''.
-										'" />
+										alt="'.$val->title_np.'" src="'.
+											base_url().DOCUMENTS.$val->filename.
+										'" width="150" height="140" />
 								</div>
 							
 								<div class="text_box fr">

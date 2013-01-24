@@ -52,14 +52,14 @@ class Files_model extends CI_Model{
 		$str ='<script type="text/javascript">'.
 				'$(function(){'.
 				'	$("#slider").nivoSlider({
-						pauseTime:5000,
+						pauseTime:25000,
 						beforeChange: function(){
 								$(".nivo-caption")
-									.animate({opacity:0},1000)
+									.animate({opacity:0},750)
 							},
 						afterChange: function(){
 								$(".nivo-caption")
-									.animate({opacity:0.6},2000)							
+									.animate({opacity:0.6},1500)							
 							},
        					
 					});'.

@@ -16,6 +16,15 @@
 	</label>
 	<br/>
 
+	image : 
+	<?php if(!isset($filename)){?>
+		<input class="img" type='file' name='file' />
+	<?php } else {?>
+		<img class="img" src='<?php echo base_url().DOCUMENTS.$filename?>' height='140' width='150'>
+		<a href='#' class='change_img'>change</a>
+	<?php }?>
+	<br/>
+
 	content :
 	<textarea name="content" id="content" >
 		<?php echo @$content?>

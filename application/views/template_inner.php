@@ -6,7 +6,9 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta charset="UTF-8">
-	<title><?php echo @$title?></title>
+	<title id="main_title"><?php echo (($this->session->userdata('lang')=='en')?
+										'Ministry of Labour and Employment':
+										'श्रम तथा रोजगार मन्त्रालय')?></title>
 	<?php echo $_styles?>
 	<link rel="shortcut icon" href="<?php echo base_url().CSSPATH?>images/favicon.ico" type="image/x-icon"/>	
 	<?php echo $_scripts?>

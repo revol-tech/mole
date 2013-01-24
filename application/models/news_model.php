@@ -313,6 +313,7 @@ class News_model extends CI_Model{
 		return $str;
 	}
 	private function _render_full_news($data){
+die;
 		$str = '';
 		$str =	'<div class="fl">
 					<h1 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>
@@ -528,34 +529,34 @@ private function _render_events($data){
 				'</style>';
 		$str.='<div class="newsticker">';
 		$str.='<div class="news_ticker_content" style="">';
-		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
-				'<script>
-				function flash_initCallback(carousel){
-					
-					/* Disable autoscrolling if the user clicks the prev or next button.*/
-					carousel.buttonNext.bind("click", function() {
-						carousel.startAuto(0);
-					});
-					carousel.buttonPrev.bind("click", function() {
-						carousel.startAuto(0);
-					});
-					/* Pause autoscrolling if the user moves with the cursor over the clip.*/
-					carousel.clip.hover(function() {
-						carousel.stopAuto();
-					}, function() {
-						carousel.startAuto();
-					});
-				}; 
-
-				jQuery(document).ready(function() {
-					jQuery("#flash-slider").jcarousel({
-						visible	: 1,
-						scroll 	: 1,
-						auto	: 5,
-						wrap	: "circular",
-						initCallback: flash_initCallback,
-					})
-				})</script>';
+//		$str .= '<link rel="stylesheet" type="text/css" href="'.CSSPATH.'carousel/tango/skin.css"/>'.
+//				'<script>
+//				function flash_initCallback(carousel){
+//					
+//					/* Disable autoscrolling if the user clicks the prev or next button.*/
+//					carousel.buttonNext.bind("click", function() {
+//						carousel.startAuto(0);
+//					});
+//					carousel.buttonPrev.bind("click", function() {
+//						carousel.startAuto(0);
+//					});
+//					/* Pause autoscrolling if the user moves with the cursor over the clip.*/
+//					carousel.clip.hover(function() {
+//						carousel.stopAuto();
+//					}, function() {
+//						carousel.startAuto();
+//					});
+//				}; 
+//
+//				jQuery(document).ready(function() {
+//					jQuery("#flash-slider").jcarousel({
+//						visible	: 1,
+//						scroll 	: 1,
+//						auto	: 5,
+//						wrap	: "circular",
+//						initCallback: flash_initCallback,
+//					})
+//				})</script>';
 
 		$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
 				
@@ -621,34 +622,34 @@ private function _render_events($data){
 			return $str;
 		}
 
-		$str .=	'<script type="text/javascript">
-					$(function(){
-						$("#notice-slider-parent").jcarousel({
-							vertical: true,
-							"wrap":"circular",
-							"animation":500,
-						});
-						$("#notice-slider-next").jcarouselControl({
-							target: "+=1"
-						});
-						var repeat;
-						function scroll(){
-							repeat = setInterval(function(){
-													$("#notice-slider-next").trigger("click");
-									console.log("scrolled ...");
-												},10000
-											)
-						}
-						scroll();
-						$("#notice-slider-parent").hover(
-							function(){
-								clearInterval(repeat);
-							},function(){
-								scroll();
-							}
-						)
-					})
-				</script>';
+//		$str .=	'<script type="text/javascript">
+//					$(function(){
+//						$("#notice-slider-parent").jcarousel({
+//							vertical: true,
+//							"wrap":"circular",
+//							"animation":500,
+//						});
+//						$("#notice-slider-next").jcarouselControl({
+//							target: "+=1"
+//						});
+//						var repeat;
+//						function scroll(){
+//							repeat = setInterval(function(){
+//													$("#notice-slider-next").trigger("click");
+//									console.log("scrolled ...");
+//												},10000
+//											)
+//						}
+//						scroll();
+//						$("#notice-slider-parent").hover(
+//							function(){
+//								clearInterval(repeat);
+//							},function(){
+//								scroll();
+//							}
+//						)
+//					})
+//				</script>';
 
 
 		$str .='<style>
@@ -670,9 +671,8 @@ private function _render_events($data){
 		
 		$str .= '<div id="notice-slider-parent"><ul id="notice-slider" class="jcarousel-skin-tango" >';
 		if(count($data)){
-			$count=0;
 			foreach($data as $key=>$val){
-				$str .= '<li>'.$count++.
+				$str .= '<li>'.
 						'	<h4 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 								$val->title.
 						'	</h4>'.
