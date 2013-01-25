@@ -43,9 +43,37 @@
 				var cssTxt = ''+
 							'<style type="text/css">'+
 							'#'+objID+'{'+
+							'	height:'+$ul.height()+'px;'+
+							'	overflow:hidden;'+
+							'	position:relative;';
+				if(options.type=='hor')
+					cssTxt +='	width:'+($ul.width())+'px;';
+					cssTxt +='}'+
+							
+							
+							'#'+objID+' > ul{'+
+							'	list-style:none outside;'+
+							'	position:relative;';
+				if(options.type=='hor')
+					cssTxt +='	width:'+($ul.width()*(2.5))+'px;';
+
+					cssTxt +='	margin:0;'+
 							'}'+
+							
+							'#'+objID+' > ul > li{';
+				if(options.type=='hor')
+					cssTxt +='	float:left;'+
+							'	width:'+($ul.width())+'px;'+
+							'	padding:5px;';
+				else if(options.type=="ver")
+					cssTxt +='	padding:0 5px 10px 20px;'+
+							'	height:150px;';
+							
+					cssTxt +='}'+
+							
 							'</style>';
-					
+console.log($obj)	
+console.log(cssTxt)				
 				$obj.before(cssTxt);
 			};
 
@@ -59,22 +87,21 @@
 			};
 
 			function scroll(){
+				$ul = $obj.children('ul');
+				$li = $ul.children('li');
+
 				if(options.type=='ver'){
 					$ul.animate({
 						top: '-='+step,
 					},options.slide,function(){
-						$li	.first()
-							.detach()
-							.appendTo($ul);
+						$li	.first().appendTo($ul);
 						$ul.css({top:0})
 					})
 				}else if(options.type='hor'){
 					$ul.animate({
 						left: '-='+step,
 					},options.slide,function(){
-						$li	.first()
-							.detach()
-							.appendTo($ul);
+						$li	.first().appendTo($ul);
 						$ul.css({left:0})
 					})
 				}
@@ -111,6 +138,7 @@
 				}
 			);
 			repeat = setInterval(scroll,options.pause);
+			
 		})
 	}
 })(jQuery);

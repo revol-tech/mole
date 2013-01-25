@@ -32,7 +32,7 @@
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.supersubs.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.totop.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>jquery.nivo.slider.js"></script>
-	<!--<script type="text/javascript" src="<?php echo JSPATH?>jquery.slider.js"></script>-->
+	<script type="text/javascript" src="<?php echo JSPATH?>jquery.slider.js"></script>
 	<script type="text/javascript" src="<?php echo JSPATH?>functions.js?<?php echo base_url()?>"></script>
 </head>
 

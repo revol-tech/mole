@@ -518,7 +518,7 @@ private function _render_events($data){
 		
 		$str.=	'<style>'.
 				'	.news_ticker_content{'.
-				'		background-color:#fff;'.
+				//'		background-color:#fff;'.
 				'		color			:#888;'.
 				'		font			:13px/20px "Open Sans",Arial,Helvetica,sans-serif;'.
 				'		height			:inherit;'.
@@ -558,12 +558,25 @@ private function _render_events($data){
 //					})
 //				})</script>';
 
-		$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
-				
+//		$str .='<style>.jcarousel-skin-tango #flash-slider {position:relative;top:-10px;left:10px;}</style>';
+$str .=
+'<script type="text/javascript">
+$(function(){
+	$("#flash-slider")
+		.wrap("<div id=\'flash-slider-wrapper\'/>")
+		.parent()
+		.slider({				
+				slide	:250,
+				pause   :8000,
+				type 	:"hor"
+			});
+})
+</script>';				
 		$str .=	'<div class="ticker_title fl">'.
 				'	<h3 class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>News</h3>'.
 				'	<h3 class="np" '.(($this->session->userdata('lang')=='np')?'':'style="display:none;"').'>समाचार</h3>'.
 				'</div>';
+
 		$str .= '<ul id="flash-slider" style="" class="ticker_block fl jcarousel-skin-tango">';//'<ul id="flash-slider" class="jcarousel-skin-tango">';
 		if(count($data)){
 			foreach($data as $key=>$val){
@@ -657,9 +670,24 @@ private function _render_events($data){
 					width:0;
 					height:0;
 				}
+				#notice-slider{
+					height:350px;
+				}
 				</style>';
-
-
+		$str .=
+'<script type="text/javascript">
+$(function(){
+	$("#notice-slider")		
+		.wrap("<div id=\'notice-slider-wrapper\'/>")
+		.parent()
+		.slider({
+			slide:250,
+			pause:8000,
+			type:"ver"
+		});
+})
+</script>';
+	
 		$str .= '<div class="item1 fl" >'.
 					'<h2 id="carousel_header" class="en" '.(($this->session->userdata('lang')=='en')?'':'style="display:none;"').'>'.
 					'	<span>Latest</span> Notices'.
@@ -669,7 +697,7 @@ private function _render_events($data){
 					'</h2>'.
 					'<div id="notice-slider-next"></div>';
 		
-		$str .= '<div id="notice-slider-parent"><ul id="notice-slider" class="jcarousel-skin-tango" >';
+		$str .= '<ul id="notice-slider" class="jcarousel-skin-tango" >';
 		if(count($data)){
 			foreach($data as $key=>$val){
 				$str .= '<li>'.
@@ -691,7 +719,7 @@ private function _render_events($data){
 						'</li>';
 			}
 		}
-		$str.= '</ul></div></div>';
+		$str.= '</ul></div>';
 
 		return $str;
 	}

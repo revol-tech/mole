@@ -48,6 +48,7 @@ class Files_model extends CI_Model{
 	 */
 	private function _render_recursive($data,$parent_id){
 		$count = 1;
+		$str = '';
 
 		$str ='<script type="text/javascript">'.
 				'$(function(){'.
@@ -65,6 +66,7 @@ class Files_model extends CI_Model{
 					});'.
 				'})'.
 				'</script>';
+
 		$str .='<style type="text/css">'.
 				'.nivo-caption {'.
 				'	border-radius: 10px 0 0 10px;'.
