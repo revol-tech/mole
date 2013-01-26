@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2013 at 01:28 AM
+-- Generation Time: Jan 26, 2013 at 07:34 PM
 -- Server version: 5.5.29
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(67, 1359045760, '127.0.0.1', 'Q2Tknc');
+(70, 1359178630, '127.0.0.1', 'qMdtOb');
 
 -- --------------------------------------------------------
 
@@ -380,6 +380,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `link` varchar(127) NOT NULL DEFAULT '#',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
   KEY `parent_id` (`parent_id`)
@@ -389,40 +390,40 @@ CREATE TABLE IF NOT EXISTS `menu` (
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `parent_id`, `active`) VALUES
-(1, 'हाम्रो बारे', 'हाम्रो बारेमा .....', 'about us', 'About us .....', 'pages/about', 0, 1),
-(2, 'रिसोर्सेस', 'रिसोर्सेसको बारेमा ...........', 'resources', 'about resourcs', 'acts', 0, 1),
-(3, '', '', 'publications', '', 'publications', 0, 0),
-(5, '', '', 'contact us', '', 'contacts/x4', 0, 0),
-(7, '', '', 'All possible links', 'Contains the tree of all possible links', 'all', 0, 0),
-(8, 'ऐन कानुन', '', 'acts & laws', '', 'acts', 7, 1),
-(9, 'श्रम', '', 'Employments', '', 'employments', 7, 1),
-(10, 'कार्यकौम', '', 'events', '', 'events', 7, 1),
-(11, 'प्रश्न-उत्तर', '', 'FAQs', 'shoqs all of the faqs ...', 'faqs', 7, 1),
-(12, 'स्वास्त', '', 'health', 'Safety & Health Management System', 'health', 7, 1),
-(14, 'नोटिसेस्', '', 'Notices', 'lists all the notices', 'notices', 7, 1),
-(15, 'छापा', '', 'Press Release', 'press releases ....', 'press', 7, 1),
-(16, 'पोल', '', 'Polls', 'polls', 'polls', 7, 1),
-(17, 'ओरगनाईजेसन', '', 'Organization', 'About organization', '', 0, 1),
-(19, 'सुरुवात', '', 'Introduction', '', 'pages/introduction', 17, 1),
-(20, 'मान्डेटस', '', 'Mandates', '', 'pages/mandates', 17, 0),
-(21, 'सस्ता', '', 'Organization Chart', '', 'pages/chart', 17, 0),
-(22, 'मुख्य प्लान', '', 'Master Plan', '', 'pages/plan', 17, 0),
-(23, 'सम्बन्धित कार्यलय', '', 'Related Offices', '', 'pages/offices', 0, 0),
-(24, 'ढि ओ ऐफ ई', '', 'DOFE', '', 'pages/dofe', 23, 1),
-(26, 'सुरुवात', '', 'Introduction to DOFE', '', 'pages/dofe-intro', 24, 1),
-(27, 'समाचार', '', 'News and Alerts', '', 'pages/dofe-news-and-alerts', 24, 1),
-(28, 'ढि ओ ऐल', '', 'DOL', '', 'pages/dol', 23, 1),
-(29, 'ओ एस् एच पि', '', 'OSHP', '', 'pages/oshp', 23, 1),
-(30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 0),
-(31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', '', 17, 1),
-(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Division', 'about Financial Division .......', 'divisions/63', 31, 1),
-(33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'divisions/budget', 31, 0),
-(34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'divisions/legal', 31, 0),
-(35, 'बजेट बिभाग', 'बजेट बिभागको बारेमा जानकारी .....', 'Budget Division', 'Information about Budjet Division.........', 'divisions/58', 31, 1),
-(36, 'स्वास्थ', 'स्वास्थको बारे ........', 'Health and Safety', 'about Health an Savety ........', '', 0, 1),
-(37, ' ासलदजा लकदजउहा लसकजाउलज लाकज ', 'सउगज सतु ससत', 'WSH Regulatory Framework', 'h sh s h', 'health/44', 36, 1),
-(38, 'स्वास्थ तथा सुरक्षा बिभाग', 'स्वास्थ तथा सुरक्षाको बारे ........', 'Safety & Health Management System ', 'about Health an Savety ........', 'health/43 ', 36, 1);
+INSERT INTO `menu` (`id`, `title_np`, `comments_np`, `title`, `comments`, `link`, `parent_id`, `active`, `sort_order`) VALUES
+(1, 'हाम्रो बारे', 'हाम्रो बारेमा .....', 'about us', 'About us .....', 'pages/about', 0, 1, 1),
+(2, 'रिसोर्सेस', 'रिसोर्सेसको बारेमा ...........', 'resources', 'about resourcs', 'acts', 0, 1, 2),
+(3, '', '', 'publications', '', 'publications', 0, 0, 0),
+(5, '', '', 'contact us', '', 'contacts/x4', 0, 0, 0),
+(7, '', '', 'All possible links', 'Contains the tree of all possible links', 'all', 0, 0, 0),
+(8, 'ऐन कानुन', '', 'acts & laws', '', 'acts', 7, 1, 1),
+(9, 'श्रम', '', 'Employments', '', 'employments', 7, 1, 2),
+(10, 'कार्यकौम', '', 'events', '', 'events', 7, 1, 3),
+(11, 'प्रश्न-उत्तर', '', 'FAQs', 'shoqs all of the faqs ...', 'faqs', 7, 1, 4),
+(12, 'स्वास्त', '', 'health', 'Safety & Health Management System', 'health', 7, 1, 5),
+(14, 'नोटिसेस्', '', 'Notices', 'lists all the notices', 'notices', 7, 1, 6),
+(15, 'छापा', '', 'Press Release', 'press releases ....', 'press', 7, 1, 7),
+(16, 'पोल', '', 'Polls', 'polls', 'polls', 7, 1, 8),
+(17, 'ओरगनाईजेसन', '', 'Organization', 'About organization', '', 0, 1, 4),
+(19, 'सुरुवात', '', 'Introduction', '', 'pages/introduction', 17, 1, 1),
+(20, 'मान्डेटस', '', 'Mandates', '', 'pages/mandates', 17, 0, 0),
+(21, 'सस्ता', '', 'Organization Chart', '', 'pages/chart', 17, 0, 0),
+(22, 'मुख्य प्लान', '', 'Master Plan', '', 'pages/plan', 17, 0, 0),
+(23, 'सम्बन्धित कार्यलय', '', 'Related Offices', '', 'pages/offices', 0, 0, 0),
+(24, 'ढि ओ ऐफ ई', '', 'DOFE', '', 'pages/dofe', 23, 1, 1),
+(26, 'सुरुवात', '', 'Introduction to DOFE', '', 'pages/dofe-intro', 24, 1, 1),
+(27, 'समाचार', '', 'News and Alerts', '', 'pages/dofe-news-and-alerts', 24, 1, 2),
+(28, 'ढि ओ ऐल', '', 'DOL', '', 'pages/dol', 23, 1, 2),
+(29, 'ओ एस् एच पि', '', 'OSHP', '', 'pages/oshp', 23, 1, 3),
+(30, 'मिडिया', '', 'Media', '', 'pages/media', 0, 0, 0),
+(31, 'बिभाग', 'अरु बिभागहरु', 'Division', 'Different Difivisons .....', '', 17, 1, 9),
+(32, 'अर्थ बिभाग', 'अर्थ बिभागको बारेमा ....', 'Financial Division', 'about Financial Division .......', 'divisions/63', 31, 1, 1),
+(33, 'बजेट बिभाग', 'बजेट बिभागको बारेमा ....', 'Budgett Division', 'about Budjet Division .......', 'divisions/budget', 31, 0, 0),
+(34, 'न्याय तया संबिधान', 'न्याय तया संबिधानको बारे', 'Legal and Constitution Diviison', 'about Legal and Constitution Diviison ... ', 'divisions/legal', 31, 0, 0),
+(35, 'बजेट बिभाग', 'बजेट बिभागको बारेमा जानकारी .....', 'Budget Division', 'Information about Budjet Division.........', 'divisions/58', 31, 1, 2),
+(36, 'स्वास्थ', 'स्वास्थको बारे ........', 'Health and Safety', 'about Health an Savety ........', '', 0, 1, 3),
+(37, ' ासलदजा लकदजउहा लसकजाउलज लाकज ', 'सउगज सतु ससत', 'WSH Regulatory Framework', 'h sh s h', 'health/44', 36, 1, 1),
+(38, 'स्वास्थ तथा सुरक्षा बिभाग', 'स्वास्थ तथा सुरक्षाको बारे ........', 'Safety & Health Management System ', 'about Health an Savety ........', 'health/43 ', 36, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -469,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `mole_users` (
 --
 
 INSERT INTO `mole_users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
-(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1359045782, 1);
+(1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1359178640, 1);
 
 -- --------------------------------------------------------
 

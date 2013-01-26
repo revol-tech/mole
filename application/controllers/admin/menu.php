@@ -183,7 +183,7 @@ class Menu extends CI_Controller {
 		//get reqd. page's data
 		$data = $this->menu_model->get(null,$config['per_page'],$page);
 
-
+		$prev=null;$next=null;
 		foreach($data as $key=>$val){
 			$str =	'<a href="'.site_url('admin/menu/view/'.$val->id).'">'.
 						$val->title.
@@ -215,12 +215,40 @@ class Menu extends CI_Controller {
 			$str .= '</form>';
 
 			$data[$key]->active = $str;
-		}
+			
+			//move positon of the link in the menu
+			if(	(isset($data[$key-1]))	&& 
+				($data[$key-1]->parent_id)==($data[$key]->parent_id)
+			){
+				$data[$key]->prev = $data[$key-1]->id;
+				$data[$key]->move_up = '<a href="'.site_url('admin/menu/change/'.$data[$key]->id.'/'.$data[$key]->prev).'">&and;</a>';
+			}else{$data[$key]->move_up = '&and;';}
 
+			if(	(isset($data[$key+1]))	&& 
+				($data[$key+1]->parent_id)==($data[$key]->parent_id)
+			){
+				$data[$key]->next = $data[$key+1]->id;
+				$data[$key]->move_down 	= '<a href="'.site_url('admin/menu/change/'.$data[$key]->id.'/'.$data[$key]->next).'">&or;</a>';
+			}else{$data[$key]->move_down = '&or;';}
+			
+		}
 		return array('data'=>$data,'links'=>$this->pagination->create_links());
 	}
 
 
+	public function change(){
+		$id=false;
+		foreach($this->uri->segment_array() as $key=>$val){
+			if($val=='change'){
+				$id1 = $this->uri->segment($key+1);
+				$id2 = $this->uri->segment($key+2);
+				break;
+			}
+		}
+		$data = $this->menu_model->change($id1,$id2);
+//$this->index();
+		redirect('admin/menu');
+	}
 
 	/**
 	 * get 1 menu for editing

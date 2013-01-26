@@ -19,6 +19,7 @@ class Migration_Add_menu extends CI_Migration {
 						'`parent_id` int(11) NOT NULL default 0',
 						'`active` tinyint(1) not null default 1',
 						'`comments` varchar(255)',
+						'`sort_order` int(11) not null',
 					);
 					
 		$this->dbforge->add_field($fields);

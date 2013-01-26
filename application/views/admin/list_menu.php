@@ -17,6 +17,8 @@
 		<th>comments</th>
 		<th>edit</th>
 		<th>delete</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
 	</tr>
 </thead>
 <tbody>
@@ -30,6 +32,8 @@
 			<td><?php echo $item->comments?></td>
 			<td><?php echo $item->edit?></td>
 			<td><?php echo $item->del?></td>
+			<td><?php echo $item->move_up?></td>
+			<td><?php echo $item->move_down?></td>
 		</tr>
 	<?php endforeach;?>
 </tbody>

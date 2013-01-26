@@ -12,6 +12,7 @@ class Menu_model extends CI_Model{
 		parent::__construct();
 
 		$this->load->library('form_validation');
+//$this->output->enable_profiler(true);
 	}
 
 	/**
@@ -65,10 +66,16 @@ class Menu_model extends CI_Model{
 
 		}else{
 		//insert new link
+			$count = $this->db->select('count(*) AS COUNT')
+						->where('parent_id',$data['parent_id'])
+						->get($this->table);
+			$tmp = $count->result();
+			$data['sort_order']=$tmp[0]->COUNT;
 
 			if(! $this->db->insert($this->table,$data)){
 				return $this->db->_error_message();
 			}
+
 
 			return $this->db->insert_id();
 		}
@@ -89,7 +96,8 @@ class Menu_model extends CI_Model{
 				$this->db->where($key,$value);
 			}
 		}
-
+		$this->db->order_by('parent_id','asc');
+		$this->db->order_by('sort_order','asc');
 		$res = $this->db->get($this->table);
 
 		return $res->result();
@@ -119,22 +127,28 @@ class Menu_model extends CI_Model{
 		return true;
 	}
 
-
-	/**
-	 * change the active | inactive menu
-	 *
+	/*
+	 * change order of the two links 
 	 */
-/**	public function active(){
+	public function change($id1,$id2){
+		$tmp = $this->db->select('sort_order')
+				->where('id',$id1)
+				->get($this->table);
+		$tmp1 = $tmp->result();
 
-		$ids=$this->input->post('menu_id');
-		$active=$this->input->post('active');
+		$tmp = $this->db->select('sort_order')
+				->where('id',$id2)
+				->get($this->table);
+		$tmp2 = $tmp->result();
 
+		$this->db->set('sort_order',$tmp1[0]->sort_order)
+				->where('id',$id2)
+				->update($this->table);
 
-		$this->db->set(	'active',$active=='true'?1:0 )
-				->where('id',$ids)
+		$this->db->set('sort_order',$tmp2[0]->sort_order)
+				->where('id',$id1)
 				->update($this->table);
 	}
-*/
 }
 
 /* End of file menu_model.php */
